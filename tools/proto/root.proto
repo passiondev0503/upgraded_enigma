@@ -1,0 +1,12 @@
+// protolint:disable FIELD_NAMES_LOWER_SNAKE_CASE
+
+syntax = "proto3";
+
+package nxngstarter;
+
+import "common.proto";
+
+service EntityService {
+  rpc FindOne(EntityById) returns (Entity) {};
+  rpc FindMany(stream EntityById) returns (stream Entity) {};
+}

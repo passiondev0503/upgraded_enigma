@@ -1,0 +1,20 @@
+:host {
+  display: block;
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 50vw;
+}
+
+mat-grid-tile {
+  cursor: pointer;
+}
+
+mat-grid-tile:hover {
+  background-color: #c7c7c7c7;
+  cursor: pointer;
+}

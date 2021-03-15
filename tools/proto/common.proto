@@ -1,0 +1,25 @@
+// protolint:disable FIELD_NAMES_LOWER_SNAKE_CASE
+
+syntax = "proto3";
+
+package nxngstarter;
+
+import "google/protobuf/any.proto";
+
+message Entity {
+  string id = 1;
+  int32 num1 = 2;
+  int64 num2 = 3;
+  bool boolean1 = 4;
+  float float1 = 5;
+  google.protobuf.Any any1 = 8;
+  repeated SubEntity subEntities = 6;
+}
+
+message SubEntity {
+  string id = 1;
+}
+
+message EntityById {
+  string id = 1;
+}

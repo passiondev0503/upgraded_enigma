@@ -1,0 +1,70 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+/android/build/
+/android/app/build/
+/android/capacitor-cordova-android-plugins/build/
+# diagrams are saved by default to the directory where input files reside
+tools/diagrams/*.*
+!tools/diagrams/*.mmd
+
+# migrations
+migrations.json
+migrations-*.json
+
+
+# firebase
+.firebase
+functions/*
+!functions/package.json
+!functions/package-lock.json
+# don't commit firebase configs placed in project root, most probably it is build leftover
+./.firebaserc
+./firebase.json
+
+# dependencies
+/node_modules
+# firebase dependencies in apps folders whenever app is an api and is deployed to firebase
+**/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/recommended-settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/coverage
+/documentation
+/changelog
+/.sass-cache
+/connect.lock
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+*.log
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Local Files
+*.keystore
+/tools/shell/vars.sh
+
