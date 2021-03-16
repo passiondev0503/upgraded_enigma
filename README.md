@@ -53,7 +53,7 @@ git cz
 
 Is generated based on GitHub repo.
 
-- [GitBook documentation](https://anisotropic-works.gitbook.io/upgraded-enigma/)
+- [GitBook documentation](https://rfprod.gitbook.io/upgraded-enigma/)
 
 ## Firebase deployment
 
