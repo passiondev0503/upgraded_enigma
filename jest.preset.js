@@ -30,5 +30,5 @@ module.exports = {
     },
   },
   collectCoverage: true,
-  cacheDirectory: '/tmp/jest_rs/nx-ng-starter',
+  cacheDirectory: '/tmp/jest_rs/upgraded-enigma',
 };

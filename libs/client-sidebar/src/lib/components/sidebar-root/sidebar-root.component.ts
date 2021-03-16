@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
-import { sidebarUiActions } from '@nx-ng-starter/client-store';
+import { sidebarUiActions } from '@upgraded-enigma/client-store';
 
 @Component({
   selector: 'app-sidebar-root',

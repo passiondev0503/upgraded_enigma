@@ -1,19 +1,19 @@
 import { Controller, Get, Inject, OnModuleInit, Param } from '@nestjs/common';
 import { ClientGrpc, GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
-import { nxngstarter } from '@nx-ng-starter/proto';
+import { upgradedenigma } from '@upgraded-enigma/proto';
 import { from, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { toArray } from 'rxjs/operators';
 
-import { NXNGSTARTER_PACKAGE } from '../grpc-client.options';
+import { GRPC_CLIENT_PACKAGE } from '../grpc-client.options';
 
 export interface IEntityService {
-  findOne(data: nxngstarter.IEntityById): Observable<nxngstarter.IEntity>;
-  findMany(upstream: Observable<nxngstarter.IEntityById>): Observable<nxngstarter.IEntity>;
+  findOne(data: upgradedenigma.IEntityById): Observable<upgradedenigma.IEntity>;
+  findMany(upstream: Observable<upgradedenigma.IEntityById>): Observable<upgradedenigma.IEntity>;
 }
 
 @Controller('grpc')
 export class BackendGrpcController implements OnModuleInit {
-  private readonly items: nxngstarter.IEntity[] = [
+  private readonly items: upgradedenigma.IEntity[] = [
     {
       id: 'id1',
       num1: 1,
@@ -36,15 +36,15 @@ export class BackendGrpcController implements OnModuleInit {
 
   private sampleService?: IEntityService;
 
-  constructor(@Inject(NXNGSTARTER_PACKAGE) private readonly client: ClientGrpc) {}
+  constructor(@Inject(GRPC_CLIENT_PACKAGE) private readonly client: ClientGrpc) {}
 
   public onModuleInit() {
     this.sampleService = this.client.getService<IEntityService>('EntityService');
   }
 
   @Get()
-  public getMany(): Observable<nxngstarter.IEntity[]> {
-    const ids$ = new ReplaySubject<nxngstarter.IEntityById>();
+  public getMany(): Observable<upgradedenigma.IEntity[]> {
+    const ids$ = new ReplaySubject<upgradedenigma.IEntityById>();
     ids$.next({ id: 'id1' });
     ids$.next({ id: 'id2' });
     ids$.complete();
@@ -55,11 +55,11 @@ export class BackendGrpcController implements OnModuleInit {
   }
 
   @Get(':id')
-  public getById(@Param('id') id: string): Observable<nxngstarter.IEntity> {
+  public getById(@Param('id') id: string): Observable<upgradedenigma.IEntity> {
     return typeof this.sampleService !== 'undefined'
       ? from(this.sampleService.findOne({ id }))
       : of(
-          nxngstarter.Entity.toObject(new nxngstarter.Entity(), {
+          upgradedenigma.Entity.toObject(new upgradedenigma.Entity(), {
             defaults: true,
           }),
         );
@@ -67,20 +67,20 @@ export class BackendGrpcController implements OnModuleInit {
 
   @GrpcMethod('EntityService', 'FindOne')
   public findOne(
-    data: nxngstarter.IEntityById,
+    data: upgradedenigma.IEntityById,
     metadata: Record<string, unknown>,
-  ): nxngstarter.IEntity | undefined {
+  ): upgradedenigma.IEntity | undefined {
     return this.items.find(({ id }) => id === data.id);
   }
 
   @GrpcStreamMethod('EntityService', 'FindMany')
   public findMany(
-    data$: Observable<nxngstarter.IEntityById>,
+    data$: Observable<upgradedenigma.IEntityById>,
     metadata: Record<string, unknown>,
-  ): Observable<nxngstarter.IEntity> {
-    const entity$ = new Subject<nxngstarter.IEntity>();
+  ): Observable<upgradedenigma.IEntity> {
+    const entity$ = new Subject<upgradedenigma.IEntity>();
 
-    const onNext = (entityById: nxngstarter.IEntityById) => {
+    const onNext = (entityById: upgradedenigma.IEntityById) => {
       const item = this.items.find(({ id }) => id === entityById.id);
       entity$.next(item);
     };

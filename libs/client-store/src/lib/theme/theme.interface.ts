@@ -1,5 +1,5 @@
 import { StateToken } from '@ngxs/store';
-import { IActionPayload } from '@nx-ng-starter/client-util';
+import { IActionPayload } from '@upgraded-enigma/client-util';
 import { Observable } from 'rxjs';
 
 export interface IThemeStateModel {

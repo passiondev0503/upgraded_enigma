@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { AppClientMaterialModule } from '@nx-ng-starter/client-material';
+import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
 
 import { AppClientDiagnosticsRoutingModule } from './client-diagnostics-routing.module';
 import { AppHomeComponent } from './home/home.component';

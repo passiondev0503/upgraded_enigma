@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { AppMarkdownService } from '@nx-ng-starter/client-services';
-import { TIMEOUT } from '@nx-ng-starter/client-util';
+import { AppMarkdownService } from '@upgraded-enigma/client-services';
+import { TIMEOUT } from '@upgraded-enigma/client-util';
 import { of, timer } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 

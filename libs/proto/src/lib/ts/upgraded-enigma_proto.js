@@ -5,11 +5,11 @@ const $util = $protobuf.util;
 
 const $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-export const nxngstarter = $root.nxngstarter = (() => {
+export const upgradedenigma = $root.upgradedenigma = (() => {
 
-    const nxngstarter = {};
+    const upgradedenigma = {};
 
-    nxngstarter.Entity = (function() {
+    upgradedenigma.Entity = (function() {
 
         function Entity(p) {
             this.subEntities = [];
@@ -28,9 +28,9 @@ export const nxngstarter = $root.nxngstarter = (() => {
         Entity.prototype.subEntities = $util.emptyArray;
 
         Entity.fromObject = function fromObject(d) {
-            if (d instanceof $root.nxngstarter.Entity)
+            if (d instanceof $root.upgradedenigma.Entity)
                 return d;
-            var m = new $root.nxngstarter.Entity();
+            var m = new $root.upgradedenigma.Entity();
             if (d.id != null) {
                 m.id = String(d.id);
             }
@@ -55,17 +55,17 @@ export const nxngstarter = $root.nxngstarter = (() => {
             }
             if (d.any1 != null) {
                 if (typeof d.any1 !== "object")
-                    throw TypeError(".nxngstarter.Entity.any1: object expected");
+                    throw TypeError(".upgradedenigma.Entity.any1: object expected");
                 m.any1 = $root.google.protobuf.Any.fromObject(d.any1);
             }
             if (d.subEntities) {
                 if (!Array.isArray(d.subEntities))
-                    throw TypeError(".nxngstarter.Entity.subEntities: array expected");
+                    throw TypeError(".upgradedenigma.Entity.subEntities: array expected");
                 m.subEntities = [];
                 for (var i = 0; i < d.subEntities.length; ++i) {
                     if (typeof d.subEntities[i] !== "object")
-                        throw TypeError(".nxngstarter.Entity.subEntities: object expected");
-                    m.subEntities[i] = $root.nxngstarter.SubEntity.fromObject(d.subEntities[i]);
+                        throw TypeError(".upgradedenigma.Entity.subEntities: object expected");
+                    m.subEntities[i] = $root.upgradedenigma.SubEntity.fromObject(d.subEntities[i]);
                 }
             }
             return m;
@@ -111,7 +111,7 @@ export const nxngstarter = $root.nxngstarter = (() => {
             if (m.subEntities && m.subEntities.length) {
                 d.subEntities = [];
                 for (var j = 0; j < m.subEntities.length; ++j) {
-                    d.subEntities[j] = $root.nxngstarter.SubEntity.toObject(m.subEntities[j], o);
+                    d.subEntities[j] = $root.upgradedenigma.SubEntity.toObject(m.subEntities[j], o);
                 }
             }
             if (m.any1 != null && m.hasOwnProperty("any1")) {
@@ -127,7 +127,7 @@ export const nxngstarter = $root.nxngstarter = (() => {
         return Entity;
     })();
 
-    nxngstarter.SubEntity = (function() {
+    upgradedenigma.SubEntity = (function() {
 
         function SubEntity(p) {
             if (p)
@@ -139,9 +139,9 @@ export const nxngstarter = $root.nxngstarter = (() => {
         SubEntity.prototype.id = "";
 
         SubEntity.fromObject = function fromObject(d) {
-            if (d instanceof $root.nxngstarter.SubEntity)
+            if (d instanceof $root.upgradedenigma.SubEntity)
                 return d;
-            var m = new $root.nxngstarter.SubEntity();
+            var m = new $root.upgradedenigma.SubEntity();
             if (d.id != null) {
                 m.id = String(d.id);
             }
@@ -168,7 +168,7 @@ export const nxngstarter = $root.nxngstarter = (() => {
         return SubEntity;
     })();
 
-    nxngstarter.EntityById = (function() {
+    upgradedenigma.EntityById = (function() {
 
         function EntityById(p) {
             if (p)
@@ -180,9 +180,9 @@ export const nxngstarter = $root.nxngstarter = (() => {
         EntityById.prototype.id = "";
 
         EntityById.fromObject = function fromObject(d) {
-            if (d instanceof $root.nxngstarter.EntityById)
+            if (d instanceof $root.upgradedenigma.EntityById)
                 return d;
-            var m = new $root.nxngstarter.EntityById();
+            var m = new $root.upgradedenigma.EntityById();
             if (d.id != null) {
                 m.id = String(d.id);
             }
@@ -209,7 +209,7 @@ export const nxngstarter = $root.nxngstarter = (() => {
         return EntityById;
     })();
 
-    nxngstarter.EntityService = (function() {
+    upgradedenigma.EntityService = (function() {
 
         function EntityService(rpcImpl, requestDelimited, responseDelimited) {
             $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
@@ -219,18 +219,18 @@ export const nxngstarter = $root.nxngstarter = (() => {
 
 
         Object.defineProperty(EntityService.prototype.findOne = function findOne(request, callback) {
-            return this.rpcCall(findOne, $root.nxngstarter.EntityById, $root.nxngstarter.Entity, request, callback);
+            return this.rpcCall(findOne, $root.upgradedenigma.EntityById, $root.upgradedenigma.Entity, request, callback);
         }, "name", { value: "FindOne" });
 
 
         Object.defineProperty(EntityService.prototype.findMany = function findMany(request, callback) {
-            return this.rpcCall(findMany, $root.nxngstarter.EntityById, $root.nxngstarter.Entity, request, callback);
+            return this.rpcCall(findMany, $root.upgradedenigma.EntityById, $root.upgradedenigma.Entity, request, callback);
         }, "name", { value: "FindMany" });
 
         return EntityService;
     })();
 
-    return nxngstarter;
+    return upgradedenigma;
 })();
 
 export const google = $root.google = (() => {

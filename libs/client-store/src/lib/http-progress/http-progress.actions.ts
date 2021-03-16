@@ -1,4 +1,4 @@
-import { actionPayloadConstructor } from '@nx-ng-starter/client-util';
+import { actionPayloadConstructor } from '@upgraded-enigma/client-util';
 
 import {
   HTTP_PROGRESS_STATE_TOKEN,

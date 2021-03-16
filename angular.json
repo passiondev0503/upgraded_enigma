@@ -401,7 +401,7 @@
           "outputs": ["coverage/libs/client-chatbot"]
         }
       },
-      "prefix": "nx-ng-starter",
+      "prefix": "upgraded-enigma",
       "projectType": "library",
       "root": "libs/client-chatbot",
       "sourceRoot": "libs/client-chatbot/src"
@@ -455,7 +455,7 @@
           "outputs": ["coverage/libs/client-components"]
         }
       },
-      "prefix": "nx-ng-starter",
+      "prefix": "upgraded-enigma",
       "projectType": "library",
       "root": "libs/client-components",
       "schematics": {
@@ -651,7 +651,7 @@
           "outputs": ["coverage/libs/client-gql"]
         }
       },
-      "prefix": "nx-ng-starter",
+      "prefix": "upgraded-enigma",
       "projectType": "library",
       "root": "libs/client-gql",
       "schematics": {
@@ -735,7 +735,7 @@
           "outputs": ["coverage/libs/client-sidebar"]
         }
       },
-      "prefix": "nx-ng-starter",
+      "prefix": "upgraded-enigma",
       "projectType": "library",
       "root": "libs/client-sidebar",
       "sourceRoot": "libs/client-sidebar/src"
@@ -1034,7 +1034,7 @@
           "outputs": ["coverage/apps/documentation"]
         }
       },
-      "prefix": "nx-ng-starter",
+      "prefix": "upgraded-enigma",
       "projectType": "application",
       "root": "apps/documentation",
       "schematics": {
@@ -1079,7 +1079,7 @@
             "production": {
               "aot": true,
               "buildOptimizer": true,
-              "deployUrl": "https://nx-ng-starter-elements.web.app/",
+              "deployUrl": "https://upgraded-enigma-elements.web.app/",
               "extractLicenses": true,
               "fileReplacements": [
                 {
@@ -1179,7 +1179,7 @@
           "outputs": ["coverage/apps/elements"]
         }
       },
-      "prefix": "nx-ng-starter",
+      "prefix": "upgraded-enigma",
       "projectType": "application",
       "root": "apps/elements",
       "sourceRoot": "apps/elements/src"
@@ -1346,7 +1346,7 @@
           "options": {
             "commands": [
               {
-                "command": "rm -rf /tmp/nx/nx-ng-starter"
+                "command": "rm -rf /tmp/nx/upgraded-enigma"
               }
             ]
           }

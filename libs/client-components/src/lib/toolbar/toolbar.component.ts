@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { AppSidebarState, chatbotActions, sidebarUiActions } from '@nx-ng-starter/client-store';
-import { IToolbarButton } from '@nx-ng-starter/client-util';
+import { AppSidebarState, chatbotActions, sidebarUiActions } from '@upgraded-enigma/client-store';
+import { IToolbarButton } from '@upgraded-enigma/client-util';
 import { map } from 'rxjs/operators';
 
 @Component({

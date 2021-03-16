@@ -1,4 +1,4 @@
-import { IActionPayload } from '@nx-ng-starter/client-util';
+import { IActionPayload } from '@upgraded-enigma/client-util';
 
 export interface IMdFilesState {
   mdFilePaths: string[];

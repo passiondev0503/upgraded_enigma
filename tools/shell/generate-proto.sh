@@ -69,8 +69,8 @@ run_protoc() {
 # Runs protobufjs.
 ##
 run_protobufjs() {
-  local PATH_TO_PROTO_JS="$OUT_DIR_TS/nx-ng-starter_proto.js"
-  local PATH_TO_PROTO_TS="$OUT_DIR_TS/nx-ng-starter_proto.d.ts"
+  local PATH_TO_PROTO_JS="$OUT_DIR_TS/upgraded-enigma_proto.js"
+  local PATH_TO_PROTO_TS="$OUT_DIR_TS/upgraded-enigma_proto.d.ts"
 
   printInfoTitle "<< RUNNING PROTOBUFJS >>"
   printNameAndValue "path to proto" "$PROTO_SOURCE_PATH"

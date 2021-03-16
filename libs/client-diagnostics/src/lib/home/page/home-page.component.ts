@@ -6,7 +6,7 @@ import {
   SimpleChange,
   SimpleChanges,
 } from '@angular/core';
-import { trackChanges } from '@nx-ng-starter/client-util';
+import { trackChanges } from '@upgraded-enigma/client-util';
 
 interface IAppHomePageChanges extends SimpleChanges {
   timer: SimpleChange;

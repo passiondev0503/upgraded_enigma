@@ -5,7 +5,7 @@ import {
   newTestBedMetadata,
   setupJestSpiesFor,
   TClassMemberSpiesObject,
-} from '@nx-ng-starter/client-unit-testing';
+} from '@upgraded-enigma/client-unit-testing';
 
 import { AppRootComponent } from './root.component';
 

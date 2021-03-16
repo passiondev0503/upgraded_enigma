@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { actionPayloadConstructor } from '@nx-ng-starter/client-util';
+import { actionPayloadConstructor } from '@upgraded-enigma/client-util';
 import { tap } from 'rxjs/operators';
 
 import {

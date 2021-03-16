@@ -5,19 +5,19 @@ export const APP_ROUTES: Route[] = [
   {
     path: '',
     loadChildren: () =>
-      import('@nx-ng-starter/client-diagnostics').then(mod => mod.AppClientDiagnosticsModule),
+      import('@upgraded-enigma/client-diagnostics').then(mod => mod.AppClientDiagnosticsModule),
   },
   {
     path: '',
     outlet: 'sidebar',
     loadChildren: () =>
-      import('@nx-ng-starter/client-sidebar').then(mod => mod.AppClientSidebarModule),
+      import('@upgraded-enigma/client-sidebar').then(mod => mod.AppClientSidebarModule),
   },
   {
     path: '',
     outlet: 'chatbot',
     loadChildren: () =>
-      import('@nx-ng-starter/client-chatbot').then(mod => mod.AppClientChatbotModule),
+      import('@upgraded-enigma/client-chatbot').then(mod => mod.AppClientChatbotModule),
   },
   { path: '**', redirectTo: '' },
 ];

@@ -1,5 +1,5 @@
 import { StateToken } from '@ngxs/store';
-import { IActionPayload, TToastType } from '@nx-ng-starter/client-util';
+import { IActionPayload, TToastType } from '@upgraded-enigma/client-util';
 import { MonoTypeOperatorFunction, Observable } from 'rxjs';
 
 export interface IAppHttpProgressState {

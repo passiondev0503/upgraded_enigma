@@ -17,7 +17,7 @@
     },
     "tsconfig.json": "*"
   },
-  "npmScope": "nx-ng-starter",
+  "npmScope": "upgraded-enigma",
   "projects": {
     "api": {
       "tags": ["scope:api", "type:application"]
@@ -122,7 +122,7 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "cacheDirectory": "/tmp/nx/nx-ng-starter",
+        "cacheDirectory": "/tmp/nx/upgraded-enigma",
         "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook"],
         "runtimeCacheInputs": ["node -v", "echo $IMPORTANT_ENV_VAR"]
       },

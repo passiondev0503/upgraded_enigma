@@ -10,7 +10,7 @@ import {
   IWebClientAppEnvironment,
   WEB_CLIENT_APP_ENV,
   WINDOW,
-} from '@nx-ng-starter/client-util';
+} from '@upgraded-enigma/client-util';
 import { HttpLink, HttpLinkHandler } from 'apollo-angular/http';
 import { createUploadLink } from 'apollo-upload-client';
 import { ExecutionResult, GraphQLError } from 'graphql';

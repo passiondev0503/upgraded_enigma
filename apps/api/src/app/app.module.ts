@@ -1,10 +1,10 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { BackendAuthModule } from '@nx-ng-starter/backend-auth';
-import { BackendGqlModule } from '@nx-ng-starter/backend-gql';
-import { BackendGrpcModule } from '@nx-ng-starter/backend-grpc';
-import { API_ENV } from '@nx-ng-starter/backend-interfaces';
-import { BackendLoggerMiddleware } from '@nx-ng-starter/backend-logger';
-import { BackendWebsocketModule } from '@nx-ng-starter/backend-websocket';
+import { BackendAuthModule } from '@upgraded-enigma/backend-auth';
+import { BackendGqlModule } from '@upgraded-enigma/backend-gql';
+import { BackendGrpcModule } from '@upgraded-enigma/backend-grpc';
+import { API_ENV } from '@upgraded-enigma/backend-interfaces';
+import { BackendLoggerMiddleware } from '@upgraded-enigma/backend-logger';
+import { BackendWebsocketModule } from '@upgraded-enigma/backend-websocket';
 
 import { environment } from '../environments/environment';
 

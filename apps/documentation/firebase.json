@@ -5,7 +5,7 @@
         "headers": [
           {
             "key": "Access-Control-Allow-Origin",
-            "value": "https://nx-ng-starter-documentation.firebaseapp.com https://nx-ng-starter-documentation.web.app"
+            "value": "https://upgraded-enigma-documentation.firebaseapp.com https://upgraded-enigma-documentation.web.app"
           },
           {
             "key": "Access-Control-Allow-Methods",
@@ -32,6 +32,6 @@
         "source": "**/!(*.*)"
       }
     ],
-    "site": "nx-ng-starter-documentation"
+    "site": "upgraded-enigma-documentation"
   }
 }

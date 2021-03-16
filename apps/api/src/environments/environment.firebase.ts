@@ -1,4 +1,4 @@
-import { ApiEnvironment } from '@nx-ng-starter/backend-interfaces';
+import { ApiEnvironment } from '@upgraded-enigma/backend-interfaces';
 
 /**
  * Production environment variables.
@@ -6,6 +6,6 @@ import { ApiEnvironment } from '@nx-ng-starter/backend-interfaces';
 export const environment: ApiEnvironment = {
   production: true,
   firebase: true,
-  appName: 'Nx Ng Starter API',
+  appName: 'Upgraded Enigma API',
   wsPort: 8081,
 };

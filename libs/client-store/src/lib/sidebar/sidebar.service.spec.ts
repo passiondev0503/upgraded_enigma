@@ -1,5 +1,5 @@
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
-import { getTestBedConfig, newTestBedMetadata } from '@nx-ng-starter/client-unit-testing';
+import { getTestBedConfig, newTestBedMetadata } from '@upgraded-enigma/client-unit-testing';
 
 import { AppSidebarModule } from './sidebar.module';
 import { AppSidebarService } from './sidebar.service';

@@ -7,7 +7,7 @@ import {
   UserLogoutCredentials,
   UserName,
   UserProfile,
-} from '@nx-ng-starter/backend-interfaces';
+} from '@upgraded-enigma/backend-interfaces';
 
 export interface IAuthPayload {
   email: string;

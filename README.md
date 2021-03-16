@@ -1,10 +1,10 @@
-# NxNgStarter
+# Upgraded Enigma
 
-Angular NestJS Nx starter project with workflow automation.
+Organizer and productivity tools.
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-![Master](https://github.com/rfprod/nx-ng-starter/workflows/Master/badge.svg) ![PR validation](https://github.com/rfprod/nx-ng-starter/workflows/PR%20validation/badge.svg)
+![Master](https://github.com/anisotropic-works/upgraded-enigma/workflows/Master/badge.svg) ![PR validation](https://github.com/anisotropic-works/upgraded-enigma/workflows/PR%20validation/badge.svg)
 
 ## Requirements
 
@@ -53,7 +53,7 @@ git cz
 
 Is generated based on GitHub repo.
 
-- [GitBook documentation](https://rfprod.gitbook.io/nx-ng-starter/)
+- [GitBook documentation](https://anisotropic-works.gitbook.io/upgraded-enigma/)
 
 ## Firebase deployment
 
@@ -61,73 +61,73 @@ Applications as well as generated documentation, testing reports, and a custom c
 
 ### Webapp
 
-- [Nx Ng Starter](https://nx-ng-starter.web.app)
+- [Upgraded Enigma](https://upgraded-enigma.web.app)
 
 ### Elements webapp
 
-- [Nx Ng Starter Elements](https://nx-ng-starter-elements.web.app)
+- [Upgraded Enigma Elements](https://upgraded-enigma-elements.web.app)
 
 ### Documentation
 
-- [Nx Ng Starter Documentation](https://nx-ng-starter-documentation.web.app)
-- [Nx Ng Starter Compodoc](https://nx-ng-starter-documentation.web.app/assets/compodoc/index.html)
+- [Upgraded Enigma Documentation](https://upgraded-enigma-documentation.web.app)
+- [Upgraded Enigma Compodoc](https://upgraded-enigma-documentation.web.app/assets/compodoc/index.html)
 
 #### Unit coverage
 
-- [API](https://nx-ng-starter-documentation.web.app/assets/coverage/apps/api/index.html)
-- [Backend Auth](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/backend-auth/index.html)
-- [Backend Gql](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/backend-gql/index.html)
-- [Backend gRPC](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/backend-grpc/index.html)
-- [Backend Interfaces](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/backend-interfaces/index.html)
-- [Backend Logger](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/backend-logger/index.html)
-- [Backend Websocket](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/backend-websocket/index.html)
-- [Client](https://nx-ng-starter-documentation.web.app/assets/coverage/apps/client/index.html)
-- [Client Chatbot](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-chatbot/index.html)
-- [Client Components](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-components/index.html)
-- [Client Diagnostics](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-diagnostics/index.html)
-- [Client Core](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-core/index.html)
-- [Client Gql](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-gql/index.html)
-- [Client Material](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-material/index.html)
-- [Client Services](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-services/index.html)
-- [Client Store](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-store/index.html)
-- [Client Translate](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-translate/index.html)
-- [Client Util](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-util/index.html)
-- [Documentation](https://nx-ng-starter-documentation.web.app/assets/coverage/apps/documentation/index.html)
-- [Mocks Core](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/mocks-core/index.html)
-- [Proto](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/proto/index.html)
+- [API](https://upgraded-enigma-documentation.web.app/assets/coverage/apps/api/index.html)
+- [Backend Auth](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-auth/index.html)
+- [Backend Gql](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-gql/index.html)
+- [Backend gRPC](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-grpc/index.html)
+- [Backend Interfaces](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-interfaces/index.html)
+- [Backend Logger](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-logger/index.html)
+- [Backend Websocket](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-websocket/index.html)
+- [Client](https://upgraded-enigma-documentation.web.app/assets/coverage/apps/client/index.html)
+- [Client Chatbot](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-chatbot/index.html)
+- [Client Components](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-components/index.html)
+- [Client Diagnostics](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-diagnostics/index.html)
+- [Client Core](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-core/index.html)
+- [Client Gql](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-gql/index.html)
+- [Client Material](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-material/index.html)
+- [Client Services](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-services/index.html)
+- [Client Store](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-store/index.html)
+- [Client Translate](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-translate/index.html)
+- [Client Util](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-util/index.html)
+- [Documentation](https://upgraded-enigma-documentation.web.app/assets/coverage/apps/documentation/index.html)
+- [Mocks Core](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/mocks-core/index.html)
+- [Proto](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/proto/index.html)
 
 #### E2E report
 
-- [Client E2E](https://nx-ng-starter-documentation.web.app/assets/cypress/client-e2e/mochawesome/mochawesome.html)
-- [Client Components E2E](https://nx-ng-starter-documentation.web.app/assets/cypress/client-components-e2e/mochawesome/mochawesome.html)
-- [Documentation E2E](https://nx-ng-starter-documentation.web.app/assets/cypress/documentation-e2e/mochawesome/mochawesome.html)
+- [Client E2E](https://upgraded-enigma-documentation.web.app/assets/cypress/client-e2e/mochawesome/mochawesome.html)
+- [Client Components E2E](https://upgraded-enigma-documentation.web.app/assets/cypress/client-components-e2e/mochawesome/mochawesome.html)
+- [Documentation E2E](https://upgraded-enigma-documentation.web.app/assets/cypress/documentation-e2e/mochawesome/mochawesome.html)
 
 #### Changelog
 
-- [API](https://nx-ng-starter-documentation.web.app/assets/changelog/apps/api-CHANGELOG.html)
-- [Backend Auth](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/backend-auth-CHANGELOG.html)
-- [Backend Gql](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/backend-gql-CHANGELOG.html)
-- [Backend gRPC](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/backend-grpc-CHANGELOG.html)
-- [Backend Interfaces](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/backend-interfaces-CHANGELOG.html)
-- [Backend Logger](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/backend-logger-CHANGELOG.html)
-- [Backend Websocket](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/backend-websocket-CHANGELOG.html)
-- [Client](https://nx-ng-starter-documentation.web.app/assets/changelog/apps/client-CHANGELOG.html)
-- [Client E2E](https://nx-ng-starter-documentation.web.app/assets/changelog/apps/client-e2e-CHANGELOG.html)
-- [Client Components](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-components-CHANGELOG.html)
-- [Client Components E2E](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-components-e2e-CHANGELOG.html)
-- [Client Diagnostics](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-diagnostics-CHANGELOG.html)
-- [Client Diagnostics E2E](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-diagnostics-e2e-CHANGELOG.html)
-- [Client Core](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-core-CHANGELOG.html)
-- [Client Gql](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-gql-CHANGELOG.html)
-- [Client Material](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-material-CHANGELOG.html)
-- [Client Services](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-services-CHANGELOG.html)
-- [Client Store](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-store-CHANGELOG.html)
-- [Client Translate](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-translate-CHANGELOG.html)
-- [Client Util](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-util-CHANGELOG.html)
-- [Documentation](https://nx-ng-starter-documentation.web.app/assets/changelog/apps/documentation-CHANGELOG.html)
-- [Documentation E2E](https://nx-ng-starter-documentation.web.app/assets/changelog/apps/documentation-e2e-CHANGELOG.html)
-- [Mocks Core](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/mocks-core-CHANGELOG.html)
-- [Proto](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/proto-CHANGELOG.html)
+- [API](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/api-CHANGELOG.html)
+- [Backend Auth](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-auth-CHANGELOG.html)
+- [Backend Gql](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-gql-CHANGELOG.html)
+- [Backend gRPC](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-grpc-CHANGELOG.html)
+- [Backend Interfaces](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-interfaces-CHANGELOG.html)
+- [Backend Logger](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-logger-CHANGELOG.html)
+- [Backend Websocket](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-websocket-CHANGELOG.html)
+- [Client](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/client-CHANGELOG.html)
+- [Client E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/client-e2e-CHANGELOG.html)
+- [Client Components](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-components-CHANGELOG.html)
+- [Client Components E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-components-e2e-CHANGELOG.html)
+- [Client Diagnostics](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-diagnostics-CHANGELOG.html)
+- [Client Diagnostics E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-diagnostics-e2e-CHANGELOG.html)
+- [Client Core](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-core-CHANGELOG.html)
+- [Client Gql](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-gql-CHANGELOG.html)
+- [Client Material](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-material-CHANGELOG.html)
+- [Client Services](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-services-CHANGELOG.html)
+- [Client Store](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-store-CHANGELOG.html)
+- [Client Translate](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-translate-CHANGELOG.html)
+- [Client Util](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-util-CHANGELOG.html)
+- [Documentation](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/documentation-CHANGELOG.html)
+- [Documentation E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/documentation-e2e-CHANGELOG.html)
+- [Mocks Core](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/mocks-core-CHANGELOG.html)
+- [Proto](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/proto-CHANGELOG.html)
 
 ## General Tooling
 
@@ -185,7 +185,7 @@ ng g @nrwl/angular:lib my-lib
 
 Libraries are sharable across libraries and applications.
 
-It can be imported from `@nx-ng-starter/mylib`.
+It can be imported from `@upgraded-enigma/mylib`.
 
 ### Running a development server
 

@@ -1,6 +1,6 @@
 import * as $protobuf from "protobufjs";
-/** Namespace nxngstarter. */
-export namespace nxngstarter {
+/** Namespace upgradedenigma. */
+export namespace upgradedenigma {
 
     /** Properties of an Entity. */
     interface IEntity {
@@ -24,7 +24,7 @@ export namespace nxngstarter {
         any1?: (google.protobuf.IAny|null);
 
         /** Entity subEntities */
-        subEntities?: (nxngstarter.ISubEntity[]|null);
+        subEntities?: (upgradedenigma.ISubEntity[]|null);
     }
 
     /** Represents an Entity. */
@@ -34,7 +34,7 @@ export namespace nxngstarter {
          * Constructs a new Entity.
          * @param [p] Properties to set
          */
-        constructor(p?: nxngstarter.IEntity);
+        constructor(p?: upgradedenigma.IEntity);
 
         /** Entity id. */
         public id: string;
@@ -55,14 +55,14 @@ export namespace nxngstarter {
         public any1?: (google.protobuf.IAny|null);
 
         /** Entity subEntities. */
-        public subEntities: nxngstarter.ISubEntity[];
+        public subEntities: upgradedenigma.ISubEntity[];
 
         /**
          * Creates an Entity message from a plain object. Also converts values to their respective internal types.
          * @param d Plain object
          * @returns Entity
          */
-        public static fromObject(d: { [k: string]: any }): nxngstarter.Entity;
+        public static fromObject(d: { [k: string]: any }): upgradedenigma.Entity;
 
         /**
          * Creates a plain object from an Entity message. Also converts values to other types if specified.
@@ -70,7 +70,7 @@ export namespace nxngstarter {
          * @param [o] Conversion options
          * @returns Plain object
          */
-        public static toObject(m: nxngstarter.Entity, o?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(m: upgradedenigma.Entity, o?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this Entity to JSON.
@@ -93,7 +93,7 @@ export namespace nxngstarter {
          * Constructs a new SubEntity.
          * @param [p] Properties to set
          */
-        constructor(p?: nxngstarter.ISubEntity);
+        constructor(p?: upgradedenigma.ISubEntity);
 
         /** SubEntity id. */
         public id: string;
@@ -103,7 +103,7 @@ export namespace nxngstarter {
          * @param d Plain object
          * @returns SubEntity
          */
-        public static fromObject(d: { [k: string]: any }): nxngstarter.SubEntity;
+        public static fromObject(d: { [k: string]: any }): upgradedenigma.SubEntity;
 
         /**
          * Creates a plain object from a SubEntity message. Also converts values to other types if specified.
@@ -111,7 +111,7 @@ export namespace nxngstarter {
          * @param [o] Conversion options
          * @returns Plain object
          */
-        public static toObject(m: nxngstarter.SubEntity, o?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(m: upgradedenigma.SubEntity, o?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SubEntity to JSON.
@@ -134,7 +134,7 @@ export namespace nxngstarter {
          * Constructs a new EntityById.
          * @param [p] Properties to set
          */
-        constructor(p?: nxngstarter.IEntityById);
+        constructor(p?: upgradedenigma.IEntityById);
 
         /** EntityById id. */
         public id: string;
@@ -144,7 +144,7 @@ export namespace nxngstarter {
          * @param d Plain object
          * @returns EntityById
          */
-        public static fromObject(d: { [k: string]: any }): nxngstarter.EntityById;
+        public static fromObject(d: { [k: string]: any }): upgradedenigma.EntityById;
 
         /**
          * Creates a plain object from an EntityById message. Also converts values to other types if specified.
@@ -152,7 +152,7 @@ export namespace nxngstarter {
          * @param [o] Conversion options
          * @returns Plain object
          */
-        public static toObject(m: nxngstarter.EntityById, o?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(m: upgradedenigma.EntityById, o?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this EntityById to JSON.
@@ -177,45 +177,45 @@ export namespace nxngstarter {
          * @param request EntityById message or plain object
          * @param callback Node-style callback called with the error, if any, and Entity
          */
-        public findOne(request: nxngstarter.IEntityById, callback: nxngstarter.EntityService.FindOneCallback): void;
+        public findOne(request: upgradedenigma.IEntityById, callback: upgradedenigma.EntityService.FindOneCallback): void;
 
         /**
          * Calls FindOne.
          * @param request EntityById message or plain object
          * @returns Promise
          */
-        public findOne(request: nxngstarter.IEntityById): Promise<nxngstarter.Entity>;
+        public findOne(request: upgradedenigma.IEntityById): Promise<upgradedenigma.Entity>;
 
         /**
          * Calls FindMany.
          * @param request EntityById message or plain object
          * @param callback Node-style callback called with the error, if any, and Entity
          */
-        public findMany(request: nxngstarter.IEntityById, callback: nxngstarter.EntityService.FindManyCallback): void;
+        public findMany(request: upgradedenigma.IEntityById, callback: upgradedenigma.EntityService.FindManyCallback): void;
 
         /**
          * Calls FindMany.
          * @param request EntityById message or plain object
          * @returns Promise
          */
-        public findMany(request: nxngstarter.IEntityById): Promise<nxngstarter.Entity>;
+        public findMany(request: upgradedenigma.IEntityById): Promise<upgradedenigma.Entity>;
     }
 
     namespace EntityService {
 
         /**
-         * Callback as used by {@link nxngstarter.EntityService#findOne}.
+         * Callback as used by {@link upgradedenigma.EntityService#findOne}.
          * @param error Error, if any
          * @param [response] Entity
          */
-        type FindOneCallback = (error: (Error|null), response?: nxngstarter.Entity) => void;
+        type FindOneCallback = (error: (Error|null), response?: upgradedenigma.Entity) => void;
 
         /**
-         * Callback as used by {@link nxngstarter.EntityService#findMany}.
+         * Callback as used by {@link upgradedenigma.EntityService#findMany}.
          * @param error Error, if any
          * @param [response] Entity
          */
-        type FindManyCallback = (error: (Error|null), response?: nxngstarter.Entity) => void;
+        type FindManyCallback = (error: (Error|null), response?: upgradedenigma.Entity) => void;
     }
 }
 

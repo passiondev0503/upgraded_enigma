@@ -1,1 +1,1 @@
-export * from './nx-ng-starter_proto';
+export * from './upgraded-enigma_proto';

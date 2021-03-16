@@ -7,8 +7,8 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { AppClientMaterialModule } from '@nx-ng-starter/client-material';
-import { documentFactory, WINDOW, windowFactory } from '@nx-ng-starter/client-util';
+import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
+import { documentFactory, WINDOW, windowFactory } from '@upgraded-enigma/client-util';
 import { MarkdownModule, MarkdownModuleConfig, MarkedOptions } from 'ngx-markdown';
 
 import { environment } from '../environments/environment';

@@ -5,7 +5,7 @@ import {
   MatcompModel,
   MatcompSubscription,
   NewMatcompInputDto,
-} from '@nx-ng-starter/backend-interfaces';
+} from '@upgraded-enigma/backend-interfaces';
 import { PubSub } from 'graphql-subscriptions';
 
 import { BackendMatcompGuard } from './matcomp.guard';

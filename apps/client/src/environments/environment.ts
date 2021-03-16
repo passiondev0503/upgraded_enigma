@@ -1,5 +1,5 @@
 import { Capacitor } from '@capacitor/core';
-import { IWebClientAppEnvironment } from '@nx-ng-starter/client-util';
+import { IWebClientAppEnvironment } from '@upgraded-enigma/client-util';
 
 const platform: string = Capacitor.getPlatform();
 
@@ -19,7 +19,7 @@ const platform: string = Capacitor.getPlatform();
 export const environment: IWebClientAppEnvironment = {
   production: false,
   platform,
-  appName: 'Nx Ng Starter Client',
+  appName: 'Upgraded Enigma Client',
   api: window.location.origin.includes('localhost')
     ? 'http://localhost:8080/api'
     : `${window.location.origin}/api`,

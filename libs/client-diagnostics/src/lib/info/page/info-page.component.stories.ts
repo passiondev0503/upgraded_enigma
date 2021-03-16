@@ -1,14 +1,14 @@
 import { DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppClientMaterialModule } from '@nx-ng-starter/client-material';
+import { text } from '@storybook/addon-knobs';
+import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
 import {
   documentFactory,
   WEB_CLIENT_APP_ENV,
   WINDOW,
   windowFactory,
-} from '@nx-ng-starter/client-util';
-import { text } from '@storybook/addon-knobs';
+} from '@upgraded-enigma/client-util';
 
 import { AppInfoPage } from './info-page.component';
 

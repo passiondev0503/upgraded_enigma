@@ -2,7 +2,7 @@ import { TCypressCustomCommands } from '../support/config/commands.config';
 
 declare const cy: TCypressCustomCommands;
 
-describe('nx-ng-starter', () => {
+describe('upgraded-enigma', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should have one app-root html element', () => {

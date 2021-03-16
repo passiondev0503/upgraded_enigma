@@ -5,7 +5,7 @@ import {
   Matcomp,
   MatcompArgs,
   NewMatcompInput,
-} from '@nx-ng-starter/backend-interfaces';
+} from '@upgraded-enigma/backend-interfaces';
 
 @Injectable()
 export class BackendMatcompService implements IMatcompQuery, IMatcompMutation {

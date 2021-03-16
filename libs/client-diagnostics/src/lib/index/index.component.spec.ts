@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppWebsocketModule } from '@nx-ng-starter/client-store';
+import { AppWebsocketModule } from '@upgraded-enigma/client-store';
 import {
   getTestBedConfig,
   newTestBedMetadata,
   setupJestSpiesFor,
   TClassMemberSpiesObject,
   testingEnvironment,
-} from '@nx-ng-starter/client-unit-testing';
+} from '@upgraded-enigma/client-unit-testing';
 
 import { AppIndexComponent } from './index.component';
 

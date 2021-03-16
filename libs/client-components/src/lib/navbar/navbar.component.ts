@@ -3,7 +3,7 @@ import {
   IToolbarAnchor,
   IWebClientAppEnvironment,
   WEB_CLIENT_APP_ENV,
-} from '@nx-ng-starter/client-util';
+} from '@upgraded-enigma/client-util';
 
 @Component({
   selector: 'app-navbar',

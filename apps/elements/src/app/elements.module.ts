@@ -14,14 +14,14 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { AppChatbotRootComponent, AppClientChatbotModule } from '@nx-ng-starter/client-chatbot';
-import { AppClientCoreModule } from '@nx-ng-starter/client-core';
-import { AppClientGqlModule } from '@nx-ng-starter/client-gql';
-import { AppClientMaterialModule } from '@nx-ng-starter/client-material';
-import { AppWebsocketModule } from '@nx-ng-starter/client-store';
-import { AppClientTranslateModule } from '@nx-ng-starter/client-translate';
-import { WINDOW } from '@nx-ng-starter/client-util';
-import { EntityServiceClient } from '@nx-ng-starter/proto';
+import { AppChatbotRootComponent, AppClientChatbotModule } from '@upgraded-enigma/client-chatbot';
+import { AppClientCoreModule } from '@upgraded-enigma/client-core';
+import { AppClientGqlModule } from '@upgraded-enigma/client-gql';
+import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
+import { AppWebsocketModule } from '@upgraded-enigma/client-store';
+import { AppClientTranslateModule } from '@upgraded-enigma/client-translate';
+import { WINDOW } from '@upgraded-enigma/client-util';
+import { EntityServiceClient } from '@upgraded-enigma/proto';
 
 import { environment } from '../environments/environment';
 

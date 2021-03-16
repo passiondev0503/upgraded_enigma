@@ -4,7 +4,7 @@ import {
   UserLoginCredentials,
   UserLogoutCredentials,
   UserProfile,
-} from '@nx-ng-starter/backend-interfaces';
+} from '@upgraded-enigma/backend-interfaces';
 
 import { BackendAuthService } from '../service/auth.service';
 
