@@ -15,7 +15,7 @@
       "engines": "*",
       "scripts": "*"
     },
-    "tsconfig.json": "*"
+    "tsconfig.base.json": "*"
   },
   "npmScope": "upgraded-enigma",
   "projects": {
