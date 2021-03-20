@@ -56,6 +56,9 @@
     "client-core": {
       "tags": ["scope:client-core", "type:ui"]
     },
+    "client-d3-charts": {
+      "tags": ["scope:client-d3-charts", "type:ui"]
+    },
     "client-diagnostics": {
       "tags": ["scope:client-diagnostics", "type:feature"]
     },

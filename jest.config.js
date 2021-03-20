@@ -14,6 +14,7 @@ module.exports = {
     '<rootDir>/libs/client-chatbot',
     '<rootDir>/libs/client-components',
     '<rootDir>/libs/client-core',
+    '<rootDir>/libs/client-d3-charts',
     '<rootDir>/libs/client-diagnostics',
     '<rootDir>/libs/client-gql',
     '<rootDir>/libs/client-material',

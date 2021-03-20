@@ -43,7 +43,13 @@ module.exports = {
     ],
     'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: false }],
     'eslint-comments/require-description': ['error', { ignore: [] }],
-    'eslint-comments/no-restricted-disable': ['error', '*', '!no-console', '!prettier'],
+    'eslint-comments/no-restricted-disable': [
+      'error',
+      '*',
+      '!no-console',
+      '!prettier',
+      '!max-lines-per-function',
+    ],
     '@typescript-eslint/await-thenable': 'error',
     '@typescript-eslint/ban-ts-comment': 'error',
     '@typescript-eslint/ban-types': [
@@ -190,7 +196,7 @@ module.exports = {
       {
         ignoreNumericLiteralTypes: true,
         ignoreReadonlyClassProperties: true,
-        ignore: [-1, 0, 1] /* ignore -1, and binary*/,
+        ignore: [-1, 0, 1, 2] /* ignore -1, binary, and common divisor 2*/,
         ignoreEnums: true /* ignore enumerators so that numeric values can be grouped via enums instead of constants */,
       },
     ],

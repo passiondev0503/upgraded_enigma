@@ -520,6 +520,29 @@
       },
       "sourceRoot": "libs/client-core/src"
     },
+    "client-d3-charts": {
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "libs/client-d3-charts/.eslintrc.json",
+            "lintFilePatterns": ["libs/client-d3-charts/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/client-d3-charts/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/client-d3-charts"]
+        }
+      },
+      "prefix": "mono",
+      "projectType": "library",
+      "root": "libs/client-d3-charts",
+      "sourceRoot": "libs/client-d3-charts/src"
+    },
     "client-diagnostics": {
       "architect": {
         "build-storybook": {
