@@ -14,7 +14,10 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { AppChatbotRootComponent, AppClientChatbotModule } from '@upgraded-enigma/client-chatbot';
+import {
+  AppChatbotWidgetRootComponent,
+  AppClientChatbotModule,
+} from '@upgraded-enigma/client-chatbot';
 import { AppClientCoreModule } from '@upgraded-enigma/client-core';
 import { AppClientGqlModule } from '@upgraded-enigma/client-gql';
 import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
@@ -66,11 +69,14 @@ export class AppElementsModule implements DoBootstrap {
   }
 
   private registerChatbotWidget(): void {
-    const chatbotWidget = createCustomElement<AppChatbotRootComponent>(AppChatbotRootComponent, {
-      injector: this.injector,
-    });
-    if (!Boolean(this.window.customElements.get('app-chatbot-root'))) {
-      this.window.customElements.define('app-chatbot-root', chatbotWidget);
+    const chatbotWidget = createCustomElement<AppChatbotWidgetRootComponent>(
+      AppChatbotWidgetRootComponent,
+      {
+        injector: this.injector,
+      },
+    );
+    if (!Boolean(this.window.customElements.get('app-chatbot-widget-root'))) {
+      this.window.customElements.define('app-chatbot-widget-root', chatbotWidget);
     }
   }
 }
