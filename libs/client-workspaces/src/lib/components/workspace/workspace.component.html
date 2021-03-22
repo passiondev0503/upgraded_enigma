@@ -1,0 +1,20 @@
+<ng-container *ngIf="data$ | async as data">
+  <h1>
+    <button mat-icon-button (click)="backHandler()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    {{ data.title }}
+  </h1>
+
+  <div>
+    <p>
+      {{ data.description }}
+    </p>
+  </div>
+
+  <div>
+    <button mat-button (click)="editHandler()">edit</button>
+
+    <button mat-button (click)="deleteHandler()">delete</button>
+  </div>
+</ng-container>

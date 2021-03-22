@@ -33,10 +33,10 @@ export class AppWebsocketApiService {
         console.error('error', error);
         return of();
       }),
-    ) as Observable<IWebsocketResponseEvent<number>>;
+    ) as Observable<IWebsocketResponseEvent<number | Record<string, string | number>[]>>;
   }
 
-  public sendEvent(eventType: 'events') {
+  public sendEvent(eventType: 'events' | 'get-diag-dynamic' | 'stop-diag-dynamic') {
     const event = { event: eventType };
     this.websocket$.next(event);
   }

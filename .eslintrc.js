@@ -48,6 +48,7 @@ module.exports = {
       '*',
       '!no-console',
       '!prettier',
+      '!no-alert',
       '!max-lines-per-function',
     ],
     '@typescript-eslint/await-thenable': 'error',
@@ -396,7 +397,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/main.ts', '*logger*.ts', '**/http-handlers.service.ts'],
+      files: ['**/main.ts', '*logger*.ts', '**/set-env.ts', '**/http-handlers.service.ts'],
       rules: {
         'no-console': 'off',
       },

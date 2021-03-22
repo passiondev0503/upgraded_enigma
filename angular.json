@@ -111,6 +111,28 @@
       "root": "libs/backend-auth",
       "sourceRoot": "libs/backend-auth/src"
     },
+    "backend-diagnostics": {
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "libs/backend-diagnostics/.eslintrc.json",
+            "lintFilePatterns": ["libs/backend-diagnostics/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/backend-diagnostics/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/backend-diagnostics"]
+        }
+      },
+      "projectType": "library",
+      "root": "libs/backend-diagnostics",
+      "sourceRoot": "libs/backend-diagnostics/src"
+    },
     "backend-gql": {
       "architect": {
         "lint": {
@@ -383,6 +405,58 @@
       },
       "sourceRoot": "apps/client/src"
     },
+    "client-api": {
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "configurations": {
+            "production": {
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/client-api/src/environments/environment.ts",
+                  "with": "apps/client-api/src/environments/environment.prod.ts"
+                }
+              ],
+              "inspect": false,
+              "optimization": true
+            }
+          },
+          "options": {
+            "assets": ["apps/client-api/src/assets"],
+            "main": "apps/client-api/src/main.ts",
+            "outputPath": "dist/apps/client-api",
+            "tsConfig": "apps/client-api/tsconfig.app.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "apps/client-api/.eslintrc.json",
+            "lintFilePatterns": ["apps/client-api/**/*.ts"]
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "client-api:build"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/client-api/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/apps/client-api"]
+        }
+      },
+      "prefix": "client-api",
+      "projectType": "application",
+      "root": "apps/client-api",
+      "sourceRoot": "apps/client-api/src"
+    },
     "client-chatbot": {
       "architect": {
         "lint": {
@@ -629,6 +703,29 @@
       "root": "apps/client-diagnostics-e2e",
       "sourceRoot": "apps/client-diagnostics-e2e/src"
     },
+    "client-directives": {
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "libs/client-directives/.eslintrc.json",
+            "lintFilePatterns": ["libs/client-directives/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/client-directives/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/client-directives"]
+        }
+      },
+      "prefix": "upgraded-enigma",
+      "projectType": "library",
+      "root": "libs/client-directives",
+      "sourceRoot": "libs/client-directives/src"
+    },
     "client-e2e": {
       "architect": {
         "e2e": {
@@ -847,6 +944,29 @@
       },
       "sourceRoot": "libs/client-unit-testing/src"
     },
+    "client-user": {
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "libs/client-user/.eslintrc.json",
+            "lintFilePatterns": ["libs/client-user/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/client-user/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/client-user"]
+        }
+      },
+      "prefix": "upgraded-enigma",
+      "projectType": "library",
+      "root": "libs/client-user",
+      "sourceRoot": "libs/client-user/src"
+    },
     "client-util": {
       "architect": {
         "lint": {
@@ -874,6 +994,29 @@
         }
       },
       "sourceRoot": "libs/client-util/src"
+    },
+    "client-workspaces": {
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "libs/client-workspaces/.eslintrc.json",
+            "lintFilePatterns": ["libs/client-workspaces/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/client-workspaces/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/client-workspaces"]
+        }
+      },
+      "prefix": "upgraded-enigma",
+      "projectType": "library",
+      "root": "libs/client-workspaces",
+      "sourceRoot": "libs/client-workspaces/src"
     },
     "documentation": {
       "architect": {
@@ -1419,6 +1562,26 @@
           "options": {
             "eslintConfig": "tools/.eslintrc.json",
             "lintFilePatterns": ["tools/generators/**/*.ts", "tools/ts/**/*.ts"]
+          }
+        },
+        "reset-client-env": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "npx ts-node -P ./tools/tsconfig.tools.json ./tools/ts/set-client-env.ts --reset=true && npx nx lint client --fix"
+              }
+            ]
+          }
+        },
+        "set-client-env": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "npx ts-node -P ./tools/tsconfig.tools.json ./tools/ts/set-client-env.ts"
+              }
+            ]
           }
         },
         "update-check": {

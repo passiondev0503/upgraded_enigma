@@ -52,17 +52,32 @@ const backendConstraints = [
     sourceTag: 'scope:api',
     onlyDependOnLibsWithTags: [
       'scope:proto',
-      'scope:backend-auth',
       'scope:backend-grpc',
       'scope:backend-gql',
       'scope:backend-interfaces',
       'scope:backend-logger',
       'scope:backend-websocket',
+      'scope:backend-diagnostics',
+    ],
+  },
+  {
+    sourceTag: 'scope:client-api',
+    onlyDependOnLibsWithTags: [
+      'scope:proto',
+      'scope:backend-auth',
+      'scope:backend-interfaces',
+      'scope:backend-logger',
+      'scope:backend-websocket',
+      'scope:backend-diagnostics',
     ],
   },
   {
     sourceTag: 'scope:backend-auth',
     onlyDependOnLibsWithTags: ['scope:proto', 'scope:backend-interfaces'],
+  },
+  {
+    sourceTag: 'scope:backend-diagnostics',
+    onlyDependOnLibsWithTags: ['scope:backend-interfaces'],
   },
   {
     sourceTag: 'scope:backend-grpc',
@@ -82,7 +97,11 @@ const backendConstraints = [
   },
   {
     sourceTag: 'scope:backend-websocket',
-    onlyDependOnLibsWithTags: ['scope:proto', 'scope:backend-interfaces'],
+    onlyDependOnLibsWithTags: [
+      'scope:proto',
+      'scope:backend-interfaces',
+      'scope:backend-diagnostics',
+    ],
   },
 ];
 
@@ -135,7 +154,11 @@ const clientConstraints = [
   },
   {
     sourceTag: 'scope:client-d3-charts',
-    onlyDependOnLibsWithTags: ['scope:client-util'],
+    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-util'],
+  },
+  {
+    sourceTag: 'scope:client-directives',
+    onlyDependOnLibsWithTags: ['scope:client-unit-testing'],
   },
   {
     sourceTag: 'scope:client-diagnostics',
@@ -169,8 +192,27 @@ const clientConstraints = [
     onlyDependOnLibsWithTags: [],
   },
   {
-    sourceTag: 'scope:translate',
-    onlyDependOnLibsWithTags: [],
+    sourceTag: 'scope:client-user',
+    onlyDependOnLibsWithTags: [
+      'scope:client-unit-testing',
+      'scope:client-material',
+      'scope:client-services',
+      'scope:client-store',
+      'scope:client-translate',
+      'scope:client-util',
+    ],
+  },
+  {
+    sourceTag: 'scope:client-workspaces',
+    onlyDependOnLibsWithTags: [
+      'scope:client-unit-testing',
+      'scope:client-material',
+      'scope:client-store',
+    ],
+  },
+  {
+    sourceTag: 'scope:client-translate',
+    onlyDependOnLibsWithTags: ['scope:client-material', 'scope:client-util'],
   },
   {
     sourceTag: 'scope:client',
@@ -187,6 +229,8 @@ const clientConstraints = [
       'scope:client-material',
       'scope:client-translate',
       'scope:client-util',
+      'scope:client-user',
+      'scope:client-workspaces',
     ],
   },
   {

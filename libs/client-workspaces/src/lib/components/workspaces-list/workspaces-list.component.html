@@ -1,0 +1,11 @@
+<ng-container *ngIf="widgets$ | async as widgets">
+  <app-workspace-widget
+    fxFlex="0 1 auto"
+    *ngFor="let widget of widgets"
+    [data]="widget"
+    (editWorkspace)="editHandler($event)"
+    (deleteWorkspace)="deleteHandler($event)"
+    (openWorkspace)="openHandler($event)"
+  >
+  </app-workspace-widget>
+</ng-container>

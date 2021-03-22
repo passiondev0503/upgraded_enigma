@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { AppWebsocketService } from '@upgraded-enigma/client-store';
 
 /**
@@ -10,8 +10,12 @@ import { AppWebsocketService } from '@upgraded-enigma/client-store';
   styleUrls: ['./index.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppIndexComponent {
+export class AppIndexComponent implements OnDestroy {
   constructor(private readonly ws: AppWebsocketService) {
-    this.ws.getData();
+    this.ws.getDynamicDiagnosticData();
+  }
+
+  public ngOnDestroy() {
+    this.ws.stopDynamicDiagnosticData();
   }
 }

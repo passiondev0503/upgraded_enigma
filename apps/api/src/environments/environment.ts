@@ -1,4 +1,4 @@
-import { ApiEnvironment } from '@upgraded-enigma/backend-interfaces';
+import { ApiEnvironment, defaultWsPort } from '@upgraded-enigma/backend-interfaces';
 
 /**
  * Development environment variables.
@@ -9,5 +9,6 @@ import { ApiEnvironment } from '@upgraded-enigma/backend-interfaces';
 export const environment: ApiEnvironment = {
   production: false,
   appName: 'Upgraded Enigma API',
-  wsPort: 8081,
+  wsPort: defaultWsPort,
+  jwtSecret: 'jwtsecret', // TODO: should be set from .env
 };

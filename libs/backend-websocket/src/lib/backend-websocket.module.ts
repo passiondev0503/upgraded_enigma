@@ -1,8 +1,14 @@
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
+import { BackendDiagnosticsService } from '@upgraded-enigma/backend-diagnostics';
 
 import { BackendEventsGateway } from './gateway/events.gateway';
 
-@Module({
-  providers: [BackendEventsGateway],
-})
-export class BackendWebsocketModule {}
+@Module({})
+export class BackendWebsocketModule {
+  public static forRoot(): DynamicModule {
+    return {
+      module: BackendWebsocketModule,
+      providers: [BackendEventsGateway, BackendDiagnosticsService],
+    };
+  }
+}

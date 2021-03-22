@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { AppChatbotModule } from './chatbot/chatbot.module';
+import { AppDiagnosticsModule } from './diagnostics/diagnostics.module';
 import { AppHttpApiModule } from './http-api/http-api.module';
 import { AppHttpProgressModule } from './http-progress/http-progress.module';
 import { AppSidebarModule } from './sidebar/sidebar.module';
@@ -17,6 +18,7 @@ import { AppWebsocketModule } from './websocket/websocket.module';
     AppWebsocketModule,
     AppChatbotModule,
     AppThemeModule,
+    AppDiagnosticsModule,
   ],
   exports: [
     AppHttpApiModule,
@@ -26,6 +28,7 @@ import { AppWebsocketModule } from './websocket/websocket.module';
     AppWebsocketModule,
     AppChatbotModule,
     AppThemeModule,
+    AppDiagnosticsModule,
   ],
 })
 export class AppClientStoreModule {}

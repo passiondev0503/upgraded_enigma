@@ -26,20 +26,30 @@ reportUsage() {
 }
 
 ##
-# Builds Nx Ng Starter client app in production mode.
+# Builds client app in production mode.
 ##
-buildNxNgStarterClientProd() {
-  printInfoTitle "<< BUILDING Nx Ng Starter client app PRODUCTION mode >>"
+buildClientProd() {
+  printInfoTitle "<< Client app PRODUCTION build >>"
   printGap
 
   ng build --project client --configuration production || exit 1
 }
 
 ##
-# Builds Nx Ng Starter documentation app in production mode.
+# Builds client api app in production mode.
 ##
-buildNxNgStarterDocs() {
-  printInfoTitle "<< BUILDING Nx Ng Starter documentation app PRODUCTION mode >>"
+buildClientApiProd() {
+  printInfoTitle "<< Client API app PRODUCTION build >>"
+  printGap
+
+  ng build --project client-api --configuration production || exit 1
+}
+
+##
+# Builds documentation app in production mode.
+##
+buildDocs() {
+  printInfoTitle "<< Documentation app PRODUCTION build >>"
   printNameAndValue "configuration" "$1"
   printGap
 
@@ -69,7 +79,7 @@ buildNxNgStarterDocs() {
 # Builds API app in production mode.
 ##
 buildAPIProd() {
-  printInfoTitle "<< BUILDING API app PRODUCTION mode >>"
+  printInfoTitle "<< API app PRODUCTION build >>"
   printGap
 
   ng build --project api --configuration firebase || exit 1
@@ -79,19 +89,19 @@ buildAPIProd() {
 # Builds all dists in production mode.
 ##
 buildAllProd() {
-  printInfoTitle "<< BUILDING ALL apps PRODUCTION mode >>"
+  printInfoTitle "<< ALL apps PRODUCTION build >>"
   printGap
 
   buildAPIProd
-  buildNxNgStarterClientProd
-  buildNxNgStarterDocs "prod"
+  buildClientProd
+  buildDocs "prod"
 }
 
 ##
 # Builds all dists in production mode.
 ##
 buildAllDev() {
-  printInfoTitle "<< BUILDING ALL apps DEVELOPMENT mode >>"
+  printInfoTitle "<< ALL apps DEVELOPMENT build >>"
   printGap
 
   npm run build:all
@@ -104,7 +114,7 @@ if [ $# -lt 1 ]; then
   reportUsage
 elif [ "$1" = "dev" ]; then
   if [ "$2" = "documentation" ]; then
-    buildNxNgStarterDocs "$1"
+    buildDocs "$1"
   else
     buildAllDev
   fi
@@ -112,9 +122,11 @@ elif [ "$1" = "prod" ]; then
   if [ "$2" = "api" ]; then
     buildAPIProd
   elif [ "$2" = "client" ]; then
-    buildNxNgStarterClientProd
+    buildClientProd
+  elif [ "$2" = "client-api" ]; then
+    buildClientApiProd
   elif [ "$2" = "documentation" ]; then
-    buildNxNgStarterDocs "$1"
+    buildDocs "$1"
   else
     buildAllProd
   fi

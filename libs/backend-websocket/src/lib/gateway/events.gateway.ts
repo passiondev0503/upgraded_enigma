@@ -6,9 +6,10 @@ import {
   WebSocketServer,
   WsResponse,
 } from '@nestjs/websockets';
+import { BackendDiagnosticsService } from '@upgraded-enigma/backend-diagnostics';
 import { defaultWsPort } from '@upgraded-enigma/backend-interfaces';
-import { BehaviorSubject, Observable, timer } from 'rxjs';
-import { map, takeWhile } from 'rxjs/operators';
+import { Subscription, timer } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Server } from 'ws';
 
 @WebSocketGateway(defaultWsPort, {
@@ -22,52 +23,68 @@ export class BackendEventsGateway implements OnGatewayConnection, OnGatewayDisco
   @WebSocketServer()
   protected server?: Server;
 
-  /**
-   * Currently coonected users count.
-   */
-  private readonly users$ = new BehaviorSubject<number>(0);
+  private dynamicDataSub?: Subscription;
 
-  private sendClientChangeEvent(data: number): void {
+  constructor(private readonly diagnosticsService: BackendDiagnosticsService) {}
+
+  private sendClientChangeEvent(): void {
     if (typeof this.server !== 'undefined') {
       const clients = this.server.clients.values();
       for (const client of clients) {
-        client.send(JSON.stringify({ event: 'users', data }));
+        client.send(JSON.stringify({ event: 'users', data: this.server.clients.size }));
       }
     }
   }
 
   public async handleConnection() {
-    // client disconnected
-    const usersCount = this.users$.value + 1;
-    this.users$.next(usersCount);
-
-    // Notify connected clients of current users
-    this.sendClientChangeEvent(usersCount);
+    this.sendClientChangeEvent();
   }
 
   public async handleDisconnect() {
-    // client disconnected
-    const usersCount = this.users$.value - 1;
-    this.users$.next(usersCount);
-
-    // Notify connected clients of current users
-    this.sendClientChangeEvent(usersCount);
+    this.sendClientChangeEvent();
   }
 
-  /**
-   * Events subscription.
-   * @param data
-   */
-  @SubscribeMessage('events')
-  public handleEvents(): Observable<WsResponse<number>> {
-    const timeout = 1000;
-    const eventsCount = 4;
-    return timer(0, timeout).pipe(
-      takeWhile(item => item < eventsCount),
-      map(item => {
-        const wsResponse: WsResponse<number> = { event: 'timer', data: item };
-        return wsResponse;
-      }),
-    );
+  @SubscribeMessage('get-diag-dynamic')
+  public getDynamicDiagnosticEvents() {
+    if (typeof this.dynamicDataSub === 'undefined') {
+      const timeout = 5000;
+      this.dynamicDataSub = timer(0, timeout)
+        .pipe(
+          tap(() => {
+            if (typeof this.server !== 'undefined') {
+              const clients = this.server.clients.values();
+              for (const client of clients) {
+                const event: WsResponse<{ name: string; value: string }[]> = {
+                  event: 'dynamic',
+                  data: this.diagnosticsService.dynamic(),
+                };
+                client.send(JSON.stringify(event));
+              }
+            }
+          }),
+        )
+        .subscribe();
+    }
+  }
+
+  @SubscribeMessage('stop-diag-dynamic')
+  public stopDynamicDiagnosticEvents() {
+    if (typeof this.dynamicDataSub !== 'undefined') {
+      this.dynamicDataSub.unsubscribe();
+    }
+  }
+
+  @SubscribeMessage('message')
+  public handleMessageEvents(data: { sender: string; text: string }) {
+    if (typeof this.server !== 'undefined') {
+      const clients = this.server.clients.values();
+      for (const client of clients) {
+        const event: WsResponse<{ sender: string; text: string }> = {
+          event: 'message',
+          data,
+        };
+        client.send(JSON.stringify(event));
+      }
+    }
   }
 }

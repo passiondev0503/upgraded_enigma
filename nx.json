@@ -25,6 +25,9 @@
     "backend-auth": {
       "tags": ["scope:backend-auth", "type:feature"]
     },
+    "backend-diagnostics": {
+      "tags": ["scope:backend-diagnostics", "type:data-access"]
+    },
     "backend-gql": {
       "tags": ["scope:backend-gql", "type:feature"]
     },
@@ -42,6 +45,9 @@
     },
     "client": {
       "tags": ["scope:client", "type:application"]
+    },
+    "client-api": {
+      "tags": ["scope:client-api", "type:application"]
     },
     "client-chatbot": {
       "tags": ["scope:client-chatbot", "type:feature"]
@@ -65,6 +71,9 @@
     "client-diagnostics-e2e": {
       "implicitDependencies": ["client-diagnostics"],
       "tags": ["scope:client-diagnostics-e2e", "type:e2e"]
+    },
+    "client-directives": {
+      "tags": ["scope:client-directives", "type:ui"]
     },
     "client-e2e": {
       "implicitDependencies": ["client"],
@@ -91,8 +100,14 @@
     "client-unit-testing": {
       "tags": ["scope:client-unit-testing", "type:unit-testing"]
     },
+    "client-user": {
+      "tags": ["scope:client-user", "type:ui"]
+    },
     "client-util": {
       "tags": ["scope:client-util", "type:util"]
+    },
+    "client-workspaces": {
+      "tags": ["scope:client-workspaces", "type:feature"]
     },
     "documentation": {
       "tags": ["scope:documentation", "type:application"]

@@ -1,37 +1,50 @@
 import { StateToken } from '@ngxs/store';
-import { IActionPayload } from '@upgraded-enigma/client-util';
-import { Observable } from 'rxjs';
+
+export interface IUserPassword {
+  name: string;
+  password: string;
+  timestamp: number;
+}
 
 export interface IUserState {
   email: string;
-  admin: boolean;
   token: string;
+  passwords: IUserPassword[];
+  status: {
+    initialized: boolean;
+    encryption: boolean;
+    encrypted: boolean;
+  };
+  exportedPasswordFiles: string[];
 }
 
 export const userInitialState: IUserState = {
   email: '',
-  admin: false,
   token: '',
+  passwords: [],
+  status: {
+    initialized: false,
+    encryption: false,
+    encrypted: false,
+  },
+  exportedPasswordFiles: [],
 };
 
 export const USER_STATE_TOKEN = new StateToken<IUserState>('user');
 
 export interface IUserStatePayload {
   email?: string;
-  admin?: boolean;
   token?: string;
-}
-
-export type TUserPayload = IActionPayload<IUserStatePayload>;
-
-export interface IUserObservableOutput {
-  model$: Observable<IUserState>;
-  email$: Observable<string>;
-  token$: Observable<string>;
-  admin$: Observable<boolean>;
-  isLoggedInSubscription$: Observable<boolean>;
+  passwords?: IUserPassword[];
+  status?: {
+    initialized?: boolean;
+    encryption?: boolean;
+    encrypted?: boolean;
+  };
 }
 
 export interface IUserHandlers {
   setState(payload: IUserStatePayload): void;
 }
+
+export const USER_SERVICE_LOCAL_STORAGE_KEY = 'userSetvice';

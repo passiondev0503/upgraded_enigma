@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
+import { AppClientTranslateModule } from '@upgraded-enigma/client-translate';
 
 import { AppClientDiagnosticsRoutingModule } from './client-diagnostics-routing.module';
 import { AppHomeComponent } from './home/home.component';
@@ -15,6 +16,7 @@ import { AppInfoPage } from './info/page/info-page.component';
     FlexLayoutModule,
     CommonModule,
     AppClientMaterialModule,
+    AppClientTranslateModule,
     AppClientDiagnosticsRoutingModule,
   ],
   declarations: [AppIndexComponent, AppHomeComponent, AppHomePage, AppInfoComponent, AppInfoPage],

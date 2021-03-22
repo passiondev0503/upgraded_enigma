@@ -2,6 +2,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { BackendAuthService } from '../service/auth.service';
+import { BackendUserService } from '../service/user.service';
 import { BackendAuthController } from './auth.controller';
 
 describe('BackendAuthController', () => {
@@ -15,7 +16,7 @@ describe('BackendAuthController', () => {
         }),
       ],
       controllers: [BackendAuthController],
-      providers: [BackendAuthService],
+      providers: [BackendAuthService, BackendUserService],
     }).compile();
   });
 

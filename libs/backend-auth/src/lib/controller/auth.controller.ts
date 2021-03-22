@@ -3,7 +3,6 @@ import {
   Message,
   UserLoginCredentials,
   UserLogoutCredentials,
-  UserProfile,
 } from '@upgraded-enigma/backend-interfaces';
 
 import { BackendAuthService } from '../service/auth.service';
@@ -12,23 +11,18 @@ import { BackendAuthService } from '../service/auth.service';
 export class BackendAuthController {
   constructor(private readonly authService: BackendAuthService) {}
 
-  @Get('ping')
+  @Get('auth')
   public ping(): Message {
     return this.authService.ping();
   }
 
-  @Post('login')
-  public login(@Body() credentials: UserLoginCredentials): UserProfile {
-    return this.authService.login(credentials);
+  @Post('auth/login')
+  public login(@Body() payload: UserLoginCredentials) {
+    return this.authService.login(payload);
   }
 
-  @Post('logout')
-  public logout(@Body() credentials: UserLogoutCredentials): Message {
-    return this.authService.logout(credentials);
-  }
-
-  @Post('signup')
-  public signup(@Body() credentials: UserLoginCredentials): UserProfile {
-    return this.authService.signup(credentials);
+  @Post('auth/logout')
+  public logout(@Body() payload: UserLogoutCredentials): Message {
+    return this.authService.logout(payload);
   }
 }

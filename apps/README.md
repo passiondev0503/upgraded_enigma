@@ -4,6 +4,7 @@
 
 - `api`
 - `client`
+- `client-api`
 - `documentation`
 - `elements`
 - `elements-testing`

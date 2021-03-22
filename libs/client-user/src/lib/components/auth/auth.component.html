@@ -1,0 +1,68 @@
+<div [ngStyle]="{ 'min-height': '100%' }" fxLayout="row" fxLayoutAlign="center center">
+  <form
+    fxFlex="50"
+    fxLayout.lt-sm="75"
+    fxLayout="row wrap"
+    fxLayoutAlign="center center"
+    fxFlayoutGap="10px"
+    [formGroup]="form"
+    (ngSubmit)="submitForm()"
+    novalidate
+  >
+    <legend fxFlex="100">
+      <h2>{{ 'loginInstructions' | translate }}</h2>
+    </legend>
+
+    <mat-form-field fxFlex="100">
+      <input
+        matInput
+        type="text"
+        name="email"
+        formControlName="email"
+        placeholder="{{ 'email' | translate }}"
+        required
+      />
+      <mat-icon matSuffix class="material-icons">email</mat-icon>
+      <mat-error *ngIf="form.controls.email.invalid">
+        invalid value, required: email, at least 7 characters long
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100">
+      <input
+        matInput
+        type="text"
+        name="password"
+        formControlName="password"
+        placeholder="{{ 'password' | translate }}"
+        required
+      />
+      <mat-icon matSuffix class="material-icons">lock</mat-icon>
+      <mat-error *ngIf="form.controls.password.invalid">
+        invalid value, required: at least 1 character
+      </mat-error>
+    </mat-form-field>
+
+    <span fxFlex="100">
+      <button
+        mat-button
+        type="button"
+        (click)="resetForm()"
+        [disabled]="form.pristine"
+        attr.aria-label="{{ 'form.clear' | translate }}"
+      >
+        {{ 'form.clear' | translate }}
+      </button>
+    </span>
+
+    <button
+      fxFlex
+      mat-button
+      type="submit"
+      [disabled]="form.pristine || form.invalid"
+      attr.aria-label="{{ 'form.submit' | translate }}"
+    >
+      {{ 'form.submit' | translate }}
+    </button>
+  </form>
+</div>

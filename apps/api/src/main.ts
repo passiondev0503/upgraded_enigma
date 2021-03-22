@@ -5,7 +5,7 @@ import { MicroserviceOptions } from '@nestjs/microservices';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { WsAdapter } from '@nestjs/platform-ws';
 import { backendGrpcClientOptions } from '@upgraded-enigma/backend-grpc';
-import { defaultWsPort } from '@upgraded-enigma/backend-interfaces';
+import { spawn } from 'child_process';
 import e from 'express';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
@@ -50,14 +50,11 @@ async function bootstrap(expressInstance: e.Express): Promise<unknown> {
   const port = typeof process.env.port !== 'undefined' ? process.env.port : defaultPort;
   await app.listen(port, () => {
     console.warn(`Listening at:
-    - http://localhost:${port}/${globalPrefix}/ping
-    - http://localhost:${port}/${globalPrefix}/signup
-    - http://localhost:${port}/${globalPrefix}/login
-    - http://localhost:${port}/${globalPrefix}/logout
+    - http://localhost:${port}/${globalPrefix}/diagnostics
     - http://localhost:${port}/${globalPrefix}/graphql
     - http://localhost:${port}/${globalPrefix}/grpc
     - http://localhost:${port}/${globalPrefix}/grpc/:id
-    - ws://localhost:${defaultWsPort}/api/events`);
+    - ws://localhost:${environment.wsPort}/api/events`);
   });
 
   return app.init();
@@ -66,20 +63,66 @@ async function bootstrap(expressInstance: e.Express): Promise<unknown> {
 void bootstrap(server);
 
 /**
- * Firebase configuration.
+ * Terminator function.
+ * Runs when application is terminated.
  */
-const firebaseConfig = process.env.FIREBASE_CONFIG;
+function terminator(sig?: string) {
+  if (typeof sig === 'string') {
+    console.log(`\n${new Date(Date.now())}: Received signal ${sig} - terminating app...\n`);
+    /**
+     * Reset client env variables if dev argument is passed.
+     */
+    if (sig === 'exit' && !Boolean(process.env.FIREBASE_CONFIG)) {
+      /**
+       * Resets client environment variables configuration to default values.
+       */
+      const envResetter = spawn('ng', ['run', 'tools:reset-client-env'], {
+        stdio: 'inherit',
+        detached: true,
+      });
+      envResetter.on('close', code => {
+        process.exit(code ?? 0);
+      });
+    } else {
+      process.exit(0);
+    }
+  }
+}
 
 /**
  * Initialize admin and export firebase functions only in cloud environment.
  */
-if (Boolean(firebaseConfig)) {
+if (Boolean(process.env.FIREBASE_CONFIG)) {
   admin.initializeApp();
-  (exports as Record<string, unknown>).ping = functions.https.onRequest(server);
-  (exports as Record<string, unknown>).login = functions.https.onRequest(server);
-  (exports as Record<string, unknown>).logout = functions.https.onRequest(server);
-  (exports as Record<string, unknown>).signup = functions.https.onRequest(server);
+  (exports as Record<string, unknown>).diagnostics = functions.https.onRequest(server);
   (exports as Record<string, unknown>).graphql = functions.https.onRequest(server);
   // TODO: handle websocket events (exports as Record<string, unknown>).events = functions.https.onRequest(server);
   // TODO: (exports as Record<string, unknown>).grpc = functions.https.onRequest(server);
+} else {
+  /**
+   * Termination handlers.
+   */
+  (() => {
+    process.on('exit', () => {
+      terminator('exit');
+    });
+    [
+      'SIGHUP',
+      'SIGINT',
+      'SIGQUIT',
+      'SIGILL',
+      'SIGTRAP',
+      'SIGABRT',
+      'SIGBUS',
+      'SIGFPE',
+      'SIGUSR1',
+      'SIGSEGV',
+      'SIGUSR2',
+      'SIGTERM',
+    ].forEach(element => {
+      process.on(element, () => {
+        terminator(element);
+      });
+    });
+  })();
 }

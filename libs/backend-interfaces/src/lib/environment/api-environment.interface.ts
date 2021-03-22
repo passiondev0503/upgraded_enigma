@@ -14,7 +14,7 @@ export interface IApiEnvironmentConstructorOptions {
 /**
  * Application name type.
  */
-export type TApiAppName = 'Nx Ng Starter API' | string;
+export type TApiAppName = 'Upgraded Enigma API' | string;
 
 export const defaultWsPort = 8081;
 
@@ -27,11 +27,13 @@ export class ApiEnvironment {
 
   public firebase?: boolean;
 
-  public appName: TApiAppName = 'Nx Ng Starter API';
+  public appName: TApiAppName = 'Upgraded Enigma API';
 
   public envoyUrl? = 'http://localhost:8081';
 
   public wsPort = defaultWsPort;
+
+  public jwtSecret = '';
 
   /**
    * Constructor.

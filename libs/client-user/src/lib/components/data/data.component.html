@@ -1,0 +1,204 @@
+<div fxLayout="row wrap" fxLayoutAlign="start start" *ngIf="user$ | async as user">
+  <mat-toolbar>
+    <button mat-button (click)="encryptPasswords()" *ngIf="!user.status.encrypted" color="primary">
+      <mat-icon class="material-icons">lock</mat-icon>
+      {{ 'passwords.encrypt' | translate }}
+    </button>
+
+    <button mat-button (click)="decryptPasswords()" *ngIf="user.status.encrypted" color="warn">
+      <mat-icon class="material-icons">lock_open</mat-icon>
+      {{ 'passwords.decrypt' | translate }}
+    </button>
+
+    <button mat-button (click)="exportPasswords()" color="primary">
+      <mat-icon class="material-icons">save_alt</mat-icon>
+      {{ 'passwords.export' | translate }}
+    </button>
+  </mat-toolbar>
+
+  <mat-toolbar [ngStyle]="{ 'font-size': 'inherit' }">
+    <form
+      *ngIf="form"
+      fxFlex="100"
+      fxLayout="row wrap"
+      fxLayoutAlign="start stretch"
+      [formGroup]="form"
+      (ngSubmit)="addPassword()"
+      novalidate
+    >
+      <button
+        mat-button
+        type="submit"
+        color="primary"
+        [disabled]="form.pristine || form.invalid"
+        [attr.aria-label]="'addPassword' | translate"
+      >
+        <mat-icon class="material-icons">add</mat-icon>
+        {{ 'addPassword' | translate }}
+      </button>
+
+      <span fxFlex="15px" [fxHide.xs]="true"> </span>
+
+      <mat-form-field fxFlex fxFlex.xs="100">
+        <input
+          matInput
+          type="text"
+          name="name"
+          formControlName="name"
+          placeholder="{{ 'name' | translate }}"
+          required
+        />
+        <mat-icon matSuffix class="material-icons">web</mat-icon>
+        <mat-error *ngIf="form.controls.name.invalid">
+          {{ 'required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <span fxFlex="15px" [fxHide.xs]="true"> </span>
+
+      <mat-form-field fxFlex fxFlex.xs="100">
+        <input
+          matInput
+          type="text"
+          name="password"
+          formControlName="password"
+          placeholder="{{ 'password' | translate }}"
+          required
+        />
+        <mat-icon matSuffix class="material-icons">lock</mat-icon>
+        <mat-error *ngIf="form.controls.password.invalid">
+          {{ 'required' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-toolbar>
+
+  <mat-divider fxFlex="100"></mat-divider>
+
+  <h2 [ngStyle]="{ margin: '10px 0 0 0' }">{{ 'passwords.title' | translate }}</h2>
+
+  <span fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start stretch">
+    <span fxFlex fxLayout="row" fxLayoutAlign="center center">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          name="searchQuery"
+          [(ngModel)]="searchQuery"
+          placeholder="{{ 'name' | translate }}"
+        />
+        <mat-icon matSuffix class="material-icons">search</mat-icon>
+      </mat-form-field>
+    </span>
+
+    <span fxFlex fxLayout="row" fxLayoutAlign="center center">
+      <mat-form-field>
+        <mat-select
+          type="select"
+          name="sortByCriterion"
+          [(ngModel)]="sortByCriterion"
+          floatPlaceholder="auto"
+        >
+          <mat-option value="">{{ 'name' | translate }}</mat-option>
+          <mat-option value="timestamp">{{ 'timestamp' | translate }}</mat-option>
+        </mat-select>
+        <mat-placeholder>
+          <mat-icon matSuffix class="material-icons">sort</mat-icon> {{ 'sortBy' | translate }}
+        </mat-placeholder>
+      </mat-form-field>
+    </span>
+
+    <span
+      fxFlex
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      matTooltip="TODO: wire it up with the filtering logic"
+    >
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          name="pickedDate"
+          [matDatepicker]="datePicker"
+          [(ngModel)]="pickedDate"
+          placeholder="{{ 'pickDate' | translate }}"
+          (click)="showDatePicker()"
+          readonly="true"
+        />
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker touchUi="true"></mat-datepicker>
+      </mat-form-field>
+    </span>
+  </span>
+
+  <span fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start stretch">
+    <span
+      *ngFor="let passObj of user.passwords; let j = index"
+      fxFlex="100"
+      fxLayout="row"
+      fxLayoutAlign="start stretch"
+      fxFlayoutGap="5px"
+      [fxHide]="hideElement$(j) | async"
+    >
+      <span fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="start center">{{ j }}</span>
+      <span
+        fxFlex="2 1 auto"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        matTooltip="{{ 'name' | translate }}"
+        matTooltipPosition="above"
+      >
+        {{ passObj.name }}
+      </span>
+
+      <span
+        fxFlex="4 1 auto"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        matTooltip="{{ 'password' | translate }}"
+        matTooltipPosition="above"
+      >
+        <span *ngIf="!user.status.encrypted">
+          {{ passObj.password }}
+        </span>
+        <span *ngIf="user.status.encrypted" [matTooltip]="passObj.password">
+          <mat-icon class="material-icons">lock</mat-icon>
+        </span>
+      </span>
+
+      <span
+        fxFlex="0 1 auto"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        [matTooltip]="$any(passObj.timestamp | date: 'yyyy.MM.dd HH:mm Z')"
+        matTooltipPosition="above"
+      >
+        <mat-icon class="material-icons" fxShow="true" [fxHide.gt-sm]="true">
+          access_time
+        </mat-icon>
+        <span fxHide="true" [fxShow.gt-sm]="true">
+          {{ passObj.timestamp | date: 'yyyy.MM.dd HH:mm Z' }}
+        </span>
+      </span>
+
+      <button
+        mat-icon-button
+        (click)="deletePassword(j)"
+        [matTooltip]="'delete' | translate"
+        matTooltipPosition="above"
+      >
+        <mat-icon class="material-icons">delete</mat-icon>
+      </button>
+    </span>
+  </span>
+
+  <mat-divider fxFlex="100"></mat-divider>
+
+  <h2 [ngStyle]="{ margin: '10px 0 0 0' }">{{ 'passwords.exported' | translate }}</h2>
+
+  <span fxFlex="100" fxLayout="row wrap">
+    <span fxFlex="100" *ngFor="let filePath of exportedPasswordFiles$ | async">
+      &bull; {{ filePath }}
+    </span>
+  </span>
+</div>

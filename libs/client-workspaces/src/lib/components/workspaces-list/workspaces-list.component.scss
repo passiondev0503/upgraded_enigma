@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  padding: 5px;
+
+  & app-workspace-widget {
+    margin: 5px;
+  }
+}

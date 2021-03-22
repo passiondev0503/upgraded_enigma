@@ -7,7 +7,15 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppInfoPage {
-  @Input() public readonly ping = '';
+  @Input() public ping = '';
 
-  @Input() public readonly markedInstructions = '';
+  @Input() public markedInstructions = '';
+
+  @Input() public serverData: {
+    static: Record<string, unknown>[];
+    dynamic: Record<string, unknown>[];
+  } | null = {
+    static: [],
+    dynamic: [],
+  };
 }

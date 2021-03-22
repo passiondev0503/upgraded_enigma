@@ -1,8 +1,33 @@
 <div class="container" [innerHtml]="markedInstructions"></div>
 
-<div class="container">
-  <h2>API integration check</h2>
-  <ul>
+<div class="container" fxLayout="row wrap">
+  <h2 fxFlex="100">API integration check</h2>
+
+  <ul fxFlex="100">
     <li [innerHTML]="ping"></li>
   </ul>
+
+  <div fxFlex="100" fxLayout="row wrap">
+    <mat-list fxFlex fxFlex.lt-sm="100" fxShow [fxHide]="serverData?.dynamic?.length === 0">
+      <mat-list-item *ngFor="let unit of serverData?.dynamic">
+        <span
+          fxFlex="5px"
+          [ngStyle]="{ height: '80%', 'background-color': '#cecece', margin: '0 5px 0 0 ' }"
+        ></span>
+        <span fxFlex="50">{{ unit.name }}</span>
+        <span fxFlex="50">{{ unit.value }}</span>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-list fxFlex fxFlex.lt-sm="100" fxShow [fxHide]="serverData?.static?.length === 0">
+      <mat-list-item *ngFor="let unit of serverData?.static">
+        <span
+          fxFlex="5px"
+          [ngStyle]="{ height: '80%', 'background-color': '#cecece', margin: '0 5px 0 0 ' }"
+        ></span>
+        <span fxFlex="50">{{ unit.name }}</span>
+        <span fxFlex="50">{{ unit.value }}</span>
+      </mat-list-item>
+    </mat-list>
+  </div>
 </div>

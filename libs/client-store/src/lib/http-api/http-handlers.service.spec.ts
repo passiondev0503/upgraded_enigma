@@ -13,7 +13,7 @@ import { Apollo } from 'apollo-angular';
 import { ExecutionResult, GraphQLError } from 'graphql';
 import { cold, getTestScheduler } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
-import { concatMap, map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { AppHttpProgressModule } from '../http-progress/http-progress.module';
 import {
@@ -217,27 +217,16 @@ describe('AppHttpHandlersService', () => {
     });
   });
 
-  it(
-    'graphQLHttpHeaders should return new http headers with authorization header set',
-    waitForAsync(() => {
-      void service.userToken$
-        .pipe(
-          concatMap(userToken => {
-            const newHeadersObj: {
-              [name: string]: string | string[];
-            } = {
-              Authorization: `Token ${userToken}`,
-            };
-            const newHeaders: HttpHeaders = new HttpHeaders(newHeadersObj);
-            return service.getGraphQLHttpHeaders().pipe(map(headers => ({ headers, newHeaders })));
-          }),
-          tap(({ headers, newHeaders }) => {
-            expect(headers.get('Authorization')).toEqual(newHeaders.get('Authorization'));
-          }),
-        )
-        .subscribe();
-    }),
-  );
+  it('graphQLHttpHeaders should return new http headers with authorization header set', () => {
+    const headers = service.getGraphQLHttpHeaders();
+    const newHeadersObj: {
+      [name: string]: string | string[];
+    } = {
+      Authorization: `Token ${service.getUserToken()}`,
+    };
+    const newHeaders: HttpHeaders = new HttpHeaders(newHeadersObj);
+    expect(headers.get('Authorization')).toEqual(newHeaders.get('Authorization'));
+  });
 
   it('pipeHttpResponse should work correctly', () => {
     const observable = of({ data: {} });

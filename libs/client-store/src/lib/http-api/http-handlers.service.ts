@@ -4,6 +4,7 @@ import { ApolloLink, split } from '@apollo/client/core';
 import { ErrorResponse, onError } from '@apollo/client/link/error';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { TranslateService } from '@ngx-translate/core';
+import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
 import {
   HTTP_STATUS,
@@ -16,13 +17,16 @@ import { createUploadLink } from 'apollo-upload-client';
 import { ExecutionResult, GraphQLError } from 'graphql';
 import memo from 'memo-decorator';
 import { MonoTypeOperatorFunction, Observable, of, throwError } from 'rxjs';
-import { catchError, finalize, first, map, tap, timeout } from 'rxjs/operators';
+import { catchError, finalize, tap, timeout } from 'rxjs/operators';
 
 import { AppHttpProgressService } from '../http-progress/http-progress.service';
 import { httpProgressActions } from '../http-progress/http-progress.store';
 import { AppToasterService } from '../http-progress/services/toaster/toaster.service';
-import { AppUserState } from '../user';
-import { userActions } from '../user/user.store';
+import {
+  IUserState,
+  USER_SERVICE_LOCAL_STORAGE_KEY,
+  userInitialState,
+} from '../user/user.interface';
 
 /**
  * Http handers service.
@@ -36,8 +40,6 @@ export class AppHttpHandlersService {
    */
   public readonly defaultHttpTimeout = 10000;
 
-  public readonly userToken$: Observable<string> = this.store.select(AppUserState.token);
-
   constructor(
     public readonly store: Store,
     public readonly toaster: AppToasterService,
@@ -47,6 +49,15 @@ export class AppHttpHandlersService {
     @Inject(WINDOW) public readonly win: Window,
     @Inject(WEB_CLIENT_APP_ENV) public readonly env: IWebClientAppEnvironment,
   ) {}
+
+  public getUserToken() {
+    const token: string = (JSON.parse(
+      localStorage.getItem('userService') ?? JSON.stringify({ token: '' }),
+    ) as {
+      token: string;
+    }).token;
+    return token;
+  }
 
   /**
    * Resolver graphQL base url, adds correct protocol.
@@ -60,14 +71,10 @@ export class AppHttpHandlersService {
    * Returns new http headers for GraphQL.
    */
   public getGraphQLHttpHeaders() {
-    return this.userToken$.pipe(
-      first(),
-      map(token => {
-        return new HttpHeaders({
-          Authorization: `Token ${token}`,
-        });
-      }),
-    );
+    const token = this.getUserToken();
+    return new HttpHeaders({
+      Authorization: `Token ${token}`,
+    });
   }
 
   /**
@@ -123,21 +130,17 @@ export class AppHttpHandlersService {
   }
 
   private getGraphqlNetworkLink(httpLinkHandler: HttpLinkHandler, uri: string) {
-    return this.userToken$.pipe(
-      first(),
-      map(token => {
-        return split(
-          ({ query }) => {
-            const { name } = getMainDefinition(query);
-            return !Boolean(name);
-          },
-          httpLinkHandler,
-          (createUploadLink({
-            uri,
-            headers: { Authorization: `Token ${token}` },
-          }) as unknown) as ApolloLink,
-        );
-      }),
+    const token = this.getUserToken();
+    return split(
+      ({ query }) => {
+        const { name } = getMainDefinition(query);
+        return !Boolean(name);
+      },
+      httpLinkHandler,
+      (createUploadLink({
+        uri,
+        headers: { Authorization: `Token ${token}` },
+      }) as unknown) as ApolloLink,
     );
   }
 
@@ -208,8 +211,8 @@ export class AppHttpHandlersService {
     const uri = this.graphQlEndpoint();
     const httpLinkHandler = this.httpLink.create({ uri });
     const linkHandler: ApolloLink = this.getErroLinkHandler(errorLinkHandler);
-    const networkLinkObs = this.getGraphqlNetworkLink(httpLinkHandler, uri);
-    return networkLinkObs.pipe(map(networkLink => linkHandler.concat(networkLink)));
+    const networkLink = this.getGraphqlNetworkLink(httpLinkHandler, uri);
+    return linkHandler.concat(networkLink);
   }
 
   /**
@@ -240,7 +243,12 @@ export class AppHttpHandlersService {
    */
   public checkErrorStatusAndRedirect(status: HTTP_STATUS): void {
     if (status === HTTP_STATUS.UNAUTHORIZED) {
-      void this.store.dispatch(new userActions.setState({ token: '' })).subscribe();
+      const user = JSON.parse(
+        localStorage.getItem(USER_SERVICE_LOCAL_STORAGE_KEY) ?? JSON.stringify(userInitialState),
+      ) as IUserState;
+      user.token = '';
+      localStorage.setItem(USER_SERVICE_LOCAL_STORAGE_KEY, JSON.stringify(user));
+      void this.store.dispatch(new Navigate(['user/auth']));
     }
   }
 

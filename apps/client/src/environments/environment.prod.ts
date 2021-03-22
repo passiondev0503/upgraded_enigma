@@ -1,6 +1,8 @@
 import { Capacitor } from '@capacitor/core';
 import { IWebClientAppEnvironment } from '@upgraded-enigma/client-util';
 
+import { firebase } from './firebase';
+
 const platform: string = Capacitor.getPlatform();
 
 /**
@@ -18,4 +20,5 @@ export const environment: IWebClientAppEnvironment = {
       : `${window.location.origin}/api`,
   envoyUrl: 'http://localhost:8082', // TODO
   sentryEnv: 'production',
+  firebase: { ...firebase },
 };
