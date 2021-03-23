@@ -15,6 +15,9 @@ tools/diagrams/*.*
 migrations.json
 migrations-*.json
 
+.env
+**/.env
+
 
 # firebase
 .firebase
