@@ -5,6 +5,7 @@ import { AppAnonimousGuard, AppAuthenticatedGuard } from '@upgraded-enigma/clien
 import { AppUserAuthComponent } from './components/auth/auth.component';
 import { AppUserDataComponent } from './components/data/data.component';
 import { AppUserProfileComponent } from './components/profile/profile.component';
+import { AppUserRtcChatComponent } from './components/rtc-chat/rtc-chat.component';
 
 const routes: Route[] = [
   {
@@ -21,6 +22,11 @@ const routes: Route[] = [
     path: 'data',
     canActivate: [AppAuthenticatedGuard],
     component: AppUserDataComponent,
+  },
+  {
+    path: 'rtc-chat',
+    canActivate: [AppAuthenticatedGuard],
+    component: AppUserRtcChatComponent,
   },
 ];
 

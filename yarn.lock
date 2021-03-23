@@ -352,6 +352,13 @@
   dependencies:
     tslib "^2.0.0"
 
+"@angular/fire@6.1.4":
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/@angular/fire/-/fire-6.1.4.tgz#d3923a68336d7177abbb2676731d0aef566b9739"
+  integrity sha512-5u305XnBC041JMrAtczLa0bdprxw7RkXy4kgcRCisPI8maGuiN4XzlwNYX+plCHZCo4R0motxQom//tPTA2edQ==
+  dependencies:
+    tslib "^2.0.0"
+
 "@angular/flex-layout@11.0.0-beta.33":
   version "11.0.0-beta.33"
   resolved "https://registry.yarnpkg.com/@angular/flex-layout/-/flex-layout-11.0.0-beta.33.tgz#c2d08f90164701b66a62b8c4365b4e22c1e95789"

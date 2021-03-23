@@ -419,7 +419,7 @@ module.exports = {
       },
     },
     {
-      files: '**/*.patch.ts',
+      files: ['**/*.patch.ts', '**/rtc-chat.component.ts'],
       rules: {
         'compat/compat': 'off',
       },

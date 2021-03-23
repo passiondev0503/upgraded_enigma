@@ -9,6 +9,7 @@ import { AppClientUserRoutingModule } from './client-user-routing.module';
 import { AppUserAuthComponent } from './components/auth/auth.component';
 import { AppUserDataComponent } from './components/data/data.component';
 import { AppUserProfileComponent } from './components/profile/profile.component';
+import { AppUserRtcChatComponent } from './components/rtc-chat/rtc-chat.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,11 @@ import { AppUserProfileComponent } from './components/profile/profile.component'
     AppClientTranslateModule.forRoot(),
     AppClientUserRoutingModule,
   ],
-  declarations: [AppUserAuthComponent, AppUserDataComponent, AppUserProfileComponent],
+  declarations: [
+    AppUserAuthComponent,
+    AppUserDataComponent,
+    AppUserProfileComponent,
+    AppUserRtcChatComponent,
+  ],
 })
 export class AppClientUserModule {}

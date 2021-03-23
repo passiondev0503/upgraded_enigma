@@ -7,14 +7,19 @@ export interface IWebsocketRequestEvent {
   event: string;
 }
 
+export interface IWsMessageEvent {
+  sender: string;
+  text: string;
+}
+
 export interface IWebsocketResponseEvent<T = unknown> {
   event: string;
   data: T;
 }
 
-export interface IAppWebsocketStateModel {
+export interface IAppWebsocketStateModel<T = unknown> {
   users: number;
-  events: IWebsocketResponseEvent[];
+  events: IWebsocketResponseEvent<T>[];
 }
 
 export const websocketInitialState = {

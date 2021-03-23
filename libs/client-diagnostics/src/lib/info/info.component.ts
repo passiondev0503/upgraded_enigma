@@ -32,13 +32,8 @@ export class AppInfoComponent {
     map(() => {
       const apiInstructions = `# API endpoints:\n
     - ${this.env.api}/auth
-    - ${this.env.api}/signup
-    - ${this.env.api}/login
-    - ${this.env.api}/logout
-    - ${this.env.api}/mailer
-    - ${this.env.api}/mail
-    - ${this.env.api}/grpc
-    - ${this.env.api}/grpc/:id`;
+    - ${this.env.api}/diagnostics
+    - ${this.env.api}/user`;
       return this.markdown.process(apiInstructions);
     }),
   );

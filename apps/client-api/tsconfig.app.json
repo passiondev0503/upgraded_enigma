@@ -4,5 +4,5 @@
   },
   "exclude": ["**/*.spec.ts"],
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts"]
+  "include": ["src/app/**/*.ts"]
 }

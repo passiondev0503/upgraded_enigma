@@ -40,4 +40,9 @@ export class AppWebsocketApiService {
     const event = { event: eventType };
     this.websocket$.next(event);
   }
+
+  public sendMessage(data: { sender: string; text: string }) {
+    const event = { event: 'message', data };
+    this.websocket$.next(event);
+  }
 }

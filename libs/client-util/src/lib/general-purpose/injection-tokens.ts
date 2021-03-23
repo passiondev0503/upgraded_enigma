@@ -9,6 +9,8 @@ export type TWindowToken = InjectionToken<Window>;
  */
 export const WINDOW: TWindowToken = new InjectionToken<Window>('Window');
 
+export const NAVIGATOR = new InjectionToken<Navigator>('Navigator');
+
 export type TWebClientEnvToken = InjectionToken<IWebClientAppEnvironment>;
 
 /**

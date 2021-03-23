@@ -1,4 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Provider } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
@@ -36,12 +39,15 @@ export const grpcProviders: Provider[] = [
     NgxsRouterPluginModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    AngularFireModule.initializeApp(environment.firebase ?? {}, 'organizer-833bc'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AppClientComponentsModule,
     AppClientCoreModule.forRoot(environment),
     AppClientMaterialModule.forRoot(),
     AppWebsocketModule.forRoot(environment),
     AppClientTranslateModule.forRoot(),
     AppClientGqlModule.forRoot(environment),
-    AppClientComponentsModule,
     AppRoutingModule,
   ],
   providers: [...grpcProviders],

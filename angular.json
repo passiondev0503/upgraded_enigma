@@ -41,7 +41,7 @@
             "assets": ["apps/api/src/assets"],
             "budgets": [
               {
-                "maximumError": "15mb",
+                "maximumError": "16mb",
                 "maximumWarning": "12mb",
                 "type": "initial"
               }
@@ -320,7 +320,7 @@
             "baseHref": "/",
             "budgets": [
               {
-                "maximumError": "15mb",
+                "maximumError": "16mb",
                 "maximumWarning": "12mb",
                 "type": "initial"
               },
@@ -1098,7 +1098,7 @@
             "baseHref": "/",
             "budgets": [
               {
-                "maximumError": "15mb",
+                "maximumError": "16mb",
                 "maximumWarning": "12mb",
                 "type": "initial"
               },
@@ -1287,7 +1287,7 @@
             "baseHref": "/",
             "budgets": [
               {
-                "maximumError": "15mb",
+                "maximumError": "16mb",
                 "maximumWarning": "12mb",
                 "type": "initial"
               },

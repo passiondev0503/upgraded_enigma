@@ -1,6 +1,12 @@
 import { APP_BASE_HREF, DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Provider } from '@angular/core';
-import { documentFactory, WINDOW, windowFactory } from '@upgraded-enigma/client-util';
+import {
+  documentFactory,
+  NAVIGATOR,
+  navigatorFactory,
+  WINDOW,
+  windowFactory,
+} from '@upgraded-enigma/client-util';
 import { HttpLink } from 'apollo-angular/http';
 
 /**
@@ -14,5 +20,6 @@ export const appClientCoreModuleProviders: Provider[] = [
   { provide: APP_BASE_HREF, useValue: '/' },
   { provide: WINDOW, useFactory: windowFactory },
   { provide: DOCUMENT, useFactory: documentFactory },
+  { provide: NAVIGATOR, useFactory: navigatorFactory },
   HttpLink,
 ];

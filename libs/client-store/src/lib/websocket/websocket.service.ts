@@ -4,8 +4,8 @@ import { Observable, of } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 
 import { diagnosticsActions } from '../diagnostics/diagnostics.store';
+import { websocketActions } from './websocket.actions';
 import { IAppWebsocketStatePayload } from './websocket.interface';
-import { websocketActions } from './websocket.store';
 import { AppWebsocketApiService } from './websocket-api.service';
 
 /**
@@ -26,10 +26,10 @@ export class AppWebsocketService {
             };
             void this.store.dispatch(new diagnosticsActions.setState(payload));
           }
-          if (event.event === 'users') {
+          if (/(message|users)/.test(event.event)) {
             const payload = {
               users: event.event === 'users' ? (event.data as number) : void 0,
-              events: [event],
+              events: event.event === 'message' ? [event] : [],
             };
             void this.setState(payload);
           }
@@ -49,5 +49,9 @@ export class AppWebsocketService {
 
   public stopDynamicDiagnosticData() {
     this.api.sendEvent('stop-diag-dynamic');
+  }
+
+  public sendMessage(data: { sender: string; text: string }) {
+    this.api.sendMessage(data);
   }
 }

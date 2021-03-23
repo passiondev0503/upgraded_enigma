@@ -60,7 +60,7 @@ function terminator(sig?: string) {
     /**
      * Reset client env variables if dev argument is passed.
      */
-    if (sig === 'exit' && !Boolean(process.env.FIREBASE_CONFIG)) {
+    if (sig === 'exit') {
       /**
        * Resets client environment variables configuration to default values.
        */

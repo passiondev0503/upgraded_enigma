@@ -11,3 +11,10 @@ export function windowFactory() {
 export function documentFactory() {
   return window.document;
 }
+
+/**
+ * Navigator factory.
+ */
+export function navigatorFactory() {
+  return window.navigator;
+}

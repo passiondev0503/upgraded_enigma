@@ -38,6 +38,11 @@ export class AppToolbarComponent {
       title: 'User data',
     },
     {
+      routerLink: ['user/rtc-chat'],
+      icon: 'voice_chat',
+      title: 'RTC Chat',
+    },
+    {
       routerLink: ['workspaces'],
       icon: 'view_comfy',
       title: 'Workspaces',
