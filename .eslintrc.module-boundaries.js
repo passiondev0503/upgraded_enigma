@@ -231,6 +231,15 @@ const clientConstraints = [
       'scope:client-util',
       'scope:client-user',
       'scope:client-workspaces',
+      'scope:client-sidebar',
+    ],
+  },
+  {
+    sourceTag: 'scope:client-sidebar',
+    onlyDependOnLibsWithTags: [
+      'scope:client-material',
+      'scope:client-store',
+      'scope:client-unit-testing',
     ],
   },
   {
