@@ -12,14 +12,16 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class BackendUserService {
-  public readonly userConfigPath = `${__dirname}/config/user.json`;
+  private readonly cwd = process.cwd();
 
-  public readonly rsaPrivateKeyPath = `${__dirname}/config/rsa.private`;
+  public readonly userConfigPath = `${this.cwd}/.config/user.json`;
 
-  public readonly rsaPublicKeyPath = `${__dirname}/config/rsa.public`;
+  public readonly rsaPrivateKeyPath = `${this.cwd}/.config/rsa.private`;
+
+  public readonly rsaPublicKeyPath = `${this.cwd}/.config/rsa.public`;
 
   public readonly userPasswordsExportPath = () =>
-    `${__dirname}/config/export.${new Date().getTime()}.json`;
+    `${this.cwd}/.config/export.${new Date().getTime()}.json`;
 
   /**
    * Checks if user rsa key (either private or public) exists.

@@ -1,16 +1,10 @@
 <mat-toolbar color="primary" fxFlex="0 1 auto">
-  <button mat-icon-button>
-    <mat-icon
-      title="open sidenav"
-      *ngIf="(sidebarOpened$ | async) === false"
-      (click)="sidebarOpenHandler()"
-    >
+  <button mat-icon-button (click)="toggleSidebar()">
+    <mat-icon title="open sidenav" *ngIf="(sidebarOpened$ | async) === false">
       flip_to_front
     </mat-icon>
 
-    <mat-icon title="close sidenav" *ngIf="sidebarOpened$ | async" (click)="sidebarCloseHandler()">
-      flip_to_back
-    </mat-icon>
+    <mat-icon title="close sidenav" *ngIf="sidebarOpened$ | async"> flip_to_back </mat-icon>
   </button>
 
   <span fxFlex="1 1 auto"></span>
@@ -19,6 +13,7 @@
     mat-button
     *ngFor="let button of buttons"
     [routerLink]="button.routerLink"
+    (click)="button.click ? button.click() : null"
     [fxHide.xs]="true"
     [fxHide.sm]="true"
   >
@@ -47,7 +42,12 @@
   </button>
 
   <mat-menu #mobileMenuBottom="matMenu" [fxHide.md]="true" [fxHide.lg]="true" [fxHide.xl]="true">
-    <a mat-menu-item *ngFor="let button of buttons" [routerLink]="button.routerLink">
+    <a
+      mat-menu-item
+      *ngFor="let button of buttons"
+      [routerLink]="button.routerLink"
+      (click)="button.click ? button.click() : null"
+    >
       <mat-icon>{{ button.icon }}</mat-icon> {{ button.title }}
     </a>
     <mat-divider></mat-divider>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { combineLatest } from 'rxjs';
-import { concatMap, map, tap } from 'rxjs/operators';
+import { concatMap, map } from 'rxjs/operators';
 
 import {
   addPassword,
@@ -20,7 +20,6 @@ import {
   TConfigureUserPayload,
   TDeletePasswordPayload,
   TLogInPayload,
-  TLogOutPayload,
   TUserPayload,
 } from './user.actions';
 import { IUserState, USER_STATE_TOKEN, userInitialState } from './user.interface';
@@ -94,60 +93,52 @@ export class AppUserState {
 
   @Action(logIn)
   public logIn(ctx: StateContext<IUserState>, { payload }: TLogInPayload) {
-    return this.api
-      .login({ email: payload.email, password: payload.password })
-      .pipe(
-        concatMap(user => this.api.getUserStatus().pipe(map(status => ({ user, status })))),
-        tap(({ user, status }) => {
-          const currentState: IUserState = ctx.getState();
-          const newState: IUserState = {
-            ...currentState,
-            ...user,
-            status,
-          };
-          this.user.saveUser(newState);
-          ctx.patchState(newState);
-        }),
-      )
-      .subscribe();
+    return this.api.login({ email: payload.email, password: payload.password }).pipe(
+      concatMap(user => this.api.getUserStatus().pipe(map(status => ({ user, status })))),
+      map(({ user, status }) => {
+        const currentState: IUserState = ctx.getState();
+        const newState: IUserState = {
+          ...currentState,
+          ...user,
+          status,
+        };
+        this.user.saveUser(newState);
+        return ctx.patchState(newState);
+      }),
+    );
   }
 
   @Action(logOut)
-  public logOut(ctx: StateContext<IUserState>, { payload }: TLogOutPayload) {
-    return this.api
-      .logout({ token: payload.token })
-      .pipe(
-        tap(result => {
-          this.user.saveUser(userInitialState);
-          ctx.patchState(userInitialState);
-        }),
-      )
-      .subscribe();
+  public logOut(ctx: StateContext<IUserState>) {
+    const token = ctx.getState().token;
+    return this.api.logout({ token }).pipe(
+      map(result => {
+        this.user.saveUser(userInitialState);
+        return ctx.patchState(userInitialState);
+      }),
+    );
   }
 
   @Action(configureUser)
   public configureUser(ctx: StateContext<IUserState>, { payload }: TConfigureUserPayload) {
-    return this.api
-      .configureUser({ ...payload })
-      .pipe(
-        tap(user => {
-          const currentState: IUserState = ctx.getState();
-          const email = user.email;
-          const token = user.token;
-          const status =
-            typeof payload.status !== 'undefined'
-              ? { ...currentState.status, ...payload.status }
-              : { ...currentState.status };
-          const passwords =
-            typeof payload.passwords !== 'undefined'
-              ? [...payload.passwords]
-              : [...currentState.passwords];
-          const newState: IUserState = { ...currentState, email, token, passwords, status };
-          this.user.saveUser(newState);
-          ctx.patchState(newState);
-        }),
-      )
-      .subscribe();
+    return this.api.configureUser({ ...payload }).pipe(
+      map(user => {
+        const currentState: IUserState = ctx.getState();
+        const email = user.email;
+        const token = user.token;
+        const status =
+          typeof payload.status !== 'undefined'
+            ? { ...currentState.status, ...payload.status }
+            : { ...currentState.status };
+        const passwords =
+          typeof payload.passwords !== 'undefined'
+            ? [...payload.passwords]
+            : [...currentState.passwords];
+        const newState: IUserState = { ...currentState, email, token, passwords, status };
+        this.user.saveUser(newState);
+        return ctx.patchState(newState);
+      }),
+    );
   }
 
   @Action(getUser)
@@ -170,9 +161,9 @@ export class AppUserState {
   @Action(listExportedPasswordFiles)
   public listExportedPasswordFiles(ctx: StateContext<IUserState>) {
     return this.api.listExportedPasswordFiles().pipe(
-      tap(exported => {
+      map(exported => {
         const currentState: IUserState = ctx.getState();
-        ctx.patchState({ ...currentState, exportedPasswordFiles: [...exported] });
+        return ctx.patchState({ ...currentState, exportedPasswordFiles: [...exported] });
       }),
     );
   }
@@ -180,9 +171,9 @@ export class AppUserState {
   @Action(addPassword)
   public addPassword(ctx: StateContext<IUserState>, { payload }: TAddPasswordPayload) {
     return this.api.addPassword(payload).pipe(
-      tap(exported => {
+      map(exported => {
         const currentState: IUserState = ctx.getState();
-        ctx.patchState({ passwords: [...currentState.passwords, payload] });
+        return ctx.patchState({ passwords: [...currentState.passwords, payload] });
       }),
     );
   }
@@ -190,8 +181,8 @@ export class AppUserState {
   @Action(deletePassword)
   public deletePassword(ctx: StateContext<IUserState>, { payload }: TDeletePasswordPayload) {
     return this.api.deletePassword(payload).pipe(
-      tap(user => {
-        ctx.patchState({
+      map(user => {
+        return ctx.patchState({
           passwords: [...user.passwords],
         });
       }),

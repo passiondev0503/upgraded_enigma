@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import {
-  IToolbarAnchor,
+  IButton,
   IWebClientAppEnvironment,
   WEB_CLIENT_APP_ENV,
 } from '@upgraded-enigma/client-util';
@@ -14,21 +14,18 @@ import {
 export class AppNavbarComponent {
   @Input() public logoSrc = 'assets/icons/icon-72x72.png';
 
-  @Input() public anchors: IToolbarAnchor[] = [
+  @Input() public buttons: IButton[] = [
     {
-      href: 'https://cli.angular.io/reference.pdf',
-      icon: 'build',
-      title: 'CLI Reference',
+      routerLink: [''],
+      icon: 'home',
+      title: 'Home',
+      requiresAuth: false,
     },
     {
-      href: 'https://material.angular.io/',
-      icon: 'change_history',
-      title: 'Angular Material',
-    },
-    {
-      href: 'https://material.io/icons/',
-      icon: 'info_outline',
-      title: 'Material Icons',
+      routerLink: ['info'],
+      icon: 'av_timer',
+      title: 'Diagnostics',
+      requiresAuth: false,
     },
   ];
 

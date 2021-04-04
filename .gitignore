@@ -15,9 +15,13 @@ tools/diagrams/*.*
 migrations.json
 migrations-*.json
 
+# environment files
 .env
 **/.env
 
+# user configs
+.config/*
+!.config
 
 # firebase
 .firebase

@@ -20,5 +20,6 @@ win:
 files:
   - ./dist/apps/client/**
   - ./dist/apps/client-api/**
+  - ./.config/**
   - ./.*
   - ./*.*

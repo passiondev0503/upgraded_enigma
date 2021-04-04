@@ -86,7 +86,7 @@ export class AppUserAuthComponent implements OnInit {
         return this.store.dispatch(new userActions.logIn(loginFormData)).pipe(
           tap(
             () => {
-              void this.router.navigate(['summary']);
+              void this.router.navigate(['user']);
             },
             () => {
               void this.router.navigate(['auth']); // redirect to login in case of failure
@@ -101,7 +101,7 @@ export class AppUserAuthComponent implements OnInit {
     return this.store.dispatch(new userActions.logIn(formData)).pipe(
       tap(
         () => {
-          void this.router.navigate(['summary']);
+          void this.router.navigate(['user']);
         },
         () => {
           void this.router.navigate(['auth']); // redirect to login in case of failure

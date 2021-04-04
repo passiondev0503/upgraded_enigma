@@ -12,9 +12,7 @@ export type TLogInPayload = IActionPayload<{ email: string; password: string }>;
 
 export const logIn = createAction<TLogInPayload>('log in');
 
-export type TLogOutPayload = IActionPayload<{ token: string }>;
-
-export const logOut = createAction<TLogOutPayload>('log out');
+export const logOut = createAction('log out');
 
 export type TConfigureUserPayload = IActionPayload<Partial<IUserStatePayload>>;
 
