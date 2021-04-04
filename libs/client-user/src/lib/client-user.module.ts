@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
-import { AppClientTranslateModule } from '@upgraded-enigma/client-translate';
+import { appSharedUiTranslateModuleProviders } from '@upgraded-enigma/client-translate';
 
 import { AppClientUserRoutingModule } from './client-user-routing.module';
 import { AppUserAuthComponent } from './components/auth/auth.component';
@@ -17,8 +18,8 @@ import { AppUserRtcChatComponent } from './components/rtc-chat/rtc-chat.componen
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
     AppClientMaterialModule,
-    AppClientTranslateModule.forRoot(),
     AppClientUserRoutingModule,
   ],
   declarations: [
@@ -27,5 +28,6 @@ import { AppUserRtcChatComponent } from './components/rtc-chat/rtc-chat.componen
     AppUserProfileComponent,
     AppUserRtcChatComponent,
   ],
+  providers: [...appSharedUiTranslateModuleProviders],
 })
 export class AppClientUserModule {}

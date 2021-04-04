@@ -41,6 +41,7 @@
       "@upgraded-enigma/client-directives": ["libs/client-directives/src/index.ts"],
       "@upgraded-enigma/client-gql": ["libs/client-gql/src/index.ts"],
       "@upgraded-enigma/client-material": ["libs/client-material/src/index.ts"],
+      "@upgraded-enigma/client-pipes": ["libs/client-pipes/src/index.ts"],
       "@upgraded-enigma/client-services": ["libs/client-services/src/index.ts"],
       "@upgraded-enigma/client-sidebar": ["libs/client-sidebar/src/index.ts"],
       "@upgraded-enigma/client-store": ["libs/client-store/src/index.ts"],

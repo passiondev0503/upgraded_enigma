@@ -5,7 +5,7 @@ import { NgxsModule } from '@ngxs/store';
 import { array } from '@storybook/addon-knobs';
 import { ArrayTypeKnobValue } from '@storybook/addon-knobs/dist/ts3.9/components/types';
 import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
-import { AppChatbotState, AppSidebarState } from '@upgraded-enigma/client-store';
+import { AppChatbotState, AppSidebarState, AppUserState } from '@upgraded-enigma/client-store';
 import {
   documentFactory,
   IButton,
@@ -72,7 +72,7 @@ export const primary = () => ({
     imports: [
       BrowserAnimationsModule,
       FlexLayoutModule,
-      NgxsModule.forRoot([AppSidebarState, AppChatbotState]),
+      NgxsModule.forRoot([AppSidebarState, AppChatbotState, AppUserState]),
       AppClientMaterialModule.forRoot(),
     ],
     providers: [

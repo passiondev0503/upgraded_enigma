@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" fxFlex="0 1 auto">
+<mat-toolbar color="primary" fxFlex="0 1 auto" *ngIf="user$ | async as user">
   <button mat-icon-button (click)="toggleSidebar()">
     <mat-icon title="open sidenav" *ngIf="(sidebarOpened$ | async) === false">
       flip_to_front
@@ -11,7 +11,7 @@
 
   <button
     mat-button
-    *ngFor="let button of buttons"
+    *ngFor="let button of buttons | buttonsVisibility: user.userAuthenticated"
     [routerLink]="button.routerLink"
     (click)="button.click ? button.click() : null"
     [fxHide.xs]="true"
@@ -44,7 +44,7 @@
   <mat-menu #mobileMenuBottom="matMenu" [fxHide.md]="true" [fxHide.lg]="true" [fxHide.xl]="true">
     <a
       mat-menu-item
-      *ngFor="let button of buttons"
+      *ngFor="let button of buttons | buttonsVisibility: user.userAuthenticated"
       [routerLink]="button.routerLink"
       (click)="button.click ? button.click() : null"
     >

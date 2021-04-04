@@ -18,7 +18,7 @@ const typeConstraints = [
   },
   {
     sourceTag: 'type:data-access',
-    onlyDependOnLibsWithTags: ['type:data-access', 'type:ui', 'type:util', 'type:unit-testing'],
+    onlyDependOnLibsWithTags: ['type:data-access', 'type:util', 'type:unit-testing'],
   },
   {
     sourceTag: 'type:ui',
@@ -150,6 +150,7 @@ const clientConstraints = [
       'scope:client-material',
       'scope:client-store',
       'scope:client-util',
+      'scope:client-pipes',
     ],
   },
   {
@@ -241,6 +242,10 @@ const clientConstraints = [
       'scope:client-store',
       'scope:client-unit-testing',
     ],
+  },
+  {
+    sourceTag: 'scope:client-pipes',
+    onlyDependOnLibsWithTags: ['scope:client-store', 'scope:client-util'],
   },
   {
     sourceTag: 'scope:client-e2e',

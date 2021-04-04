@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" fxFlex="0 1 auto">
+<mat-toolbar color="primary" fxFlex="0 1 auto" *ngIf="user$ | async as user">
   <img
     [ngStyle]="{ height: '75%', width: 'auto!important' }"
     [src]="logoSrc"
@@ -10,7 +10,7 @@
 
   <button
     mat-button
-    *ngFor="let button of buttons"
+    *ngFor="let button of buttons | buttonsVisibility: user.userAuthenticated"
     [routerLink]="button.routerLink"
     [fxHide.xs]="true"
     [fxHide.sm]="true"

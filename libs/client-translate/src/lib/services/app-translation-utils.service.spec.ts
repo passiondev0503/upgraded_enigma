@@ -133,7 +133,7 @@ describe('AppTranslationUtilsService', () => {
         use: spy.translate.use.mock.calls.length,
       },
     };
-    expect(dateAdapter.setLocale).toHaveBeenCalledWith('ru');
+    expect(dateAdapter.setLocale).toHaveBeenCalledWith('en');
     expect(translate.setDefaultLang).toHaveBeenCalled();
     expect(translate.setTranslation).toHaveBeenCalled();
     expect(translate.use).toHaveBeenCalled();

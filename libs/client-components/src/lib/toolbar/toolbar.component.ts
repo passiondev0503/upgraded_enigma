@@ -1,12 +1,20 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  HostListener,
+  Inject,
+  Input,
+} from '@angular/core';
 import { Store } from '@ngxs/store';
 import {
   AppSidebarState,
+  AppUserState,
   chatbotActions,
   sidebarUiActions,
   userActions,
 } from '@upgraded-enigma/client-store';
-import { IButton } from '@upgraded-enigma/client-util';
+import { IButton, WINDOW } from '@upgraded-enigma/client-util';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -16,6 +24,9 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppToolbarComponent {
+  @HostBinding('class.fixed-position-toolbar') public fixedPosition =
+    this.win.innerHeight + this.win.scrollY < this.win.document.body.offsetHeight;
+
   @Input() public buttons: IButton[] = [
     {
       routerLink: ['user/auth'],
@@ -27,7 +38,7 @@ export class AppToolbarComponent {
       routerLink: [''],
       icon: 'lock',
       title: 'Log out',
-      requiresAuth: false,
+      requiresAuth: true,
       click: () => {
         void this.store.dispatch(new userActions.logOut()).subscribe();
       },
@@ -68,7 +79,11 @@ export class AppToolbarComponent {
     .select(AppSidebarState.getState)
     .pipe(map(state => state.sidebarOpened));
 
-  constructor(public readonly store: Store) {}
+  public readonly user$ = this.store
+    .select(AppUserState.token)
+    .pipe(map(token => ({ userAuthenticated: Boolean(token) })));
+
+  constructor(public readonly store: Store, @Inject(WINDOW) private readonly win: Window) {}
 
   public toggleSidebar(): void {
     void this.store.dispatch(new sidebarUiActions.toggleSidebar());
@@ -76,5 +91,12 @@ export class AppToolbarComponent {
 
   public toggleChatbot(): void {
     void this.store.dispatch(new chatbotActions.toggle());
+  }
+
+  @HostListener('window:scroll')
+  public windowScrollHandler() {
+    const mod = 75;
+    this.fixedPosition =
+      this.win.innerHeight + this.win.scrollY < this.win.document.body.offsetHeight - mod;
   }
 }

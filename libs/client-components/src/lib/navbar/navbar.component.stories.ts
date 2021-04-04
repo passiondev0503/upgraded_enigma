@@ -1,9 +1,11 @@
 import { APP_BASE_HREF, DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxsModule } from '@ngxs/store';
 import { array, text } from '@storybook/addon-knobs';
 import { ArrayTypeKnobValue } from '@storybook/addon-knobs/dist/ts3.9/components/types';
 import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
+import { AppUserState } from '@upgraded-enigma/client-store';
 import {
   documentFactory,
   IButton,
@@ -43,7 +45,12 @@ const buttons: IButton[] = [
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [BrowserAnimationsModule, FlexLayoutModule, AppClientMaterialModule.forRoot()],
+    imports: [
+      BrowserAnimationsModule,
+      FlexLayoutModule,
+      NgxsModule.forRoot([AppUserState]),
+      AppClientMaterialModule.forRoot(),
+    ],
     providers: [
       {
         provide: LocationStrategy,

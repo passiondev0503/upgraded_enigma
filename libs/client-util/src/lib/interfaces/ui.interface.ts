@@ -5,10 +5,3 @@ export interface IButton {
   requiresAuth: boolean;
   click?(): void;
 }
-
-export interface IAnchor {
-  href: string;
-  icon: string;
-  title: string;
-  requiresAuth: boolean;
-}

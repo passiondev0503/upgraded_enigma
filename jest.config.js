@@ -30,5 +30,6 @@ module.exports = {
     '<rootDir>/libs/client-user',
     '<rootDir>/libs/client-workspaces',
     '<rootDir>/libs/proto',
+    '<rootDir>/libs/client-pipes',
   ],
 };

@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { AppUserState } from '@upgraded-enigma/client-store';
 import {
   IButton,
   IWebClientAppEnvironment,
   WEB_CLIENT_APP_ENV,
 } from '@upgraded-enigma/client-util';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -25,11 +28,18 @@ export class AppNavbarComponent {
       routerLink: ['info'],
       icon: 'av_timer',
       title: 'Diagnostics',
-      requiresAuth: false,
+      requiresAuth: true,
     },
   ];
 
   public readonly appName = this.env.appName;
 
-  constructor(@Inject(WEB_CLIENT_APP_ENV) private readonly env: IWebClientAppEnvironment) {}
+  public readonly user$ = this.store
+    .select(AppUserState.token)
+    .pipe(map(token => ({ userAuthenticated: Boolean(token) })));
+
+  constructor(
+    public readonly store: Store,
+    @Inject(WEB_CLIENT_APP_ENV) private readonly env: IWebClientAppEnvironment,
+  ) {}
 }

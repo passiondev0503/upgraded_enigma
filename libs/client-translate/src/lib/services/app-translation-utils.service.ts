@@ -4,6 +4,7 @@ import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { WINDOW } from '@upgraded-enigma/client-util';
 import { Subject } from 'rxjs';
 
+import { EN_DICTIONARY } from '../dictionaries/en';
 import { RU_DICTIONARY } from '../dictionaries/ru';
 import { IUiDictionary } from '../interfaces/ui-dictionary.interface';
 import {
@@ -47,9 +48,11 @@ export class AppTranslationUtilsService {
    * UI dictionaries.
    */
   private readonly translations: IUiTranslations = {
-    ru: { ...this.ruDictionary },
+    ru: {
+      ...this.ruDictionary,
+    },
     en: {
-      /*, SHARED_EN*/
+      ...this.enDictionary,
     },
   };
 
@@ -58,6 +61,7 @@ export class AppTranslationUtilsService {
     private readonly dateAdapter: DateAdapter<unknown>,
     @Inject(WINDOW) private readonly win: Window,
     @Inject(RU_DICTIONARY) private readonly ruDictionary: IUiDictionary,
+    @Inject(EN_DICTIONARY) private readonly enDictionary: IUiDictionary,
   ) {
     this.languageChangeSubscription();
   }
@@ -66,11 +70,12 @@ export class AppTranslationUtilsService {
    * Initializes Translate service.
    */
   public initialize(): void {
-    this.setDatepickersLocale('ru');
-    this.translate.setDefaultLang(this.langs.ru);
     this.translate.setTranslation(this.langs.ru, this.translations.ru);
     this.translate.setTranslation(this.langs.en, this.translations.en);
-    void this.translate.use(this.langs.ru);
+    const userPreferred = this.getUserLanguagePreference();
+    this.translate.setDefaultLang(userPreferred);
+    this.setDatepickersLocale(userPreferred);
+    void this.translate.use(userPreferred);
   }
 
   /**

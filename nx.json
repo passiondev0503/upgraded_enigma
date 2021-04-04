@@ -85,6 +85,9 @@
     "client-material": {
       "tags": ["scope:client-material", "type:ui"]
     },
+    "client-pipes": {
+      "tags": ["scope:client-pipes", "type:data-access"]
+    },
     "client-services": {
       "tags": ["scope:client-services", "type:ui"]
     },
@@ -95,7 +98,7 @@
       "tags": ["scope:client-store", "type:data-access"]
     },
     "client-translate": {
-      "tags": ["scope:client-translate", "type:ui"]
+      "tags": ["scope:client-translate", "type:util"]
     },
     "client-unit-testing": {
       "tags": ["scope:client-unit-testing", "type:unit-testing"]
