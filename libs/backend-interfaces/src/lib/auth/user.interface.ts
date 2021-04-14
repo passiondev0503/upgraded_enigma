@@ -43,3 +43,12 @@ export const userStatusObject = (values: Partial<IUserStatus>): IUserStatus => (
   encryption: values.encryption ?? false,
   encrypted: values.encrypted ?? false,
 });
+
+export interface IUserLoginCredentials {
+  email: string;
+  password: string;
+}
+
+export interface IUserLogoutCredentials {
+  token: string;
+}

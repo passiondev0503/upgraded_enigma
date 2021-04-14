@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import {
+  IUserLoginCredentials,
+  IUserLogoutCredentials,
   Message,
-  UserLoginCredentials,
-  UserLogoutCredentials,
 } from '@upgraded-enigma/backend-interfaces';
 
 import { BackendAuthService } from '../service/auth.service';
@@ -17,12 +17,12 @@ export class BackendAuthController {
   }
 
   @Post('auth/login')
-  public login(@Body() payload: UserLoginCredentials) {
+  public login(@Body() payload: IUserLoginCredentials) {
     return this.authService.login(payload);
   }
 
   @Post('auth/logout')
-  public logout(@Body() payload: UserLogoutCredentials): Message {
+  public logout(@Body() payload: IUserLogoutCredentials): Message {
     return this.authService.logout(payload);
   }
 }

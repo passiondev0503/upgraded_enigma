@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import {
   IUser,
+  IUserLoginCredentials,
+  IUserLogoutCredentials,
   Message,
-  UserLoginCredentials,
-  UserLogoutCredentials,
 } from '@upgraded-enigma/backend-interfaces';
 import * as crypto from 'crypto';
 import { map } from 'rxjs/operators';
@@ -58,15 +58,15 @@ export class BackendAuthService {
     });
   }
 
-  public login(credentials: UserLoginCredentials) {
+  public login(credentials: IUserLoginCredentials) {
     return this.authenticateAndReturnProfile(credentials);
   }
 
-  public logout(credentials: UserLogoutCredentials): Message {
+  public logout(credentials: IUserLogoutCredentials): Message {
     return new Message({ message: `success for token ${credentials.token}` });
   }
 
-  private authenticateAndReturnProfile(credentials: UserLoginCredentials) {
+  private authenticateAndReturnProfile(credentials: IUserLoginCredentials) {
     const name = {
       first: '',
       last: '',

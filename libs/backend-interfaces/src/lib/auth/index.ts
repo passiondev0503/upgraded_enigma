@@ -1,1 +1,1 @@
-export * from './user/index';
+export * from './user.interface';
