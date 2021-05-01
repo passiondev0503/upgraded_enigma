@@ -13,7 +13,7 @@ import { Apollo } from 'apollo-angular';
 import { ExecutionResult, GraphQLError } from 'graphql';
 import { cold, getTestScheduler } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 import { AppHttpProgressModule } from '../http-progress/http-progress.module';
 import {
@@ -182,15 +182,15 @@ describe('AppHttpHandlersService', () => {
           status: 400,
           statusText: 'error status text',
         });
-        service
+        void service
           .handleError(errRes)
-          .toPromise()
-          .then(
-            () => true,
-            (error: string) => {
-              expect(error).toEqual(service.getErrorMessage(errRes));
-            },
-          );
+          .pipe(
+            catchError((error: Error) => {
+              expect(error).toEqual(new Error(service.getErrorMessage(errRes)));
+              return of(null);
+            }),
+          )
+          .subscribe();
       }),
     );
 
@@ -198,15 +198,15 @@ describe('AppHttpHandlersService', () => {
       'should handle errors properly #2',
       waitForAsync(() => {
         const errRes = new HttpErrorResponse({});
-        service
+        void service
           .handleError(errRes)
-          .toPromise()
-          .then(
-            () => true,
-            (error: string) => {
-              expect(error).toEqual(service.getErrorMessage(errRes));
-            },
-          );
+          .pipe(
+            catchError((error: Error) => {
+              expect(error).toEqual(new Error(service.getErrorMessage(errRes)));
+              return of(null);
+            }),
+          )
+          .subscribe();
       }),
     );
   });

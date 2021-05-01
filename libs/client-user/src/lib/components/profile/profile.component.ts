@@ -13,9 +13,9 @@ import { map, tap } from 'rxjs/operators';
 export class AppUserProfileComponent {
   public user$ = this.store.select(AppUserState.model).pipe(map(user => user));
 
-  private readonly showModal = new BehaviorSubject<boolean>(false);
+  private readonly showModalSubject = new BehaviorSubject<boolean>(false);
 
-  public readonly showModal$ = this.showModal.asObservable();
+  public readonly showModal$ = this.showModalSubject.asObservable();
 
   constructor(private readonly store: Store) {}
 

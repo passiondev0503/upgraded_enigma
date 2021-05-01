@@ -32,7 +32,6 @@ export class BackendUserService {
       fs.readFile(keyPath, (error, data) => {
         if (error !== null) {
           observer.error(error);
-          observer.complete();
         } else {
           observer.next(true);
           observer.complete();
@@ -52,7 +51,6 @@ export class BackendUserService {
           fs.writeFile(this.userConfigPath, JSON.stringify(userObject({})), writeError => {
             if (writeError !== null) {
               observer.error(writeError);
-              observer.complete();
             } else {
               observer.next(userObject({}));
               observer.complete();
@@ -75,7 +73,6 @@ export class BackendUserService {
       fs.readFile(this.userConfigPath, (readError, data) => {
         if (readError !== null) {
           observer.error(readError);
-          observer.complete();
         } else {
           const user: IUser = JSON.parse(data.toString());
           const userStatus = userStatusObject({
@@ -98,7 +95,6 @@ export class BackendUserService {
       fs.readFile(this.userConfigPath, (readError, data) => {
         if (readError !== null) {
           observer.error(readError);
-          observer.complete();
         } else {
           const user: IUser = JSON.parse(data.toString());
 
@@ -111,7 +107,6 @@ export class BackendUserService {
           fs.writeFile(this.userConfigPath, JSON.stringify(user), writeError => {
             if (writeError !== null) {
               observer.error(writeError);
-              observer.complete();
             } else {
               observer.next(user);
               observer.complete();
@@ -130,18 +125,15 @@ export class BackendUserService {
       fs.readFile(this.userConfigPath, (readError, data) => {
         if (readError !== null) {
           observer.error(readError);
-          observer.complete();
         } else {
           const user = JSON.parse(data.toString());
           fs.writeFile(this.rsaPrivateKeyPath, JSON.stringify(keyPair.private), writeError1 => {
             if (writeError1 !== null) {
               observer.error(writeError1);
-              observer.complete();
             }
             fs.writeFile(this.rsaPublicKeyPath, JSON.stringify(keyPair.public), writeError2 => {
               if (writeError2 !== null) {
                 observer.error(writeError2);
-                observer.complete();
               }
               observer.next(user);
               observer.complete();
@@ -160,7 +152,6 @@ export class BackendUserService {
       fs.readFile(this.userConfigPath, (readError, data) => {
         if (readError !== null) {
           observer.error(readError);
-          observer.complete();
         } else {
           const user: IUser = JSON.parse(data.toString());
 
@@ -170,7 +161,6 @@ export class BackendUserService {
           fs.writeFile(this.userConfigPath, JSON.stringify(user), writeError => {
             if (writeError !== null) {
               observer.error(writeError);
-              observer.complete();
             } else {
               observer.next(user);
               observer.complete();
@@ -189,7 +179,6 @@ export class BackendUserService {
       fs.readFile(this.userConfigPath, (readError, data) => {
         if (readError !== null) {
           observer.error(readError);
-          observer.complete();
         } else {
           const user: IUser = JSON.parse(data.toString());
 
@@ -200,7 +189,6 @@ export class BackendUserService {
           fs.writeFile(this.userConfigPath, JSON.stringify(user), writeError => {
             if (writeError !== null) {
               observer.error(writeError);
-              observer.complete();
             } else {
               observer.next(user);
               observer.complete();
@@ -221,7 +209,6 @@ export class BackendUserService {
       fs.writeFile(exportPath, data, writeError => {
         if (writeError !== null) {
           observer.error(writeError);
-          observer.complete();
         }
         observer.next({ path: exportPath, passwords: passwords });
         observer.complete();
@@ -237,7 +224,6 @@ export class BackendUserService {
       new Glob('config/export.*.json', {}, (error, files) => {
         if (error !== null) {
           observer.error(error);
-          observer.complete();
         }
         observer.next(files);
         observer.complete();

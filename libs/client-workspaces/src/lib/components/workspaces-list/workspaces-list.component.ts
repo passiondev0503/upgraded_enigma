@@ -16,7 +16,7 @@ export class AppWorkspacesListComponent {
    * @note prototype
    * @note TODO: get this asyncronously from store.
    */
-  private readonly widgets = new BehaviorSubject<IWorkspace[]>([
+  private readonly widgetsSubject = new BehaviorSubject<IWorkspace[]>([
     {
       id: 'xx',
       title: 'title',
@@ -43,7 +43,7 @@ export class AppWorkspacesListComponent {
     },
   ]);
 
-  public readonly widgets$ = this.widgets.asObservable();
+  public readonly widgets$ = this.widgetsSubject.asObservable();
 
   constructor(private readonly store: Store) {}
 

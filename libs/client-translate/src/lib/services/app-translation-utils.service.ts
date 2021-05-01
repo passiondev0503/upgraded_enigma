@@ -24,9 +24,9 @@ export class AppTranslationUtilsService {
   /**
    * Language changes notifier.
    */
-  private readonly languageChanges = new Subject<LangChangeEvent>();
+  private readonly languageChangesSubject = new Subject<LangChangeEvent>();
 
-  public readonly languageChanges$ = this.languageChanges.asObservable();
+  public readonly languageChanges$ = this.languageChangesSubject.asObservable();
 
   /**
    * Available UI language codes.
@@ -135,7 +135,7 @@ export class AppTranslationUtilsService {
   private languageChangeSubscription(): void {
     void this.translate.onLangChange.subscribe(
       (langChangeEvent: LangChangeEvent) => {
-        this.languageChanges.next(langChangeEvent);
+        this.languageChangesSubject.next(langChangeEvent);
         const langCode: TLangCode = langChangeEvent.lang as TLangCode;
         this.setDatepickersLocale(langCode);
       },

@@ -16,7 +16,7 @@ export class AppWorkspaceComponent {
    * @note prototype
    * @note TODO: get this asyncronously from store.
    */
-  private readonly data = new BehaviorSubject<IWorkspace>({
+  private readonly dataSubject = new BehaviorSubject<IWorkspace>({
     id: 'xx',
     title: 'title',
     tags: ['tag1'],
@@ -25,7 +25,7 @@ export class AppWorkspaceComponent {
     url: 'https://duckduckgo.com',
   });
 
-  public readonly data$ = this.data.asObservable();
+  public readonly data$ = this.dataSubject.asObservable();
 
   constructor(private readonly store: Store) {}
 

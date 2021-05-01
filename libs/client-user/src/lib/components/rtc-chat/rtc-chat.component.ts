@@ -43,9 +43,9 @@ type TFirestoreRooms = IFirestoreRoom[];
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppUserRtcChatComponent implements OnInit {
-  private readonly mediaDevices = new BehaviorSubject<MediaDeviceInfo[]>([]);
+  private readonly mediaDevicesSubject = new BehaviorSubject<MediaDeviceInfo[]>([]);
 
-  public readonly mediaDevices$ = this.mediaDevices.asObservable();
+  public readonly mediaDevices$ = this.mediaDevicesSubject.asObservable();
 
   public readonly messages$ = this.store
     .select(AppWebsocketState.getState)
@@ -83,23 +83,23 @@ export class AppUserRtcChatComponent implements OnInit {
       .get(),
   );
 
-  private readonly iceCandidates = new BehaviorSubject<RTCIceCandidate[]>([]);
+  private readonly iceCandidatesSubject = new BehaviorSubject<RTCIceCandidate[]>([]);
 
-  public readonly iceCandidates$ = this.iceCandidates.asObservable();
+  public readonly iceCandidates$ = this.iceCandidatesSubject.asObservable();
 
   private readonly peerConnection = new RTCPeerConnection(this.webRtcConfig.servers);
 
-  private readonly localVideoStream = new BehaviorSubject<MediaStream>(new MediaStream());
+  private readonly localVideoStreamSubject = new BehaviorSubject<MediaStream>(new MediaStream());
 
-  public readonly localVideoStream$ = this.localVideoStream.asObservable();
+  public readonly localVideoStream$ = this.localVideoStreamSubject.asObservable();
 
-  private readonly remoteVideoStream = new BehaviorSubject<MediaStream>(new MediaStream());
+  private readonly remoteVideoStreamSubject = new BehaviorSubject<MediaStream>(new MediaStream());
 
-  public readonly remoteVideoStream$ = this.remoteVideoStream.asObservable();
+  public readonly remoteVideoStream$ = this.remoteVideoStreamSubject.asObservable();
 
-  private readonly videoRoomPeers = new BehaviorSubject<IRtcPeer[]>([]);
+  private readonly videoRoomPeersSubject = new BehaviorSubject<IRtcPeer[]>([]);
 
-  public readonly videoRoomPeers$ = this.videoRoomPeers.asObservable();
+  public readonly videoRoomPeers$ = this.videoRoomPeersSubject.asObservable();
 
   public readonly offers$ = this.videoRoomPeers$.pipe(
     map(peers =>
@@ -124,11 +124,11 @@ export class AppUserRtcChatComponent implements OnInit {
             const processed: IRtcPeer = { ...peer, sdp };
             return processed;
           }) as IRtcPeer[];
-        this.videoRoomPeers.next(peers);
+        this.videoRoomPeersSubject.next(peers);
 
         if (typeof room?.ice !== 'undefined') {
           const ice = room.ice.map(item => new RTCIceCandidate(JSON.parse(item)));
-          this.iceCandidates.next(ice);
+          this.iceCandidatesSubject.next(ice);
         }
 
         const answer = room?.peers.find(
@@ -189,7 +189,7 @@ export class AppUserRtcChatComponent implements OnInit {
       .pipe(
         switchMap(() => {
           const observables: Observable<void>[] = [];
-          for (const candidate of this.iceCandidates.value) {
+          for (const candidate of this.iceCandidatesSubject.value) {
             observables.push(from(this.peerConnection.addIceCandidate(candidate)));
           }
           return combineLatest(observables);
@@ -345,9 +345,9 @@ export class AppUserRtcChatComponent implements OnInit {
    * @param stream local media stream
    */
   private setupVideoStream(stream: MediaStream) {
-    this.localVideoStream.next(stream);
-    this.localVideoStream.value.getTracks().forEach(track => {
-      this.peerConnection.addTrack(track, this.localVideoStream.value);
+    this.localVideoStreamSubject.next(stream);
+    this.localVideoStreamSubject.value.getTracks().forEach(track => {
+      this.peerConnection.addTrack(track, this.localVideoStreamSubject.value);
     });
   }
 
@@ -360,7 +360,7 @@ export class AppUserRtcChatComponent implements OnInit {
       // eslint-disable-next-line no-console -- TODO: remove after debugging
       console.warn(`ICE gathering state changed: ${this.peerConnection.iceGatheringState}`, event);
 
-      const ice = this.iceCandidates.value.map(item => JSON.stringify(item));
+      const ice = this.iceCandidatesSubject.value.map(item => JSON.stringify(item));
       switch (this.peerConnection.iceGatheringState) {
         case 'complete':
           void from(
@@ -399,20 +399,20 @@ export class AppUserRtcChatComponent implements OnInit {
       console.warn(`ICE Candidate: ${this.peerConnection.iceConnectionState}`, event.candidate);
       if (event.candidate !== null) {
         const candidate = new RTCIceCandidate(event.candidate);
-        this.iceCandidates.next([...this.iceCandidates.value, candidate]);
+        this.iceCandidatesSubject.next([...this.iceCandidatesSubject.value, candidate]);
       }
     });
 
     this.peerConnection.addEventListener('track', event => {
       // eslint-disable-next-line no-console -- TODO: remove after debugging
       console.warn(`Track, ${this.peerConnection.iceConnectionState}:`, event.streams[0]);
-      const remoteStream = this.remoteVideoStream.value;
+      const remoteStream = this.remoteVideoStreamSubject.value;
       event.streams[0].getTracks().forEach(track => {
         // eslint-disable-next-line no-console -- TODO: remove after debugging
         console.warn('Add a track to the remoteStream:', track);
         remoteStream.addTrack(track);
       });
-      this.remoteVideoStream.next(remoteStream);
+      this.remoteVideoStreamSubject.next(remoteStream);
     });
 
     this.peerConnection.addEventListener('datachannel', event => {
@@ -430,7 +430,7 @@ export class AppUserRtcChatComponent implements OnInit {
         .enumerateDevices()
         .then(devices => {
           devices.forEach(item => {
-            this.mediaDevices.next([...this.mediaDevices.value, item]);
+            this.mediaDevicesSubject.next([...this.mediaDevicesSubject.value, item]);
           });
         })
         .catch(error => {
