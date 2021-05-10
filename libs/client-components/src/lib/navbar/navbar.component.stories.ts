@@ -68,6 +68,6 @@ export const primary = () => ({
   component: AppNavbarComponent,
   props: {
     logoSrc: text('logoSrc', 'assets/icons/icon-72x72.png'),
-    buttons: array('buttons', (buttons as unknown) as ArrayTypeKnobValue),
+    buttons: array('buttons', buttons as unknown as ArrayTypeKnobValue),
   },
 });

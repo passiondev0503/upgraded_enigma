@@ -1,4 +1,4 @@
-import { KeyLike, RsaPrivateKey, RsaPublicKey } from 'node:crypto';
+import { KeyLike, RsaPrivateKey, RsaPublicKey } from 'crypto';
 
 export interface IUserPassword {
   name: string;

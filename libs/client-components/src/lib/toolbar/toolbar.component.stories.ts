@@ -91,6 +91,6 @@ export const primary = () => ({
   },
   component: AppToolbarComponent,
   props: {
-    buttons: array('anchors', (buttons as unknown) as ArrayTypeKnobValue),
+    buttons: array('anchors', buttons as unknown as ArrayTypeKnobValue),
   },
 });

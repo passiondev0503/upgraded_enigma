@@ -159,7 +159,7 @@ describe('AppToasterService', () => {
     service.showToaster('message', 'primary');
     expect(service['snackBarRef']).toBeDefined();
     jest.spyOn(
-      ((service as unknown) as { snackBarRef: MatSnackBarRef<SimpleSnackBar> }).snackBarRef,
+      (service as unknown as { snackBarRef: MatSnackBarRef<SimpleSnackBar> }).snackBarRef,
       'dismiss',
     );
     service.hideToaster();

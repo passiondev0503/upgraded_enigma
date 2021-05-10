@@ -51,11 +51,11 @@ export class AppHttpHandlersService {
   ) {}
 
   public getUserToken() {
-    const token: string = (JSON.parse(
-      localStorage.getItem('userService') ?? JSON.stringify({ token: '' }),
-    ) as {
-      token: string;
-    }).token;
+    const token: string = (
+      JSON.parse(localStorage.getItem('userService') ?? JSON.stringify({ token: '' })) as {
+        token: string;
+      }
+    ).token;
     return token;
   }
 
@@ -137,10 +137,10 @@ export class AppHttpHandlersService {
         return !Boolean(name);
       },
       httpLinkHandler,
-      (createUploadLink({
+      createUploadLink({
         uri,
         headers: { Authorization: `Token ${token}` },
-      }) as unknown) as ApolloLink,
+      }) as unknown as ApolloLink,
     );
   }
 
@@ -175,11 +175,13 @@ export class AppHttpHandlersService {
               if (networkError instanceof HttpErrorResponse) {
                 resultMessage += (networkError.error as { detail: string }).detail;
               } else {
-                const errors: GraphQLError[] = ((networkError as unknown) as {
-                  error: {
-                    errors: GraphQLError[];
-                  };
-                }).error.errors;
+                const errors: GraphQLError[] = (
+                  networkError as unknown as {
+                    error: {
+                      errors: GraphQLError[];
+                    };
+                  }
+                ).error.errors;
                 errors.map(({ message, extensions }) => {
                   resultMessage += `[Network]: ${message}`;
                   errorCode = extensions?.code;
@@ -194,9 +196,7 @@ export class AppHttpHandlersService {
               }
             }
 
-            if (!resultMessage) {
-              resultMessage = 'Graphql request error';
-            }
+            resultMessage = !resultMessage ? 'Graphql request error' : resultMessage;
 
             this.toaster.showToaster(resultMessage, 'error');
           });
