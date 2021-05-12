@@ -40,14 +40,7 @@
       <span fxFlex="15px" [fxHide.xs]="true"> </span>
 
       <mat-form-field fxFlex fxFlex.xs="100">
-        <input
-          matInput
-          type="text"
-          name="name"
-          formControlName="name"
-          placeholder="{{ 'name' | translate }}"
-          required
-        />
+        <input matInput type="text" name="name" formControlName="name" placeholder="{{ 'name' | translate }}" required />
         <mat-icon matSuffix class="material-icons">web</mat-icon>
         <mat-error *ngIf="form.controls.name.invalid">
           {{ 'required' | translate }}
@@ -57,14 +50,7 @@
       <span fxFlex="15px" [fxHide.xs]="true"> </span>
 
       <mat-form-field fxFlex fxFlex.xs="100">
-        <input
-          matInput
-          type="text"
-          name="password"
-          formControlName="password"
-          placeholder="{{ 'password' | translate }}"
-          required
-        />
+        <input matInput type="text" name="password" formControlName="password" placeholder="{{ 'password' | translate }}" required />
         <mat-icon matSuffix class="material-icons">lock</mat-icon>
         <mat-error *ngIf="form.controls.password.invalid">
           {{ 'required' | translate }}
@@ -80,40 +66,22 @@
   <span fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start stretch">
     <span fxFlex fxLayout="row" fxLayoutAlign="center center">
       <mat-form-field>
-        <input
-          matInput
-          type="text"
-          name="searchQuery"
-          [(ngModel)]="searchQuery"
-          placeholder="{{ 'name' | translate }}"
-        />
+        <input matInput type="text" name="searchQuery" [(ngModel)]="searchQuery" placeholder="{{ 'name' | translate }}" />
         <mat-icon matSuffix class="material-icons">search</mat-icon>
       </mat-form-field>
     </span>
 
     <span fxFlex fxLayout="row" fxLayoutAlign="center center">
       <mat-form-field>
-        <mat-select
-          type="select"
-          name="sortByCriterion"
-          [(ngModel)]="sortByCriterion"
-          floatPlaceholder="auto"
-        >
+        <mat-select type="select" name="sortByCriterion" [(ngModel)]="sortByCriterion" floatPlaceholder="auto">
           <mat-option value="">{{ 'name' | translate }}</mat-option>
           <mat-option value="timestamp">{{ 'timestamp' | translate }}</mat-option>
         </mat-select>
-        <mat-placeholder>
-          <mat-icon matSuffix class="material-icons">sort</mat-icon> {{ 'sortBy' | translate }}
-        </mat-placeholder>
+        <mat-placeholder> <mat-icon matSuffix class="material-icons">sort</mat-icon> {{ 'sortBy' | translate }} </mat-placeholder>
       </mat-form-field>
     </span>
 
-    <span
-      fxFlex
-      fxLayout="row"
-      fxLayoutAlign="center center"
-      matTooltip="TODO: wire it up with the filtering logic"
-    >
+    <span fxFlex fxLayout="row" fxLayoutAlign="center center" matTooltip="TODO: wire it up with the filtering logic">
       <mat-form-field>
         <input
           matInput
@@ -141,13 +109,7 @@
       [fxHide]="hideElement$(j) | async"
     >
       <span fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="start center">{{ j }}</span>
-      <span
-        fxFlex="2 1 auto"
-        fxLayout="row"
-        fxLayoutAlign="start center"
-        matTooltip="{{ 'name' | translate }}"
-        matTooltipPosition="above"
-      >
+      <span fxFlex="2 1 auto" fxLayout="row" fxLayoutAlign="start center" matTooltip="{{ 'name' | translate }}" matTooltipPosition="above">
         {{ passObj.name }}
       </span>
 
@@ -173,20 +135,13 @@
         [matTooltip]="$any(passObj.timestamp | date: 'yyyy.MM.dd HH:mm Z')"
         matTooltipPosition="above"
       >
-        <mat-icon class="material-icons" fxShow="true" [fxHide.gt-sm]="true">
-          access_time
-        </mat-icon>
+        <mat-icon class="material-icons" fxShow="true" [fxHide.gt-sm]="true"> access_time </mat-icon>
         <span fxHide="true" [fxShow.gt-sm]="true">
           {{ passObj.timestamp | date: 'yyyy.MM.dd HH:mm Z' }}
         </span>
       </span>
 
-      <button
-        mat-icon-button
-        (click)="deletePassword(j)"
-        [matTooltip]="'delete' | translate"
-        matTooltipPosition="above"
-      >
+      <button mat-icon-button (click)="deletePassword(j)" [matTooltip]="'delete' | translate" matTooltipPosition="above">
         <mat-icon class="material-icons">delete</mat-icon>
       </button>
     </span>
@@ -197,8 +152,6 @@
   <h2 [ngStyle]="{ margin: '10px 0 0 0' }">{{ 'passwords.exported' | translate }}</h2>
 
   <span fxFlex="100" fxLayout="row wrap">
-    <span fxFlex="100" *ngFor="let filePath of exportedPasswordFiles$ | async">
-      &bull; {{ filePath }}
-    </span>
+    <span fxFlex="100" *ngFor="let filePath of exportedPasswordFiles$ | async"> &bull; {{ filePath }} </span>
   </span>
 </div>

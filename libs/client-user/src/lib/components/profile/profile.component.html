@@ -4,11 +4,7 @@
   </h3>
 
   <mat-chip-list [attr.aria-label]="'user.status' | translate" *ngIf="user$ | async as user">
-    <mat-chip
-      [color]="user.status.initialized ? 'primary' : 'warn'"
-      [disabled]="true"
-      [selected]="true"
-    >
+    <mat-chip [color]="user.status.initialized ? 'primary' : 'warn'" [disabled]="true" [selected]="true">
       <mat-icon>verified_user</mat-icon>
       &nbsp;
       {{ 'user.initialized' | translate }}
@@ -26,23 +22,14 @@
       {{ 'user.encryption' | translate }}
     </mat-chip>
 
-    <mat-chip
-      [color]="user.passwords.length > 0 ? 'primary' : 'warn'"
-      [disabled]="true"
-      [selected]="true"
-    >
+    <mat-chip [color]="user.passwords.length > 0 ? 'primary' : 'warn'" [disabled]="true" [selected]="true">
       <mat-icon>bookmarks</mat-icon>
       &nbsp;
       {{ 'passwords.count' | translate }}: {{ user.passwords.length }}
     </mat-chip>
   </mat-chip-list>
 
-  <div
-    fxFlex="100"
-    fxLayout="row wrap"
-    fxLayoutAlign="center start"
-    [ngStyle]="{ padding: '10px 0' }"
-  >
+  <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center start" [ngStyle]="{ padding: '10px 0' }">
     <span fxFlex="0 1 auto">
       <canvas #canvas></canvas>
       <div class="mat-caption" [ngStyle]="{ 'text-align': 'center' }">

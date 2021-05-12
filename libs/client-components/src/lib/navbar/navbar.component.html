@@ -1,10 +1,5 @@
 <mat-toolbar color="primary" fxFlex="0 1 auto" *ngIf="user$ | async as user">
-  <img
-    [ngStyle]="{ height: '75%', width: 'auto!important' }"
-    [src]="logoSrc"
-    alt="{{ appName }}"
-    title="{{ appName }}"
-  />
+  <img [ngStyle]="{ height: '75%', width: 'auto!important' }" [src]="logoSrc" alt="{{ appName }}" title="{{ appName }}" />
 
   <span fxFlex="1 1 auto"></span>
 
@@ -18,13 +13,7 @@
     <mat-icon>{{ button.icon }}</mat-icon> {{ button.title }}
   </button>
 
-  <button
-    mat-icon-button
-    [matMenuTriggerFor]="mobileMenuTop"
-    [fxHide.md]="true"
-    [fxHide.lg]="true"
-    [fxHide.xl]="true"
-  >
+  <button mat-icon-button [matMenuTriggerFor]="mobileMenuTop" [fxHide.md]="true" [fxHide.lg]="true" [fxHide.xl]="true">
     <mat-icon>menu</mat-icon>
   </button>
 

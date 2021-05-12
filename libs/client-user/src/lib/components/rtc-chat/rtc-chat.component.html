@@ -6,21 +6,14 @@
 
   <h4 fxFlex="100">
     Offers &nbsp;
-    <button
-      mat-stroked-button
-      color="primary"
-      *ngFor="let offer of offers$ | async"
-      (click)="acceptOffer(offer)"
-    >
+    <button mat-stroked-button color="primary" *ngFor="let offer of offers$ | async" (click)="acceptOffer(offer)">
       Accept offer ({{ offer.sender }})
     </button>
   </h4>
 
   <h4 fxFlex="100" [ngStyle]="{ 'max-width': '100%' }">
     ICE Candidates
-    <div class="clamp-flex" *ngFor="let candidate of iceCandidates$ | async">
-      &bull; {{ candidate.candidate }}
-    </div>
+    <div class="clamp-flex" *ngFor="let candidate of iceCandidates$ | async">&bull; {{ candidate.candidate }}</div>
   </h4>
 
   <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center start">
@@ -49,29 +42,18 @@
 
   <mat-divider [ngStyle]="{ margin: '16px 0' }" fxFlex="100"></mat-divider>
 
-  <div
-    fxFlex="100"
-    fxLayout="row wrap"
-    fxLayoutAlign="stretch start"
-    [ngStyle]="{ 'margin-left': '16px' }"
-  >
+  <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="stretch start" [ngStyle]="{ 'margin-left': '16px' }">
     <h4 fxFlex="100">
       {{ 'chat.title' | translate }}
     </h4>
 
-    <div
-      fxFlex="100"
-      appAutoscroll
-      [ngStyle]="{ height: '200px', 'max-height': '200px', overflow: 'auto' }"
-    >
+    <div fxFlex="100" appAutoscroll [ngStyle]="{ height: '200px', 'max-height': '200px', overflow: 'auto' }">
       <div [ngStyle]="{ height: '100%' }">
         <ng-container *ngFor="let message of messages$ | async">
           <div [ngStyle]="{ padding: '8px' }">
             <span class="mat-body-2">{{ message.data.sender }}:</span>
 
-            <span class="mat-body-1" [ngStyle]="{ 'overflow-wrap': 'break-word' }">
-              &nbsp;{{ message.data.text }}
-            </span>
+            <span class="mat-body-1" [ngStyle]="{ 'overflow-wrap': 'break-word' }"> &nbsp;{{ message.data.text }} </span>
           </div>
 
           <mat-divider></mat-divider>
@@ -83,22 +65,8 @@
       <form fxFlex [formGroup]="form" (submit)="sendChatMessage()">
         <mat-form-field appearance="standard">
           <mat-label>New message</mat-label>
-          <input
-            formControlName="text"
-            [autofocus]="true"
-            appAutofocus
-            matInput
-            placeholder="Message text"
-          />
-          <mat-icon
-            matSuffix
-            [ngStyle]="{ cursor: 'pointer' }"
-            type="submit"
-            color="warn"
-            (click)="sendChatMessage()"
-          >
-            send
-          </mat-icon>
+          <input formControlName="text" [autofocus]="true" appAutofocus matInput placeholder="Message text" />
+          <mat-icon matSuffix [ngStyle]="{ cursor: 'pointer' }" type="submit" color="warn" (click)="sendChatMessage()"> send </mat-icon>
 
           <mat-hint>Input message text, and hit Enter or the highlighted send button.</mat-hint>
         </mat-form-field>
@@ -110,12 +78,7 @@
 
   <h4 fxFlex="100">{{ 'chat.devices' | translate }}</h4>
 
-  <div
-    fxFlex="100"
-    fxLayout="row wrap"
-    fxLayoutAlign="center space-around"
-    *ngIf="mediaDevices$ | async as devices"
-  >
+  <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center space-around" *ngIf="mediaDevices$ | async as devices">
     <mat-card [ngStyle]="{ margin: '16px' }" *ngFor="let device of devices">
       <mat-card-header>
         <div mat-card-avatar fxLayout="row" fxLayoutAlign="center center">
@@ -124,11 +87,7 @@
         <mat-card-title>{{ device.kind }}</mat-card-title>
 
         <mat-card-subtitle>
-          <div
-            [ngStyle]="{ width: '100px', overflow: 'hidden' }"
-            class="clamp"
-            matTooltip="{{ device.deviceId }}"
-          >
+          <div [ngStyle]="{ width: '100px', overflow: 'hidden' }" class="clamp" matTooltip="{{ device.deviceId }}">
             <span class="mat-body-2">Device id:</span>
             <span>
               {{ device.deviceId || 'N/A' }}
@@ -138,22 +97,14 @@
       </mat-card-header>
 
       <mat-card-content>
-        <div
-          [ngStyle]="{ width: '150px', overflow: 'hidden' }"
-          class="clamp"
-          matTooltip="{{ device.groupId }}"
-        >
+        <div [ngStyle]="{ width: '150px', overflow: 'hidden' }" class="clamp" matTooltip="{{ device.groupId }}">
           <span class="mat-body-2">Group id:</span>
           <span>
             {{ device.groupId }}
           </span>
         </div>
 
-        <div
-          [ngStyle]="{ width: '150px', overflow: 'hidden' }"
-          class="clamp"
-          matTooltip="{{ device.label }}"
-        >
+        <div [ngStyle]="{ width: '150px', overflow: 'hidden' }" class="clamp" matTooltip="{{ device.label }}">
           <span class="mat-body-2">Label:</span>
           <span>
             {{ device.label || 'N/A' }}

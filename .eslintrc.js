@@ -18,11 +18,11 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    // 'plugin:prettier/recommended', // prettier is too opinionated, not flexible
     'plugin:eslint-comments/recommended',
   ],
   plugins: [
-    'prettier',
+    // 'prettier', // prettier is too opinionated, not flexible
     '@typescript-eslint', // https://github.com/typescript-eslint/typescript-eslint
     '@angular-eslint', // https://github.com/angular-eslint/angular-eslint
     'simple-import-sort', // https://github.com/lydell/eslint-plugin-simple-import-sort
@@ -43,14 +43,7 @@ module.exports = {
     ],
     'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: false }],
     'eslint-comments/require-description': ['error', { ignore: [] }],
-    'eslint-comments/no-restricted-disable': [
-      'error',
-      '*',
-      '!no-console',
-      '!prettier',
-      '!no-alert',
-      '!max-lines-per-function',
-    ],
+    'eslint-comments/no-restricted-disable': ['error', '*', '!no-console', '!prettier', '!no-alert', '!max-lines-per-function'],
     '@typescript-eslint/await-thenable': 'error',
     '@typescript-eslint/ban-ts-comment': 'error',
     '@typescript-eslint/ban-types': [
@@ -71,19 +64,9 @@ module.exports = {
     '@typescript-eslint/default-param-last': ['error'],
     '@typescript-eslint/explicit-function-return-type': 'off', // keep off
     '@typescript-eslint/explicit-module-boundary-types': 'off', // keep off
-    '@typescript-eslint/explicit-member-accessibility': [
-      'error',
-      { ignoredMethodNames: ['constructor'] },
-    ],
-    '@typescript-eslint/lines-between-class-members': [
-      'error',
-      'always',
-      { exceptAfterOverload: true },
-    ],
-    '@typescript-eslint/member-ordering': [
-      'error',
-      { default: ['static-field', 'instance-field', 'static-method', 'instance-method'] },
-    ],
+    '@typescript-eslint/explicit-member-accessibility': ['error', { ignoredMethodNames: ['constructor'] }],
+    '@typescript-eslint/lines-between-class-members': ['error', 'always', { exceptAfterOverload: true }],
+    '@typescript-eslint/member-ordering': ['error', { default: ['static-field', 'instance-field', 'static-method', 'instance-method'] }],
     '@typescript-eslint/naming-convention': [
       'error', // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/naming-convention.md
       {
@@ -181,10 +164,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-empty-interface': 'error',
-    '@typescript-eslint/no-extraneous-class': [
-      'error',
-      { allowEmpty: true, allowStaticOnly: true, allowWithDecorator: true },
-    ],
+    '@typescript-eslint/no-extraneous-class': ['error', { allowEmpty: true, allowStaticOnly: true, allowWithDecorator: true }],
     '@typescript-eslint/no-floating-promises': [
       'error',
       {
@@ -202,10 +182,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-misused-new': 'error',
-    '@typescript-eslint/no-misused-promises': [
-      'error',
-      { checksVoidReturn: false, checksConditionals: true },
-    ],
+    '@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: false, checksConditionals: true }],
     '@typescript-eslint/no-non-null-assertion': 'error',
     '@typescript-eslint/no-for-in-array': 'error',
     '@typescript-eslint/no-shadow': 'error',
@@ -215,10 +192,7 @@ module.exports = {
     '@typescript-eslint/no-unnecessary-type-assertion': ['error', { typesToIgnore: [''] }],
     '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
     '@typescript-eslint/no-unsafe-member-access': 'error',
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      { vars: 'all', args: 'none', ignoreRestSiblings: false },
-    ],
+    '@typescript-eslint/no-unused-vars': ['error', { vars: 'all', args: 'none', ignoreRestSiblings: false }],
     '@typescript-eslint/no-require-imports': 'error',
     '@typescript-eslint/no-use-before-define': [
       'error',
@@ -236,22 +210,17 @@ module.exports = {
       },
     ],
     '@typescript-eslint/prefer-optional-chain': 'error',
-    '@typescript-eslint/prefer-nullish-coalescing': [
-      'error',
-      { ignoreConditionalTests: true, ignoreMixedLogicalExpressions: true },
-    ],
+    '@typescript-eslint/prefer-nullish-coalescing': ['error', { ignoreConditionalTests: true, ignoreMixedLogicalExpressions: true }],
     '@typescript-eslint/promise-function-async': 'off', // keep off
     '@typescript-eslint/require-await': 'off', // keep off
     '@typescript-eslint/restrict-plus-operands': 'error',
     '@typescript-eslint/strict-boolean-expressions': 'error',
-    '@typescript-eslint/triple-slash-reference': [
-      'error',
-      { path: 'never', types: 'never', lib: 'never' },
-    ],
+    '@typescript-eslint/triple-slash-reference': ['error', { path: 'never', types: 'never', lib: 'never' }],
     '@typescript-eslint/unbound-method': [
       'off', // keep of for now
       { ignoreStatic: true },
     ],
+    '@typescript-eslint/quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
     'arrow-parens': ['error', 'as-needed'],
     'brace-style': 'off', // handled by @typescript-eslint rule
     'compat/compat': 'error',
@@ -335,7 +304,8 @@ module.exports = {
     'prefer-object-spread': 'error',
     'prefer-spread': 'error',
     'prefer-promise-reject-errors': 'error',
-    'prettier/prettier': 'error',
+    // 'prettier/prettier': 'error', // prettier is too opinionated, not flexible
+    quotes: 'off', // handled by typescript eslint rule
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     'sort-imports': 'off', // handled by simple-import-sort/sort
@@ -401,11 +371,7 @@ module.exports = {
         sourceType: 'module',
         project: ['./tsconfig.eslint-js.json'],
       },
-      extends: [
-        'eslint:recommended',
-        'plugin:prettier/recommended',
-        'plugin:@angular-eslint/recommended',
-      ],
+      extends: ['eslint:recommended', 'plugin:prettier/recommended', 'plugin:@angular-eslint/recommended'],
       plugins: [
         'prettier',
         '@angular-eslint', // https://github.com/angular-eslint/angular-eslint
