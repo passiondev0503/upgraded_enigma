@@ -1,19 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  HostListener,
-  Inject,
-  Input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Inject, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
-import {
-  AppSidebarState,
-  AppUserState,
-  chatbotActions,
-  sidebarUiActions,
-  userActions,
-} from '@upgraded-enigma/client-store';
+import { AppSidebarState, AppUserState, chatbotActions, sidebarUiActions, userActions } from '@upgraded-enigma/client-store';
 import { IButton, WINDOW } from '@upgraded-enigma/client-util';
 import { map } from 'rxjs/operators';
 
@@ -75,13 +62,9 @@ export class AppToolbarComponent {
     },
   ];
 
-  public readonly sidebarOpened$ = this.store
-    .select(AppSidebarState.getState)
-    .pipe(map(state => state.sidebarOpened));
+  public readonly sidebarOpened$ = this.store.select(AppSidebarState.getState).pipe(map(state => state.sidebarOpened));
 
-  public readonly user$ = this.store
-    .select(AppUserState.token)
-    .pipe(map(token => ({ userAuthenticated: Boolean(token) })));
+  public readonly user$ = this.store.select(AppUserState.token).pipe(map(token => ({ userAuthenticated: Boolean(token) })));
 
   constructor(public readonly store: Store, @Inject(WINDOW) private readonly win: Window) {}
 
@@ -96,7 +79,6 @@ export class AppToolbarComponent {
   @HostListener('window:scroll')
   public windowScrollHandler() {
     const mod = 75;
-    this.fixedPosition =
-      this.win.innerHeight + this.win.scrollY < this.win.document.body.offsetHeight - mod;
+    this.fixedPosition = this.win.innerHeight + this.win.scrollY < this.win.document.body.offsetHeight - mod;
   }
 }

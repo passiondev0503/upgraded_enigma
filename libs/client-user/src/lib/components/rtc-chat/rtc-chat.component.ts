@@ -2,11 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/cor
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import {
-  AppWebsocketState,
-  IWebsocketResponseEvent,
-  IWsMessageEvent,
-} from '@upgraded-enigma/client-store';
+import { AppWebsocketState, IWebsocketResponseEvent, IWsMessageEvent } from '@upgraded-enigma/client-store';
 import { NAVIGATOR } from '@upgraded-enigma/client-util';
 import { BehaviorSubject, combineLatest, from, Observable, of } from 'rxjs';
 import { filter, first, map, mapTo, switchMap } from 'rxjs/operators';
@@ -76,12 +72,7 @@ export class AppUserRtcChatComponent implements OnInit {
     text: ['', Validators.compose([Validators.required])],
   });
 
-  private readonly roomRef$ = from(
-    this.firestore
-      .collection<TFirestoreRooms>('rooms')
-      .doc<IFirestoreRoom>(this.webRtcConfig.roomId)
-      .get(),
-  );
+  private readonly roomRef$ = from(this.firestore.collection<TFirestoreRooms>('rooms').doc<IFirestoreRoom>(this.webRtcConfig.roomId).get());
 
   private readonly iceCandidatesSubject = new BehaviorSubject<RTCIceCandidate[]>([]);
 
@@ -102,9 +93,7 @@ export class AppUserRtcChatComponent implements OnInit {
   public readonly videoRoomPeers$ = this.videoRoomPeersSubject.asObservable();
 
   public readonly offers$ = this.videoRoomPeers$.pipe(
-    map(peers =>
-      peers.filter(item => item.type === 'offer' && item.sender !== this.webRtcConfig.senderId),
-    ),
+    map(peers => peers.filter(item => item.type === 'offer' && item.sender !== this.webRtcConfig.senderId)),
   );
 
   public readonly videoRoomPeersValueChanges = this.firestore
@@ -119,8 +108,7 @@ export class AppUserRtcChatComponent implements OnInit {
         const peers = room?.peers
           .filter(peer => Boolean(peer.sdp))
           .map(peer => {
-            const sdp =
-              peer.sdp !== null ? (JSON.parse(peer.sdp) as RTCSessionDescription | null) : null;
+            const sdp = peer.sdp !== null ? (JSON.parse(peer.sdp) as RTCSessionDescription | null) : null;
             const processed: IRtcPeer = { ...peer, sdp };
             return processed;
           }) as IRtcPeer[];
@@ -131,9 +119,7 @@ export class AppUserRtcChatComponent implements OnInit {
           this.iceCandidatesSubject.next(ice);
         }
 
-        const answer = room?.peers.find(
-          item => item.type === 'answer' && item.sender !== this.webRtcConfig.senderId,
-        );
+        const answer = room?.peers.find(item => item.type === 'answer' && item.sender !== this.webRtcConfig.senderId);
         if (typeof answer !== 'undefined' && answer.sdp !== null) {
           const andwerSdp = JSON.parse(answer.sdp) as RTCSessionDescriptionInit;
           void this.receiveVideoRoomAnswer(andwerSdp).subscribe();
@@ -183,9 +169,7 @@ export class AppUserRtcChatComponent implements OnInit {
    * @param peer RTC peer
    */
   public acceptOffer(peer: IRtcPeer) {
-    void from(
-      this.peerConnection.setRemoteDescription(new RTCSessionDescription(peer.sdp ?? void 0)),
-    )
+    void from(this.peerConnection.setRemoteDescription(new RTCSessionDescription(peer.sdp ?? void 0)))
       .pipe(
         switchMap(() => {
           const observables: Observable<void>[] = [];
@@ -221,9 +205,7 @@ export class AppUserRtcChatComponent implements OnInit {
     console.warn('sendVideoRoomOffer: existingPeers', existingPeers);
 
     const offerExists =
-      typeof existingPeers.find(
-        item => item.type === 'offer' && item.sender === this.webRtcConfig.senderId,
-      ) !== 'undefined';
+      typeof existingPeers.find(item => item.type === 'offer' && item.sender === this.webRtcConfig.senderId) !== 'undefined';
     // eslint-disable-next-line no-console -- TODO: remove after debugging
     console.warn('sendVideoRoomOffer: offerExists', offerExists);
 
@@ -234,10 +216,7 @@ export class AppUserRtcChatComponent implements OnInit {
    * Sends video room connection offer.
    * @param room room snapshot
    */
-  // eslint-disable-next-line max-lines-per-function -- TODO: tech debt
-  private sendVideoRoomOffer(
-    room: firebase.default.firestore.DocumentSnapshot<firebase.default.firestore.DocumentData>,
-  ) {
+  private sendVideoRoomOffer(room: firebase.default.firestore.DocumentSnapshot<firebase.default.firestore.DocumentData>) {
     // eslint-disable-next-line no-console -- TODO: remove after debugging
     console.warn('sendVideoRoomOffer: room:', room);
     return this.videoRoomPeers$.pipe(
@@ -269,10 +248,7 @@ export class AppUserRtcChatComponent implements OnInit {
                     {
                       sender: this.webRtcConfig.senderId,
                       type: 'offer',
-                      sdp:
-                        this.peerConnection.localDescription !== null
-                          ? JSON.stringify(this.peerConnection.localDescription)
-                          : null,
+                      sdp: this.peerConnection.localDescription !== null ? JSON.stringify(this.peerConnection.localDescription) : null,
                     },
                   ],
                 })
@@ -334,9 +310,7 @@ export class AppUserRtcChatComponent implements OnInit {
   }
 
   public receiveVideoRoomAnswer(answer: RTCSessionDescriptionInit) {
-    return from(
-      this.peerConnection.setRemoteDescription(new RTCSessionDescription(answer ?? void 0)),
-    );
+    return from(this.peerConnection.setRemoteDescription(new RTCSessionDescription(answer ?? void 0)));
   }
 
   /**

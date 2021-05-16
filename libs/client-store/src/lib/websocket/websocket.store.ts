@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { websocketActions } from './websocket.actions';
-import {
-  IAppWebsocketStateModel,
-  TWebsocketPayload,
-  WEBSOCKET_STATE_TOKEN,
-  websocketInitialState,
-} from './websocket.interface';
+import { IAppWebsocketStateModel, TWebsocketPayload, WEBSOCKET_STATE_TOKEN, websocketInitialState } from './websocket.interface';
 
 @State<IAppWebsocketStateModel>({
   name: WEBSOCKET_STATE_TOKEN,

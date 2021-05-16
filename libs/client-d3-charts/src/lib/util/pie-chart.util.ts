@@ -4,10 +4,7 @@ import { arc, pie, PieArcDatum } from 'd3-shape';
 
 import { IPieChartDataNode, PIE_CHART_ARC_CONFIG } from '../interfaces/pie-chart.interface';
 
-export const drawPieChart = (
-  canvas: ElementRef<HTMLCanvasElement>,
-  chartData: IPieChartDataNode[],
-) => {
+export const drawPieChart = (canvas: ElementRef<HTMLCanvasElement>, chartData: IPieChartDataNode[]) => {
   const context = canvas.nativeElement.getContext('2d');
   if (context !== null && typeof context !== 'undefined' && typeof canvas !== 'undefined') {
     const width = canvas.nativeElement.width;
@@ -30,10 +27,7 @@ export const drawPieChart = (
     const createPieChart = pie<IPieChartDataNode>().value(datum => datum.y);
 
     const scale = 1.25;
-    context.translate(
-      (width / divisor - radius) / scale,
-      (height / divisor - radius / divisor) / scale,
-    );
+    context.translate((width / divisor - radius) / scale, (height / divisor - radius / divisor) / scale);
 
     context.transform(scale, 0, 0, scale, 0, 0);
 

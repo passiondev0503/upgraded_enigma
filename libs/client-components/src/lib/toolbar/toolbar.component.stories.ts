@@ -6,13 +6,7 @@ import { array } from '@storybook/addon-knobs';
 import { ArrayTypeKnobValue } from '@storybook/addon-knobs/dist/ts3.9/components/types';
 import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
 import { AppChatbotState, AppSidebarState, AppUserState } from '@upgraded-enigma/client-store';
-import {
-  documentFactory,
-  IButton,
-  WEB_CLIENT_APP_ENV,
-  WINDOW,
-  windowFactory,
-} from '@upgraded-enigma/client-util';
+import { documentFactory, IButton, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@upgraded-enigma/client-util';
 
 import { AppToolbarComponent } from './toolbar.component';
 

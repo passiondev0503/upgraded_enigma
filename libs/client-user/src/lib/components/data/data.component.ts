@@ -28,9 +28,7 @@ export class AppUserDataComponent {
   /**
    * Exported passwords list.
    */
-  public readonly exportedPasswordFiles$ = this.store
-    .select(AppUserState.model)
-    .pipe(map(model => model.exportedPasswordFiles));
+  public readonly exportedPasswordFiles$ = this.store.select(AppUserState.model).pipe(map(model => model.exportedPasswordFiles));
 
   /**
    * New password form.

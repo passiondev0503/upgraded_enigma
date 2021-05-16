@@ -26,10 +26,7 @@ export const httpProgressActions = {
 })
 @Injectable()
 export class AppHttpProgressState {
-  constructor(
-    private readonly toaster: AppToasterService,
-    private readonly service: AppHttpProgressService,
-  ) {}
+  constructor(private readonly toaster: AppToasterService, private readonly service: AppHttpProgressService) {}
 
   @Selector()
   public static allProgress(state: IAppHttpProgressState) {
@@ -42,10 +39,7 @@ export class AppHttpProgressState {
   }
 
   @Action(startProgress)
-  public startProgress(
-    ctx: StateContext<IAppHttpProgressState>,
-    { payload }: THttpProgressPayload,
-  ) {
+  public startProgress(ctx: StateContext<IAppHttpProgressState>, { payload }: THttpProgressPayload) {
     const newState = { mainView: { ...ctx.getState().mainView } };
     const keys = Object.keys(payload);
     for (const key of keys) {

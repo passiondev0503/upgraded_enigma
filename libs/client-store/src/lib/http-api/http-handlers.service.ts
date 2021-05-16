@@ -6,12 +6,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { TranslateService } from '@ngx-translate/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
-import {
-  HTTP_STATUS,
-  IWebClientAppEnvironment,
-  WEB_CLIENT_APP_ENV,
-  WINDOW,
-} from '@upgraded-enigma/client-util';
+import { HTTP_STATUS, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW } from '@upgraded-enigma/client-util';
 import { HttpLink, HttpLinkHandler } from 'apollo-angular/http';
 import { createUploadLink } from 'apollo-upload-client';
 import { ExecutionResult, GraphQLError } from 'graphql';
@@ -22,22 +17,15 @@ import { catchError, finalize, tap, timeout } from 'rxjs/operators';
 import { AppHttpProgressService } from '../http-progress/http-progress.service';
 import { httpProgressActions } from '../http-progress/http-progress.store';
 import { AppToasterService } from '../http-progress/services/toaster/toaster.service';
-import {
-  IUserState,
-  USER_SERVICE_LOCAL_STORAGE_KEY,
-  userInitialState,
-} from '../user/user.interface';
+import { IUserState, USER_SERVICE_LOCAL_STORAGE_KEY, userInitialState } from '../user/user.interface';
 
 /**
- * Http handers service.
+ * Handlers to work with http requests.
  */
 @Injectable({
   providedIn: 'root',
 })
 export class AppHttpHandlersService {
-  /**
-   * Default timeout interval for http-requests.
-   */
   public readonly defaultHttpTimeout = 10000;
 
   constructor(
@@ -60,11 +48,10 @@ export class AppHttpHandlersService {
   }
 
   /**
-   * Resolver graphQL base url, adds correct protocol.
+   * Gql endpoint former.
    */
   public graphQlEndpoint(): string {
-    const url = `${this.env.api}/graphql`;
-    return url;
+    return `${this.env.api}/graphql`;
   }
 
   /**
@@ -84,8 +71,8 @@ export class AppHttpHandlersService {
    */
   @memo()
   public getEndpoint(path: string): string {
-    const p = /^\/.*$/.test(path) ? path : `/${path}`;
-    return this.env.api + p;
+    const endpoint = /^\/.*$/.test(path) ? path : `/${path}`;
+    return `${this.env.api}${endpoint}`;
   }
 
   /**
@@ -243,9 +230,7 @@ export class AppHttpHandlersService {
    */
   public checkErrorStatusAndRedirect(status: HTTP_STATUS): void {
     if (status === HTTP_STATUS.UNAUTHORIZED) {
-      const user = JSON.parse(
-        localStorage.getItem(USER_SERVICE_LOCAL_STORAGE_KEY) ?? JSON.stringify(userInitialState),
-      ) as IUserState;
+      const user = JSON.parse(localStorage.getItem(USER_SERVICE_LOCAL_STORAGE_KEY) ?? JSON.stringify(userInitialState)) as IUserState;
       user.token = '';
       localStorage.setItem(USER_SERVICE_LOCAL_STORAGE_KEY, JSON.stringify(user));
       void this.store.dispatch(new Navigate(['user/auth']));
@@ -254,11 +239,7 @@ export class AppHttpHandlersService {
 
   public getErrorMessage(error: HttpErrorResponse): string {
     const msg: string = error.message ? error.message : error.error;
-    const errorMessage: string = msg
-      ? msg
-      : error.status
-      ? `${error.status} - ${error.statusText}`
-      : 'Server error';
+    const errorMessage: string = msg ? msg : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     return errorMessage;
   }
 
@@ -287,8 +268,7 @@ export class AppHttpHandlersService {
     return tap(
       (): void => void 0,
       (error: { networkError: HttpErrorResponse }) => {
-        const unauthorized: boolean =
-          Boolean(error.networkError) && error.networkError.status === HTTP_STATUS.BAD_REQUEST;
+        const unauthorized: boolean = Boolean(error.networkError) && error.networkError.status === HTTP_STATUS.BAD_REQUEST;
         if (unauthorized) {
           this.checkErrorStatusAndRedirect(HTTP_STATUS.UNAUTHORIZED);
         }

@@ -8,8 +8,7 @@ import { IUserState, USER_SERVICE_LOCAL_STORAGE_KEY } from './user.interface';
 export class AppUserService {
   public restoreUser() {
     const userService = localStorage.getItem(USER_SERVICE_LOCAL_STORAGE_KEY);
-    const user: IUserState =
-      userService !== null && typeof userService !== 'undefined' ? JSON.parse(userService) : {};
+    const user: IUserState = userService !== null && typeof userService !== 'undefined' ? JSON.parse(userService) : {};
     return user;
   }
 

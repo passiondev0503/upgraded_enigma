@@ -1,9 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import {
-  IUserLoginCredentials,
-  IUserLogoutCredentials,
-  Message,
-} from '@upgraded-enigma/backend-interfaces';
+import { IUserLoginCredentials, IUserLogoutCredentials, Message } from '@upgraded-enigma/backend-interfaces';
 
 import { BackendAuthService } from '../service/auth.service';
 

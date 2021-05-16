@@ -24,11 +24,7 @@ export const initializeSentry = (env: IWebClientAppEnvironment) => {
          * performance, including custom Angular routing instrumentation.
          */
         new Integrations.BrowserTracing({
-          tracingOrigins: [
-            'localhost:4200',
-            'https://organizer-833bc.web.app',
-            'https://organizer-833bc.firebaseapp.com',
-          ],
+          tracingOrigins: ['localhost:4200', 'https://organizer-833bc.web.app', 'https://organizer-833bc.firebaseapp.com'],
           routingInstrumentation: Sentry.routingInstrumentation,
         }),
       ],

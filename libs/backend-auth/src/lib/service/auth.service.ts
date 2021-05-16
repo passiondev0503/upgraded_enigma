@@ -1,11 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import {
-  IUser,
-  IUserLoginCredentials,
-  IUserLogoutCredentials,
-  Message,
-} from '@upgraded-enigma/backend-interfaces';
+import { IUser, IUserLoginCredentials, IUserLogoutCredentials, Message } from '@upgraded-enigma/backend-interfaces';
 import * as crypto from 'crypto';
 import { map } from 'rxjs/operators';
 
@@ -21,19 +16,13 @@ export interface IAuthPayload {
 export class BackendAuthService {
   constructor(private readonly jwt: JwtService, private readonly userService: BackendUserService) {}
 
-  public encryptStringWithRsaPublicKey(
-    input: string,
-    publicKey: crypto.RsaPublicKey | crypto.KeyLike,
-  ) {
+  public encryptStringWithRsaPublicKey(input: string, publicKey: crypto.RsaPublicKey | crypto.KeyLike) {
     const buffer = Buffer.from(input);
     const encrypted = crypto.publicEncrypt(publicKey, buffer);
     return encrypted.toString('base64');
   }
 
-  public decryptStringWithRsaPrivateKey(
-    input: string,
-    privateKey: crypto.RsaPrivateKey | crypto.KeyLike,
-  ) {
+  public decryptStringWithRsaPrivateKey(input: string, privateKey: crypto.RsaPrivateKey | crypto.KeyLike) {
     const buffer = Buffer.from(input, 'base64');
     const decrypted = crypto.privateDecrypt(privateKey, buffer);
     return decrypted.toString('utf8');

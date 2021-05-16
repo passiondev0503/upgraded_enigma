@@ -10,13 +10,7 @@ import { AppNavbarComponent } from './navbar/navbar.component';
 import { AppToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
-  imports: [
-    FlexLayoutModule,
-    CommonModule,
-    AppClientMaterialModule,
-    AppClientPipesModule,
-    RouterModule,
-  ],
+  imports: [FlexLayoutModule, CommonModule, AppClientMaterialModule, AppClientPipesModule, RouterModule],
   declarations: [AppContentComponent, AppNavbarComponent, AppToolbarComponent],
   exports: [AppContentComponent, AppNavbarComponent, AppToolbarComponent],
 })

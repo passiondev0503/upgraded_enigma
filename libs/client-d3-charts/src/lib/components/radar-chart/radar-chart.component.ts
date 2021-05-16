@@ -1,18 +1,6 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Input,
-  OnChanges,
-  SimpleChange,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, SimpleChange, ViewChild } from '@angular/core';
 
-import {
-  IDrawRadarChartOptions,
-  IRadarChartDataNode,
-} from '../../interfaces/radar-chart-interface';
+import { IDrawRadarChartOptions, IRadarChartDataNode } from '../../interfaces/radar-chart-interface';
 import { drawRadarChart } from '../../util/radar-chart.util';
 
 interface IInputChanges {
@@ -42,12 +30,8 @@ export class AppRadarChartComponent implements AfterViewInit, OnChanges {
       width: 10,
       height: 20,
     };
-    const width =
-      Math.min(minWidth, window.innerWidth - modifiers.width) - margin.left - margin.right;
-    const height = Math.min(
-      width,
-      window.innerHeight - margin.top - margin.bottom - modifiers.height,
-    );
+    const width = Math.min(minWidth, window.innerWidth - modifiers.width) - margin.left - margin.right;
+    const height = Math.min(width, window.innerHeight - margin.top - margin.bottom - modifiers.height);
     const options: Partial<IDrawRadarChartOptions> = {
       w: width,
       h: height,

@@ -46,8 +46,7 @@ describe('AppAutoscrollDirective', () => {
             newDiv.innerText = 'new div';
             const newDivHeight = newDiv.clientHeight;
             testingElement.appendChild(newDiv);
-            let scrollValue =
-              testingElement.scrollHeight - testingElementHeight - newDivHeight - inputHeight - 1;
+            let scrollValue = testingElement.scrollHeight - testingElementHeight - newDivHeight - inputHeight - 1;
             scrollValue = scrollValue < 0 ? 0 : scrollValue;
             expect(testingElement.scrollTop).toEqual(scrollValue);
           }),

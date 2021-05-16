@@ -74,9 +74,7 @@ const updateProjectConfig =
     const projectRoot = `${process.cwd()}`;
     const angularJsonPath = `${projectRoot}/angular.json`;
 
-    const angularJson: Record<string, Record<string, unknown>> = JSON.parse(
-      fs.readFileSync(angularJsonPath)?.toString() ?? '{}',
-    );
+    const angularJson: Record<string, Record<string, unknown>> = JSON.parse(fs.readFileSync(angularJsonPath)?.toString() ?? '{}');
     angularJson.projects[schema.name] = projectConfig;
     fs.writeFileSync(angularJsonPath, Buffer.from(JSON.stringify(angularJson)));
 

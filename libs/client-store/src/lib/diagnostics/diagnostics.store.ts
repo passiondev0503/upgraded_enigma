@@ -3,11 +3,7 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 
 import { getStaticData, setState, TDiagnosticsPayload } from './diagnostics.actions';
-import {
-  DIAGNOSTICS_STATE_TOKEN,
-  diagnosticsInitialState,
-  IDiagnosticsState,
-} from './diagnostics.interface';
+import { DIAGNOSTICS_STATE_TOKEN, diagnosticsInitialState, IDiagnosticsState } from './diagnostics.interface';
 import { AppServerStaticDataService } from './services/server-static-data-api.service';
 
 export const diagnosticsActions = {

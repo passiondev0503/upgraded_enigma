@@ -1,11 +1,4 @@
-import {
-  AfterContentInit,
-  Directive,
-  ElementRef,
-  HostListener,
-  Input,
-  OnDestroy,
-} from '@angular/core';
+import { AfterContentInit, Directive, ElementRef, HostListener, Input, OnDestroy } from '@angular/core';
 
 const defaultLockYOffset = 10;
 
@@ -61,10 +54,7 @@ export class AppAutoscrollDirective implements AfterContentInit, OnDestroy {
   @HostListener('scroll')
   public scrollHandler(): void {
     if (typeof this.nativeElement !== 'undefined') {
-      const scrollFromBottom =
-        this.nativeElement.scrollHeight -
-        this.nativeElement.scrollTop -
-        this.nativeElement.clientHeight;
+      const scrollFromBottom = this.nativeElement.scrollHeight - this.nativeElement.scrollTop - this.nativeElement.clientHeight;
       this.lockAutoscroll = scrollFromBottom > this.lockYOffset;
     }
   }

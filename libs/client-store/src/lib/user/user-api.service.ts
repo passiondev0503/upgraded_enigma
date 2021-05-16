@@ -64,90 +64,70 @@ export class AppUserApiService {
    * Gets user.
    */
   public getUser() {
-    return this.httpHandlers.pipeHttpResponse<IUserDto>(
-      this.http.get<IUserDto>(this.endpoints.user),
-    );
+    return this.httpHandlers.pipeHttpResponse<IUserDto>(this.http.get<IUserDto>(this.endpoints.user));
   }
 
   /**
    * Gets user status.
    */
   public getUserStatus() {
-    return this.httpHandlers.pipeHttpResponse<IUserStatusDto>(
-      this.http.get<IUserStatusDto>(this.endpoints.status),
-    );
+    return this.httpHandlers.pipeHttpResponse<IUserStatusDto>(this.http.get<IUserStatusDto>(this.endpoints.status));
   }
 
   /**
    * Logs user in.
    */
   public login(formData: { email: string; password: string }) {
-    return this.httpHandlers.pipeHttpResponse<IUserDto>(
-      this.http.post<IUserDto>(this.endpoints.login, formData),
-    );
+    return this.httpHandlers.pipeHttpResponse<IUserDto>(this.http.post<IUserDto>(this.endpoints.login, formData));
   }
 
   /**
    * Logs user out.
    */
   public logout(formData: { token: string }) {
-    return this.httpHandlers.pipeHttpResponse<{ message: string }>(
-      this.http.post<{ message: string }>(this.endpoints.logout, formData),
-    );
+    return this.httpHandlers.pipeHttpResponse<{ message: string }>(this.http.post<{ message: string }>(this.endpoints.logout, formData));
   }
 
   /**
    * Configures user.
    */
   public configureUser(formData: Partial<IUserDto>) {
-    return this.httpHandlers.pipeHttpResponse<IUserDto>(
-      this.http.post<IUserDto>(this.endpoints.config, formData),
-    );
+    return this.httpHandlers.pipeHttpResponse<IUserDto>(this.http.post<IUserDto>(this.endpoints.config, formData));
   }
 
   /**
    * Adds user password.
    */
   public addPassword(formData: IUserPasswordDto) {
-    return this.httpHandlers.pipeHttpResponse<IUserDto>(
-      this.http.post<IUserDto>(this.endpoints.addPassword, formData),
-    );
+    return this.httpHandlers.pipeHttpResponse<IUserDto>(this.http.post<IUserDto>(this.endpoints.addPassword, formData));
   }
 
   /**
    * Deletes user password.
    */
   public deletePassword(formData: IUserPasswordDto) {
-    return this.httpHandlers.pipeHttpResponse<IUserDto>(
-      this.http.post<IUserDto>(this.endpoints.deletePassword, formData),
-    );
+    return this.httpHandlers.pipeHttpResponse<IUserDto>(this.http.post<IUserDto>(this.endpoints.deletePassword, formData));
   }
 
   /**
    * Generates RSA keypair for a user.
    */
   public generateKeypair() {
-    return this.httpHandlers.pipeHttpResponse<IUserDto>(
-      this.http.post<IUserDto>(this.endpoints.generateKeypair, {}),
-    );
+    return this.httpHandlers.pipeHttpResponse<IUserDto>(this.http.post<IUserDto>(this.endpoints.generateKeypair, {}));
   }
 
   /**
    * Encrypts user passwords with user public RSA key.
    */
   public encryptPasswords() {
-    return this.httpHandlers.pipeHttpResponse<IUserDto>(
-      this.http.post<IUserDto>(this.endpoints.encryptPasswords, {}),
-    );
+    return this.httpHandlers.pipeHttpResponse<IUserDto>(this.http.post<IUserDto>(this.endpoints.encryptPasswords, {}));
   }
 
   /**
    * Decrypts user passwords with user private RSA key.
    */
   public decryptPasswords() {
-    return this.httpHandlers.pipeHttpResponse<IUserDto>(
-      this.http.post<IUserDto>(this.endpoints.decryptPasswords, {}),
-    );
+    return this.httpHandlers.pipeHttpResponse<IUserDto>(this.http.post<IUserDto>(this.endpoints.decryptPasswords, {}));
   }
 
   /**
@@ -163,8 +143,6 @@ export class AppUserApiService {
    * Lists exported passwords.
    */
   public listExportedPasswordFiles() {
-    return this.httpHandlers.pipeHttpResponse<string[]>(
-      this.http.get<string[]>(this.endpoints.listExportedPasswordFiles),
-    );
+    return this.httpHandlers.pipeHttpResponse<string[]>(this.http.get<string[]>(this.endpoints.listExportedPasswordFiles));
   }
 }

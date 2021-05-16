@@ -49,9 +49,7 @@ export class BackendGrpcController implements OnModuleInit {
     idsSubject.next({ id: 'id2' });
     idsSubject.complete();
 
-    return typeof this.sampleService !== 'undefined'
-      ? this.sampleService.findMany(idsSubject.asObservable()).pipe(toArray())
-      : of([]);
+    return typeof this.sampleService !== 'undefined' ? this.sampleService.findMany(idsSubject.asObservable()).pipe(toArray()) : of([]);
   }
 
   @Get(':id')
@@ -66,23 +64,19 @@ export class BackendGrpcController implements OnModuleInit {
   }
 
   @GrpcMethod('EntityService', 'FindOne')
-  public findOne(
-    data: upgradedenigma.IEntityById,
-    metadata: Record<string, unknown>,
-  ): upgradedenigma.IEntity | undefined {
+  public findOne(data: upgradedenigma.IEntityById, metadata: Record<string, unknown>): upgradedenigma.IEntity | undefined {
     return this.items.find(({ id }) => id === data.id);
   }
 
   @GrpcStreamMethod('EntityService', 'FindMany')
-  public findMany(
-    data$: Observable<upgradedenigma.IEntityById>,
-    metadata: Record<string, unknown>,
-  ): Observable<upgradedenigma.IEntity> {
+  public findMany(data$: Observable<upgradedenigma.IEntityById>, metadata: Record<string, unknown>): Observable<upgradedenigma.IEntity> {
     const entitySubject = new Subject<upgradedenigma.IEntity>();
 
     const onNext = (entityById: upgradedenigma.IEntityById) => {
       const item = this.items.find(({ id }) => id === entityById.id);
-      entitySubject.next(item);
+      if (typeof item !== 'undefined') {
+        entitySubject.next(item);
+      }
     };
     const onComplete = () => {
       entitySubject.complete();

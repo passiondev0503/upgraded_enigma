@@ -49,11 +49,7 @@ export const userActions = {
 })
 @Injectable()
 export class AppUserState {
-  constructor(
-    private readonly store: Store,
-    private readonly user: AppUserService,
-    private readonly api: AppUserApiService,
-  ) {
+  constructor(private readonly store: Store, private readonly user: AppUserService, private readonly api: AppUserApiService) {
     const userObj = this.user.restoreUser();
     void this.store.dispatch(new userActions.setState(userObj)).subscribe();
   }
@@ -78,14 +74,8 @@ export class AppUserState {
     const currentState: IUserState = ctx.getState();
     const email = typeof payload.email !== 'undefined' ? payload.email : currentState.email;
     const token = typeof payload.token !== 'undefined' ? payload.token : currentState.token;
-    const status =
-      typeof payload.status !== 'undefined'
-        ? { ...currentState.status, ...payload.status }
-        : { ...currentState.status };
-    const passwords =
-      typeof payload.passwords !== 'undefined'
-        ? [...payload.passwords]
-        : [...currentState.passwords];
+    const status = typeof payload.status !== 'undefined' ? { ...currentState.status, ...payload.status } : { ...currentState.status };
+    const passwords = typeof payload.passwords !== 'undefined' ? [...payload.passwords] : [...currentState.passwords];
     const newState: IUserState = { ...currentState, email, token, passwords, status };
     this.user.saveUser(newState);
     return ctx.patchState(newState);
@@ -126,14 +116,8 @@ export class AppUserState {
         const currentState: IUserState = ctx.getState();
         const email = user.email;
         const token = user.token;
-        const status =
-          typeof payload.status !== 'undefined'
-            ? { ...currentState.status, ...payload.status }
-            : { ...currentState.status };
-        const passwords =
-          typeof payload.passwords !== 'undefined'
-            ? [...payload.passwords]
-            : [...currentState.passwords];
+        const status = typeof payload.status !== 'undefined' ? { ...currentState.status, ...payload.status } : { ...currentState.status };
+        const passwords = typeof payload.passwords !== 'undefined' ? [...payload.passwords] : [...currentState.passwords];
         const newState: IUserState = { ...currentState, email, token, passwords, status };
         this.user.saveUser(newState);
         return ctx.patchState(newState);

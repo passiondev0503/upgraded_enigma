@@ -12,11 +12,7 @@ import { concatMap, first, tap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppUserAuthComponent implements OnInit {
-  constructor(
-    private readonly fb: FormBuilder,
-    private readonly router: Router,
-    private readonly store: Store,
-  ) {}
+  constructor(private readonly fb: FormBuilder, private readonly router: Router, private readonly store: Store) {}
 
   @HostBinding('class.mat-body-1') protected matBody1 = true;
 
@@ -27,12 +23,7 @@ export class AppUserAuthComponent implements OnInit {
     email: ['', Validators.compose([Validators.required, Validators.email])],
     password: [
       '',
-      Validators.compose([
-        Validators.required,
-        Validators.pattern(/[a-z]+/),
-        Validators.pattern(/[A-Z]+/),
-        Validators.pattern(/\d+/),
-      ]),
+      Validators.compose([Validators.required, Validators.pattern(/[a-z]+/), Validators.pattern(/[A-Z]+/), Validators.pattern(/\d+/)]),
     ],
   });
 

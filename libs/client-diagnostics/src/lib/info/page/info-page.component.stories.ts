@@ -3,12 +3,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { text } from '@storybook/addon-knobs';
 import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
-import {
-  documentFactory,
-  WEB_CLIENT_APP_ENV,
-  WINDOW,
-  windowFactory,
-} from '@upgraded-enigma/client-util';
+import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@upgraded-enigma/client-util';
 
 import { AppInfoPage } from './info-page.component';
 

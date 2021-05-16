@@ -1,12 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { AppMarkdownService } from '@upgraded-enigma/client-services';
-import {
-  AppDiagnosticsState,
-  AppHttpApiState,
-  diagnosticsActions,
-  httpApiActions,
-} from '@upgraded-enigma/client-store';
+import { AppDiagnosticsState, AppHttpApiState, diagnosticsActions, httpApiActions } from '@upgraded-enigma/client-store';
 import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@upgraded-enigma/client-util';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';

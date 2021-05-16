@@ -12,13 +12,7 @@ import { AppInfoComponent } from './info/info.component';
 import { AppInfoPage } from './info/page/info-page.component';
 
 @NgModule({
-  imports: [
-    FlexLayoutModule,
-    CommonModule,
-    AppClientMaterialModule,
-    AppClientTranslateModule,
-    AppClientDiagnosticsRoutingModule,
-  ],
+  imports: [FlexLayoutModule, CommonModule, AppClientMaterialModule, AppClientTranslateModule, AppClientDiagnosticsRoutingModule],
   declarations: [AppIndexComponent, AppHomeComponent, AppHomePage, AppInfoComponent, AppInfoPage],
 })
 export class AppClientDiagnosticsModule {}

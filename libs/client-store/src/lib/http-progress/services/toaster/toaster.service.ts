@@ -1,10 +1,6 @@
 import { Injectable, Provider } from '@angular/core';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
-import {
-  toasterExtraClasses,
-  TToasterExtraClasses,
-  TToastType,
-} from '@upgraded-enigma/client-util';
+import { toasterExtraClasses, TToasterExtraClasses, TToastType } from '@upgraded-enigma/client-util';
 
 /**
  * Toaster service for user feedback.
@@ -38,11 +34,7 @@ export class AppToasterService {
    * @param type event type, colorizes snackbar
    * @param duration snackbar visibility duration in milliseconds
    */
-  public showToaster(
-    message: string,
-    type: TToastType = 'primary',
-    duration: number = this.defaultDuration,
-  ): void {
+  public showToaster(message: string, type: TToastType = 'primary', duration: number = this.defaultDuration): void {
     const ec: TToasterExtraClasses = toasterExtraClasses(type);
     this.snackBarRef = this.snackBar.open(message, void 0, {
       panelClass: ec,

@@ -1,11 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import {
-  IUser,
-  IUserPassword,
-  IUserStatus,
-  userObject,
-  userStatusObject,
-} from '@upgraded-enigma/backend-interfaces';
+import { IUser, IUserPassword, IUserStatus, userObject, userStatusObject } from '@upgraded-enigma/backend-interfaces';
 import * as fs from 'fs';
 import { Glob } from 'glob';
 import { Observable } from 'rxjs';
@@ -20,8 +14,7 @@ export class BackendUserService {
 
   public readonly rsaPublicKeyPath = `${this.cwd}/.config/rsa.public`;
 
-  public readonly userPasswordsExportPath = () =>
-    `${this.cwd}/.config/export.${new Date().getTime()}.json`;
+  public readonly userPasswordsExportPath = () => `${this.cwd}/.config/export.${new Date().getTime()}.json`;
 
   /**
    * Checks if user rsa key (either private or public) exists.
@@ -182,9 +175,7 @@ export class BackendUserService {
         } else {
           const user: IUser = JSON.parse(data.toString());
 
-          user.passwords = user.passwords.filter(
-            item => item.name !== passwordObject.name && item.password !== passwordObject.password,
-          );
+          user.passwords = user.passwords.filter(item => item.name !== passwordObject.name && item.password !== passwordObject.password);
 
           fs.writeFile(this.userConfigPath, JSON.stringify(user), writeError => {
             if (writeError !== null) {

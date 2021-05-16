@@ -14,23 +14,19 @@ export class AppThemeService {
   public readonly darkEnabled$ = this.store.select(AppThemeState.getDarkThemeEnabled);
 
   public enableDarkTheme() {
-    return this.store
-      .dispatch(new themeThemeActions.setThemeState({ darkThemeEnabled: true }))
-      .pipe(
-        tap(() => {
-          this.overlayContainer.getContainerElement().classList.add('unicorn-dark-theme');
-        }),
-      );
+    return this.store.dispatch(new themeThemeActions.setThemeState({ darkThemeEnabled: true })).pipe(
+      tap(() => {
+        this.overlayContainer.getContainerElement().classList.add('unicorn-dark-theme');
+      }),
+    );
   }
 
   public disableDarkTheme() {
-    return this.store
-      .dispatch(new themeThemeActions.setThemeState({ darkThemeEnabled: false }))
-      .pipe(
-        tap(() => {
-          this.overlayContainer.getContainerElement().classList.remove('unicorn-dark-theme');
-        }),
-      );
+    return this.store.dispatch(new themeThemeActions.setThemeState({ darkThemeEnabled: false })).pipe(
+      tap(() => {
+        this.overlayContainer.getContainerElement().classList.remove('unicorn-dark-theme');
+      }),
+    );
   }
 
   public toggleMaterialTheme() {

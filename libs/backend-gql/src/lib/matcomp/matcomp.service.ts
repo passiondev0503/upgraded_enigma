@@ -1,11 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import {
-  IMatcompMutation,
-  IMatcompQuery,
-  Matcomp,
-  MatcompArgs,
-  NewMatcompInput,
-} from '@upgraded-enigma/backend-interfaces';
+import { IMatcompMutation, IMatcompQuery, Matcomp, MatcompArgs, NewMatcompInput } from '@upgraded-enigma/backend-interfaces';
 
 @Injectable()
 export class BackendMatcompService implements IMatcompQuery, IMatcompMutation {

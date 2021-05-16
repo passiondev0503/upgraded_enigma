@@ -1,4 +1,5 @@
 const { nxModuleBoundaryRules } = require('./.eslintrc.module-boundaries');
+const { join } = require('path');
 
 /**
  * Roadmap typescript-eslint
@@ -12,17 +13,17 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
-    project: ['./tsconfig.base.json'],
+    project: [join(__dirname, './tsconfig.base.json')],
   },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    // 'plugin:prettier/recommended', // prettier is too opinionated, not flexible
+    'prettier',
     'plugin:eslint-comments/recommended',
   ],
   plugins: [
-    // 'prettier', // prettier is too opinionated, not flexible
+    'prettier',
     '@typescript-eslint', // https://github.com/typescript-eslint/typescript-eslint
     '@angular-eslint', // https://github.com/angular-eslint/angular-eslint
     'simple-import-sort', // https://github.com/lydell/eslint-plugin-simple-import-sort
@@ -304,7 +305,7 @@ module.exports = {
     'prefer-object-spread': 'error',
     'prefer-spread': 'error',
     'prefer-promise-reject-errors': 'error',
-    // 'prettier/prettier': 'error', // prettier is too opinionated, not flexible
+    'prettier/prettier': 'error',
     quotes: 'off', // handled by typescript eslint rule
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
@@ -369,7 +370,7 @@ module.exports = {
       parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
-        project: ['./tsconfig.eslint-js.json'],
+        project: [join(__dirname, './tsconfig.eslint-js.json')],
       },
       extends: ['eslint:recommended', 'plugin:prettier/recommended', 'plugin:@angular-eslint/recommended'],
       plugins: [

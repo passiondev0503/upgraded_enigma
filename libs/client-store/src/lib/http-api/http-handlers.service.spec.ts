@@ -3,23 +3,15 @@ import { HttpTestingController, TestRequest } from '@angular/common/http/testing
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { Store } from '@ngxs/store';
 import { AppClientTranslateModule } from '@upgraded-enigma/client-translate';
-import {
-  AppLocalStorageMock,
-  getTestBedConfig,
-  newTestBedMetadata,
-} from '@upgraded-enigma/client-unit-testing';
+import { AppLocalStorageMock, getTestBedConfig, newTestBedMetadata } from '@upgraded-enigma/client-unit-testing';
 import { HTTP_STATUS } from '@upgraded-enigma/client-util';
 import { Apollo } from 'apollo-angular';
 import { ExecutionResult, GraphQLError } from 'graphql';
-import { cold, getTestScheduler } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { AppHttpProgressModule } from '../http-progress/http-progress.module';
-import {
-  AppToasterService,
-  toasterServiceProvider,
-} from '../http-progress/services/toaster/toaster.service';
+import { AppToasterService, toasterServiceProvider } from '../http-progress/services/toaster/toaster.service';
 import { AppHttpHandlersService } from './http-handlers.service';
 
 describe('AppHttpHandlersService', () => {
@@ -140,30 +132,22 @@ describe('AppHttpHandlersService', () => {
   it('extractGraphQLData should throw errors if get', () => {
     const error: GraphQLError = new GraphQLError('message');
     void service.extractGraphQLData({ errors: [error] }).pipe(
-      tap(
-        () => {
-          // empty
-        },
-        errors => {
+      tap({
+        error: errors => {
           expect(errors[0]).toBe(error);
         },
-      ),
+      }),
     );
   });
 
   it(
     'pipeGraphQLRequest should check error if 401 status',
     waitForAsync(() => {
-      const q$ = cold('---#|', null, { networkError: { status: HTTP_STATUS.BAD_REQUEST } });
-      void service.pipeGraphQLRequest(q$).subscribe(
-        () => null,
-        () => {
-          expect(spy.service.checkErrorStatusAndRedirect).toHaveBeenCalledWith(
-            HTTP_STATUS.UNAUTHORIZED,
-          );
-        },
-      );
-      getTestScheduler().flush();
+      const observable$ = of({ networkError: { status: HTTP_STATUS.BAD_REQUEST } });
+      void service
+        .pipeGraphQLRequest(observable$)
+        .pipe(tap({ error: () => expect(spy.service.checkErrorStatusAndRedirect).toHaveBeenCalledWith(HTTP_STATUS.UNAUTHORIZED) }))
+        .subscribe();
     }),
   );
 

@@ -9,13 +9,7 @@ import { AppWorkspaceWidgetComponent } from './components/workspace-widget/works
 import { AppWorkspacesListComponent } from './components/workspaces-list/workspaces-list.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppClientMaterialModule,
-    AppClientWorkspacesRoutingModule,
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, AppClientMaterialModule, AppClientWorkspacesRoutingModule],
   declarations: [AppWorkspacesListComponent, AppWorkspaceWidgetComponent, AppWorkspaceComponent],
 })
 export class AppClientWorkspacesModule {}

@@ -22,12 +22,7 @@ import { AppUserRtcChatComponent } from './components/rtc-chat/rtc-chat.componen
     AppClientMaterialModule,
     AppClientUserRoutingModule,
   ],
-  declarations: [
-    AppUserAuthComponent,
-    AppUserDataComponent,
-    AppUserProfileComponent,
-    AppUserRtcChatComponent,
-  ],
+  declarations: [AppUserAuthComponent, AppUserDataComponent, AppUserProfileComponent, AppUserRtcChatComponent],
   providers: [...appSharedUiTranslateModuleProviders],
 })
 export class AppClientUserModule {}

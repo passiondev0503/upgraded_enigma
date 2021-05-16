@@ -9,15 +9,9 @@ import { BackendUserService } from '../service/user.service';
 
 @Controller()
 export class BackendUserController {
-  private readonly rsaKeysExist$ = combineLatest([
-    this.userService.userKeyExists(),
-    this.userService.userKeyExists(true),
-  ]);
+  private readonly rsaKeysExist$ = combineLatest([this.userService.userKeyExists(), this.userService.userKeyExists(true)]);
 
-  constructor(
-    private readonly userService: BackendUserService,
-    private readonly authService: BackendAuthService,
-  ) {}
+  constructor(private readonly userService: BackendUserService, private readonly authService: BackendAuthService) {}
 
   @Get('user')
   public user() {
@@ -83,10 +77,7 @@ export class BackendUserController {
                 ...user,
                 passwords: user.passwords.map(item => {
                   if (typeof user.keys.public !== 'undefined') {
-                    item.password = this.authService.encryptStringWithRsaPublicKey(
-                      item.password,
-                      user.keys.public,
-                    );
+                    item.password = this.authService.encryptStringWithRsaPublicKey(item.password, user.keys.public);
                   }
                   return item;
                 }),
@@ -96,11 +87,7 @@ export class BackendUserController {
                 encrypted: true,
               });
             }
-            return throwError(
-              new Error(
-                `Error encrypting data, check server logs for details. Data is ${userStatus.encrypted} now.`,
-              ),
-            );
+            return throwError(new Error(`Error encrypting data, check server logs for details. Data is ${userStatus.encrypted} now.`));
           }),
         );
       }),
@@ -121,10 +108,7 @@ export class BackendUserController {
                 ...user,
                 passwords: user.passwords.map(item => {
                   if (typeof user.keys.private !== 'undefined') {
-                    item.password = this.authService.decryptStringWithRsaPrivateKey(
-                      item.password,
-                      user.keys.private,
-                    );
+                    item.password = this.authService.decryptStringWithRsaPrivateKey(item.password, user.keys.private);
                   }
                   return item;
                 }),
@@ -134,11 +118,7 @@ export class BackendUserController {
                 encrypted: false,
               });
             }
-            return throwError(
-              new Error(
-                `Error decrypting data, check server logs for details. Data is ${userStatus.encrypted} now.`,
-              ),
-            );
+            return throwError(new Error(`Error decrypting data, check server logs for details. Data is ${userStatus.encrypted} now.`));
           }),
         );
       }),
@@ -161,10 +141,7 @@ export class BackendUserController {
                   ? user.passwords
                   : user.passwords.map(item => {
                       if (typeof user.keys.public !== 'undefined') {
-                        item.password = this.authService.encryptStringWithRsaPublicKey(
-                          item.password,
-                          user.keys.public,
-                        );
+                        item.password = this.authService.encryptStringWithRsaPublicKey(item.password, user.keys.public);
                       }
                       return item;
                     }),

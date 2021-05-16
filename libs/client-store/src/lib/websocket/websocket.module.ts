@@ -16,9 +16,7 @@ export class AppWebsocketModule {
         {
           provide: WS_CONFIG,
           useValue: {
-            url: !env.production
-              ? 'ws://localhost:8081/api/events'
-              : 'wss://us-central1-upgraded-enigma.cloudfunctions.net/events',
+            url: !env.production ? 'ws://localhost:8081/api/events' : 'wss://us-central1-upgraded-enigma.cloudfunctions.net/events',
           },
         },
       ],

@@ -1,12 +1,7 @@
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppMarkdownService } from '@upgraded-enigma/client-services';
-import {
-  getTestBedConfig,
-  newTestBedMetadata,
-  setupJestSpiesFor,
-  TClassMemberSpiesObject,
-} from '@upgraded-enigma/client-unit-testing';
+import { getTestBedConfig, newTestBedMetadata, setupJestSpiesFor, TClassMemberSpiesObject } from '@upgraded-enigma/client-unit-testing';
 
 import { AppHomeComponent } from './home.component';
 
@@ -43,9 +38,7 @@ describe('AppHomeComponent', () => {
           service = TestBed.inject(AppMarkdownService);
           spy = {
             service: {
-              process: jest
-                .spyOn(service, 'process')
-                .mockImplementation((input: string) => `marked ${input}`),
+              process: jest.spyOn(service, 'process').mockImplementation((input: string) => `marked ${input}`),
             },
             component: setupJestSpiesFor<AppHomeComponent>(component),
           };

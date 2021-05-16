@@ -16,8 +16,7 @@ export class AppAuthenticatedGuard implements CanActivate {
     return this.store.selectOnce(AppUserState.model).pipe(
       map(user => {
         if (!Boolean(user.token) || !Boolean(user.email)) {
-          const alertText =
-            'To access data you need to log in first. You will be redirected to the login page.';
+          const alertText = 'To access data you need to log in first. You will be redirected to the login page.';
           // eslint-disable-next-line no-alert -- needed here
           window.alert(alertText);
           return this.router.createUrlTree(['/user', 'auth']);

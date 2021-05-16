@@ -6,11 +6,7 @@ import { documentProvider, WINDOW, windowProvider } from '@upgraded-enigma/clien
 import { Subject } from 'rxjs';
 
 import { AppClientTranslateModule } from '../client-translate.module';
-import {
-  ISupportedLanguage,
-  IUiLanguagesInterface,
-  TLangCode,
-} from '../interfaces/ui-languages.interface';
+import { ISupportedLanguage, IUiLanguagesInterface, TLangCode } from '../interfaces/ui-languages.interface';
 import { AppTranslationUtilsService } from './app-translation-utils.service';
 
 describe('AppTranslationUtilsService', () => {
@@ -139,16 +135,13 @@ describe('AppTranslationUtilsService', () => {
     expect(translate.use).toHaveBeenCalled();
     expect(callsAfter.dateAdapter.setLocale - callsBefore.dateAdapter.setLocale).toEqual(1);
     expect(callsAfter.translate.setDefaultLang - callsBefore.translate.setDefaultLang).toEqual(1);
-    expect(callsAfter.translate.setTranslation - callsBefore.translate.setTranslation).toEqual(
-      1 + 1,
-    );
+    expect(callsAfter.translate.setTranslation - callsBefore.translate.setTranslation).toEqual(1 + 1);
     expect(callsAfter.translate.use - callsBefore.translate.use).toEqual(1);
   });
 
   it('getUserLanguagePreference should work correctly', () => {
     const navLang: string = win.navigator.language;
-    const userPreference: TLangCode =
-      Boolean(navLang.match(/(ru-RU|ru)/gi)) || Boolean(navLang[0].match(/(ru)/gi)) ? 'ru' : 'en';
+    const userPreference: TLangCode = Boolean(navLang.match(/(ru-RU|ru)/gi)) || Boolean(navLang[0].match(/(ru)/gi)) ? 'ru' : 'en';
     expect(service.getUserLanguagePreference()).toEqual(userPreference);
   });
 

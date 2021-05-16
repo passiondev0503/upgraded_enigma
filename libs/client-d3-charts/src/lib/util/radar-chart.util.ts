@@ -1,18 +1,10 @@
 import { ElementRef } from '@angular/core';
 import * as d3 from 'd3';
 
-import {
-  IDrawRadarChartOptions,
-  IRadarChartDataNode,
-  TRadarChartData,
-} from '../interfaces/radar-chart-interface';
+import { IDrawRadarChartOptions, IRadarChartDataNode, TRadarChartData } from '../interfaces/radar-chart-interface';
 
 // eslint-disable-next-line max-lines-per-function -- TODO: tech debt
-export const drawRadarChart = (
-  container: ElementRef<HTMLDivElement>,
-  data: TRadarChartData,
-  options?: Partial<IDrawRadarChartOptions>,
-) => {
+export const drawRadarChart = (container: ElementRef<HTMLDivElement>, data: TRadarChartData, options?: Partial<IDrawRadarChartOptions>) => {
   const id = container.nativeElement.id ?? 'radar-0';
   const transitionDuration = 200;
   const chartConfig: IDrawRadarChartOptions = {
@@ -50,10 +42,7 @@ export const drawRadarChart = (
   /**
    * Set max value.
    */
-  const maxValue = Math.max(
-    chartConfig.maxValue,
-    d3.max(data, i => d3.max(i.map(o => o.value))) ?? 0,
-  );
+  const maxValue = Math.max(chartConfig.maxValue, d3.max(data, i => d3.max(i.map(o => o.value))) ?? 0);
 
   /**
    * Get axis names.
@@ -91,12 +80,7 @@ export const drawRadarChart = (
   // append a g element
   const g = svg
     .append('g')
-    .attr(
-      'transform',
-      `translate(${chartConfig.w / 2 + chartConfig.margin.left},${
-        chartConfig.h / 2 + chartConfig.margin.top
-      })`,
-    );
+    .attr('transform', `translate(${chartConfig.w / 2 + chartConfig.margin.left},${chartConfig.h / 2 + chartConfig.margin.top})`);
 
   /**
    * Glow filter for some extra pizzazz.
@@ -201,12 +185,7 @@ export const drawRadarChart = (
       return i * angleSlice;
     });
   // create a wrapper for the blobs
-  const blobWrapper = g
-    .selectAll('.radarWrapper')
-    .data(data)
-    .enter()
-    .append('g')
-    .attr('class', 'radarWrapper');
+  const blobWrapper = g.selectAll('.radarWrapper').data(data).enter().append('g').attr('class', 'radarWrapper');
   // append the backgrounds
   blobWrapper
     .append('path')
@@ -221,20 +200,14 @@ export const drawRadarChart = (
     .on('mouseover', function (d, i) {
       // dim all blobs
       const radarAreaFillOpacity = 0.1;
-      d3.selectAll('.radarArea')
-        .transition()
-        .duration(transitionDuration)
-        .style('fill-opacity', radarAreaFillOpacity);
+      d3.selectAll('.radarArea').transition().duration(transitionDuration).style('fill-opacity', radarAreaFillOpacity);
       // bring back the hovered over blob
       const fillOpacity = 0.7;
       d3.select(this).transition().duration(transitionDuration).style('fill-opacity', fillOpacity);
     })
     .on('mouseout', function () {
       // bring back all blobs
-      d3.selectAll('.radarArea')
-        .transition()
-        .duration(transitionDuration)
-        .style('fill-opacity', chartConfig.opacityArea);
+      d3.selectAll('.radarArea').transition().duration(transitionDuration).style('fill-opacity', chartConfig.opacityArea);
     });
   // create the outlines
   blobWrapper
@@ -276,12 +249,7 @@ export const drawRadarChart = (
    * Append invisible circles for tooltip.
    */
   // wrapper for the invisible circles on top
-  const blobCircleWrapper = g
-    .selectAll('.radarCircleWrapper')
-    .data(data)
-    .enter()
-    .append('g')
-    .attr('class', 'radarCircleWrapper');
+  const blobCircleWrapper = g.selectAll('.radarCircleWrapper').data(data).enter().append('g').attr('class', 'radarCircleWrapper');
   // set up the small tooltip for when you hover over a circle
   const tooltip = g.append('text').attr('class', 'tooltip').style('opacity', 0);
   // append a set of invisible circles on top for the mouseover pop-up
@@ -310,23 +278,14 @@ export const drawRadarChart = (
 
       const nodeData = (event.target as unknown as Record<string, IRadarChartDataNode>).__data__;
       const tooltipText = `${nodeData.value} events`;
-      tooltip
-        .attr('x', newX)
-        .attr('y', newY)
-        .text(tooltipText)
-        .transition()
-        .duration(transitionDuration)
-        .style('opacity', 1);
+      tooltip.attr('x', newX).attr('y', newY).text(tooltipText).transition().duration(transitionDuration).style('opacity', 1);
     })
     .on('mouseout', function () {
       tooltip.transition().duration(transitionDuration).style('opacity', 0);
     });
 };
 
-function wrapSvgText(
-  svgText: d3.Selection<SVGTextElement, string, SVGGElement, unknown>,
-  width: number,
-) {
+function wrapSvgText(svgText: d3.Selection<SVGTextElement, string, SVGGElement, unknown>, width: number) {
   svgText.each(function (this: SVGTextElement) {
     const text = d3.select<SVGElement, string>(this);
     const words = text.text().split(/\s+/).reverse();
