@@ -21,10 +21,10 @@ export class AppHomeComponent {
   public readonly markedInstructions$ = of('').pipe(
     first(),
     map(() => {
-      const sidenavInstruction =
-        'Open **sidenav** by clicking the **icon** button in the left corner of the browser window, and select an item.';
-      const markdownInstructions = '# You can use Markdown \n\n via AppMarkdownService, just like in this example.';
-      return this.markdown.process(`${sidenavInstruction}\n${markdownInstructions}`);
+      const title = '# Upgraded Enigma: Organizer and Productivity tools \n\n';
+      const usageInstructions =
+        '## Usage instructions \n\n - log in (if there is no account it will be created for you first);\n - all configurations are local, i.e. stored on your computer (lose your configuration file, and you will have to start over);\n - generate a pair of encryption keys to safeguard your data when you are not using the app (lose your keys, and if your data is encrypted it will be inaccessible);';
+      return this.markdown.process(`${title}\n${usageInstructions}`);
     }),
   );
 

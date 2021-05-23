@@ -25,7 +25,7 @@ export class AppInfoComponent {
    */
   public readonly markedInstructions$ = of(null).pipe(
     map(() => {
-      const apiInstructions = `# API endpoints:\n
+      const apiInstructions = `## API endpoints:\n
     - ${this.env.api}/auth
     - ${this.env.api}/diagnostics
     - ${this.env.api}/user`;
