@@ -2,7 +2,7 @@
 
 This folder contains utility shell scripts.
 
-- `build.sh` - applications building script
+- `build-docs.sh` - documentation building script
 - `build-android.sh` - android application building script
 - `build-mobile.sh` - mobile application building script
 - `changelog.sh` - apps/libs changelog generation script
@@ -17,14 +17,6 @@ This folder contains utility shell scripts.
 - `set-documentation-env.sh` - documentation app prebuild script, collects references to \*.md files across the repo
 - `test.sh` - apps/libs unit testing script
 - `yarn-extension.sh` - checks package integrity and cleans up workspace if there is no integrity
-
-## `build.sh`
-
-### print usage
-
-```bash
-bash tools/shell/build.sh
-```
 
 ## `changelog.sh`
 

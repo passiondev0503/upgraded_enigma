@@ -50,8 +50,7 @@
             "main": "apps/api/src/main.ts",
             "outputPath": "dist/apps/api",
             "tsConfig": "apps/api/tsconfig.app.json"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
@@ -79,8 +78,7 @@
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/apps/api"]
+          }
         }
       },
       "prefix": "api",
@@ -103,8 +101,7 @@
           "options": {
             "jestConfig": "libs/backend-auth/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-auth"]
+          }
         }
       },
       "projectType": "library",
@@ -125,8 +122,7 @@
           "options": {
             "jestConfig": "libs/backend-diagnostics/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-diagnostics"]
+          }
         }
       },
       "projectType": "library",
@@ -147,8 +143,7 @@
           "options": {
             "jestConfig": "libs/backend-gql/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-gql"]
+          }
         }
       },
       "projectType": "library",
@@ -169,8 +164,7 @@
           "options": {
             "jestConfig": "libs/backend-grpc/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-grpc"]
+          }
         }
       },
       "projectType": "library",
@@ -201,8 +195,7 @@
           "options": {
             "jestConfig": "libs/backend-interfaces/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-interfaces"]
+          }
         }
       },
       "projectType": "library",
@@ -224,8 +217,7 @@
           "options": {
             "jestConfig": "libs/backend-logger/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-logger"]
+          }
         }
       },
       "projectType": "library",
@@ -246,8 +238,7 @@
           "options": {
             "jestConfig": "libs/backend-websocket/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-websocket"]
+          }
         }
       },
       "projectType": "library",
@@ -342,8 +333,7 @@
               "libs/client-core/src/lib/styles/styles.scss"
             ],
             "tsConfig": "apps/client/tsconfig.app.json"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -391,8 +381,7 @@
               "apps/client/src/styles.scss",
               "libs/client-core/src/lib/styles/styles.scss"
             ]
-          },
-          "outputs": ["coverage/apps/client"]
+          }
         }
       },
       "prefix": "client",
@@ -427,8 +416,7 @@
             "main": "apps/client-api/src/main.ts",
             "outputPath": "dist/apps/client-api",
             "tsConfig": "apps/client-api/tsconfig.app.json"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
@@ -448,8 +436,7 @@
           "options": {
             "jestConfig": "apps/client-api/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/apps/client-api"]
+          }
         }
       },
       "prefix": "client-api",
@@ -471,8 +458,7 @@
           "options": {
             "jestConfig": "libs/client-chatbot/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-chatbot"]
+          }
         }
       },
       "prefix": "upgraded-enigma",
@@ -495,8 +481,7 @@
             },
             "outputPath": "dist/storybook/client-components",
             "uiFramework": "@storybook/angular"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
@@ -525,8 +510,7 @@
           "options": {
             "jestConfig": "libs/client-components/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-components"]
+          }
         }
       },
       "prefix": "upgraded-enigma",
@@ -580,8 +564,7 @@
           "options": {
             "jestConfig": "libs/client-core/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-core"]
+          }
         }
       },
       "prefix": "client",
@@ -608,8 +591,7 @@
           "options": {
             "jestConfig": "libs/client-d3-charts/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-d3-charts"]
+          }
         }
       },
       "prefix": "mono",
@@ -632,8 +614,7 @@
             },
             "outputPath": "dist/storybook/client-diagnostics",
             "uiFramework": "@storybook/angular"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
@@ -662,8 +643,7 @@
           "options": {
             "jestConfig": "libs/client-diagnostics/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-diagnostics"]
+          }
         }
       },
       "prefix": "mono",
@@ -717,8 +697,7 @@
           "options": {
             "jestConfig": "libs/client-directives/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-directives"]
+          }
         }
       },
       "prefix": "upgraded-enigma",
@@ -767,8 +746,7 @@
           "options": {
             "jestConfig": "libs/client-gql/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-gql"]
+          }
         }
       },
       "prefix": "upgraded-enigma",
@@ -795,8 +773,7 @@
           "options": {
             "jestConfig": "libs/client-material/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-material"]
+          }
         }
       },
       "prefix": "client",
@@ -823,8 +800,7 @@
           "options": {
             "jestConfig": "libs/client-pipes/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-pipes"]
+          }
         }
       },
       "prefix": "upgraded-enigma",
@@ -846,8 +822,7 @@
           "options": {
             "jestConfig": "libs/client-services/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-services"]
+          }
         }
       },
       "prefix": "client",
@@ -874,8 +849,7 @@
           "options": {
             "jestConfig": "libs/client-sidebar/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-sidebar"]
+          }
         }
       },
       "prefix": "upgraded-enigma",
@@ -897,8 +871,7 @@
           "options": {
             "jestConfig": "libs/client-store/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-store"]
+          }
         }
       },
       "prefix": "client",
@@ -925,8 +898,7 @@
           "options": {
             "jestConfig": "libs/client-translate/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-translate"]
+          }
         }
       },
       "prefix": "client",
@@ -953,8 +925,7 @@
           "options": {
             "jestConfig": "libs/client-unit-testing/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-unit-testing"]
+          }
         }
       },
       "prefix": "client",
@@ -981,8 +952,7 @@
           "options": {
             "jestConfig": "libs/client-user/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-user"]
+          }
         }
       },
       "prefix": "upgraded-enigma",
@@ -1004,8 +974,7 @@
           "options": {
             "jestConfig": "libs/client-util/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-util"]
+          }
         }
       },
       "prefix": "client",
@@ -1032,8 +1001,7 @@
           "options": {
             "jestConfig": "libs/client-workspaces/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-workspaces"]
+          }
         }
       },
       "prefix": "upgraded-enigma",
@@ -1156,8 +1124,7 @@
               "node_modules/katex/dist/katex.min.css"
             ],
             "tsConfig": "apps/documentation/tsconfig.app.json"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
@@ -1172,8 +1139,7 @@
             },
             "outputPath": "dist/storybook/documentation",
             "uiFramework": "@storybook/angular"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -1204,8 +1170,7 @@
           "options": {
             "jestConfig": "apps/documentation/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/apps/documentation"]
+          }
         }
       },
       "prefix": "upgraded-enigma",
@@ -1349,8 +1314,7 @@
           "options": {
             "jestConfig": "apps/elements/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/apps/elements"]
+          }
         }
       },
       "prefix": "upgraded-enigma",
@@ -1423,8 +1387,7 @@
             "scripts": [],
             "styles": ["apps/elements-testing/src/styles.scss"],
             "tsConfig": "apps/elements-testing/tsconfig.app.json"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
@@ -1450,8 +1413,7 @@
           "options": {
             "jestConfig": "apps/elements-testing/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/apps/elements-testing"]
+          }
         }
       },
       "projectType": "application",
@@ -1499,8 +1461,7 @@
           "options": {
             "jestConfig": "libs/proto/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/proto"]
+          }
         }
       },
       "prefix": "client",
