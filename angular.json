@@ -298,6 +298,13 @@
               "subscriptions-transport-ws"
             ],
             "aot": true,
+            "buildOptimizer": false,
+            "extractLicenses": true,
+            "namedChunks": true,
+            "optimization": false,
+            "outputHashing": "none",
+            "sourceMap": true,
+            "vendorChunk": true,
             "assets": [
               "apps/client/src/favicon.ico",
               "apps/client/src/assets",
@@ -1057,6 +1064,13 @@
               "extract-files/public/extractFiles"
             ],
             "aot": true,
+            "buildOptimizer": false,
+            "extractLicenses": true,
+            "namedChunks": true,
+            "optimization": false,
+            "outputHashing": "none",
+            "sourceMap": true,
+            "vendorChunk": true,
             "assets": [
               "apps/documentation/src/favicon.ico",
               "apps/documentation/src/assets",
@@ -1247,6 +1261,13 @@
               "subscriptions-transport-ws"
             ],
             "aot": true,
+            "buildOptimizer": false,
+            "extractLicenses": true,
+            "namedChunks": true,
+            "optimization": false,
+            "outputHashing": "none",
+            "sourceMap": true,
+            "vendorChunk": true,
             "assets": [
               "apps/elements/src/favicon.ico",
               "apps/elements/src/assets",
@@ -1355,7 +1376,6 @@
           "builder": "@nrwl/web:build",
           "configurations": {
             "production": {
-              "extractCss": true,
               "extractLicenses": true,
               "fileReplacements": [
                 {
