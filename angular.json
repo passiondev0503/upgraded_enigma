@@ -1052,7 +1052,14 @@
             "buildOptimizer": false,
             "extractLicenses": true,
             "namedChunks": true,
-            "optimization": false,
+            "optimization": {
+              "fonts": false,
+              "scripts": false,
+              "styles": {
+                "minify": false,
+                "inlineCritical": false
+              }
+            },
             "outputHashing": "none",
             "sourceMap": true,
             "vendorChunk": true,
