@@ -143,7 +143,7 @@ jobs:
         env:
           FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
 
-      - name: Deploy documentation app (optional)
+      - name: Deploy documentation app
         if: steps.changes.outputs.nx == 'true'
         run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" documentation || exit 0
         env:
