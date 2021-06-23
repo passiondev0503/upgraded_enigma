@@ -7,4 +7,5 @@ module.exports = {
     },
   },
   displayName: 'client-api',
+  testEnvironment: 'node',
 };

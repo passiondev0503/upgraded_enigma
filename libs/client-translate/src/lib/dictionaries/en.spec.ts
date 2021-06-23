@@ -25,7 +25,7 @@ describe('English shared translations', () => {
 
   it('should create the app', () => {
     expect(dictionary).toEqual(
-      jasmine.objectContaining({
+      expect.objectContaining({
         title: 'Organizer',
 
         language: 'Language',
