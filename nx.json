@@ -17,6 +17,7 @@
     },
     "tsconfig.base.json": "*"
   },
+  "newProjectRoot": "",
   "npmScope": "upgraded-enigma",
   "projects": {
     "api": {
@@ -139,6 +140,14 @@
     "tools": {
       "tags": ["scope:tools", "type:workspace"]
     }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "projects": "dependencies",
+        "target": "build"
+      }
+    ]
   },
   "tasksRunnerOptions": {
     "default": {
