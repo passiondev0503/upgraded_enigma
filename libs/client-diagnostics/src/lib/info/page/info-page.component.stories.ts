@@ -1,25 +1,26 @@
 import { DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { text } from '@storybook/addon-knobs';
+import { Args, Story } from '@storybook/angular/types-6-0';
 import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
 import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@upgraded-enigma/client-util';
 
 import { AppInfoPage } from './info-page.component';
 
-export default {
-  title: 'AppInfoPage',
-};
-
 const testingEnvironment = {
   production: false,
   platform: '',
-  appName: 'Nx Ng Starter Client',
+  appName: 'Client',
   api: 'http://localhost:8080/api',
   envoyUrl: 'http://localhost:8081',
 };
 
-export const primary = () => ({
+export default {
+  title: 'AppInfoPage',
+  component: AppInfoPage,
+};
+
+const story: Story<AppInfoPage> = (args: Args) => ({
   moduleMetadata: {
     imports: [BrowserAnimationsModule, FlexLayoutModule, AppClientMaterialModule.forRoot()],
     providers: [
@@ -34,10 +35,22 @@ export const primary = () => ({
         useValue: testingEnvironment,
       },
     ],
+    declarations: [AppInfoPage],
   },
-  component: AppInfoPage,
   props: {
-    ping: text('ping', 'ping result'),
-    markedInstructions: text('Marked Instructions', 'Marked instructions'),
+    ...args,
   },
 });
+
+export const primary = story.bind({});
+primary.args = {
+  ping: 'ping result',
+  markedInstructions: 'Marked instructions',
+};
+primary.parameters = {
+  /**
+   * Use legacy Angular renderer.
+   * See docs https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#new-angular-renderer
+   */
+  angularLegacyRendering: true,
+};

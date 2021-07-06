@@ -1,18 +1,17 @@
 import { APP_BASE_HREF, DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 import { NgxsModule } from '@ngxs/store';
-import { array, text } from '@storybook/addon-knobs';
-import { ArrayTypeKnobValue } from '@storybook/addon-knobs/dist/ts3.9/components/types';
+import { Args, Story } from '@storybook/angular/types-6-0';
 import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
-import { AppUserState } from '@upgraded-enigma/client-store';
-import { documentFactory, IButton, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@upgraded-enigma/client-util';
+import { AppClientPipesModule } from '@upgraded-enigma/client-pipes';
+import { AppHttpProgressModule, AppUserModule, AppUserState } from '@upgraded-enigma/client-store';
+import { AppClientTranslateModule } from '@upgraded-enigma/client-translate';
+import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@upgraded-enigma/client-util';
 
 import { AppNavbarComponent } from './navbar.component';
-
-export default {
-  title: 'AppNavbarComponent',
-};
 
 const testingEnvironment = {
   production: false,
@@ -22,24 +21,25 @@ const testingEnvironment = {
   envoyUrl: 'http://localhost:8081',
 };
 
-const buttons: IButton[] = [
-  {
-    routerLink: [''],
-    icon: 'home',
-    title: 'Home',
-    requiresAuth: false,
-  },
-  {
-    routerLink: ['info'],
-    icon: 'av_timer',
-    title: 'Diagnostics',
-    requiresAuth: false,
-  },
-];
+export default {
+  title: 'AppNavbarComponent',
+  component: AppNavbarComponent,
+};
 
-export const primary = () => ({
+const story: Story<AppNavbarComponent> = (args: Args) => ({
   moduleMetadata: {
-    imports: [BrowserAnimationsModule, FlexLayoutModule, NgxsModule.forRoot([AppUserState]), AppClientMaterialModule.forRoot()],
+    imports: [
+      BrowserAnimationsModule,
+      FlexLayoutModule,
+      HttpClientModule,
+      RouterTestingModule,
+      AppClientMaterialModule.forRoot(),
+      NgxsModule.forRoot([AppUserState]),
+      AppUserModule,
+      AppHttpProgressModule.forRoot(),
+      AppClientTranslateModule,
+      AppClientPipesModule,
+    ],
     providers: [
       {
         provide: LocationStrategy,
@@ -53,10 +53,35 @@ export const primary = () => ({
         useValue: testingEnvironment,
       },
     ],
+    declarations: [AppNavbarComponent],
   },
-  component: AppNavbarComponent,
   props: {
-    logoSrc: text('logoSrc', 'assets/icons/icon-72x72.png'),
-    buttons: array('buttons', buttons as unknown as ArrayTypeKnobValue),
+    ...args,
   },
 });
+
+export const primary = story.bind({});
+primary.args = {
+  logoSrc: 'assets/icons/icon-72x72.png',
+  buttons: [
+    {
+      routerLink: [''],
+      icon: 'home',
+      title: 'Home',
+      requiresAuth: false,
+    },
+    {
+      routerLink: ['info'],
+      icon: 'av_timer',
+      title: 'Diagnostics',
+      requiresAuth: true,
+    },
+  ],
+};
+primary.parameters = {
+  /**
+   * Use legacy Angular renderer.
+   * See docs https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#new-angular-renderer
+   */
+  angularLegacyRendering: true,
+};
