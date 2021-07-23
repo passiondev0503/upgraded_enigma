@@ -169,7 +169,11 @@ export class AppUserRtcChatComponent implements OnInit {
    * @param peer RTC peer
    */
   public acceptOffer(peer: IRtcPeer) {
-    void from(this.peerConnection.setRemoteDescription(new RTCSessionDescription(peer.sdp ?? void 0)))
+    const descriptionInitDict: RTCSessionDescriptionInit = peer.sdp ?? {
+      sdp: void 0,
+      type: 'offer',
+    };
+    void from(this.peerConnection.setRemoteDescription(new RTCSessionDescription(descriptionInitDict)))
       .pipe(
         switchMap(() => {
           const observables: Observable<void>[] = [];
