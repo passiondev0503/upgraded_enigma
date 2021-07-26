@@ -81,7 +81,7 @@
           }
         }
       },
-      "prefix": "api",
+      "prefix": "app",
       "projectType": "application",
       "root": "apps/api",
       "schematics": {},
@@ -383,7 +383,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "application",
       "root": "apps/client",
       "schematics": {
@@ -438,7 +438,7 @@
           }
         }
       },
-      "prefix": "client-api",
+      "prefix": "app",
       "projectType": "application",
       "root": "apps/client-api",
       "sourceRoot": "apps/client-api/src"
@@ -460,7 +460,7 @@
           }
         }
       },
-      "prefix": "upgraded-enigma",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-chatbot",
       "sourceRoot": "libs/client-chatbot/src"
@@ -512,7 +512,7 @@
           }
         }
       },
-      "prefix": "upgraded-enigma",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-components",
       "schematics": {
@@ -566,7 +566,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-core",
       "schematics": {
@@ -593,7 +593,7 @@
           }
         }
       },
-      "prefix": "mono",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-d3-charts",
       "sourceRoot": "libs/client-d3-charts/src"
@@ -645,7 +645,7 @@
           }
         }
       },
-      "prefix": "mono",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-diagnostics",
       "schematics": {
@@ -699,7 +699,7 @@
           }
         }
       },
-      "prefix": "upgraded-enigma",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-directives",
       "sourceRoot": "libs/client-directives/src"
@@ -748,7 +748,7 @@
           }
         }
       },
-      "prefix": "upgraded-enigma",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-gql",
       "schematics": {
@@ -775,7 +775,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-material",
       "schematics": {
@@ -802,7 +802,7 @@
           }
         }
       },
-      "prefix": "upgraded-enigma",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-pipes",
       "sourceRoot": "libs/client-pipes/src"
@@ -824,7 +824,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-services",
       "schematics": {
@@ -851,7 +851,7 @@
           }
         }
       },
-      "prefix": "upgraded-enigma",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-sidebar",
       "sourceRoot": "libs/client-sidebar/src"
@@ -873,7 +873,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-store",
       "schematics": {
@@ -900,7 +900,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-translate",
       "schematics": {
@@ -927,7 +927,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-unit-testing",
       "schematics": {
@@ -954,7 +954,7 @@
           }
         }
       },
-      "prefix": "upgraded-enigma",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-user",
       "sourceRoot": "libs/client-user/src"
@@ -976,7 +976,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-util",
       "schematics": {
@@ -1003,7 +1003,7 @@
           }
         }
       },
-      "prefix": "upgraded-enigma",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-workspaces",
       "sourceRoot": "libs/client-workspaces/src"
@@ -1195,7 +1195,7 @@
           }
         }
       },
-      "prefix": "upgraded-enigma",
+      "prefix": "app",
       "projectType": "application",
       "root": "apps/documentation",
       "schematics": {
@@ -1342,7 +1342,7 @@
           }
         }
       },
-      "prefix": "upgraded-enigma",
+      "prefix": "app",
       "projectType": "application",
       "root": "apps/elements",
       "sourceRoot": "apps/elements/src"
@@ -1488,7 +1488,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/proto",
       "schematics": {
