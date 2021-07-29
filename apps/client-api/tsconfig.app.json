@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc/client-api"
+    "outDir": "../../dist/out-tsc"
   },
   "exclude": ["**/*.spec.ts"],
   "extends": "./tsconfig.json",

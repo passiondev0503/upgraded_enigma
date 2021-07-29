@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "../../dist/libs/client-chatbot",
+    "outDir": "../../dist/out-tsc",
     "target": "es2015",
     "declaration": true,
     "declarationMap": true,
