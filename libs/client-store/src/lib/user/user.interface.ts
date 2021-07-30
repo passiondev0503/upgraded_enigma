@@ -46,5 +46,3 @@ export interface IUserStatePayload {
 export interface IUserHandlers {
   setState(payload: IUserStatePayload): void;
 }
-
-export const USER_SERVICE_LOCAL_STORAGE_KEY = 'userSetvice';

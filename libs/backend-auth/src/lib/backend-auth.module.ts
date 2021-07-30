@@ -1,6 +1,6 @@
+import { ApiEnvironment } from '@app/backend-interfaces';
 import { DynamicModule, Module, Provider } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { ApiEnvironment } from '@upgraded-enigma/backend-interfaces';
 
 import { BackendAuthController } from './controller/auth.controller';
 import { BackendUserController } from './controller/user.controller';

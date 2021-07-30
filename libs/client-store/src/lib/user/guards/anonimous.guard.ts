@@ -20,7 +20,7 @@ export class AppAnonimousGuard implements CanActivate {
           return this.router.createUrlTree(['/user']);
         }
 
-        return !Boolean(user.token) ? true : false;
+        return !user.token ? true : false;
       }),
     );
   }

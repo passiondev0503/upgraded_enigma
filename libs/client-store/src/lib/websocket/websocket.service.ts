@@ -3,7 +3,7 @@ import { Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 
-import { diagnosticsActions } from '../diagnostics/diagnostics.store';
+import { diagnosticsActions } from '../diagnostics/diagnostics.actions';
 import { websocketActions } from './websocket.actions';
 import { IAppWebsocketStatePayload } from './websocket.interface';
 import { AppWebsocketApiService } from './websocket-api.service';

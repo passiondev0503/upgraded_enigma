@@ -35,7 +35,7 @@ let envConfigFile = `export const firebase = {
  */
 const reset = argv.reset;
 
-if (!Boolean(reset)) {
+if (typeof reset === 'undefined' || reset === false) {
   /**
    * Load environment variables.
    */

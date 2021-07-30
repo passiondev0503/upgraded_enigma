@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { AppUserState, userActions } from '@app/client-store';
 import { Store } from '@ngxs/store';
-import { AppUserState, userActions } from '@upgraded-enigma/client-store';
 import { of } from 'rxjs';
 import { concatMap, map, tap } from 'rxjs/operators';
 

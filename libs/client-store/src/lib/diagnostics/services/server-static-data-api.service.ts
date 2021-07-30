@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { WINDOW } from '@upgraded-enigma/client-util';
+import { WINDOW } from '@app/client-util';
 
 import { AppHttpHandlersService } from '../../http-api/http-handlers.service';
 

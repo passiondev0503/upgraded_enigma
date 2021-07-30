@@ -4,17 +4,18 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AppClientComponentsModule } from '@app/client-components';
+import { AppClientCoreModule } from '@app/client-core';
+import { AppClientGqlModule } from '@app/client-gql';
+import { AppClientMaterialModule } from '@app/client-material';
+import { AppUserState, AppWebsocketModule } from '@app/client-store';
+import { AppClientTranslateModule } from '@app/client-translate';
+import { EntityServiceClient } from '@app/proto';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { AppClientComponentsModule } from '@upgraded-enigma/client-components';
-import { AppClientCoreModule } from '@upgraded-enigma/client-core';
-import { AppClientGqlModule } from '@upgraded-enigma/client-gql';
-import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
-import { AppWebsocketModule } from '@upgraded-enigma/client-store';
-import { AppClientTranslateModule } from '@upgraded-enigma/client-translate';
-import { EntityServiceClient } from '@upgraded-enigma/proto';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +35,9 @@ export const grpcProviders: Provider[] = [
   imports: [
     BrowserAnimationsModule,
     NgxsModule.forRoot([], { developmentMode: !environment.production }),
+    NgxsStoragePluginModule.forRoot({
+      key: [AppUserState],
+    }),
     NgxsLoggerPluginModule.forRoot({ disabled: environment.production, collapsed: true }),
     NgxsRouterPluginModule.forRoot(),
     NgxsFormPluginModule.forRoot(),

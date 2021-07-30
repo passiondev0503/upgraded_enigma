@@ -18,7 +18,7 @@
     "tsconfig.base.json": "*"
   },
   "newProjectRoot": "",
-  "npmScope": "upgraded-enigma",
+  "npmScope": "app",
   "projects": {
     "api": {
       "tags": ["scope:api", "type:application"]

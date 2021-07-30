@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppMarkdownService } from '@upgraded-enigma/client-services';
-import { getTestBedConfig, newTestBedMetadata, setupJestSpiesFor, TClassMemberSpiesObject } from '@upgraded-enigma/client-unit-testing';
+import { AppMarkdownService } from '@app/client-services';
+import { getTestBedConfig, newTestBedMetadata, setupJestSpiesFor, TClassMemberSpiesObject } from '@app/client-unit-testing';
 
 import { AppHomeComponent } from './home.component';
 

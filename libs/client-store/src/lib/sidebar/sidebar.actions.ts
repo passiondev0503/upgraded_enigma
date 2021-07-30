@@ -1,11 +1,20 @@
-import { actionPayloadConstructor } from '@upgraded-enigma/client-util';
+import { actionPayloadConstructor } from '@app/client-util';
 
-import { SIDEBAR_STATE_TOKEN } from './sidebar.interface';
+import { SIDEBAR_STATE_TOKEN, TSidebarPayload } from './sidebar.interface';
 
 const createAction = actionPayloadConstructor(SIDEBAR_STATE_TOKEN.getName());
 
-export const openSidebar = createAction('open');
+const openSidebar = createAction('open');
 
-export const closeSidebar = createAction('close');
+const closeSidebar = createAction('close');
 
-export const toggleSidebar = createAction('toggle');
+const toggleSidebar = createAction('toggle');
+
+const setState = createAction<TSidebarPayload>('set state');
+
+export const sidebarActions = {
+  openSidebar,
+  closeSidebar,
+  toggleSidebar,
+  setState,
+};

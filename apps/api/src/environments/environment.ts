@@ -1,4 +1,4 @@
-import { ApiEnvironment, defaultWsPort } from '@upgraded-enigma/backend-interfaces';
+import { ApiEnvironment, defaultWsPort } from '@app/backend-interfaces';
 
 /**
  * Development environment variables.

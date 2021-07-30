@@ -1,4 +1,4 @@
-import { actionPayloadConstructor, IActionPayload } from '@upgraded-enigma/client-util';
+import { actionPayloadConstructor, IActionPayload } from '@app/client-util';
 
 import { IUserPassword, IUserStatePayload, USER_STATE_TOKEN } from './user.interface';
 
@@ -6,34 +6,49 @@ const createAction = actionPayloadConstructor(USER_STATE_TOKEN.getName());
 
 export type TUserPayload = IActionPayload<IUserStatePayload>;
 
-export const setState = createAction<TUserPayload>('set state');
+const setState = createAction<TUserPayload>('set state');
 
 export type TLogInPayload = IActionPayload<{ email: string; password: string }>;
 
-export const logIn = createAction<TLogInPayload>('log in');
+const logIn = createAction<TLogInPayload>('log in');
 
-export const logOut = createAction('log out');
+const logOut = createAction('log out');
 
 export type TConfigureUserPayload = IActionPayload<Partial<IUserStatePayload>>;
 
-export const configureUser = createAction<TConfigureUserPayload>('configure user');
+const configureUser = createAction<TConfigureUserPayload>('configure user');
 
-export const getUser = createAction('get user');
+const getUser = createAction('get user');
 
-export const listExportedPasswordFiles = createAction('list exported password files');
+const listExportedPasswordFiles = createAction('list exported password files');
 
 export type TAddPasswordPayload = IActionPayload<IUserPassword>;
 
-export const addPassword = createAction<TAddPasswordPayload>('add password');
+const addPassword = createAction<TAddPasswordPayload>('add password');
 
 export type TDeletePasswordPayload = IActionPayload<IUserPassword>;
 
-export const deletePassword = createAction<TDeletePasswordPayload>('delete password');
+const deletePassword = createAction<TDeletePasswordPayload>('delete password');
 
-export const encryptPasswords = createAction('encrypt passwords');
+const encryptPasswords = createAction('encrypt passwords');
 
-export const decryptPasswords = createAction('decrypt passwords');
+const decryptPasswords = createAction('decrypt passwords');
 
-export const exportPasswords = createAction('export passwords');
+const exportPasswords = createAction('export passwords');
 
-export const generateKeypair = createAction('generate keypair');
+const generateKeypair = createAction('generate keypair');
+
+export const userActions = {
+  setState,
+  logIn,
+  logOut,
+  configureUser,
+  getUser,
+  listExportedPasswordFiles,
+  addPassword,
+  deletePassword,
+  encryptPasswords,
+  decryptPasswords,
+  exportPasswords,
+  generateKeypair,
+};

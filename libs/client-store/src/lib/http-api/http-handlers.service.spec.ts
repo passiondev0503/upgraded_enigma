@@ -1,22 +1,22 @@
 import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
+import { AppClientTranslateModule } from '@app/client-translate';
+import { AppLocalStorageMock, getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
+import { HTTP_STATUS } from '@app/client-util';
 import { Store } from '@ngxs/store';
-import { AppClientTranslateModule } from '@upgraded-enigma/client-translate';
-import { AppLocalStorageMock, getTestBedConfig, newTestBedMetadata } from '@upgraded-enigma/client-unit-testing';
-import { HTTP_STATUS } from '@upgraded-enigma/client-util';
 import { Apollo } from 'apollo-angular';
 import { ExecutionResult, GraphQLError } from 'graphql';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-import { AppHttpProgressModule } from '../http-progress/http-progress.module';
+import { AppHttpProgressStoreModule } from '../http-progress/http-progress.module';
 import { AppToasterService, toasterServiceProvider } from '../http-progress/services/toaster/toaster.service';
 import { AppHttpHandlersService } from './http-handlers.service';
 
 describe('AppHttpHandlersService', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    imports: [AppClientTranslateModule.forRoot(), AppHttpProgressModule.forRoot()],
+    imports: [AppClientTranslateModule.forRoot(), AppHttpProgressStoreModule.forRoot()],
     providers: [toasterServiceProvider],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);

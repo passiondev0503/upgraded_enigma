@@ -1,5 +1,5 @@
+import { Message } from '@app/backend-interfaces';
 import { Controller, Get } from '@nestjs/common';
-import { Message } from '@upgraded-enigma/backend-interfaces';
 
 import { BackendDiagnosticsService } from '../service/diagnostics.service';
 

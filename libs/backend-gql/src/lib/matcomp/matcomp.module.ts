@@ -1,5 +1,5 @@
+import { DateScalar } from '@app/backend-interfaces';
 import { DynamicModule, Module, Provider } from '@nestjs/common';
-import { DateScalar } from '@upgraded-enigma/backend-interfaces';
 import { PubSub } from 'graphql-subscriptions';
 
 // import { PubSub } from 'apollo-server-express';

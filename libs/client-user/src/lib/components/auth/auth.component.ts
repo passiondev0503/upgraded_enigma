@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppUserState, userActions } from '@app/client-store';
 import { Store } from '@ngxs/store';
-import { AppUserState, userActions } from '@upgraded-enigma/client-store';
 import { concatMap, first, tap } from 'rxjs/operators';
 
 @Component({

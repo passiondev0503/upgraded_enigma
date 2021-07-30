@@ -1,9 +1,9 @@
 import { DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppClientMaterialModule } from '@app/client-material';
+import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
 import { Args, Story } from '@storybook/angular/types-6-0';
-import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
-import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@upgraded-enigma/client-util';
 
 import { AppInfoPage } from './info-page.component';
 

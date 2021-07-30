@@ -1,5 +1,5 @@
+import { BackendDiagnosticsService } from '@app/backend-diagnostics';
 import { DynamicModule, Module } from '@nestjs/common';
-import { BackendDiagnosticsService } from '@upgraded-enigma/backend-diagnostics';
 
 import { BackendEventsGateway } from './gateway/events.gateway';
 

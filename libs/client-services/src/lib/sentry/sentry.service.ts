@@ -1,8 +1,8 @@
 import { APP_INITIALIZER, ErrorHandler, Injectable, Provider } from '@angular/core';
 import { Router } from '@angular/router';
+import { IWebClientAppEnvironment, TSentryEnvironment } from '@app/client-util';
 import * as Sentry from '@sentry/angular';
 import { Integrations } from '@sentry/tracing';
-import { IWebClientAppEnvironment, TSentryEnvironment } from '@upgraded-enigma/client-util';
 
 /**
  * Sentry is disabled for environments defined in this array.

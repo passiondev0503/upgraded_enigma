@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { getTestBedConfig, newTestBedMetadata, setupJestSpiesFor, TClassMemberSpiesObject } from '@upgraded-enigma/client-unit-testing';
+import { getTestBedConfig, newTestBedMetadata, setupJestSpiesFor, TClassMemberSpiesObject } from '@app/client-unit-testing';
 
 import { AppInfoPage } from './info-page.component';
 

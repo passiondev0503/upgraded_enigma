@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { getTestBedConfig, newTestBedMetadata } from '@upgraded-enigma/client-unit-testing';
+import { getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
 
 import { AppHomePage } from './home-page.component';
 

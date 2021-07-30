@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
+import { AppUserState, userActions } from '@app/client-store';
 import { Store } from '@ngxs/store';
-import { AppUserState, userActions } from '@upgraded-enigma/client-store';
 import { BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 

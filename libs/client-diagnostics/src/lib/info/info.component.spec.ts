@@ -1,14 +1,14 @@
 import { HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppClientTranslateModule } from '@upgraded-enigma/client-translate';
+import { AppClientTranslateModule } from '@app/client-translate';
 import {
   flushHttpRequests,
   getTestBedConfig,
   newTestBedMetadata,
   setupJestSpiesFor,
   TClassMemberSpiesObject,
-} from '@upgraded-enigma/client-unit-testing';
+} from '@app/client-unit-testing';
 
 import { AppInfoComponent } from './info.component';
 

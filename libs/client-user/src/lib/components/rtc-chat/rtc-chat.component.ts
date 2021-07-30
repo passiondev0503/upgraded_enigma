@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AppWebsocketState, IWebsocketResponseEvent, IWsMessageEvent } from '@app/client-store';
+import { NAVIGATOR } from '@app/client-util';
 import { Store } from '@ngxs/store';
-import { AppWebsocketState, IWebsocketResponseEvent, IWsMessageEvent } from '@upgraded-enigma/client-store';
-import { NAVIGATOR } from '@upgraded-enigma/client-util';
 import { BehaviorSubject, combineLatest, from, Observable, of } from 'rxjs';
 import { filter, first, map, mapTo, switchMap } from 'rxjs/operators';
 

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { AppWebsocketService } from '@upgraded-enigma/client-store';
+import { AppWebsocketService } from '@app/client-store';
 
 /**
  * Application index component.

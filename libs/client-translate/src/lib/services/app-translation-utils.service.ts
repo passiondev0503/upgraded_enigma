@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
+import { WINDOW } from '@app/client-util';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { WINDOW } from '@upgraded-enigma/client-util';
 import { Subject } from 'rxjs';
 
 import { EN_DICTIONARY } from '../dictionaries/en';

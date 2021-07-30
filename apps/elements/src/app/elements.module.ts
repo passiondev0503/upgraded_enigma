@@ -3,18 +3,18 @@ import { createCustomElement } from '@angular/elements';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AppChatbotWidgetRootComponent, AppClientChatbotModule } from '@app/client-chatbot';
+import { AppClientCoreModule } from '@app/client-core';
+import { AppClientGqlModule } from '@app/client-gql';
+import { AppClientMaterialModule } from '@app/client-material';
+import { AppWebsocketModule } from '@app/client-store';
+import { AppClientTranslateModule } from '@app/client-translate';
+import { WINDOW } from '@app/client-util';
+import { EntityServiceClient } from '@app/proto';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { AppChatbotWidgetRootComponent, AppClientChatbotModule } from '@upgraded-enigma/client-chatbot';
-import { AppClientCoreModule } from '@upgraded-enigma/client-core';
-import { AppClientGqlModule } from '@upgraded-enigma/client-gql';
-import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
-import { AppWebsocketModule } from '@upgraded-enigma/client-store';
-import { AppClientTranslateModule } from '@upgraded-enigma/client-translate';
-import { WINDOW } from '@upgraded-enigma/client-util';
-import { EntityServiceClient } from '@upgraded-enigma/proto';
 
 import { environment } from '../environments/environment';
 
@@ -58,7 +58,7 @@ export class AppElementsModule implements DoBootstrap {
     const chatbotWidget = createCustomElement<AppChatbotWidgetRootComponent>(AppChatbotWidgetRootComponent, {
       injector: this.injector,
     });
-    if (!Boolean(this.window.customElements.get('app-chatbot-widget-root'))) {
+    if (typeof this.window.customElements.get('app-chatbot-widget-root') === 'undefined') {
       this.window.customElements.define('app-chatbot-widget-root', chatbotWidget);
     }
   }

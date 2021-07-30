@@ -1,5 +1,5 @@
+import { IUser, IUserPassword } from '@app/backend-interfaces';
 import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
-import { IUser, IUserPassword } from '@upgraded-enigma/backend-interfaces';
 import { keypair } from 'keypair';
 import { combineLatest, of, throwError } from 'rxjs';
 import { concatMap } from 'rxjs/operators';

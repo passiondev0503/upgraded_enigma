@@ -1,10 +1,10 @@
+import { backendGrpcClientOptions } from '@app/backend-grpc';
 import { ValidationPipe } from '@nestjs/common';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { WsAdapter } from '@nestjs/platform-ws';
-import { backendGrpcClientOptions } from '@upgraded-enigma/backend-grpc';
 import { spawn } from 'child_process';
 import e from 'express';
 import * as admin from 'firebase-admin';
@@ -41,10 +41,10 @@ async function bootstrap(expressInstance: e.Express): Promise<unknown> {
   app.enableCors(corsOptions);
 
   // TODO: debug grpc in firebase, currently it causes all functions deployment failure
-  if (!Boolean(environment.firebase)) {
+  if (environment.firebase !== true) {
     const grpcClientOptions = backendGrpcClientOptions(environment);
     app.connectMicroservice<MicroserviceOptions>(grpcClientOptions);
-    await app.startAllMicroservicesAsync();
+    await app.startAllMicroservices();
   }
 
   const port = typeof process.env.port !== 'undefined' ? process.env.port : defaultPort;
@@ -63,6 +63,11 @@ async function bootstrap(expressInstance: e.Express): Promise<unknown> {
 void bootstrap(server);
 
 /**
+ * Firebase configuration.
+ */
+const firebaseConfig = process.env.FIREBASE_CONFIG;
+
+/**
  * Terminator function.
  * Runs when application is terminated.
  */
@@ -72,7 +77,7 @@ function terminator(sig?: string) {
     /**
      * Reset client env variables if dev argument is passed.
      */
-    if (sig === 'exit' && !Boolean(process.env.FIREBASE_CONFIG)) {
+    if (sig === 'exit' && typeof firebaseConfig === 'undefined') {
       /**
        * Resets client environment variables configuration to default values.
        */
@@ -92,7 +97,7 @@ function terminator(sig?: string) {
 /**
  * Initialize admin and export firebase functions only in cloud environment.
  */
-if (Boolean(process.env.FIREBASE_CONFIG)) {
+if (typeof firebaseConfig !== 'undefined') {
   admin.initializeApp();
   /**
    * Explicit type casting is needed due types mismatch introduced recently.

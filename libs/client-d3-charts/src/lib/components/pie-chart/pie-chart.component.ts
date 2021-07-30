@@ -38,7 +38,8 @@ export class AppPieChartComponent implements AfterViewInit, OnChanges {
    * Redraws chart on changes.
    */
   public ngOnChanges(changes: IInputChanges): void {
-    if (Boolean(changes.data?.currentValue)) {
+    const currentValue: IPieChartDataNode[] | undefined = changes.data?.currentValue;
+    if (typeof currentValue !== 'undefined' && currentValue !== null) {
       this.drawChart();
     }
   }

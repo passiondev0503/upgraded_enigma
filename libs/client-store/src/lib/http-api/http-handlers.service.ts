@@ -3,10 +3,10 @@ import { Inject, Injectable } from '@angular/core';
 import { ApolloLink, split } from '@apollo/client/core';
 import { ErrorResponse, onError } from '@apollo/client/link/error';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { HTTP_STATUS, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW } from '@app/client-util';
 import { TranslateService } from '@ngx-translate/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
-import { HTTP_STATUS, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW } from '@upgraded-enigma/client-util';
 import { HttpLink, HttpLinkHandler } from 'apollo-angular/http';
 import { createUploadLink } from 'apollo-upload-client';
 import { ExecutionResult, GraphQLError } from 'graphql';
@@ -14,10 +14,10 @@ import memo from 'memo-decorator';
 import { MonoTypeOperatorFunction, Observable, of, throwError } from 'rxjs';
 import { catchError, finalize, tap, timeout } from 'rxjs/operators';
 
+import { httpProgressActions } from '../http-progress/http-progress.actions';
 import { AppHttpProgressService } from '../http-progress/http-progress.service';
-import { httpProgressActions } from '../http-progress/http-progress.store';
 import { AppToasterService } from '../http-progress/services/toaster/toaster.service';
-import { IUserState, USER_SERVICE_LOCAL_STORAGE_KEY, userInitialState } from '../user/user.interface';
+import { userActions } from '../user/user.actions';
 
 /**
  * Handlers to work with http requests.
@@ -121,7 +121,7 @@ export class AppHttpHandlersService {
     return split(
       ({ query }) => {
         const { name } = getMainDefinition(query);
-        return !Boolean(name);
+        return !name;
       },
       httpLinkHandler,
       createUploadLink({
@@ -156,7 +156,7 @@ export class AppHttpHandlersService {
               });
             }
 
-            if (Boolean(networkError)) {
+            if (networkError) {
               console.error('Apollo linkHandler [Network error]: ', networkError);
 
               if (networkError instanceof HttpErrorResponse) {
@@ -209,7 +209,7 @@ export class AppHttpHandlersService {
    */
   public extractGraphQLData(res: ExecutionResult): Observable<{ [key: string]: unknown }> {
     if (typeof res.errors !== 'undefined') {
-      return throwError(new Error(res.errors.join(', ')));
+      return throwError(() => new Error(res.errors?.join(', ')));
     }
     return of(res.data ?? res);
   }
@@ -230,9 +230,7 @@ export class AppHttpHandlersService {
    */
   public checkErrorStatusAndRedirect(status: HTTP_STATUS): void {
     if (status === HTTP_STATUS.UNAUTHORIZED) {
-      const user = JSON.parse(localStorage.getItem(USER_SERVICE_LOCAL_STORAGE_KEY) ?? JSON.stringify(userInitialState)) as IUserState;
-      user.token = '';
-      localStorage.setItem(USER_SERVICE_LOCAL_STORAGE_KEY, JSON.stringify(user));
+      void this.store.dispatch(new userActions.setState({ token: '' }));
       void this.store.dispatch(new Navigate(['user/auth']));
     }
   }
@@ -250,7 +248,7 @@ export class AppHttpHandlersService {
   public handleError(error: HttpErrorResponse): Observable<never> {
     const errorMessage = this.getErrorMessage(error);
     this.toaster.showToaster(errorMessage, 'error');
-    return throwError(new Error(errorMessage));
+    return throwError(() => new Error(errorMessage));
   }
 
   /**
@@ -258,7 +256,7 @@ export class AppHttpHandlersService {
    * @param error error message
    */
   public handleGraphQLError(error: string): Observable<never> {
-    return throwError(new Error(error));
+    return throwError(() => new Error(error));
   }
 
   /**

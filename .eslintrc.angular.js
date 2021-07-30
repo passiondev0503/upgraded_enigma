@@ -3,14 +3,8 @@
  */
 module.exports = {
   rules: {
-    '@angular-eslint/directive-selector': [
-      'error',
-      { type: 'attribute', prefix: 'app', style: 'camelCase' },
-    ],
-    '@angular-eslint/component-selector': [
-      'error',
-      { type: 'element', prefix: 'app', style: 'kebab-case' },
-    ],
+    '@angular-eslint/directive-selector': ['error', { type: 'attribute', prefix: 'app', style: 'camelCase' }],
+    '@angular-eslint/component-selector': ['error', { type: 'element', prefix: 'app', style: 'kebab-case' }],
     '@angular-eslint/no-pipe-impure': 'error',
     '@angular-eslint/contextual-lifecycle': 'error',
     '@angular-eslint/use-lifecycle-interface': 'error',
@@ -28,10 +22,7 @@ module.exports = {
     '@angular-eslint/use-component-selector': 'error',
     '@angular-eslint/use-component-view-encapsulation': 'error',
     '@angular-eslint/use-pipe-transform-interface': 'error',
-    '@angular-eslint/component-class-suffix': [
-      'error',
-      { suffixes: ['Component', 'Page', 'Modal'] },
-    ],
+    '@angular-eslint/component-class-suffix': ['error', { suffixes: ['Component', 'Page', 'Modal'] }],
     '@angular-eslint/directive-class-suffix': ['error', { suffixes: ['Directive', 'ViewAdapter'] }],
     '@angular-eslint/no-host-metadata-property': 'error',
     '@angular-eslint/no-inputs-metadata-property': 'error',

@@ -1,17 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 
-import { closeSidebar, openSidebar, toggleSidebar } from './sidebar.actions';
-import { ISiedbarUiState, SIDEBAR_STATE_TOKEN, sidebarUiInitialState } from './sidebar.interface';
-import { AppSidebarService } from './sidebar.service';
+import { sidebarActions } from './sidebar.actions';
+import { ISiedbarState, SIDEBAR_STATE_TOKEN, sidebarUiInitialState, TSidebarPayload } from './sidebar.interface';
 
-export const sidebarUiActions = {
-  openSidebar,
-  closeSidebar,
-  toggleSidebar,
-};
-
-@State<ISiedbarUiState>({
+@State<ISiedbarState>({
   name: SIDEBAR_STATE_TOKEN,
   defaults: {
     ...sidebarUiInitialState,
@@ -19,35 +13,34 @@ export const sidebarUiActions = {
 })
 @Injectable()
 export class AppSidebarState {
-  constructor(private readonly service: AppSidebarService) {}
+  constructor(private readonly store: Store) {}
 
   @Selector()
-  public static getState(state: ISiedbarUiState) {
+  public static getState(state: ISiedbarState) {
     return state;
   }
 
-  @Action(openSidebar)
-  public openSidebar(ctx: StateContext<ISiedbarUiState>) {
-    const sidebarOpened = true;
-    this.service.openSidebar();
-    return ctx.patchState({ sidebarOpened });
+  @Action(sidebarActions.openSidebar)
+  public openSidebar(ctx: StateContext<ISiedbarState>) {
+    void this.store.dispatch(new Navigate([{ outlets: { sidebar: ['root'] } }]));
+    return ctx.patchState({ sidebarOpened: true });
   }
 
-  @Action(closeSidebar)
-  public closeSidebar(ctx: StateContext<ISiedbarUiState>) {
-    const sidebarOpened = false;
-    this.service.closeSidebar();
-    return ctx.patchState({ sidebarOpened });
+  @Action(sidebarActions.closeSidebar)
+  public closeSidebar(ctx: StateContext<ISiedbarState>) {
+    void this.store.dispatch(new Navigate([{ outlets: { sidebar: [] } }]));
+    return ctx.patchState({ sidebarOpened: false });
   }
 
-  @Action(toggleSidebar)
-  public toggleSidebar(ctx: StateContext<ISiedbarUiState>) {
+  @Action(sidebarActions.toggleSidebar)
+  public toggleSidebar(ctx: StateContext<ISiedbarState>) {
     const sidebarOpened = ctx.getState().sidebarOpened;
-    if (sidebarOpened) {
-      this.service.closeSidebar();
-    } else {
-      this.service.openSidebar();
-    }
-    return ctx.patchState({ sidebarOpened: !sidebarOpened });
+    const action = sidebarOpened ? new sidebarActions.closeSidebar() : new sidebarActions.openSidebar();
+    return ctx.dispatch(action);
+  }
+
+  @Action(sidebarActions.setState)
+  public setState(ctx: StateContext<ISiedbarState>, { payload }: TSidebarPayload) {
+    return ctx.patchState(payload);
   }
 }

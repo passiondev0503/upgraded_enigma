@@ -1,6 +1,6 @@
+import { upgradedenigma } from '@app/proto';
 import { Controller, Get, Inject, OnModuleInit, Param } from '@nestjs/common';
 import { ClientGrpc, GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
-import { upgradedenigma } from '@upgraded-enigma/proto';
 import { from, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { toArray } from 'rxjs/operators';
 

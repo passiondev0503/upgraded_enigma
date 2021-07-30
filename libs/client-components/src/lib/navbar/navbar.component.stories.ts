@@ -3,13 +3,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AppClientMaterialModule } from '@app/client-material';
+import { AppClientPipesModule } from '@app/client-pipes';
+import { AppHttpProgressStoreModule, AppUserState, AppUserStoreModule } from '@app/client-store';
+import { AppClientTranslateModule } from '@app/client-translate';
+import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
 import { NgxsModule } from '@ngxs/store';
 import { Args, Story } from '@storybook/angular/types-6-0';
-import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
-import { AppClientPipesModule } from '@upgraded-enigma/client-pipes';
-import { AppHttpProgressModule, AppUserModule, AppUserState } from '@upgraded-enigma/client-store';
-import { AppClientTranslateModule } from '@upgraded-enigma/client-translate';
-import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@upgraded-enigma/client-util';
 
 import { AppNavbarComponent } from './navbar.component';
 
@@ -35,8 +35,8 @@ const story: Story<AppNavbarComponent> = (args: Args) => ({
       RouterTestingModule,
       AppClientMaterialModule.forRoot(),
       NgxsModule.forRoot([AppUserState]),
-      AppUserModule,
-      AppHttpProgressModule.forRoot(),
+      AppUserStoreModule,
+      AppHttpProgressStoreModule.forRoot(),
       AppClientTranslateModule,
       AppClientPipesModule,
     ],

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppAuthenticatedGuard } from '@upgraded-enigma/client-store';
+import { AppAuthenticatedGuard } from '@app/client-store';
 
 import { AppWorkspaceComponent } from './components/workspace/workspace.component';
 import { AppWorkspacesListComponent } from './components/workspaces-list/workspaces-list.component';

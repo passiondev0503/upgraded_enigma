@@ -15,13 +15,10 @@ export class AppAuthenticatedGuard implements CanActivate {
   public canActivate(): Observable<boolean | UrlTree> {
     return this.store.selectOnce(AppUserState.model).pipe(
       map(user => {
-        if (!Boolean(user.token) || !Boolean(user.email)) {
-          const alertText = 'To access data you need to log in first. You will be redirected to the login page.';
-          // eslint-disable-next-line no-alert -- needed here
-          window.alert(alertText);
+        if (!user.token || !user.email) {
           return this.router.createUrlTree(['/user', 'auth']);
         }
-        return Boolean(user.token) ? true : false;
+        return user.token ? true : false;
       }),
     );
   }

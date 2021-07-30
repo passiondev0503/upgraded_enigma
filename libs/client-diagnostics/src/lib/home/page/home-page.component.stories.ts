@@ -1,11 +1,11 @@
 import { APP_BASE_HREF, DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppClientMaterialModule } from '@app/client-material';
+import { AppHttpProgressStoreModule } from '@app/client-store';
+import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
 import { NgxsModule } from '@ngxs/store';
 import { Args, Story } from '@storybook/angular/types-6-0';
-import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
-import { AppHttpProgressModule } from '@upgraded-enigma/client-store';
-import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@upgraded-enigma/client-util';
 
 import { AppHomePage } from './home-page.component';
 
@@ -28,7 +28,7 @@ const story: Story<AppHomePage> = (args: Args) => ({
       BrowserAnimationsModule,
       FlexLayoutModule,
       AppClientMaterialModule.forRoot(),
-      AppHttpProgressModule.forRoot(),
+      AppHttpProgressStoreModule.forRoot(),
       NgxsModule.forRoot([]),
     ],
     providers: [

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IButton } from '@upgraded-enigma/client-util';
+import { IButton } from '@app/client-util';
 
 @Pipe({
   name: 'buttonsVisibility',

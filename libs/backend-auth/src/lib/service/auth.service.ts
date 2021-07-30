@@ -1,6 +1,6 @@
+import { IUser, IUserLoginCredentials, IUserLogoutCredentials, Message } from '@app/backend-interfaces';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { IUser, IUserLoginCredentials, IUserLogoutCredentials, Message } from '@upgraded-enigma/backend-interfaces';
 import * as crypto from 'crypto';
 import { map } from 'rxjs/operators';
 

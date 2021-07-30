@@ -1,5 +1,5 @@
 import { ElementRef } from '@angular/core';
-import { getRandomColor } from '@mono/client-util';
+import { getRandomColor } from '@app/client-util';
 import { arc, pie, PieArcDatum } from 'd3-shape';
 
 import { IPieChartDataNode, PIE_CHART_ARC_CONFIG } from '../interfaces/pie-chart.interface';

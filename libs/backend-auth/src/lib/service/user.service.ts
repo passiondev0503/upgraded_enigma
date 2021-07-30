@@ -1,5 +1,5 @@
+import { IUser, IUserPassword, IUserStatus, userObject, userStatusObject } from '@app/backend-interfaces';
 import { Injectable } from '@nestjs/common';
-import { IUser, IUserPassword, IUserStatus, userObject, userStatusObject } from '@upgraded-enigma/backend-interfaces';
 import * as fs from 'fs';
 import { Glob } from 'glob';
 import { Observable } from 'rxjs';
@@ -21,7 +21,7 @@ export class BackendUserService {
    */
   public userKeyExists(privateKey?: boolean) {
     return new Observable<boolean>(observer => {
-      const keyPath = Boolean(privateKey) ? this.rsaPrivateKeyPath : this.rsaPublicKeyPath;
+      const keyPath = privateKey === true ? this.rsaPrivateKeyPath : this.rsaPublicKeyPath;
       fs.readFile(keyPath, (error, data) => {
         if (error !== null) {
           observer.error(error);

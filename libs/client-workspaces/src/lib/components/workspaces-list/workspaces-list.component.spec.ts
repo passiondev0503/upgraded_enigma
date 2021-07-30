@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserTestingModule } from '@angular/platform-browser/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AppClientMaterialModule } from '@app/client-material';
+import { AppTestingComponent } from '@app/client-unit-testing';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
-import { AppTestingComponent } from '@upgraded-enigma/client-unit-testing';
 
 import { AppWorkspaceWidgetComponent } from '../workspace-widget/workspace-widget.component';
 import { AppWorkspacesListComponent } from './workspaces-list.component';

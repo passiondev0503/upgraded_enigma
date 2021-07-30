@@ -1,8 +1,8 @@
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { DateAdapter } from '@angular/material/core';
+import { AppClientMaterialModule } from '@app/client-material';
+import { documentProvider, WINDOW, windowProvider } from '@app/client-util';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { AppClientMaterialModule } from '@upgraded-enigma/client-material';
-import { documentProvider, WINDOW, windowProvider } from '@upgraded-enigma/client-util';
 import { Subject } from 'rxjs';
 
 import { AppClientTranslateModule } from '../client-translate.module';

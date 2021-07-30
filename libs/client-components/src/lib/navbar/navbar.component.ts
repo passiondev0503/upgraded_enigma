@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
+import { AppUserState } from '@app/client-store';
+import { IButton, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@app/client-util';
 import { Store } from '@ngxs/store';
-import { AppUserState } from '@upgraded-enigma/client-store';
-import { IButton, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@upgraded-enigma/client-util';
 import { map } from 'rxjs/operators';
 
 @Component({

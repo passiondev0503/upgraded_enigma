@@ -1,10 +1,10 @@
+import { BackendDiagnosticsModule } from '@app/backend-diagnostics';
+import { BackendGqlModule } from '@app/backend-gql';
+import { BackendGrpcModule } from '@app/backend-grpc';
+import { API_ENV } from '@app/backend-interfaces';
+import { BackendLoggerMiddleware } from '@app/backend-logger';
+import { BackendWebsocketModule } from '@app/backend-websocket';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { BackendDiagnosticsModule } from '@upgraded-enigma/backend-diagnostics';
-import { BackendGqlModule } from '@upgraded-enigma/backend-gql';
-import { BackendGrpcModule } from '@upgraded-enigma/backend-grpc';
-import { API_ENV } from '@upgraded-enigma/backend-interfaces';
-import { BackendLoggerMiddleware } from '@upgraded-enigma/backend-logger';
-import { BackendWebsocketModule } from '@upgraded-enigma/backend-websocket';
 
 import { environment } from '../environments/environment';
 

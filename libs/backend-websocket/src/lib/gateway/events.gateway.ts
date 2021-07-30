@@ -1,3 +1,5 @@
+import { BackendDiagnosticsService } from '@app/backend-diagnostics';
+import { defaultWsPort } from '@app/backend-interfaces';
 import {
   OnGatewayConnection,
   OnGatewayDisconnect,
@@ -6,8 +8,6 @@ import {
   WebSocketServer,
   WsResponse,
 } from '@nestjs/websockets';
-import { BackendDiagnosticsService } from '@upgraded-enigma/backend-diagnostics';
-import { defaultWsPort } from '@upgraded-enigma/backend-interfaces';
 import { Subscription, timer } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Server } from 'ws';
