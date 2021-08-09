@@ -1,10 +1,14 @@
 node_modules
-.azure
+
+.envoy
+.electron
 .firebase
 .git
 .github
+.husky
+.storybook
 .vscode
-*.log
+android
 apps
 changelog
 coverage
@@ -12,3 +16,5 @@ dist/apps/*-e2e
 documentation
 functions
 libs
+tools
+*.log
