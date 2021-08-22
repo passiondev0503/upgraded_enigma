@@ -12,6 +12,7 @@ on:
         default: 'warning'
       tags:
         description: 'Test scenario tags'
+        required: true
 
 defaults:
   run:
@@ -73,7 +74,7 @@ jobs:
         run: yarn workspace:integrity-check
 
       - name: Install project dependencies
-        run: yarn install --frozen-lockfile --ignore-scripts
+        run: yarn install --frozen-lockfile
 
       - name: Process dependencies with ngcc
         run: yarn ngcc

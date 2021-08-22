@@ -17719,10 +17719,10 @@ matcher@^3.0.0:
   dependencies:
     escape-string-regexp "^4.0.0"
 
-material-design-icon-fonts@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/material-design-icon-fonts/-/material-design-icon-fonts-3.0.1.tgz#935a85f5a01d39acacc0c20910a48d40c1057666"
-  integrity sha1-k1qF9aAdOayswMIJEKSNQMEFdmY=
+material-design-icon-fonts-self-hosted-web@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/material-design-icon-fonts-self-hosted-web/-/material-design-icon-fonts-self-hosted-web-1.0.0.tgz#8e80b96200908d4abed4179d6c9f7f381e8f2357"
+  integrity sha512-C7SokhF4vJTId2JHTE967CAM1+qBHvSxbygwEkJ8y6pKs9FT1LHopV5tmrjzyDPf1mq8vgPOjVyUy32uvwlLXA==
 
 math-random@^1.0.1:
   version "1.0.4"
