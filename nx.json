@@ -29,9 +29,6 @@
     "backend-diagnostics": {
       "tags": ["scope:backend-diagnostics", "type:data-access"]
     },
-    "backend-gql": {
-      "tags": ["scope:backend-gql", "type:feature"]
-    },
     "backend-grpc": {
       "tags": ["scope:backend-grpc", "type:feature"]
     },
@@ -79,9 +76,6 @@
     "client-e2e": {
       "implicitDependencies": ["client"],
       "tags": ["scope:client-e2e", "type:e2e"]
-    },
-    "client-gql": {
-      "tags": ["scope:client-gql", "type:data-access"]
     },
     "client-material": {
       "tags": ["scope:client-material", "type:ui"]

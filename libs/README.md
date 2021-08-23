@@ -3,7 +3,6 @@
 ## Backend
 
 - `backend-auth`
-- `backend-gql`
 - `backend-grpc`
 - `backend-interfaces`
 - `backend-logger`
@@ -14,7 +13,6 @@
 - `client-chatbot`
 - `client-components`
 - `client-core`
-- `client-gql`
 - `client-material`
 - `client-services`
 - `client-sidebar`

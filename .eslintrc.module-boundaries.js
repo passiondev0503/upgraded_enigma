@@ -47,7 +47,6 @@ const backendConstraints = [
     onlyDependOnLibsWithTags: [
       'scope:proto',
       'scope:backend-grpc',
-      'scope:backend-gql',
       'scope:backend-interfaces',
       'scope:backend-logger',
       'scope:backend-websocket',
@@ -76,10 +75,6 @@ const backendConstraints = [
   {
     sourceTag: 'scope:backend-grpc',
     onlyDependOnLibsWithTags: ['scope:proto', 'scope:backend-interfaces'],
-  },
-  {
-    sourceTag: 'scope:backend-gql',
-    onlyDependOnLibsWithTags: ['scope:backend-interfaces'],
   },
   {
     sourceTag: 'scope:backend-interfaces',
@@ -160,10 +155,6 @@ const clientConstraints = [
     ],
   },
   {
-    sourceTag: 'scope:client-gql',
-    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:proto', 'scope:client-util'],
-  },
-  {
     sourceTag: 'scope:client-chatbot',
     onlyDependOnLibsWithTags: [
       'scope:client-unit-testing',
@@ -201,7 +192,6 @@ const clientConstraints = [
     onlyDependOnLibsWithTags: [
       'scope:client-unit-testing',
       'scope:proto',
-      'scope:client-gql',
       'scope:client-store',
       'scope:client-services',
       'scope:client-chatbot',

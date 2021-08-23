@@ -1,14 +1,12 @@
-import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { AppClientTranslateModule } from '@app/client-translate';
 import { AppLocalStorageMock, getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
 import { HTTP_STATUS } from '@app/client-util';
 import { Store } from '@ngxs/store';
-import { Apollo } from 'apollo-angular';
-import { ExecutionResult, GraphQLError } from 'graphql';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { AppHttpProgressStoreModule } from '../http-progress/http-progress.module';
 import { AppToasterService, toasterServiceProvider } from '../http-progress/services/toaster/toaster.service';
@@ -22,7 +20,6 @@ describe('AppHttpHandlersService', () => {
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
   let service: AppHttpHandlersService;
-  let apollo: Apollo;
   let httpTestingController: HttpTestingController;
   let localStorage: AppLocalStorageMock;
   let toaster: AppToasterService;
@@ -47,7 +44,6 @@ describe('AppHttpHandlersService', () => {
           service = TestBed.inject(AppHttpHandlersService);
           toaster = TestBed.inject(AppToasterService);
           httpTestingController = TestBed.inject(HttpTestingController);
-          apollo = TestBed.inject(Apollo);
           store = TestBed.inject(Store);
           spy = {
             store: {
@@ -70,86 +66,17 @@ describe('AppHttpHandlersService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
-    expect(apollo).toBeDefined();
     expect(toaster).toBeDefined();
   });
 
   it('should have variables and methods defined', () => {
     expect(service.defaultHttpTimeout).toEqual(expect.any(Number));
-    expect(service.graphQlEndpoint).toEqual(expect.any(Function));
-    expect(service.getGraphQLHttpHeaders).toEqual(expect.any(Function));
     expect(service.getEndpoint).toEqual(expect.any(Function));
-    expect(service.extractGraphQLData).toEqual(expect.any(Function));
     expect(service.checkErrorStatusAndRedirect).toEqual(expect.any(Function));
     expect(service.handleError).toEqual(expect.any(Function));
-    expect(service.handleGraphQLError).toEqual(expect.any(Function));
     expect(service.pipeHttpResponse).toEqual(expect.any(Function));
-    expect(service.pipeGraphQLRequest).toEqual(expect.any(Function));
     expect(service.tapError).toEqual(expect.any(Function));
-    expect(service.createApolloLinkFor).toEqual(expect.any(Function));
   });
-
-  describe('extractGraphQLData', () => {
-    it(
-      'should return an Array',
-      waitForAsync(() => {
-        const executionResult: ExecutionResult = {
-          data: [{ x: 'x' }, { y: 'y' }],
-        };
-        void service.extractGraphQLData(executionResult).pipe(
-          tap(result => {
-            expect(result).toEqual(expect.any(Array));
-          }),
-        );
-
-        void service.extractGraphQLData(executionResult).pipe(
-          tap(result => {
-            expect(result).toEqual(executionResult.data);
-          }),
-        );
-      }),
-    );
-
-    it(
-      'should return execution result if response does not contain nested data object',
-      waitForAsync(() => {
-        const executionResult: ExecutionResult = {};
-        void service.extractGraphQLData(executionResult).pipe(
-          tap(result => {
-            expect(result).toEqual(expect.any(Object));
-          }),
-        );
-
-        void service.extractGraphQLData(executionResult).pipe(
-          tap(result => {
-            expect(result).toEqual(executionResult);
-          }),
-        );
-      }),
-    );
-  });
-
-  it('extractGraphQLData should throw errors if get', () => {
-    const error: GraphQLError = new GraphQLError('message');
-    void service.extractGraphQLData({ errors: [error] }).pipe(
-      tap({
-        error: errors => {
-          expect(errors[0]).toBe(error);
-        },
-      }),
-    );
-  });
-
-  it(
-    'pipeGraphQLRequest should check error if 401 status',
-    waitForAsync(() => {
-      const observable$ = of({ networkError: { status: HTTP_STATUS.BAD_REQUEST } });
-      void service
-        .pipeGraphQLRequest(observable$)
-        .pipe(tap({ error: () => expect(spy.service.checkErrorStatusAndRedirect).toHaveBeenCalledWith(HTTP_STATUS.UNAUTHORIZED) }))
-        .subscribe();
-    }),
-  );
 
   it('checkErrorStatusAndRedirect should reset user if error status is 401', () => {
     service.checkErrorStatusAndRedirect(HTTP_STATUS.BAD_REQUEST);
@@ -193,23 +120,6 @@ describe('AppHttpHandlersService', () => {
           .subscribe();
       }),
     );
-  });
-
-  describe('handleGraphQLError', () => {
-    it('should return an Observable', () => {
-      expect(service['handleGraphQLError']('err')).toEqual(expect.any(Observable));
-    });
-  });
-
-  it('graphQLHttpHeaders should return new http headers with authorization header set', () => {
-    const headers = service.getGraphQLHttpHeaders();
-    const newHeadersObj: {
-      [name: string]: string | string[];
-    } = {
-      Authorization: `Token ${service.getUserToken()}`,
-    };
-    const newHeaders: HttpHeaders = new HttpHeaders(newHeadersObj);
-    expect(headers.get('Authorization')).toEqual(newHeaders.get('Authorization'));
   });
 
   it('pipeHttpResponse should work correctly', () => {

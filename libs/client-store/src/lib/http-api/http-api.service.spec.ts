@@ -3,7 +3,6 @@ import { HttpTestingController, TestRequest } from '@angular/common/http/testing
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { AppClientTranslateModule } from '@app/client-translate';
 import { getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
-import { Apollo } from 'apollo-angular';
 import { of } from 'rxjs';
 
 import { AppHttpProgressStoreModule, httpProgressModuleProviders } from '../http-progress/http-progress.module';
@@ -19,7 +18,6 @@ describe('AppHttpApiService', () => {
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
   let service: AppHttpApiService;
-  let apollo: Apollo;
   let httpHandlers: AppHttpHandlersService;
   let toaster: AppToasterService;
   let spy: {
@@ -39,7 +37,6 @@ describe('AppHttpApiService', () => {
           service = TestBed.inject(AppHttpApiService);
           toaster = TestBed.inject(AppToasterService);
           httpHandlers = TestBed.inject(AppHttpHandlersService);
-          apollo = TestBed.inject(Apollo);
           spy = {
             httpHandlers: {
               pipeHttpResponse: jest.spyOn(httpHandlers, 'pipeHttpResponse').mockReturnValue(of({})),
@@ -60,7 +57,6 @@ describe('AppHttpApiService', () => {
 
   it('should exist', () => {
     expect(service).toBeTruthy();
-    expect(apollo).toBeDefined();
     expect(toaster).toBeDefined();
   });
 });

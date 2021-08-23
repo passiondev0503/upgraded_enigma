@@ -1,6 +1,5 @@
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { DateAdapter } from '@angular/material/core';
-import { AppClientMaterialModule } from '@app/client-material';
 import { documentProvider, WINDOW, windowProvider } from '@app/client-util';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
@@ -11,8 +10,8 @@ import { AppTranslationUtilsService } from './app-translation-utils.service';
 
 describe('AppTranslationUtilsService', () => {
   const testBedConfig: TestModuleMetadata = {
-    imports: [AppClientTranslateModule.forRoot(), AppClientMaterialModule.forRoot()],
-    providers: [windowProvider, documentProvider],
+    imports: [AppClientTranslateModule.forRoot()],
+    providers: [windowProvider, documentProvider, DateAdapter],
   };
 
   let service: AppTranslationUtilsService;

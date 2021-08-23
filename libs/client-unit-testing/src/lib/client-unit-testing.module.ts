@@ -10,7 +10,6 @@ import { AppClientMaterialModule } from '@app/client-material';
 import { documentFactory, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { HttpLink } from 'apollo-angular/http';
 
 import { AppTestingComponent } from './components/testing/testing.component.mock';
 import { dialogRefMockProvider } from './refs/dialog-ref.mock';
@@ -27,7 +26,6 @@ export const testingEnvironment: IWebClientAppEnvironment = {
 };
 
 export const mocksCoreModuleProviders: Provider[] = [
-  HttpLink,
   dialogRefMockProvider,
   overlayRefMockProvider,
   matSnackbarRefMockProvider,

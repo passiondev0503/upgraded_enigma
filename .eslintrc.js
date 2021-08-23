@@ -236,7 +236,10 @@ module.exports = {
              * PascalCase can be used only in cases when camelCase is not applicable, like in http headers, e.g. 'Authorization'.
              * In all other cases camelCase must be used.
              */
-            format: ['camelCase', 'PascalCase'],
+            /**
+             * Node env uses uppercase.
+             */
+            format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
             leadingUnderscore: 'forbid',
             trailingUnderscore: 'forbid',
           },
@@ -457,7 +460,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/generated/**', '**/grpc/**', '**/ts/**'], // generated gql definitions, and protobuf
+      files: ['**/grpc/**', '*proto*.*'], // generated protobuf definitions
       rules: {
         'max-lines': 'off',
         'no-dupe-class-members': 'off',

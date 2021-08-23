@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppClientComponentsModule } from '@app/client-components';
 import { AppClientCoreModule } from '@app/client-core';
-import { AppClientGqlModule } from '@app/client-gql';
 import { AppClientMaterialModule } from '@app/client-material';
 import { AppUserState, AppWebsocketModule } from '@app/client-store';
 import { AppClientTranslateModule } from '@app/client-translate';
@@ -50,7 +49,6 @@ export const grpcProviders: Provider[] = [
     AppClientMaterialModule.forRoot(),
     AppWebsocketModule.forRoot(environment),
     AppClientTranslateModule.forRoot(),
-    AppClientGqlModule.forRoot(environment),
     AppRoutingModule,
   ],
   providers: [...grpcProviders],

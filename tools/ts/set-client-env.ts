@@ -64,8 +64,10 @@ export const firebase = {
  */
 writeFile(targetPath, envConfigFile, err => {
   if (err !== null) {
+    // eslint-disable-next-line no-console -- needed here to print output in the terminal
     console.log(err);
   }
 
+  // eslint-disable-next-line no-console -- needed here to print output in the terminal
   console.log(`Output generated at ${targetPath}`);
 });

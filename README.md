@@ -83,7 +83,6 @@ Applications as well as generated documentation, testing reports, and a custom c
 
 - [API](https://upgraded-enigma-documentation.web.app/assets/coverage/apps/api/index.html)
 - [Backend Auth](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-auth/index.html)
-- [Backend Gql](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-gql/index.html)
 - [Backend gRPC](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-grpc/index.html)
 - [Backend Interfaces](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-interfaces/index.html)
 - [Backend Logger](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-logger/index.html)
@@ -93,7 +92,6 @@ Applications as well as generated documentation, testing reports, and a custom c
 - [Client Components](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-components/index.html)
 - [Client Diagnostics](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-diagnostics/index.html)
 - [Client Core](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-core/index.html)
-- [Client Gql](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-gql/index.html)
 - [Client Material](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-material/index.html)
 - [Client Services](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-services/index.html)
 - [Client Store](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-store/index.html)
@@ -113,7 +111,6 @@ Applications as well as generated documentation, testing reports, and a custom c
 
 - [API](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/api-CHANGELOG.html)
 - [Backend Auth](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-auth-CHANGELOG.html)
-- [Backend Gql](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-gql-CHANGELOG.html)
 - [Backend gRPC](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-grpc-CHANGELOG.html)
 - [Backend Interfaces](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-interfaces-CHANGELOG.html)
 - [Backend Logger](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-logger-CHANGELOG.html)
@@ -125,7 +122,6 @@ Applications as well as generated documentation, testing reports, and a custom c
 - [Client Diagnostics](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-diagnostics-CHANGELOG.html)
 - [Client Diagnostics E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-diagnostics-e2e-CHANGELOG.html)
 - [Client Core](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-core-CHANGELOG.html)
-- [Client Gql](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-gql-CHANGELOG.html)
 - [Client Material](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-material-CHANGELOG.html)
 - [Client Services](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-services-CHANGELOG.html)
 - [Client Store](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-store-CHANGELOG.html)
@@ -289,7 +285,6 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 - [Angular](https://angular.io)
 - [Angular CLI](https://cli.angular.io/)
 - [Angular Material](https://material.angular.io/)
-- [Apollo Angular](https://github.com/apollographql/apollo-angular)
 - [Material Design Guidelines](https://material.io)
 - [NGXS](https://www.ngxs.io/)
 
@@ -297,7 +292,6 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 
 - [NestJS](https://nestjs.com/)
 - [Firebase JS Reference](https://firebase.google.com/docs/reference/js/)
-- [Express GraphQL Server](https://graphql.org/graphql-js/running-an-express-graphql-server/)
 - [Angular Firebase: Apollo Server](https://angularfirebase.com/lessons/graphql-apollo-2-tutorial-node/#Apollo-Server)
 - [GRPC](https://grpc.io/)
 

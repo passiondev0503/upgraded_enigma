@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppChatbotWidgetRootComponent, AppClientChatbotModule } from '@app/client-chatbot';
 import { AppClientCoreModule } from '@app/client-core';
-import { AppClientGqlModule } from '@app/client-gql';
 import { AppClientMaterialModule } from '@app/client-material';
 import { AppWebsocketModule } from '@app/client-store';
 import { AppClientTranslateModule } from '@app/client-translate';
@@ -39,7 +38,6 @@ export const grpcProviders: Provider[] = [
     AppClientCoreModule.forRoot(environment),
     AppClientMaterialModule.forRoot(),
     AppClientTranslateModule.forRoot(),
-    AppClientGqlModule.forRoot(environment),
     AppWebsocketModule.forRoot(environment),
     RouterModule.forRoot([]),
     AppClientChatbotModule,
