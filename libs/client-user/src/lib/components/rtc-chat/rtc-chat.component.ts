@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AppWebsocketState, IWebsocketResponseEvent, IWsMessageEvent } from '@app/client-store';
 import { NAVIGATOR } from '@app/client-util';

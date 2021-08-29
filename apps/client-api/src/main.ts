@@ -3,7 +3,6 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { WsAdapter } from '@nestjs/platform-ws';
-import { spawn } from 'child_process';
 import e from 'express';
 
 import { ClientApiAppModule } from './app/app.module';
@@ -57,23 +56,7 @@ void bootstrap(server);
 function terminator(sig?: string) {
   if (typeof sig === 'string') {
     console.log(`\n${new Date(Date.now())}: Received signal ${sig} - terminating app...\n`);
-    /**
-     * Reset client env variables if dev argument is passed.
-     */
-    if (sig === 'exit') {
-      /**
-       * Resets client environment variables configuration to default values.
-       */
-      const envResetter = spawn('ng', ['run', 'tools:reset-client-env'], {
-        stdio: 'inherit',
-        detached: true,
-      });
-      envResetter.on('close', code => {
-        process.exit(code ?? 0);
-      });
-    } else {
-      process.exit(0);
-    }
+    process.exit(0);
   }
 }
 

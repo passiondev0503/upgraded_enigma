@@ -5,7 +5,6 @@ import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { WsAdapter } from '@nestjs/platform-ws';
-import { spawn } from 'child_process';
 import e from 'express';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
@@ -74,28 +73,12 @@ const firebaseConfig = process.env.FIREBASE_CONFIG;
 function terminator(sig?: string) {
   if (typeof sig === 'string') {
     console.log(`\n${new Date(Date.now())}: Received signal ${sig} - terminating app...\n`);
-    /**
-     * Reset client env variables if dev argument is passed.
-     */
-    if (sig === 'exit' && typeof firebaseConfig === 'undefined') {
-      /**
-       * Resets client environment variables configuration to default values.
-       */
-      const envResetter = spawn('ng', ['run', 'tools:reset-client-env'], {
-        stdio: 'inherit',
-        detached: true,
-      });
-      envResetter.on('close', code => {
-        process.exit(code ?? 0);
-      });
-    } else {
-      process.exit(0);
-    }
+    process.exit(0);
   }
 }
 
 /**
- * Initialize admin and export firebase functions only in cloud environment.
+ * Initialize admin and export undefined from undefinedfirebase/compat functions only in cloud environment.undefined
  */
 if (typeof firebaseConfig !== 'undefined') {
   admin.initializeApp();
@@ -104,7 +87,6 @@ if (typeof firebaseConfig !== 'undefined') {
    */
   const handler = <(req: functions.https.Request, resp: functions.Response) => void | Promise<void>>server;
   (exports as Record<string, unknown>).diagnostics = functions.https.onRequest(handler);
-  (exports as Record<string, unknown>).graphql = functions.https.onRequest(handler);
   // TODO: handle websocket events (exports as Record<string, unknown>).events = functions.https.onRequest(handler);
   // TODO: (exports as Record<string, unknown>).grpc = functions.https.onRequest(handler);
 } else {

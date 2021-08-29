@@ -1479,7 +1479,7 @@
           "options": {
             "commands": [
               {
-                "command": "npx ts-node -P ./tools/tsconfig.tools.json ./tools/ts/set-client-env.ts --reset=true && npx nx lint client --fix",
+                "command": "npx ts-node -P ./tools/tsconfig.tools.json ./tools/ts/set-client-env.ts --reset=true",
                 "forwardAllArgs": false
               }
             ]
