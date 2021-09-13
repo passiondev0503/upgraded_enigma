@@ -15,7 +15,7 @@ import {
   AppUserStoreModule,
 } from '@app/client-store';
 import { AppClientTranslateModule } from '@app/client-translate';
-import { documentFactory, IButton, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
+import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
 import { NgxsModule } from '@ngxs/store';
 import { Args, Story } from '@storybook/angular/types-6-0';
 
@@ -33,45 +33,6 @@ export default {
   title: 'AppToolbarComponent',
   component: AppToolbarComponent,
 };
-
-const buttons: IButton[] = [
-  {
-    routerLink: ['user/auth'],
-    icon: 'input',
-    title: 'Login',
-    requiresAuth: false,
-  },
-  {
-    routerLink: ['user'],
-    icon: 'verified_user',
-    title: 'User profile',
-    requiresAuth: true,
-  },
-  {
-    routerLink: ['user/data'],
-    icon: 'dashboard',
-    title: 'User data',
-    requiresAuth: true,
-  },
-  {
-    routerLink: ['user/rtc-chat'],
-    icon: 'voice_chat',
-    title: 'RTC Chat',
-    requiresAuth: true,
-  },
-  {
-    routerLink: ['workspaces'],
-    icon: 'view_comfy',
-    title: 'Workspaces',
-    requiresAuth: true,
-  },
-  {
-    routerLink: ['chatbot'],
-    icon: 'chat',
-    title: 'Chat',
-    requiresAuth: true,
-  },
-];
 
 const story: Story<AppToolbarComponent> = (args: Args) => ({
   moduleMetadata: {
@@ -111,7 +72,23 @@ const story: Story<AppToolbarComponent> = (args: Args) => ({
 
 export const primary = story.bind({});
 primary.args = {
-  buttons: [...buttons],
+  anchors: [
+    {
+      href: 'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=bug_report.md&title=',
+      icon: 'bug_report',
+      title: 'Report a bug',
+    },
+    {
+      href: 'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=feature_request.md&title=',
+      icon: 'lightbulb',
+      title: 'Request a feature',
+    },
+    {
+      href: 'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=maintenance.md&title=',
+      icon: 'engineering',
+      title: 'Request maintenance',
+    },
+  ],
 };
 primary.parameters = {
   /**

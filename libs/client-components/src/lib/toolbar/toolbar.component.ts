@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Inject, Input } from '@angular/core';
-import { AppSidebarState, AppUserState, chatbotActions, sidebarActions, userActions } from '@app/client-store';
-import { IButton, WINDOW } from '@app/client-util';
+import { AppSidebarState, AppUserState, chatbotActions, sidebarActions } from '@app/client-store';
+import { IAnchor, WINDOW } from '@app/client-util';
 import { Store } from '@ngxs/store';
 import { map } from 'rxjs/operators';
 
@@ -14,51 +14,21 @@ export class AppToolbarComponent {
   @HostBinding('class.fixed-position-toolbar') public fixedPosition =
     this.win.innerHeight + this.win.scrollY < this.win.document.body.offsetHeight;
 
-  @Input() public buttons: IButton[] = [
+  @Input() public anchors: IAnchor[] = [
     {
-      routerLink: ['user/auth'],
-      icon: 'input',
-      title: 'Log in',
-      requiresAuth: false,
+      href: 'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=bug_report.md&title=',
+      icon: 'bug_report',
+      title: 'Report a bug',
     },
     {
-      routerLink: [''],
-      icon: 'lock',
-      title: 'Log out',
-      requiresAuth: true,
-      click: () => {
-        void this.store.dispatch(new userActions.logOut()).subscribe();
-      },
+      href: 'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=feature_request.md&title=',
+      icon: 'lightbulb',
+      title: 'Request a feature',
     },
     {
-      routerLink: ['user'],
-      icon: 'verified_user',
-      title: 'User profile',
-      requiresAuth: true,
-    },
-    {
-      routerLink: ['user/data'],
-      icon: 'dashboard',
-      title: 'User data',
-      requiresAuth: true,
-    },
-    {
-      routerLink: ['user/rtc-chat'],
-      icon: 'voice_chat',
-      title: 'RTC Chat',
-      requiresAuth: true,
-    },
-    {
-      routerLink: ['workspaces'],
-      icon: 'view_comfy',
-      title: 'Workspaces',
-      requiresAuth: true,
-    },
-    {
-      routerLink: ['chatbot'],
-      icon: 'chat',
-      title: 'Chat',
-      requiresAuth: true,
+      href: 'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=maintenance.md&title=',
+      icon: 'engineering',
+      title: 'Request maintenance',
     },
   ];
 

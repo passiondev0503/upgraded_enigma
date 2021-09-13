@@ -66,12 +66,14 @@ primary.args = {
   buttons: [
     {
       routerLink: [''],
+      routeActive: () => false,
       icon: 'home',
       title: 'Home',
       requiresAuth: false,
     },
     {
       routerLink: ['info'],
+      routeActive: () => false,
       icon: 'av_timer',
       title: 'Diagnostics',
       requiresAuth: true,

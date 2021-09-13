@@ -7,6 +7,8 @@
     mat-button
     *ngFor="let button of buttons | buttonsVisibility: user.userAuthenticated"
     [routerLink]="button.routerLink"
+    [disabled]="button.routeActive()"
+    (click)="button.click ? button.click() : null"
     [fxHide.xs]="true"
     [fxHide.sm]="true"
   >
@@ -14,11 +16,18 @@
   </button>
 
   <button mat-icon-button [matMenuTriggerFor]="mobileMenuTop" [fxHide.md]="true" [fxHide.lg]="true" [fxHide.xl]="true">
-    <mat-icon>menu</mat-icon>
+    <mat-icon *ngIf="!user.userAuthenticated">menu</mat-icon>
+    <mat-icon *ngIf="user.userAuthenticated">account_circle</mat-icon>
   </button>
 
   <mat-menu #mobileMenuTop="matMenu" [fxHide.md]="true" [fxHide.lg]="true" [fxHide.xl]="true">
-    <a mat-menu-item *ngFor="let button of buttons" [routerLink]="button.routerLink">
+    <a
+      mat-menu-item
+      *ngFor="let button of buttons | buttonsVisibility: user.userAuthenticated"
+      [routerLink]="button.routerLink"
+      [disabled]="button.routeActive()"
+      (click)="button.click ? button.click() : null"
+    >
       <mat-icon>{{ button.icon }}</mat-icon> {{ button.title }}
     </a>
   </mat-menu>

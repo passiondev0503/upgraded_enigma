@@ -75,14 +75,14 @@ export class AppUserAuthComponent implements OnInit {
         // make subsequent login request for user after successful initialization request
         const loginFormData = this.form.value;
         return this.store.dispatch(new userActions.logIn(loginFormData)).pipe(
-          tap(
-            () => {
+          tap({
+            next: () => {
               void this.router.navigate(['user']);
             },
-            () => {
-              void this.router.navigate(['auth']); // redirect to login in case of failure
+            error: () => {
+              void this.router.navigate(['auth']);
             },
-          ),
+          }),
         );
       }),
     );
@@ -90,14 +90,14 @@ export class AppUserAuthComponent implements OnInit {
 
   private logUserIn(formData: { email: string; password: string }) {
     return this.store.dispatch(new userActions.logIn(formData)).pipe(
-      tap(
-        () => {
+      tap({
+        next: () => {
           void this.router.navigate(['user']);
         },
-        () => {
-          void this.router.navigate(['auth']); // redirect to login in case of failure
+        error: () => {
+          void this.router.navigate(['auth']);
         },
-      ),
+      }),
     );
   }
 }

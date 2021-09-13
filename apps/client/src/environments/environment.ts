@@ -22,6 +22,7 @@ export const environment: IWebClientAppEnvironment = {
   production: false,
   platform,
   appName: 'Upgraded Enigma Client',
+  description: 'Upgraded Enigma client application',
   api: window.location.origin.includes('localhost') ? 'http://localhost:8080/api' : `${window.location.origin}/api`,
   envoyUrl: 'http://localhost:8082',
   sentryEnv: 'development',

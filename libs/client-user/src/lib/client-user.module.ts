@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppClientMaterialModule } from '@app/client-material';
-import { appSharedUiTranslateModuleProviders } from '@app/client-translate';
+import { appClientTranslateModuleProviders } from '@app/client-translate';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { AppClientUserRoutingModule } from './client-user-routing.module';
@@ -23,6 +23,6 @@ import { AppUserRtcChatComponent } from './components/rtc-chat/rtc-chat.componen
     AppClientUserRoutingModule,
   ],
   declarations: [AppUserAuthComponent, AppUserDataComponent, AppUserProfileComponent, AppUserRtcChatComponent],
-  providers: [...appSharedUiTranslateModuleProviders],
+  providers: [...appClientTranslateModuleProviders],
 })
 export class AppClientUserModule {}

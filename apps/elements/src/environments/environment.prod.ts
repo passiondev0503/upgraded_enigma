@@ -10,6 +10,7 @@ export const environment: IWebClientAppEnvironment = {
   production: true,
   platform,
   appName: 'Upgraded Enigma Elements',
+  description: 'Nx Ng Starter Elements: wigdets based on Angular Elements',
   api:
     platform !== 'web'
       ? 'https://upgraded-enigma.web.app/api'

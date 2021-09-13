@@ -20,6 +20,7 @@ export const environment: IWebClientAppEnvironment = {
   production: false,
   platform,
   appName: 'Upgraded Enigma Elements',
+  description: 'Nx Ng Starter Elements: wigdets based on Angular Elements',
   api: window.location.origin.includes('localhost') ? 'http://localhost:8080/api' : `${window.location.origin}/api`,
   envoyUrl: 'http://localhost:8082',
   sentryEnv: 'development',

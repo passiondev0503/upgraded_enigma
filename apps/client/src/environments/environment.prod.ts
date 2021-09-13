@@ -12,6 +12,7 @@ export const environment: IWebClientAppEnvironment = {
   production: true,
   platform,
   appName: 'Upgraded Enigma Client',
+  description: 'Upgraded Enigma client application',
   api:
     platform !== 'web'
       ? 'https://upgraded-enigma.web.app/api'
