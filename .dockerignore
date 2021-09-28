@@ -1,7 +1,7 @@
 node_modules
-
-.envoy
+.docker
 .electron
+.envoy
 .firebase
 .git
 .github
@@ -15,6 +15,9 @@ coverage
 dist/apps/*-e2e
 documentation
 functions
+!functions/package.json
+!functions/package-lock.json
 libs
 tools
+!tools/proto
 *.log
