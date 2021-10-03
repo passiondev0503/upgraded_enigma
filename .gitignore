@@ -19,6 +19,11 @@ migrations-*.json
 .env
 **/.env
 
+# keys
+*.pem
+*.*.pem
+*.*.*.pem
+
 # user configs
 .config/*
 !.config
