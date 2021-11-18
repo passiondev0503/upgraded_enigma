@@ -132,6 +132,14 @@ Applications as well as generated documentation, testing reports, and a custom c
 - [Mocks Core](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/mocks-core-CHANGELOG.html)
 - [Proto](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/proto-CHANGELOG.html)
 
+## Workspace generators
+
+### Generate a client feature library
+
+```bash
+yarn workspace:schematic client-feature client-<feature-name> --tags=scope:client-<feature-name>,type:feature
+```
+
 ## General Tooling
 
 This project was generated using [Nx](https://nx.dev).
