@@ -9,7 +9,7 @@ export interface IUserPassword {
 export interface IUserState {
   email: string;
   token: string;
-  passwords: IUserPassword[];
+  passwords?: IUserPassword[];
   status: {
     initialized: boolean;
     encryption: boolean;

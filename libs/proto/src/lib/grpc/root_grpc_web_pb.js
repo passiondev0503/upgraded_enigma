@@ -23,7 +23,7 @@ proto.upgradedenigma = require('./root_pb.js');
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -31,7 +31,7 @@ proto.upgradedenigma = require('./root_pb.js');
 proto.upgradedenigma.EntityServiceClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -49,7 +49,7 @@ proto.upgradedenigma.EntityServiceClient =
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -57,7 +57,7 @@ proto.upgradedenigma.EntityServiceClient =
 proto.upgradedenigma.EntityServicePromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -95,30 +95,11 @@ const methodDescriptor_EntityService_FindOne = new grpc.web.MethodDescriptor(
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.upgradedenigma.EntityById,
- *   !proto.upgradedenigma.Entity>}
- */
-const methodInfo_EntityService_FindOne = new grpc.web.AbstractClientBase.MethodInfo(
-  common_pb.Entity,
-  /**
-   * @param {!proto.upgradedenigma.EntityById} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  common_pb.Entity.deserializeBinary
-);
-
-
-/**
  * @param {!proto.upgradedenigma.EntityById} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.upgradedenigma.Entity)}
+ * @param {function(?grpc.web.RpcError, ?proto.upgradedenigma.Entity)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.upgradedenigma.Entity>|undefined}
  *     The XHR Node Readable Stream
@@ -137,7 +118,7 @@ proto.upgradedenigma.EntityServiceClient.prototype.findOne =
 /**
  * @param {!proto.upgradedenigma.EntityById} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.upgradedenigma.Entity>}
  *     Promise that resolves to the response

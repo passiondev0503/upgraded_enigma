@@ -60,6 +60,7 @@ functions/*
 !.vscode/extensions.json
 
 # misc
+/.angular/cache
 /coverage
 /documentation
 /changelog

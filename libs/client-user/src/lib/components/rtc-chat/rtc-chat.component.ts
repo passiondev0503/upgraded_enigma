@@ -423,20 +423,19 @@ export class AppUserRtcChatComponent implements OnInit {
    */
   private connectUserMedia() {
     if (typeof this.nav !== 'undefined') {
-      this.nav.getUserMedia(
-        {
+      void this.nav.mediaDevices
+        .getUserMedia({
           video: { width: { min: 320 }, height: { min: 240 } },
           audio: true,
-        },
-        stream => {
+        })
+        .then(stream => {
           this.setupVideoStream(stream);
           this.registerPeerConnectionListeners();
-        },
-        error => {
+        })
+        .catch(error => {
           // eslint-disable-next-line no-console -- TODO: remove after debugging
           console.error('connectMediaDevices:', error);
-        },
-      );
+        });
     }
   }
 

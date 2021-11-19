@@ -144,7 +144,7 @@ export class AppUserDataComponent {
       .selectOnce(AppUserState.model)
       .pipe(
         concatMap(user => {
-          const formData = user.passwords[id];
+          const formData = (user.passwords ?? [])[id];
           return typeof formData !== 'undefined'
             ? this.store.dispatch(new userActions.deletePassword(formData)).pipe(
                 concatMap(() => this.getUser()),
@@ -197,8 +197,9 @@ export class AppUserDataComponent {
   public hideElement$ = (index: number) =>
     this.store.selectOnce(AppUserState.model).pipe(
       map(user => {
-        if (typeof user.status !== 'undefined' && user.passwords.length > 0) {
-          const result = Boolean(user.passwords[index].name.includes(this.searchValue));
+        const passwords = user.passwords ?? [];
+        if (typeof user.status !== 'undefined' && passwords.length > 0) {
+          const result = Boolean(passwords[index].name.includes(this.searchValue));
           return this.searchValue ? !result : false;
         }
         return false;
@@ -215,7 +216,7 @@ export class AppUserDataComponent {
       .selectOnce(AppUserState.model)
       .pipe(
         tap(user => {
-          const sorted = { ...user };
+          const sorted = { ...user, passwords: [...(user.passwords ?? [])] };
           if (val === 'timestamp') {
             sorted.passwords.sort((a, b) => b[val] - a[val]);
           } else if (val === '') {

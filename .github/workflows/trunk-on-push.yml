@@ -11,6 +11,10 @@ defaults:
   run:
     shell: bash
 
+concurrency:
+  group: ${{ github.head_ref }}.${{ github.sha }}
+  cancel-in-progress: true
+
 jobs:
   test-build-deploy:
     runs-on: ubuntu-latest
@@ -74,6 +78,10 @@ jobs:
         if: steps.changes.outputs.nx == 'true'
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
+      - name: Use yarn 1.22.17 (required for integrity check)
+        if: steps.changes.outputs.nx == 'true'
+        run: yarn set version 1.22.17 # this is mandatory, yarn v2 does not have integrity check which is needed for the pipeline
+
       - name: Get yarn cache directory path and commit hash
         if: steps.changes.outputs.nx == 'true'
         id: get-variables
@@ -92,6 +100,7 @@ jobs:
             **/node_modules
             /tmp/nx
             /tmp/jest_rs
+            ./angular
           key: ${{ runner.os }}-node-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}-workspace-${{ steps.get-variables.outputs.commitsha }}
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}-workspace-
@@ -100,7 +109,7 @@ jobs:
 
       - name: Install global dependencies
         if: steps.changes.outputs.nx == 'true'
-        run: npm i -g typescript @angular/cli @nrwl/cli firebase-tools @compodoc/compodoc
+        run: npm i -g firebase-tools @compodoc/compodoc
 
       - name: Workspace integrity check
         if: steps.changes.outputs.nx == 'true'

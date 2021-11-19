@@ -11,6 +11,10 @@ defaults:
   run:
     shell: bash
 
+concurrency:
+  group: ${{ github.head_ref }}.${{ github.sha }}
+  cancel-in-progress: true
+
 jobs:
   premerge:
     runs-on: ubuntu-latest
@@ -81,8 +85,9 @@ jobs:
         if: steps.changes.outputs.nx == 'true'
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-      - name: Use yarn 1.22.1 (required for integrity check)
-        run: yarn set version 1.22.1 # this is mandatory, yarn v2 does not have integrity check which is needed for the pipeline
+      - name: Use yarn 1.22.17 (required for integrity check)
+        if: steps.changes.outputs.nx == 'true'
+        run: yarn set version 1.22.17 # this is mandatory, yarn v2 does not have integrity check which is needed for the pipeline
 
       - name: Get variables (yarn cache directory path, commit hash)
         if: steps.changes.outputs.nx == 'true'
@@ -102,15 +107,12 @@ jobs:
             **/node_modules
             /tmp/nx
             /tmp/jest_rs
+            ./angular
           key: ${{ runner.os }}-node-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}-workspace-${{ steps.get-variables.outputs.commitsha }}
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}-workspace-
             ${{ runner.os }}-node-${{ matrix.node-version }}-yarn-
             ${{ runner.os }}-
-
-      - name: Install global dependencies
-        if: steps.changes.outputs.nx == 'true'
-        run: npm i -g typescript @angular/cli @nrwl/cli
 
       - name: Workspace integrity check
         if: steps.changes.outputs.nx == 'true'

@@ -45,7 +45,7 @@ export class AppUserState {
     const email = typeof payload.email !== 'undefined' ? payload.email : currentState.email;
     const token = typeof payload.token !== 'undefined' ? payload.token : currentState.token;
     const status = typeof payload.status !== 'undefined' ? { ...currentState.status, ...payload.status } : { ...currentState.status };
-    const passwords = typeof payload.passwords !== 'undefined' ? [...payload.passwords] : [...currentState.passwords];
+    const passwords = typeof payload.passwords !== 'undefined' ? [...payload.passwords] : [...(currentState.passwords ?? [])];
     const newState: IUserState = { ...currentState, email, token, passwords, status };
     return ctx.patchState(newState);
   }
@@ -84,7 +84,7 @@ export class AppUserState {
         const email = user.email;
         const token = user.token;
         const status = typeof payload.status !== 'undefined' ? { ...currentState.status, ...payload.status } : { ...currentState.status };
-        const passwords = typeof payload.passwords !== 'undefined' ? [...payload.passwords] : [...currentState.passwords];
+        const passwords = typeof payload.passwords !== 'undefined' ? [...payload.passwords] : [...(currentState.passwords ?? [])];
         const newState: IUserState = { ...currentState, email, token, passwords, status };
         return ctx.patchState(newState);
       }),
@@ -122,7 +122,7 @@ export class AppUserState {
     return this.api.addPassword(payload).pipe(
       map(exported => {
         const currentState: IUserState = ctx.getState();
-        return ctx.patchState({ passwords: [...currentState.passwords, payload] });
+        return ctx.patchState({ passwords: [...(currentState.passwords ?? []), payload] });
       }),
     );
   }

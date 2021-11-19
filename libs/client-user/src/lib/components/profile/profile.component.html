@@ -22,10 +22,10 @@
       {{ 'user.encryption' | translate }}
     </mat-chip>
 
-    <mat-chip [color]="user.passwords.length > 0 ? 'primary' : 'warn'" [disabled]="true" [selected]="true">
+    <mat-chip [color]="(user?.passwords?.length ?? 0) > 0 ? 'primary' : 'warn'" [disabled]="true" [selected]="true">
       <mat-icon>bookmarks</mat-icon>
       &nbsp;
-      {{ 'passwords.count' | translate }}: {{ user.passwords.length }}
+      {{ 'passwords.count' | translate }}: {{ user?.passwords?.length }}
     </mat-chip>
   </mat-chip-list>
 
