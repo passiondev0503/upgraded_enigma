@@ -131,22 +131,22 @@ jobs:
         if: steps.changes.outputs.nx == 'true'
         run: |
           npx nx run-many --target=test --all --pass-with-no-tests --code-coverage=true --watch=false --run-in-band --ci --updateSnapshot
-          ng run tools:coverage-stats
+          npx nx run tools:coverage-stats
           cat ./tools/ts/UNIT_COVERAGE.md
 
       - name: Build all (production)
         if: steps.changes.outputs.nx == 'true'
         run: |
           yarn generate:env:documentation
-          ng run tools:set-client-env
+          npx nx run tools:set-client-env
           npx nx run-many --target=build --all --configuration production
-          ng run tools:reset-client-env
+          npx nx run tools:reset-client-env
 
       - name: Build documentation
         if: steps.changes.outputs.nx == 'true'
         run: |
           yarn test:reports
-          ng run tools:compodoc-build
+          npx nx run tools:compodoc-build
           yarn generate:changelog
           yarn e2e:headless:report
 
