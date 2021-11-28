@@ -4,7 +4,15 @@ Organizer and productivity tools.
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-![Master](https://github.com/anisotropic-works/upgraded-enigma/workflows/Master/badge.svg) ![PR validation](https://github.com/anisotropic-works/upgraded-enigma/workflows/PR%20validation/badge.svg)
+## Workflows
+
+### [![pr-validation](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/pr-validation.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/pr-validation.yml)
+
+### [![trunk-on-push](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/trunk-on-push.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/trunk-on-push.yml)
+
+### [![e2e-test](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/e2e-test.yml)
+
+### [![codeowners-validator](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/codeowners-validator.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/codeowners-validator.yml)
 
 ## Requirements
 
@@ -14,7 +22,7 @@ In order to run own copy of the project one must fulfill the following requireme
 
 - [Debian based Linux](https://en.wikipedia.org/wiki/List_of_Linux_distributions#Debian-based)
 - [OSX](https://en.wikipedia.org/wiki/MacOS)
-- [Windows](https://en.wikipedia.org/wiki/Microsoft_Windows) - `poorly supported`
+- [~~Windows~~](https://en.wikipedia.org/wiki/Microsoft_Windows) - `poorly supported`
 
 ### Core dependencies
 
