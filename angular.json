@@ -1460,7 +1460,7 @@
           "options": {
             "commands": [
               {
-                "command": "rm -rf documentation/* dist/* coverage/* changelog/* /tmp/nx/upgraded-enigma",
+                "command": "rm -rf .angular/* documentation/* dist/* coverage/* changelog/* /tmp/nx/upgraded-enigma",
                 "forwardAllArgs": false
               }
             ]
