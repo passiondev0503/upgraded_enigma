@@ -113,7 +113,7 @@ jobs:
 
       - name: Install project dependencies
         if: steps.changes.outputs.nx == 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install:ci
 
       - name: Process dependencies with ngcc
         if: steps.changes.outputs.nx == 'true'
@@ -133,4 +133,4 @@ jobs:
 
       - name: Build storybook
         if: steps.changes.outputs.nx == 'true'
-        run: npx nx run documentation:build-storybook
+        run: npx nx run documentation:build-storybook || true

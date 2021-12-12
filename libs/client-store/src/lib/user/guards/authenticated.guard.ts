@@ -4,7 +4,7 @@ import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { AppUserState } from '../user.store';
+import { AppUserState } from '../user.state';
 
 @Injectable({
   providedIn: 'root',

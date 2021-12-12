@@ -4,7 +4,7 @@ import { NgxsModule } from '@ngxs/store';
 
 import { AppGlobalProgressBarComponent } from './components/global-progress-bar/global-progress-bar.component';
 import { httpProgressServiceProvider } from './http-progress.service';
-import { AppHttpProgressState } from './http-progress.store';
+import { AppHttpProgressState } from './http-progress.state';
 
 export const httpProgressModuleProviders: Provider[] = [httpProgressServiceProvider];
 

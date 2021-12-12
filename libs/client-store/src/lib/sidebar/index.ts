@@ -1,3 +1,3 @@
 export * from './sidebar.actions';
 export * from './sidebar.module';
-export * from './sidebar.store';
+export * from './sidebar.state';

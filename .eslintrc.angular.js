@@ -46,7 +46,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/hammerjs-gesture.config.ts', '**/*.store.ts'],
+      files: ['**/hammerjs-gesture.config.ts', '**/*.state.ts'],
       rules: {
         '@angular-eslint/use-injectable-provided-in': 'off',
       },

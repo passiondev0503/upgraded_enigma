@@ -175,7 +175,7 @@
       "root": "libs/backend-interfaces",
       "schematics": {},
       "sourceRoot": "libs/backend-interfaces/src",
-      "tags": ["scope:backend-interfaces", "type:data-access"]
+      "tags": ["scope:backend-interfaces", "type:util"]
     },
     "backend-logger": {
       "architect": {
@@ -547,7 +547,7 @@
         }
       },
       "sourceRoot": "libs/client-core/src",
-      "tags": ["scope:client-core", "type:ui"]
+      "tags": ["scope:client-core", "type:feature"]
     },
     "client-d3-charts": {
       "architect": {
@@ -737,7 +737,7 @@
         }
       },
       "sourceRoot": "libs/client-material/src",
-      "tags": ["scope:client-material", "type:ui"]
+      "tags": ["scope:client-material", "type:util"]
     },
     "client-pipes": {
       "architect": {
@@ -788,7 +788,7 @@
         }
       },
       "sourceRoot": "libs/client-services/src",
-      "tags": ["scope:client-services", "type:ui"]
+      "tags": ["scope:client-services", "type:util"]
     },
     "client-sidebar": {
       "architect": {
@@ -918,7 +918,7 @@
       "projectType": "library",
       "root": "libs/client-user",
       "sourceRoot": "libs/client-user/src",
-      "tags": ["scope:client-user", "type:ui"]
+      "tags": ["scope:client-user", "type:feature"]
     },
     "client-util": {
       "architect": {
@@ -1328,7 +1328,7 @@
     "elements-testing": {
       "architect": {
         "build": {
-          "builder": "@nrwl/web:build",
+          "builder": "@nrwl/web:webpack",
           "configurations": {
             "production": {
               "extractLicenses": true,
