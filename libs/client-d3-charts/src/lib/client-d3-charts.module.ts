@@ -11,6 +11,5 @@ import { AppRadarChartComponent } from './components/radar-chart/radar-chart.com
   imports: [CommonModule],
   declarations: [AppPieChartComponent, AppRadarChartComponent],
   exports: [AppPieChartComponent, AppRadarChartComponent],
-  entryComponents: [AppPieChartComponent, AppRadarChartComponent],
 })
 export class AppClientD3ChartsModule {}
