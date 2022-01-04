@@ -3,8 +3,8 @@
   "cli": {
     "cache": {
       "enabled": true,
-      "path": ".angular/cache",
-      "environment": "all"
+      "environment": "all",
+      "path": ".angular/cache"
     }
   },
   "newProjectRoot": "",
@@ -434,93 +434,6 @@
       "sourceRoot": "libs/client-chatbot/src",
       "tags": ["scope:client-chatbot", "type:feature"]
     },
-    "client-components": {
-      "architect": {
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          },
-          "options": {
-            "config": {
-              "configFolder": "libs/client-components/.storybook"
-            },
-            "outputPath": "dist/storybook/client-components",
-            "uiFramework": "@storybook/angular"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "eslintConfig": "libs/client-components/.eslintrc.json",
-            "lintFilePatterns": ["libs/client-components/**/*.ts"]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          },
-          "options": {
-            "config": {
-              "configFolder": "libs/client-components/.storybook"
-            },
-            "port": 4400,
-            "uiFramework": "@storybook/angular"
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/client-components/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "prefix": "app",
-      "projectType": "library",
-      "root": "libs/client-components",
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      },
-      "sourceRoot": "libs/client-components/src",
-      "tags": ["scope:client-components", "type:feature"]
-    },
-    "client-components-e2e": {
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "configurations": {
-            "ci": {
-              "devServerTarget": "client-components:storybook:ci"
-            }
-          },
-          "options": {
-            "cypressConfig": "apps/client-components-e2e/cypress.json",
-            "devServerTarget": "client-components:storybook",
-            "tsConfig": "apps/client-components-e2e/tsconfig.e2e.json"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "eslintConfig": "apps/client-components-e2e/.eslintrc.json",
-            "lintFilePatterns": ["apps/client-components-e2e/**/*.ts"]
-          }
-        }
-      },
-      "implicitDependencies": ["client-components"],
-      "projectType": "application",
-      "root": "apps/client-components-e2e",
-      "sourceRoot": "apps/client-components-e2e/src",
-      "tags": ["scope:client-components-e2e", "type:e2e"]
-    },
     "client-core": {
       "architect": {
         "lint": {
@@ -548,6 +461,93 @@
       },
       "sourceRoot": "libs/client-core/src",
       "tags": ["scope:client-core", "type:feature"]
+    },
+    "client-core-components": {
+      "architect": {
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          },
+          "options": {
+            "config": {
+              "configFolder": "libs/client-core-components/.storybook"
+            },
+            "outputPath": "dist/storybook/client-core-components",
+            "uiFramework": "@storybook/angular"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "libs/client-core-components/.eslintrc.json",
+            "lintFilePatterns": ["libs/client-core-components/**/*.ts"]
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          },
+          "options": {
+            "config": {
+              "configFolder": "libs/client-core-components/.storybook"
+            },
+            "port": 4400,
+            "uiFramework": "@storybook/angular"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/client-core-components/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "prefix": "app",
+      "projectType": "library",
+      "root": "libs/client-core-components",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "sourceRoot": "libs/client-core-components/src",
+      "tags": ["scope:client-core-components", "type:feature"]
+    },
+    "client-core-components-e2e": {
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "configurations": {
+            "ci": {
+              "devServerTarget": "client-core-components:storybook:ci"
+            }
+          },
+          "options": {
+            "cypressConfig": "apps/client-core-components-e2e/cypress.json",
+            "devServerTarget": "client-core-components:storybook",
+            "tsConfig": "apps/client-core-components-e2e/tsconfig.e2e.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "apps/client-core-components-e2e/.eslintrc.json",
+            "lintFilePatterns": ["apps/client-core-components-e2e/**/*.ts"]
+          }
+        }
+      },
+      "implicitDependencies": ["client-core-components"],
+      "projectType": "application",
+      "root": "apps/client-core-components-e2e",
+      "sourceRoot": "apps/client-core-components-e2e/src",
+      "tags": ["scope:client-core-components-e2e", "type:e2e"]
     },
     "client-d3-charts": {
       "architect": {
@@ -1099,6 +1099,7 @@
               "configFolder": "apps/documentation/.storybook"
             },
             "outputPath": "dist/storybook/documentation",
+            "projectBuildConfig": "documentation",
             "uiFramework": "@storybook/angular"
           }
         },

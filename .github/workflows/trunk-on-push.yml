@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [16.x]
 
     steps:
       - name: Checkout sources
@@ -148,6 +148,8 @@ jobs:
           npx nx run tools:compodoc-build
           yarn generate:changelog
           yarn e2e:headless:report
+          npx nx run documentation:build-storybook || true
+          cp -r ./dist/storybook/documentation ./dist/apps/documentation/assets/storybook || true
 
       - name: Deploy client
         if: steps.changes.outputs.nx == 'true'

@@ -1,6 +1,6 @@
 # Upgraded Enigma
 
-Organizer and productivity tools.
+Organizer and productivity tools mono-repository.
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
@@ -19,7 +19,7 @@ In order to run own copy of the project one must fulfill the following requireme
 
 ### Operating system
 
-- [Debian based Linux](https://en.wikipedia.org/wiki/List_of_Linux_distributions#Debian-based)
+- [Debian based Linux](https://en.wikipedia.org/wiki/List_of_Linux_distributions#Debian-based) - recommended, check out this [dev setup instructions](https://github.com/rfprod/wdsdu) to facilitate getting started
 - [OSX](https://en.wikipedia.org/wiki/MacOS)
 - [~~Windows~~](https://en.wikipedia.org/wiki/Microsoft_Windows) - `poorly supported`
 
@@ -32,8 +32,8 @@ In order to run own copy of the project one must fulfill the following requireme
 
 ### Preferred package manager
 
-- [Yarn](https://www.npmjs.com/package/yarn) is a preferred package manager for dependencies installation in the project root.
-- [npm](https://www.npmjs.com/) is a preferred package manager for dependencies installation in the `functions` folder.
+- [Yarn](https://www.npmjs.com/package/yarn) - preferred package manager for dependencies installation in the project root.
+- [npm](https://www.npmjs.com/) - preferred package manager for dependencies installation in the `functions` folder.
 
 ## Dependencies audit
 
@@ -49,7 +49,7 @@ yarn audit:fix
 
 The project has lots of package scripts, check it in the `package.json` located in the project root, or use the following command (see terminal output for usage tips)
 
-```
+```bash
 yarn workspace:help
 ```
 
@@ -75,16 +75,14 @@ Applications as well as generated documentation, testing reports, and a custom c
 
 ### Webapp
 
-- [Upgraded Enigma](https://upgraded-enigma.web.app)
-
-### Elements webapp
-
-- [Upgraded Enigma Elements](https://upgraded-enigma-elements.web.app)
+- [Client](https://upgraded-enigma.web.app)
+- [Elements](https://upgraded-enigma-elements.web.app)
 
 ### Documentation
 
-- [Upgraded Enigma Documentation](https://upgraded-enigma-documentation.web.app)
-- [Upgraded Enigma Compodoc](https://upgraded-enigma-documentation.web.app/assets/compodoc/index.html)
+- [Documentation](https://upgraded-enigma-documentation.web.app)
+- [Compodoc](https://upgraded-enigma-documentation.web.app/assets/compodoc/index.html)
+- [Storybook](https://upgraded-enigma-documentation.web.app/assets/storybook/index.html)
 
 #### Unit coverage
 
@@ -96,7 +94,7 @@ Applications as well as generated documentation, testing reports, and a custom c
 - [Backend Websocket](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-websocket/index.html)
 - [Client](https://upgraded-enigma-documentation.web.app/assets/coverage/apps/client/index.html)
 - [Client Chatbot](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-chatbot/index.html)
-- [Client Components](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-components/index.html)
+- [Client Core Components](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-core-components/index.html)
 - [Client Diagnostics](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-diagnostics/index.html)
 - [Client Core](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-core/index.html)
 - [Client Material](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-material/index.html)
@@ -111,7 +109,7 @@ Applications as well as generated documentation, testing reports, and a custom c
 #### E2E report
 
 - [Client E2E](https://upgraded-enigma-documentation.web.app/assets/cypress/client-e2e/mochawesome/mochawesome.html)
-- [Client Components E2E](https://upgraded-enigma-documentation.web.app/assets/cypress/client-components-e2e/mochawesome/mochawesome.html)
+- [Client Core Components E2E](https://upgraded-enigma-documentation.web.app/assets/cypress/client-core-components-e2e/mochawesome/mochawesome.html)
 - [Documentation E2E](https://upgraded-enigma-documentation.web.app/assets/cypress/documentation-e2e/mochawesome/mochawesome.html)
 
 #### Changelog
@@ -124,8 +122,8 @@ Applications as well as generated documentation, testing reports, and a custom c
 - [Backend Websocket](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-websocket-CHANGELOG.html)
 - [Client](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/client-CHANGELOG.html)
 - [Client E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/client-e2e-CHANGELOG.html)
-- [Client Components](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-components-CHANGELOG.html)
-- [Client Components E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-components-e2e-CHANGELOG.html)
+- [Client Core Components](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-core-components-CHANGELOG.html)
+- [Client Core Components E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-core-components-e2e-CHANGELOG.html)
 - [Client Diagnostics](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-diagnostics-CHANGELOG.html)
 - [Client Diagnostics E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-diagnostics-e2e-CHANGELOG.html)
 - [Client Core](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-core-CHANGELOG.html)
@@ -281,7 +279,7 @@ npx nx g @nrwl/angular:storybook-configuration project-name
 
 ### Tools help
 
-```
+```bash
 ng run tools:help
 ```
 

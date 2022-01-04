@@ -195,7 +195,7 @@ const clientConstraints = [
       'scope:client-store',
       'scope:client-services',
       'scope:client-chatbot',
-      'scope:client-components',
+      'scope:client-core-components',
       'scope:client-core',
       'scope:client-diagnostics',
       'scope:client-material',
@@ -219,7 +219,7 @@ const clientConstraints = [
     onlyDependOnLibsWithTags: ['scope:client-util'],
   },
   {
-    sourceTag: 'scope:client-components-e2e',
+    sourceTag: 'scope:client-core-components-e2e',
     onlyDependOnLibsWithTags: ['scope:client-util'],
   },
 ];
