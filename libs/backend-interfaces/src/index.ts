@@ -1,3 +1,3 @@
-export * from './lib/auth/index';
-export * from './lib/environment/index';
-export * from './lib/shared/index';
+export * from './lib/auth';
+export * from './lib/environment';
+export * from './lib/shared';
