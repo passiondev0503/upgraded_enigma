@@ -33,7 +33,7 @@ let envConfigFile = `export const firebase = {
  * If reset argument is passed (retrieved via yargs argv object) environment
  * variables in client app are set to default values.
  */
-const reset = argv.reset;
+const reset = (<{ [x: string]: string | number | boolean }>argv).reset;
 
 if (typeof reset === 'undefined' || reset === false) {
   /**
