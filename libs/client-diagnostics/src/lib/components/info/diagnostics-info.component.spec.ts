@@ -6,19 +6,19 @@ import {
   flushHttpRequests,
   getTestBedConfig,
   newTestBedMetadata,
-  setupJestSpiesFor,
-  TClassMemberSpiesObject,
+  spyOnFunctions,
+  TClassMemberFunctionSpiesObject,
 } from '@app/client-unit-testing';
 
-import { AppInfoComponent } from './info.component';
+import { AppDiagnosticsInfoComponent } from './diagnostics-info.component';
 
-describe('AppInfoComponent', () => {
+describe('AppDiagnosticsInfoComponent', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    declarations: [AppInfoComponent],
+    declarations: [AppDiagnosticsInfoComponent],
     imports: [
       AppClientTranslateModule.forRoot(),
       RouterTestingModule.withRoutes([
-        { path: '', component: AppInfoComponent },
+        { path: '', component: AppDiagnosticsInfoComponent },
         { path: '', redirectTo: '', pathMatch: 'full' },
         { path: '**', redirectTo: '' },
       ]),
@@ -26,11 +26,9 @@ describe('AppInfoComponent', () => {
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
-  let fixture: ComponentFixture<AppInfoComponent>;
-  let component: AppInfoComponent;
-  let spy: {
-    component: TClassMemberSpiesObject<AppInfoComponent>;
-  };
+  let fixture: ComponentFixture<AppDiagnosticsInfoComponent>;
+  let component: AppDiagnosticsInfoComponent;
+  let componentSpy: TClassMemberFunctionSpiesObject<AppDiagnosticsInfoComponent>;
 
   let httpController: HttpTestingController;
 
@@ -40,12 +38,9 @@ describe('AppInfoComponent', () => {
         .compileComponents()
         .then(() => {
           httpController = TestBed.inject(HttpTestingController);
-          fixture = TestBed.createComponent(AppInfoComponent);
-          component = fixture.debugElement.componentInstance;
-          spy = {
-            component: setupJestSpiesFor<AppInfoComponent>(component),
-          };
-          expect(spy.component).toBeDefined();
+          fixture = TestBed.createComponent(AppDiagnosticsInfoComponent);
+          component = fixture.componentInstance;
+          componentSpy = spyOnFunctions<AppDiagnosticsInfoComponent>(component);
           flushHttpRequests(httpController);
         });
     }),
@@ -57,5 +52,6 @@ describe('AppInfoComponent', () => {
 
   it('should be defined', () => {
     expect(component).toBeDefined();
+    expect(componentSpy).toBeDefined();
   });
 });

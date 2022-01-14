@@ -5,14 +5,20 @@ import { AppClientMaterialModule } from '@app/client-material';
 import { AppClientTranslateModule } from '@app/client-translate';
 
 import { AppClientDiagnosticsRoutingModule } from './client-diagnostics-routing.module';
-import { AppHomeComponent } from './components/home/home.component';
-import { AppHomePage } from './components/home/page/home-page.component';
-import { AppIndexComponent } from './components/index/index.component';
-import { AppInfoComponent } from './components/info/info.component';
-import { AppInfoPage } from './components/info/page/info-page.component';
+import { AppDiagnosticsHomeComponent } from './components/home/diagnostics-home.component';
+import { AppDiagnosticsHomePage } from './components/home/page/diagnostics-home-page.component';
+import { AppDiagnosticsIndexComponent } from './components/index/diagnostics-index.component';
+import { AppDiagnosticsInfoComponent } from './components/info/diagnostics-info.component';
+import { AppDiagnosticsInfoPage } from './components/info/page/diagnostics-info-page.component';
 
 @NgModule({
   imports: [FlexLayoutModule, CommonModule, AppClientMaterialModule, AppClientTranslateModule, AppClientDiagnosticsRoutingModule],
-  declarations: [AppIndexComponent, AppHomeComponent, AppHomePage, AppInfoComponent, AppInfoPage],
+  declarations: [
+    AppDiagnosticsIndexComponent,
+    AppDiagnosticsHomeComponent,
+    AppDiagnosticsHomePage,
+    AppDiagnosticsInfoComponent,
+    AppDiagnosticsInfoPage,
+  ],
 })
 export class AppClientDiagnosticsModule {}

@@ -2,12 +2,19 @@ import { HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { AppClientTranslateModule } from '@app/client-translate';
-import { AppLocalStorageMock, getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
+import {
+  AppLocalStorageMock,
+  getTestBedConfig,
+  newTestBedMetadata,
+  spyOnFunctions,
+  TClassMemberFunctionSpiesObject,
+} from '@app/client-unit-testing';
 import { HTTP_STATUS } from '@app/client-util';
 import { Store } from '@ngxs/store';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { of, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
+import { httpProgressActions } from '../http-progress/http-progress.actions';
 import { AppHttpProgressStoreModule } from '../http-progress/http-progress.module';
 import { AppToasterService, toasterServiceProvider } from '../http-progress/services/toaster/toaster.service';
 import { AppHttpHandlersService } from './http-handlers.service';
@@ -20,18 +27,12 @@ describe('AppHttpHandlersService', () => {
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
   let service: AppHttpHandlersService;
+  let serviceSpies: TClassMemberFunctionSpiesObject<AppHttpHandlersService>;
   let httpTestingController: HttpTestingController;
   let localStorage: AppLocalStorageMock;
   let toaster: AppToasterService;
   let store: Store;
-  let spy: {
-    store: {
-      dispatch: jest.SpyInstance;
-    };
-    service: {
-      checkErrorStatusAndRedirect: jest.SpyInstance;
-    };
-  };
+  let storeDispatchSpy: jest.SpyInstance;
 
   beforeEach(
     waitForAsync(() => {
@@ -42,17 +43,11 @@ describe('AppHttpHandlersService', () => {
         .compileComponents()
         .then(() => {
           service = TestBed.inject(AppHttpHandlersService);
+          serviceSpies = spyOnFunctions<AppHttpHandlersService>(service);
           toaster = TestBed.inject(AppToasterService);
           httpTestingController = TestBed.inject(HttpTestingController);
           store = TestBed.inject(Store);
-          spy = {
-            store: {
-              dispatch: jest.spyOn(store, 'dispatch'),
-            },
-            service: {
-              checkErrorStatusAndRedirect: jest.spyOn(service, 'checkErrorStatusAndRedirect'),
-            },
-          };
+          storeDispatchSpy = jest.spyOn(store, 'dispatch');
         });
     }),
   );
@@ -80,9 +75,9 @@ describe('AppHttpHandlersService', () => {
 
   it('checkErrorStatusAndRedirect should reset user if error status is 401', () => {
     service.checkErrorStatusAndRedirect(HTTP_STATUS.BAD_REQUEST);
-    expect(spy.store.dispatch).not.toHaveBeenCalled();
+    expect(storeDispatchSpy).not.toHaveBeenCalled();
     service.checkErrorStatusAndRedirect(HTTP_STATUS.UNAUTHORIZED);
-    expect(spy.store.dispatch).toHaveBeenCalled();
+    expect(storeDispatchSpy).toHaveBeenCalled();
   });
 
   describe('handleError', () => {
@@ -122,10 +117,38 @@ describe('AppHttpHandlersService', () => {
     );
   });
 
-  it('pipeHttpResponse should work correctly', () => {
-    const observable = of({ data: {} });
-    let pipedRequest = service.pipeHttpResponse(observable);
-    expect(pipedRequest).toEqual(expect.any(Observable));
-    pipedRequest = service.pipeHttpResponse(observable);
+  describe('pipeHttpResponse', () => {
+    it(
+      'should pipe observable that returns data correctly',
+      waitForAsync(() => {
+        const observable = of({ data: {} });
+        void service
+          .pipeHttpResponse(observable)
+          .pipe(
+            tap(() => {
+              expect(serviceSpies.handleError).not.toHaveBeenCalled();
+              expect(storeDispatchSpy).toHaveBeenCalledWith(new httpProgressActions.stopProgress({ mainView: true }));
+            }),
+          )
+          .subscribe();
+      }),
+    );
+
+    it(
+      'should pipe observable that throws an error correctly',
+      waitForAsync(() => {
+        const error = new Error('');
+        const observable = throwError(() => error);
+        void service
+          .pipeHttpResponse(observable)
+          .pipe(
+            tap(() => {
+              expect(serviceSpies.handleError).toHaveBeenCalledWith(error, true);
+              expect(storeDispatchSpy).toHaveBeenCalledWith(new httpProgressActions.stopProgress({ mainView: true }));
+            }),
+          )
+          .subscribe();
+      }),
+    );
   });
 });

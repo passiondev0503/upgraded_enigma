@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
 import memo from 'memo-decorator';
-import { MonoTypeOperatorFunction, Observable, throwError } from 'rxjs';
+import { MonoTypeOperatorFunction, Observable, of } from 'rxjs';
 import { catchError, finalize, tap, timeout } from 'rxjs/operators';
 
 import { httpProgressActions } from '../http-progress/http-progress.actions';
@@ -103,21 +103,21 @@ export class AppHttpHandlersService {
   public handleError(error: HttpErrorResponse): Observable<never> {
     const errorMessage = this.getErrorMessage(error);
     this.toaster.showToaster(errorMessage, 'error');
-    return throwError(() => new Error(errorMessage));
+    return of();
   }
 
   /**
    * Taps errors.
    */
   public tapError<T>(): MonoTypeOperatorFunction<T> {
-    return tap(
-      (): void => void 0,
-      (error: { networkError: HttpErrorResponse }) => {
+    return tap({
+      next: (): void => void 0,
+      error: (error: { networkError: HttpErrorResponse }) => {
         const unauthorized: boolean = Boolean(error.networkError) && error.networkError.status === HTTP_STATUS.BAD_REQUEST;
         if (unauthorized) {
           this.checkErrorStatusAndRedirect(HTTP_STATUS.UNAUTHORIZED);
         }
       },
-    );
+    });
   }
 }

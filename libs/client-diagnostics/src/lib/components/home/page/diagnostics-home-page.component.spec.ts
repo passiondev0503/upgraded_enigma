@@ -1,15 +1,15 @@
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { getTestBedConfig, newTestBedMetadata, setupJestSpiesFor, TClassMemberSpiesObject } from '@app/client-unit-testing';
+import { getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
 
-import { AppInfoPage } from './info-page.component';
+import { AppDiagnosticsHomePage } from './diagnostics-home-page.component';
 
-describe('AppInfoPage', () => {
+describe('AppDiagnosticsHomePage', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    declarations: [AppInfoPage],
+    declarations: [AppDiagnosticsHomePage],
     imports: [
       RouterTestingModule.withRoutes([
-        { path: '', component: AppInfoPage },
+        { path: '', component: AppDiagnosticsHomePage },
         { path: '', redirectTo: '', pathMatch: 'full' },
         { path: '**', redirectTo: '' },
       ]),
@@ -17,23 +17,16 @@ describe('AppInfoPage', () => {
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
-  let fixture: ComponentFixture<AppInfoPage>;
-  let component: AppInfoPage;
-  let spy: {
-    component: TClassMemberSpiesObject<AppInfoPage>;
-  };
+  let fixture: ComponentFixture<AppDiagnosticsHomePage>;
+  let component: AppDiagnosticsHomePage;
 
   beforeEach(
     waitForAsync(() => {
       void TestBed.configureTestingModule(testBedConfig)
         .compileComponents()
         .then(() => {
-          fixture = TestBed.createComponent(AppInfoPage);
+          fixture = TestBed.createComponent(AppDiagnosticsHomePage);
           component = fixture.debugElement.componentInstance;
-          spy = {
-            component: setupJestSpiesFor<AppInfoPage>(component),
-          };
-          expect(spy.component).toBeDefined();
         });
     }),
   );

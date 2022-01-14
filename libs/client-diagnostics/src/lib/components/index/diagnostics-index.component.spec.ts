@@ -4,20 +4,20 @@ import { AppWebsocketModule } from '@app/client-store';
 import {
   getTestBedConfig,
   newTestBedMetadata,
-  setupJestSpiesFor,
-  TClassMemberSpiesObject,
+  spyOnFunctions,
+  TClassMemberFunctionSpiesObject,
   testingEnvironment,
 } from '@app/client-unit-testing';
 
-import { AppIndexComponent } from './index.component';
+import { AppDiagnosticsIndexComponent } from './diagnostics-index.component';
 
-describe('AppIndexComponent', () => {
+describe('AppDiagnosticsIndexComponent', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    declarations: [AppIndexComponent],
+    declarations: [AppDiagnosticsIndexComponent],
     imports: [
       AppWebsocketModule.forRoot(testingEnvironment),
       RouterTestingModule.withRoutes([
-        { path: '', component: AppIndexComponent },
+        { path: '', component: AppDiagnosticsIndexComponent },
         { path: '', redirectTo: '', pathMatch: 'full' },
         { path: '**', redirectTo: '' },
       ]),
@@ -25,23 +25,18 @@ describe('AppIndexComponent', () => {
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
-  let fixture: ComponentFixture<AppIndexComponent>;
-  let component: AppIndexComponent;
-  let spy: {
-    component: TClassMemberSpiesObject<AppIndexComponent>;
-  };
+  let fixture: ComponentFixture<AppDiagnosticsIndexComponent>;
+  let component: AppDiagnosticsIndexComponent;
+  let componentSpy: TClassMemberFunctionSpiesObject<AppDiagnosticsIndexComponent>;
 
   beforeEach(
     waitForAsync(() => {
       void TestBed.configureTestingModule(testBedConfig)
         .compileComponents()
         .then(() => {
-          fixture = TestBed.createComponent(AppIndexComponent);
-          component = fixture.debugElement.componentInstance;
-          spy = {
-            component: setupJestSpiesFor<AppIndexComponent>(component),
-          };
-          expect(spy.component).toBeDefined();
+          fixture = TestBed.createComponent(AppDiagnosticsIndexComponent);
+          component = fixture.componentInstance;
+          componentSpy = spyOnFunctions<AppDiagnosticsIndexComponent>(component);
           fixture.detectChanges();
         });
     }),
@@ -49,5 +44,6 @@ describe('AppIndexComponent', () => {
 
   it('should be defined', () => {
     expect(component).toBeDefined();
+    expect(componentSpy).toBeDefined();
   });
 });

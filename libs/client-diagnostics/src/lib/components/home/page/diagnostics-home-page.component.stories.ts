@@ -1,28 +1,36 @@
-import { DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { APP_BASE_HREF, DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppClientMaterialModule } from '@app/client-material';
+import { AppHttpProgressStoreModule } from '@app/client-store';
 import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
+import { NgxsModule } from '@ngxs/store';
 import { Args, Story } from '@storybook/angular/types-6-0';
 
-import { AppInfoPage } from './info-page.component';
+import { AppDiagnosticsHomePage } from './diagnostics-home-page.component';
 
 const testingEnvironment = {
   production: false,
   platform: '',
-  appName: 'Client',
+  appName: 'Upgraded enigma',
   api: 'http://localhost:8080/api',
   envoyUrl: 'http://localhost:8081',
 };
 
 export default {
-  title: 'AppInfoPage',
-  component: AppInfoPage,
+  title: 'AppDiagnosticsHomePage',
+  component: AppDiagnosticsHomePage,
 };
 
-const story: Story<AppInfoPage> = (args: Args) => ({
+const story: Story<AppDiagnosticsHomePage> = (args: Args) => ({
   moduleMetadata: {
-    imports: [BrowserAnimationsModule, FlexLayoutModule, AppClientMaterialModule.forRoot()],
+    imports: [
+      BrowserAnimationsModule,
+      FlexLayoutModule,
+      AppClientMaterialModule.forRoot(),
+      AppHttpProgressStoreModule.forRoot(),
+      NgxsModule.forRoot([]),
+    ],
     providers: [
       {
         provide: LocationStrategy,
@@ -30,12 +38,13 @@ const story: Story<AppInfoPage> = (args: Args) => ({
       },
       { provide: WINDOW, useFactory: windowFactory },
       { provide: DOCUMENT, useFactory: documentFactory },
+      { provide: APP_BASE_HREF, useValue: '/' },
       {
         provide: WEB_CLIENT_APP_ENV,
         useValue: testingEnvironment,
       },
     ],
-    declarations: [AppInfoPage],
+    declarations: [AppDiagnosticsHomePage],
   },
   props: {
     ...args,
@@ -44,7 +53,7 @@ const story: Story<AppInfoPage> = (args: Args) => ({
 
 export const primary = story.bind({});
 primary.args = {
-  ping: 'ping result',
+  timer: '1',
   markedInstructions: 'Marked instructions',
 };
 primary.parameters = {

@@ -5,12 +5,12 @@ import { AppWebsocketService } from '@app/client-store';
  * Application index component.
  */
 @Component({
-  selector: 'app-index',
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss'],
+  selector: 'app-diagnostics-index',
+  templateUrl: './diagnostics-index.component.html',
+  styleUrls: ['./diagnostics-index.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppIndexComponent implements OnDestroy {
+export class AppDiagnosticsIndexComponent implements OnDestroy {
   constructor(private readonly ws: AppWebsocketService) {
     this.ws.getDynamicDiagnosticData();
   }

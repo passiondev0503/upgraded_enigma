@@ -47,7 +47,7 @@ export class AppHttpProgressService {
     this.progressRef.attach(new ComponentPortal<AppGlobalProgressBarComponent>(AppGlobalProgressBarComponent));
   }
 
-  public detachIndicator(): void {
+  private detachIndicator(): void {
     this.progressRef.detach();
   }
 

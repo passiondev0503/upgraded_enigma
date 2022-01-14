@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 
-import { AppHomeComponent } from './components/home/home.component';
-import { AppIndexComponent } from './components/index/index.component';
-import { AppInfoComponent } from './components/info/info.component';
+import { AppDiagnosticsHomeComponent } from './components/home/diagnostics-home.component';
+import { AppDiagnosticsIndexComponent } from './components/index/diagnostics-index.component';
+import { AppDiagnosticsInfoComponent } from './components/info/diagnostics-info.component';
 
 const routes: Route[] = [
   {
     path: '',
-    component: AppIndexComponent,
+    component: AppDiagnosticsIndexComponent,
     children: [
       {
         path: '',
-        component: AppHomeComponent,
+        component: AppDiagnosticsHomeComponent,
       },
       {
         path: 'info',
-        component: AppInfoComponent,
+        component: AppDiagnosticsInfoComponent,
       },
     ],
   },
