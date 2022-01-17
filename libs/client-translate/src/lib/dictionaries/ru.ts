@@ -10,6 +10,8 @@ export const RU_DICTIONARY = new InjectionToken<IUiDictionary>('RU');
 export const RU: IUiDictionary = {
   title: 'Органайзер',
 
+  back: 'Назад',
+
   language: 'Язык',
 
   initialization: 'Инициализация пользовательской учётной записи',

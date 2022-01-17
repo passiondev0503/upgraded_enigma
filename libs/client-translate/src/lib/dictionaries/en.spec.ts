@@ -28,6 +28,8 @@ describe('English shared translations', () => {
       expect.objectContaining({
         title: 'Organizer',
 
+        back: 'Back',
+
         language: 'Language',
 
         initialization: 'User account initialization',

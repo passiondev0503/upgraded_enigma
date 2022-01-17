@@ -10,6 +10,8 @@ export const EN_DICTIONARY = new InjectionToken<IUiDictionary>('EN');
 export const EN: IUiDictionary = {
   title: 'Organizer',
 
+  back: 'Back',
+
   language: 'Language',
 
   initialization: 'User account initialization',

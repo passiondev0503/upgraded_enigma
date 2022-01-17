@@ -1,3 +1,13 @@
 :host {
   display: block;
 }
+
+.logo-container {
+  width: auto !important;
+  height: 100%;
+
+  &_image {
+    width: auto !important;
+    height: 75%;
+  }
+}

@@ -1,9 +1,11 @@
+import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppUserState, userActions } from '@app/client-store';
+import { AppUserState, sidebarActions, userActions } from '@app/client-store';
 import { IButton, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@app/client-util';
+import { RouterState } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
-import { map } from 'rxjs/operators';
+import { first, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +15,8 @@ import { map } from 'rxjs/operators';
 })
 export class AppNavbarComponent {
   @Input() public logoSrc = 'assets/icons/icon-72x72.png';
+
+  @Input() public showBackButton = false;
 
   @Input() public buttons: IButton[] = [
     {
@@ -138,6 +142,29 @@ export class AppNavbarComponent {
   constructor(
     public readonly store: Store,
     private readonly router: Router,
+    private readonly location: Location,
     @Inject(WEB_CLIENT_APP_ENV) private readonly env: IWebClientAppEnvironment,
   ) {}
+
+  public sidebarCloseHandler(): void {
+    void this.store.dispatch(new sidebarActions.setState({ sidebarOpened: false }));
+  }
+
+  public goBack(): void {
+    void this.store
+      .select(RouterState.state)
+      .pipe(
+        first(),
+        tap(state => {
+          const hasQueryParams = state?.url?.match(/.*[?].*/);
+          if (typeof hasQueryParams !== 'undefined' && hasQueryParams !== null && hasQueryParams.length > 0) {
+            this.location.back(); // first call resets query params only
+            this.location.back();
+          } else {
+            this.location.back();
+          }
+        }),
+      )
+      .subscribe();
+  }
 }

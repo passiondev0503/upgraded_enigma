@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, HostListener, Inject, Input, Output } from '@angular/core';
 import { AppSidebarState, AppUserState, chatbotActions, sidebarActions } from '@app/client-store';
 import { IAnchor, WINDOW } from '@app/client-util';
 import { Store } from '@ngxs/store';
@@ -32,6 +32,8 @@ export class AppToolbarComponent {
     },
   ];
 
+  @Output() public readonly darkThemeEnabled = new EventEmitter<boolean>();
+
   public readonly sidebarOpened$ = this.store.select(AppSidebarState.getState).pipe(map(state => state.sidebarOpened));
 
   public readonly user$ = this.store.select(AppUserState.token).pipe(map(token => ({ userAuthenticated: Boolean(token) })));
@@ -44,6 +46,10 @@ export class AppToolbarComponent {
 
   public toggleChatbot(): void {
     void this.store.dispatch(new chatbotActions.toggle());
+  }
+
+  public toggleMaterialTheme(event: boolean): void {
+    this.darkThemeEnabled.emit(event);
   }
 
   @HostListener('window:scroll')

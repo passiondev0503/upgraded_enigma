@@ -1,5 +1,11 @@
 <mat-toolbar color="primary" fxFlex="0 1 auto" *ngIf="user$ | async as user">
-  <img [ngStyle]="{ height: '75%', width: 'auto!important' }" [src]="logoSrc" alt="{{ appName }}" title="{{ appName }}" />
+  <span fxFlex="0 1 auto" class="logo-container" fxLayout="row" fxLayoutAlign="start center">
+    <img *ngIf="!showBackButton" class="logo-container_image" [src]="logoSrc" alt="{{ appName }}" title="{{ appName }}" />
+
+    <button mat-icon-button *ngIf="showBackButton" (click)="goBack()">
+      <mat-icon title="{{ 'back' | translate }}"> arrow_back </mat-icon>
+    </button>
+  </span>
 
   <span fxFlex="1 1 auto"></span>
 
@@ -8,6 +14,7 @@
     *ngFor="let button of buttons | buttonsVisibility: user.userAuthenticated"
     [routerLink]="button.routerLink"
     [disabled]="button.routeActive()"
+    (click)="sidebarCloseHandler()"
     (click)="button.click ? button.click() : null"
     [fxHide.xs]="true"
     [fxHide.sm]="true"
