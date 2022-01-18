@@ -78,6 +78,7 @@
       "options": {
         "cacheDirectory": "/tmp/nx/upgraded-enigma",
         "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook"],
+        "parallel": 1,
         "runtimeCacheInputs": ["node -v", "echo $IMPORTANT_ENV_VAR"]
       },
       "runner": "@nrwl/workspace/tasks-runners/default"
