@@ -310,3 +310,7 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 ### CI
 
 - [GitHub Actions](https://github.com/features/actions)
+
+### Development methodology
+
+- [Trunk based development](https://trunkbaseddevelopment.com/)
