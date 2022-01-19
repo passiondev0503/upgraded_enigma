@@ -476,6 +476,7 @@
               "configFolder": "libs/client-core-components/.storybook"
             },
             "outputPath": "dist/storybook/client-core-components",
+            "projectBuildConfig": "client-core-components:build-storybook",
             "uiFramework": "@storybook/angular"
           }
         },
@@ -498,6 +499,7 @@
               "configFolder": "libs/client-core-components/.storybook"
             },
             "port": 4400,
+            "projectBuildConfig": "client-core-components:build-storybook",
             "uiFramework": "@storybook/angular"
           }
         },
@@ -586,6 +588,7 @@
               "configFolder": "libs/client-diagnostics/.storybook"
             },
             "outputPath": "dist/storybook/client-diagnostics",
+            "projectBuildConfig": "client-diagnostics:build-storybook",
             "uiFramework": "@storybook/angular"
           }
         },
@@ -608,6 +611,7 @@
               "configFolder": "libs/client-diagnostics/.storybook"
             },
             "port": 4400,
+            "projectBuildConfig": "client-diagnostics:build-storybook",
             "uiFramework": "@storybook/angular"
           }
         },
