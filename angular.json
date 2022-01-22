@@ -1458,7 +1458,7 @@
           "options": {
             "commands": [
               {
-                "command": "rm -rf .angular/* documentation/* dist/* coverage/* changelog/* /tmp/nx/upgraded-enigma",
+                "command": "rm -rf .angular/* documentation/* dist/* coverage/* changelog/* /tmp/nx/upgraded-enigma /tmp/jest_rs/upgraded-enigma",
                 "forwardAllArgs": false
               }
             ]
