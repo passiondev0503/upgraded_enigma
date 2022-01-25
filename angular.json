@@ -1453,17 +1453,6 @@
     },
     "tools": {
       "architect": {
-        "cleanup": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "rm -rf .angular/* documentation/* dist/* coverage/* changelog/* /tmp/nx/upgraded-enigma /tmp/jest_rs/upgraded-enigma",
-                "forwardAllArgs": false
-              }
-            ]
-          }
-        },
         "compodoc-build": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
