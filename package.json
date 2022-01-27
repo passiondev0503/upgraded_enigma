@@ -1,6 +1,6 @@
 {
   "name": "upgraded-enigma",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "private": true,
   "description": "Organizer and productivity tools.",
   "license": "MIT",
@@ -109,7 +109,7 @@
     "workspace:cleanup": "rm -rf .angular/* documentation/* dist/* coverage/* changelog/* /tmp/nx/upgraded-enigma /tmp/jest_rs/upgraded-enigma",
     "workspace:help": "nx run tools:help",
     "workspace:integrity-check": "bash tools/shell/yarn-extension.sh integrity-check",
-    "workspace:mmdc": "./node_modules/.bin/mmdc",
+    "workspace:mmdc": "node ./node_modules/puppeteer/install.js; ./node_modules/.bin/mmdc",
     "workspace:schematic": "nx workspace-schematic",
     "workspace:update": "nx migrate latest",
     "workspace:update:check": "nx run tools:update-check",
