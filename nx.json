@@ -3,6 +3,11 @@
     "defaultBase": "main"
   },
   "cli": {
+    "cache": {
+      "enabled": true,
+      "environment": "all",
+      "path": ".angular/cache"
+    },
     "defaultCollection": "@nrwl/angular",
     "warnings": {
       "versionMismatch": false
