@@ -46,10 +46,13 @@ describe('AppToolbarComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('toggleSidebase should call store dispatch', () => {
-    component.toggleSidebar();
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.toggleSidebar());
-  });
+  it(
+    'toggleSidebar should call store dispatch',
+    waitForAsync(() => {
+      component.toggleSidebar();
+      expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.toggleSidebar());
+    }),
+  );
 
   it('toggleMaterialTheme should emit an output event', () => {
     const outputSpy = jest.spyOn(component.darkThemeEnabled, 'emit');
@@ -58,10 +61,13 @@ describe('AppToolbarComponent', () => {
     expect(outputSpy).toHaveBeenCalledWith(event);
   });
 
-  it('toggleChatbot should call store dispatch', () => {
-    component.toggleChatbot();
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(new chatbotActions.toggle());
-  });
+  it(
+    'toggleChatbot should call store dispatch',
+    waitForAsync(() => {
+      component.toggleChatbot();
+      expect(storeSpy.dispatch).toHaveBeenCalledWith(new chatbotActions.toggle());
+    }),
+  );
 
   it('windowScrollHandler should set the fixedPosition value', () => {
     component.windowScrollHandler();

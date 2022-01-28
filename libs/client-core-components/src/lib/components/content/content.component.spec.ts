@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { AppSidebarState, sidebarActions } from '@app/client-store';
 import { getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
 import { NgxsModule, Store } from '@ngxs/store';
@@ -19,6 +20,7 @@ describe('AppContentComponent', () => {
   let storeSpy: {
     dispatch: jest.SpyInstance;
   };
+  let router: Router;
 
   beforeEach(
     waitForAsync(() => {
@@ -33,6 +35,8 @@ describe('AppContentComponent', () => {
             dispatch: jest.spyOn(store, 'dispatch').mockImplementation((action: unknown) => of(null)),
           };
 
+          router = TestBed.inject(Router);
+
           fixture.detectChanges();
         });
     }),
@@ -42,13 +46,28 @@ describe('AppContentComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('sidebarCloseHandler should call store dispatch', () => {
-    component.sidebarCloseHandler();
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.closeSidebar());
-  });
+  it(
+    'sidebarCloseHandler should call store dispatch',
+    waitForAsync(() => {
+      component.sidebarCloseHandler();
+      expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.closeSidebar());
+    }),
+  );
 
-  it('sidebarOpenHandler should call store dispatch', () => {
-    component.sidebarOpenHandler();
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.openSidebar());
+  it(
+    'sidebarOpenHandler should call store dispatch',
+    waitForAsync(() => {
+      component.sidebarOpenHandler();
+      expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.openSidebar());
+    }),
+  );
+
+  it('should scroll content on router events', async () => {
+    expect(component.content).toBeDefined();
+    if (typeof component.content !== 'undefined') {
+      const scrollToSpy = jest.spyOn(component.content, 'scrollTo');
+      await router.navigate(['']);
+      expect(scrollToSpy).toHaveBeenCalledWith({ top: 0 });
+    }
   });
 });

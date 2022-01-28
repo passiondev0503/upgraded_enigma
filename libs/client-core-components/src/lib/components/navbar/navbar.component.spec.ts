@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientPipesModule } from '@app/client-pipes';
 import { AppSidebarState, sidebarActions } from '@app/client-store';
@@ -27,6 +28,8 @@ describe('AppNavbarComponent', () => {
     dispatch: jest.SpyInstance;
   };
   let loc: Location;
+  let router: Router;
+  let routerIsActiveSpy: jest.SpyInstance;
 
   beforeEach(
     waitForAsync(() => {
@@ -46,6 +49,9 @@ describe('AppNavbarComponent', () => {
 
           loc = TestBed.inject(Location);
 
+          router = TestBed.inject(Router);
+          routerIsActiveSpy = jest.spyOn(router, 'isActive');
+
           fixture.detectChanges();
         });
     }),
@@ -59,10 +65,13 @@ describe('AppNavbarComponent', () => {
     expect(component.appName).toEqual(env.appName);
   });
 
-  it('sidebarCloseHandler should call store dispatch', () => {
-    component.sidebarCloseHandler();
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.setState({ sidebarOpened: false }));
-  });
+  it(
+    'sidebarCloseHandler should call store dispatch',
+    waitForAsync(() => {
+      component.sidebarCloseHandler();
+      expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.setState({ sidebarOpened: false }));
+    }),
+  );
 
   it(
     'goBack should call store dispatch and location.back',
@@ -73,4 +82,96 @@ describe('AppNavbarComponent', () => {
       expect(locationBackSpy).toHaveBeenCalled();
     }),
   );
+
+  it('buttons should have default values', () => {
+    const expectedLength = 9;
+    expect(component.buttons.length).toEqual(expectedLength);
+  });
+
+  it('buttons, routeActive should call router isActive with params', () => {
+    const firstButtonIndex = 0;
+    component.buttons[firstButtonIndex].routeActive();
+    expect(routerIsActiveSpy).toHaveBeenCalledWith('', {
+      matrixParams: 'ignored',
+      queryParams: 'ignored',
+      paths: 'exact',
+      fragment: 'ignored',
+    });
+    routerIsActiveSpy.mockClear();
+
+    const secondButtonIndex = 1;
+    component.buttons[secondButtonIndex].routeActive();
+    expect(routerIsActiveSpy).toHaveBeenCalledWith('user/auth', {
+      matrixParams: 'ignored',
+      queryParams: 'ignored',
+      paths: 'exact',
+      fragment: 'ignored',
+    });
+    routerIsActiveSpy.mockClear();
+
+    const thirdButtonIndex = 2;
+    component.buttons[thirdButtonIndex].routeActive();
+    expect(routerIsActiveSpy).not.toHaveBeenCalledWith();
+    routerIsActiveSpy.mockClear();
+
+    const fourthButtonIndex = 3;
+    component.buttons[fourthButtonIndex].routeActive();
+    expect(routerIsActiveSpy).toHaveBeenCalledWith('user', {
+      matrixParams: 'ignored',
+      queryParams: 'ignored',
+      paths: 'exact',
+      fragment: 'ignored',
+    });
+    routerIsActiveSpy.mockClear();
+
+    const fifthButtonIndex = 4;
+    component.buttons[fifthButtonIndex].routeActive();
+    expect(routerIsActiveSpy).toHaveBeenCalledWith('user/data', {
+      matrixParams: 'ignored',
+      queryParams: 'ignored',
+      paths: 'exact',
+      fragment: 'ignored',
+    });
+    routerIsActiveSpy.mockClear();
+
+    const sixthButtonIndex = 5;
+    component.buttons[sixthButtonIndex].routeActive();
+    expect(routerIsActiveSpy).toHaveBeenCalledWith('user/rtc-chat', {
+      matrixParams: 'ignored',
+      queryParams: 'ignored',
+      paths: 'exact',
+      fragment: 'ignored',
+    });
+    routerIsActiveSpy.mockClear();
+
+    const seventhButtonIndex = 6;
+    component.buttons[seventhButtonIndex].routeActive();
+    expect(routerIsActiveSpy).toHaveBeenCalledWith('workspaces', {
+      matrixParams: 'ignored',
+      queryParams: 'ignored',
+      paths: 'exact',
+      fragment: 'ignored',
+    });
+    routerIsActiveSpy.mockClear();
+
+    const eightthButtonIndex = 7;
+    component.buttons[eightthButtonIndex].routeActive();
+    expect(routerIsActiveSpy).toHaveBeenCalledWith('chatbot', {
+      matrixParams: 'ignored',
+      queryParams: 'ignored',
+      paths: 'exact',
+      fragment: 'ignored',
+    });
+    routerIsActiveSpy.mockClear();
+
+    const ninethButtonIndex = 8;
+    component.buttons[ninethButtonIndex].routeActive();
+    expect(routerIsActiveSpy).toHaveBeenCalledWith('info', {
+      matrixParams: 'ignored',
+      queryParams: 'ignored',
+      paths: 'exact',
+      fragment: 'ignored',
+    });
+    routerIsActiveSpy.mockClear();
+  });
 });
