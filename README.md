@@ -94,7 +94,6 @@ Applications as well as generated documentation, testing reports, and a custom c
 - [Client Util](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-util/index.html)
 - [Documentation](https://upgraded-enigma-documentation.web.app/assets/coverage/apps/documentation/index.html)
 - [Mocks Core](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/mocks-core/index.html)
-- [Proto](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/proto/index.html)
 
 #### E2E report
 
