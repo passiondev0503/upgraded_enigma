@@ -56,16 +56,8 @@ jobs:
               - '.prettier*'
               - '.protolint.yaml'
               - '.stylelint*'
-            electron:
-              - '.electron/**'
-              - 'index.js'
-            mobile:
-              - 'android/**'
-              - 'capacitor.config.json'
-            devops:
-              - '.envoy/**'
-              - '.github/**'
-              - '.dockerignore'
+            shelltools:
+              - 'tools/shell/**'
 
       - name: Use Node.js ${{ matrix.node-version }}
         if: steps.changes.outputs.nx == 'true'
@@ -122,6 +114,12 @@ jobs:
       - name: Lint affected
         if: steps.changes.outputs.nx == 'true'
         run: npx nx affected --target=lint --base=origin/main --head=HEAD --parallel --max-parallel=2
+
+      - name: Lint shell
+        if: steps.changes.outputs.shelltools == 'true'
+        run: |
+          sudo apt install shellcheck
+          yarn lint:shell
 
       - name: Unit test affected (without code coverage)
         if: steps.changes.outputs.nx == 'true'
