@@ -220,7 +220,7 @@ export class AppUserRtcChatComponent implements OnInit {
    * Sends video room connection offer.
    * @param room room snapshot
    */
-  private sendVideoRoomOffer(room: firebase.default.firestore.DocumentSnapshot<firebase.default.firestore.DocumentData>) {
+  private sendVideoRoomOffer(room: firebase.default.firestore.DocumentSnapshot) {
     // eslint-disable-next-line no-console -- TODO: remove after debugging
     console.warn('sendVideoRoomOffer: room:', room);
     return this.videoRoomPeers$.pipe(
