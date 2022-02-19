@@ -13,10 +13,10 @@ const sentryDisabledEnvironments: TSentryEnvironment[] = ['unit-testing', 'devel
  * This method must be used only in main.ts on client.
  */
 export const initializeSentry = (env: IWebClientAppEnvironment) => {
-  if (!sentryDisabledEnvironments.includes(env.sentryEnv)) {
+  if (!sentryDisabledEnvironments.includes(env.sentry.env)) {
     Sentry.init({
-      environment: env.sentryEnv,
-      dsn: 'https://a076fb94912040d1952c9d76dba44f85@o551250.ingest.sentry.io/5679603',
+      environment: env.sentry.env,
+      dsn: env.sentry.dsn,
       integrations: [
         /**
          * Registers and configures the Tracing integration,
@@ -24,7 +24,7 @@ export const initializeSentry = (env: IWebClientAppEnvironment) => {
          * performance, including custom Angular routing instrumentation.
          */
         new Integrations.BrowserTracing({
-          tracingOrigins: ['localhost:4200', 'https://organizer-833bc.web.app', 'https://organizer-833bc.firebaseapp.com'],
+          tracingOrigins: [...env.sentry.tracingOrigins],
           routingInstrumentation: Sentry.routingInstrumentation,
         }),
       ],
@@ -34,13 +34,13 @@ export const initializeSentry = (env: IWebClientAppEnvironment) => {
        * of transactions for performance monitoring.
        * We recommend adjusting this value in production.
        */
-      tracesSampleRate: 1.0,
+      tracesSampleRate: env.sentry.tracesSampleRate,
     });
   }
 };
 
 export const sentryProviders: (env: IWebClientAppEnvironment) => Provider[] = env => {
-  return sentryDisabledEnvironments.includes(env.sentryEnv)
+  return sentryDisabledEnvironments.includes(env.sentry.env)
     ? []
     : [
         {

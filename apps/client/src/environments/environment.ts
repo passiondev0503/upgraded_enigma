@@ -1,6 +1,7 @@
 import { IWebClientAppEnvironment } from '@app/client-util';
 import { Capacitor } from '@capacitor/core';
 
+import { sentryEnvFactory } from './environment.config';
 import { firebase } from './firebase';
 
 const platform: string = Capacitor.getPlatform();
@@ -17,6 +18,7 @@ const platform: string = Capacitor.getPlatform();
  * on performance if an error is thrown:
  *
  * import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
  */
 export const environment: IWebClientAppEnvironment = {
   production: false,
@@ -25,6 +27,6 @@ export const environment: IWebClientAppEnvironment = {
   description: 'Upgraded Enigma client application',
   api: window.location.origin.includes('localhost') ? 'http://localhost:8080/api' : `${window.location.origin}/api`,
   envoyUrl: 'http://localhost:8082',
-  sentryEnv: 'development',
+  sentry: sentryEnvFactory({ production: false }),
   firebase: { ...firebase },
 };

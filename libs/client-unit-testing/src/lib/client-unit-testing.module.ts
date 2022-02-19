@@ -23,7 +23,12 @@ export const testingEnvironment: IWebClientAppEnvironment = {
   description: 'Testing description',
   api: window.location.origin.includes('localhost') ? 'http://localhost:8080/api' : `${window.location.origin}/api`,
   envoyUrl: '',
-  sentryEnv: 'unit-testing',
+  sentry: {
+    env: 'unit-testing',
+    dsn: '',
+    tracesSampleRate: 0.0,
+    tracingOrigins: [],
+  },
 };
 
 export const mocksCoreModuleProviders: Provider[] = [

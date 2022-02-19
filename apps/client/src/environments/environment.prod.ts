@@ -1,6 +1,7 @@
 import { IWebClientAppEnvironment } from '@app/client-util';
 import { Capacitor } from '@capacitor/core';
 
+import { sentryEnvFactory } from './environment.config';
 import { firebase } from './firebase';
 
 const platform: string = Capacitor.getPlatform();
@@ -20,6 +21,6 @@ export const environment: IWebClientAppEnvironment = {
       ? 'http://localhost:8080/api'
       : `${window.location.origin}/api`,
   envoyUrl: 'http://localhost:8082', // TODO
-  sentryEnv: 'production',
+  sentry: sentryEnvFactory({ production: true }),
   firebase: { ...firebase },
 };

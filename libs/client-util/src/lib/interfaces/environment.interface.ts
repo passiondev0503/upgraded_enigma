@@ -14,7 +14,12 @@ export interface IWebClientAppEnvironment {
   description: string;
   api: string;
   envoyUrl: string;
-  sentryEnv: TSentryEnvironment;
+  sentry: {
+    env: TSentryEnvironment;
+    dsn: string;
+    tracingOrigins: string[];
+    tracesSampleRate: number;
+  };
   firebase?: {
     apiKey: string;
     authDomain: string;

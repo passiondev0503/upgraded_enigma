@@ -1,6 +1,8 @@
 import { IWebClientAppEnvironment } from '@app/client-util';
 import { Capacitor } from '@capacitor/core';
 
+import { sentryEnvFactory } from './environment.config';
+
 const platform: string = Capacitor.getPlatform();
 
 /**
@@ -10,7 +12,7 @@ export const environment: IWebClientAppEnvironment = {
   production: true,
   platform,
   appName: 'Upgraded Enigma Elements',
-  description: 'Nx Ng Starter Elements: wigdets based on Angular Elements',
+  description: 'Upgraded Enigma Elements: wigdets based on Angular Elements',
   api:
     platform !== 'web'
       ? 'https://upgraded-enigma.web.app/api'
@@ -18,5 +20,5 @@ export const environment: IWebClientAppEnvironment = {
       ? 'http://localhost:8080/api'
       : `${window.location.origin}/api`,
   envoyUrl: 'http://localhost:8082', // TODO
-  sentryEnv: 'production',
+  sentry: sentryEnvFactory({ production: true }),
 };
