@@ -1,9 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AppMarkdownService } from '@app/client-services';
-import { TIMEOUT } from '@app/client-util';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { of, timer } from 'rxjs';
 import { first, map } from 'rxjs/operators';
+
+const timeout = {
+  start: 0,
+  interval: 2000,
+};
 
 @UntilDestroy()
 @Component({
@@ -13,7 +17,7 @@ import { first, map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppDiagnosticsHomeComponent {
-  public readonly timer$ = timer(TIMEOUT.INSTANT, TIMEOUT.MEDIUM).pipe(
+  public readonly timer$ = timer(timeout.start, timeout.interval).pipe(
     map(num => `Until destroyed ${num}`),
     untilDestroyed(this),
   );
