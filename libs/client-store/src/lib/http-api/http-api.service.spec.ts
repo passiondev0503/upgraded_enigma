@@ -1,8 +1,7 @@
-import { HttpRequest } from '@angular/common/http';
-import { HttpTestingController, TestRequest } from '@angular/common/http/testing';
+import { HttpTestingController } from '@angular/common/http/testing';
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { AppClientTranslateModule } from '@app/client-translate';
-import { getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
+import { flushHttpRequests, getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
 import { of } from 'rxjs';
 
 import { AppHttpProgressStoreModule, httpProgressModuleProviders } from '../http-progress/http-progress.module';
@@ -43,16 +42,13 @@ describe('AppHttpApiService', () => {
             },
           };
           expect(spy.httpHandlers.pipeHttpResponse).toBeDefined();
-          httpController.match(() => true).forEach((req: TestRequest) => (!req.cancelled ? req.flush({}) : null));
+          flushHttpRequests(httpController);
         });
     }),
   );
 
   afterEach(() => {
-    httpController
-      .match((req: HttpRequest<unknown>): boolean => true)
-      .forEach((req: TestRequest) => (!req.cancelled ? req.flush({}) : null));
-    httpController.verify();
+    flushHttpRequests(httpController, true);
   });
 
   it('should exist', () => {
