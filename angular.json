@@ -1443,6 +1443,63 @@
       "sourceRoot": "libs/proto/src",
       "tags": ["scope:proto", "type:data-access"]
     },
+    "server-dev": {
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "configurations": {
+            "production": {
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/server-dev/src/environments/environment.ts",
+                  "with": "apps/server-dev/src/environments/environment.prod.ts"
+                }
+              ],
+              "inspect": false,
+              "optimization": true
+            }
+          },
+          "options": {
+            "assets": ["apps/server-dev/src/assets"],
+            "main": "apps/server-dev/src/main.ts",
+            "outputPath": "dist/apps/server-dev",
+            "tsConfig": "apps/server-dev/tsconfig.app.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "apps/server-dev/.eslintrc.json",
+            "lintFilePatterns": ["apps/server-dev/**/*.ts"]
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "configurations": {
+            "production": {
+              "buildTarget": "server-dev:build:production"
+            }
+          },
+          "options": {
+            "buildTarget": "server-dev:build"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/server-dev/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/apps/server-dev"]
+        }
+      },
+      "projectType": "application",
+      "root": "apps/server-dev",
+      "sourceRoot": "apps/server-dev/src",
+      "tags": []
+    },
     "tools": {
       "architect": {
         "compodoc-build": {
@@ -1492,28 +1549,6 @@
           "options": {
             "eslintConfig": "tools/.eslintrc.json",
             "lintFilePatterns": ["tools/generators/**/*.ts", "tools/ts/**/*.ts"]
-          }
-        },
-        "reset-client-env": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "npx ts-node -P ./tools/tsconfig.ts-tools.json ./tools/ts/set-client-env.ts --reset=true",
-                "forwardAllArgs": false
-              }
-            ]
-          }
-        },
-        "set-client-env": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "npx ts-node -P ./tools/tsconfig.ts-tools.json ./tools/ts/set-client-env.ts",
-                "forwardAllArgs": false
-              }
-            ]
           }
         },
         "update-check": {
