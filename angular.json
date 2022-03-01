@@ -70,7 +70,8 @@
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/apps/api"]
         }
       },
       "prefix": "app",
@@ -94,7 +95,8 @@
           "options": {
             "jestConfig": "libs/backend-auth/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/backend-auth"]
         }
       },
       "projectType": "library",
@@ -116,7 +118,8 @@
           "options": {
             "jestConfig": "libs/backend-diagnostics/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/backend-diagnostics"]
         }
       },
       "projectType": "library",
@@ -138,7 +141,8 @@
           "options": {
             "jestConfig": "libs/backend-grpc/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/backend-grpc"]
         }
       },
       "projectType": "library",
@@ -160,7 +164,8 @@
           "options": {
             "jestConfig": "libs/backend-interfaces/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/backend-interfaces"]
         }
       },
       "projectType": "library",
@@ -183,7 +188,8 @@
           "options": {
             "jestConfig": "libs/backend-logger/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/backend-logger"]
         }
       },
       "projectType": "library",
@@ -205,7 +211,8 @@
           "options": {
             "jestConfig": "libs/backend-websocket/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/backend-websocket"]
         }
       },
       "projectType": "library",
@@ -338,7 +345,8 @@
               "apps/client/src/styles.scss",
               "libs/client-core/src/lib/styles/styles.scss"
             ]
-          }
+          },
+          "outputs": ["coverage/apps/client"]
         }
       },
       "prefix": "app",
@@ -394,7 +402,8 @@
           "options": {
             "jestConfig": "apps/client-api/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/apps/client-api"]
         }
       },
       "prefix": "app",
@@ -409,7 +418,7 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "eslintConfig": "libs/client-chatbot/.eslintrc.json",
-            "lintFilePatterns": ["libs/client-chatbot/src/**/*.ts"]
+            "lintFilePatterns": ["libs/client-chatbot/**/*.ts"]
           }
         },
         "test": {
@@ -417,7 +426,8 @@
           "options": {
             "jestConfig": "libs/client-chatbot/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-chatbot"]
         }
       },
       "prefix": "app",
@@ -440,7 +450,8 @@
           "options": {
             "jestConfig": "libs/client-core/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-core"]
         }
       },
       "prefix": "app",
@@ -500,7 +511,8 @@
           "options": {
             "jestConfig": "libs/client-core-components/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-core-components"]
         }
       },
       "prefix": "app",
@@ -557,7 +569,8 @@
           "options": {
             "jestConfig": "libs/client-d3-charts/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-d3-charts"]
         }
       },
       "prefix": "app",
@@ -612,7 +625,8 @@
           "options": {
             "jestConfig": "libs/client-diagnostics/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-diagnostics"]
         }
       },
       "prefix": "app",
@@ -669,7 +683,8 @@
           "options": {
             "jestConfig": "libs/client-directives/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-diagnostics"]
         }
       },
       "prefix": "app",
@@ -721,7 +736,8 @@
           "options": {
             "jestConfig": "libs/client-material/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-material"]
         }
       },
       "prefix": "app",
@@ -741,7 +757,7 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "eslintConfig": "libs/client-pipes/.eslintrc.json",
-            "lintFilePatterns": ["libs/client-pipes/src/**/*.ts", "libs/client-pipes/src/**/*.ts"]
+            "lintFilePatterns": ["libs/client-pipes/**/*.ts"]
           }
         },
         "test": {
@@ -749,7 +765,8 @@
           "options": {
             "jestConfig": "libs/client-pipes/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-pipes"]
         }
       },
       "prefix": "app",
@@ -772,7 +789,8 @@
           "options": {
             "jestConfig": "libs/client-services/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-services"]
         }
       },
       "prefix": "app",
@@ -800,7 +818,8 @@
           "options": {
             "jestConfig": "libs/client-sidebar/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-sidebar"]
         }
       },
       "prefix": "app",
@@ -823,7 +842,8 @@
           "options": {
             "jestConfig": "libs/client-store/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-store"]
         }
       },
       "prefix": "app",
@@ -851,7 +871,8 @@
           "options": {
             "jestConfig": "libs/client-translate/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-translate"]
         }
       },
       "prefix": "app",
@@ -879,7 +900,8 @@
           "options": {
             "jestConfig": "libs/client-unit-testing/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-unit-testing"]
         }
       },
       "prefix": "app",
@@ -907,7 +929,8 @@
           "options": {
             "jestConfig": "libs/client-user/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-user"]
         }
       },
       "prefix": "app",
@@ -930,7 +953,8 @@
           "options": {
             "jestConfig": "libs/client-util/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-util"]
         }
       },
       "prefix": "app",
@@ -958,7 +982,8 @@
           "options": {
             "jestConfig": "libs/client-workspaces/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/client-workspaces"]
         }
       },
       "prefix": "app",
@@ -1144,7 +1169,8 @@
           "options": {
             "jestConfig": "apps/documentation/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/apps/documentation"]
         }
       },
       "prefix": "app",
@@ -1284,7 +1310,8 @@
           "options": {
             "jestConfig": "apps/elements/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/apps/elements"]
         }
       },
       "prefix": "app",
@@ -1385,7 +1412,8 @@
           "options": {
             "jestConfig": "apps/elements-testing/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/apps/elements-testing"]
         }
       },
       "projectType": "application",
