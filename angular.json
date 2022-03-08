@@ -4,7 +4,7 @@
     "api": {
       "architect": {
         "build": {
-          "builder": "@nrwl/node:build",
+          "builder": "@nrwl/node:webpack",
           "configurations": {
             "firebase": {
               "extractLicenses": true,
@@ -52,7 +52,7 @@
           }
         },
         "serve": {
-          "builder": "@nrwl/node:execute",
+          "builder": "@nrwl/node:node",
           "configurations": {
             "firebase": {
               "buildTarget": "api:build:firebase"
@@ -363,7 +363,7 @@
     "client-api": {
       "architect": {
         "build": {
-          "builder": "@nrwl/node:build",
+          "builder": "@nrwl/node:webpack",
           "configurations": {
             "production": {
               "extractLicenses": true,
@@ -392,7 +392,7 @@
           }
         },
         "serve": {
-          "builder": "@nrwl/node:execute",
+          "builder": "@nrwl/node:node",
           "options": {
             "buildTarget": "client-api:build"
           }
@@ -1474,7 +1474,7 @@
     "server-dev": {
       "architect": {
         "build": {
-          "builder": "@nrwl/node:build",
+          "builder": "@nrwl/node:webpack",
           "configurations": {
             "production": {
               "extractLicenses": true,
@@ -1504,7 +1504,7 @@
           }
         },
         "serve": {
-          "builder": "@nrwl/node:execute",
+          "builder": "@nrwl/node:node",
           "configurations": {
             "production": {
               "buildTarget": "server-dev:build:production"
