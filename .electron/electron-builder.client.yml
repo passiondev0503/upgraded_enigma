@@ -19,7 +19,7 @@ win:
 
 files:
   - ./dist/apps/client/**
-  - ./dist/apps/client-api/**
-  - ./.config/**
-  - ./.*
-  - ./*.*
+  - ./.electron/**
+  - './index.js'
+  - ./LICENSE
+  - ./package.json

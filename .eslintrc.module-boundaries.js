@@ -88,6 +88,14 @@ const backendConstraints = [
     sourceTag: 'scope:backend-websocket',
     onlyDependOnLibsWithTags: ['scope:proto', 'scope:backend-interfaces', 'scope:backend-diagnostics'],
   },
+  {
+    sourceTag: 'scope:server-dev',
+    onlyDependOnLibsWithTags: [],
+  },
+  {
+    sourceTag: 'scope:server-prod',
+    onlyDependOnLibsWithTags: [],
+  },
 ];
 
 /**
