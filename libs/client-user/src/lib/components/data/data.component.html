@@ -149,6 +149,12 @@
 
   <mat-divider fxFlex="100"></mat-divider>
 
+  <span fxFlex="100" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="chartData$ | async as chartData">
+    <app-bar-chart [chartId]="'bar-chart-0'" [data]="chartData"></app-bar-chart>
+  </span>
+
+  <mat-divider fxFlex="100"></mat-divider>
+
   <h2 [ngStyle]="{ margin: '10px 0 0 0' }">{{ 'passwords.exported' | translate }}</h2>
 
   <span fxFlex="100" fxLayout="row wrap">

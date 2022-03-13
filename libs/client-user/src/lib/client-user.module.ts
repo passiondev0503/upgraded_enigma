@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppClientMaterialModule } from '@app/client-material';
 import { appClientTranslateModuleProviders } from '@app/client-translate';
 import { TranslateModule } from '@ngx-translate/core';
+import { AppClientD3ChartsModule } from '@rfprodz/d3-charts';
 
 import { AppClientUserRoutingModule } from './client-user-routing.module';
 import { AppUserAuthComponent } from './components/auth/auth.component';
@@ -20,6 +21,7 @@ import { AppUserRtcChatComponent } from './components/rtc-chat/rtc-chat.componen
     ReactiveFormsModule,
     TranslateModule,
     AppClientMaterialModule,
+    AppClientD3ChartsModule,
     AppClientUserRoutingModule,
   ],
   declarations: [AppUserAuthComponent, AppUserDataComponent, AppUserProfileComponent, AppUserRtcChatComponent],

@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { AppUserState, userActions } from '@app/client-store';
 import { Store } from '@ngxs/store';
+import { TBarChartData } from '@rfprodz/d3-charts';
 import { of } from 'rxjs';
 import { concatMap, map, tap } from 'rxjs/operators';
 
@@ -23,7 +24,29 @@ export class AppUserDataComponent {
   /**
    * Currently logged in user object.
    */
-  public user$ = this.store.select(AppUserState.model);
+  public readonly user$ = this.store.select(AppUserState.model);
+
+  /**
+   * Currently logged in user object.
+   */
+  public readonly chartData$ = this.store.select(AppUserState.model).pipe(
+    map(model => {
+      return (model.passwords ?? [])
+        .map(item => ({
+          name: item.name,
+          date: new Date(item.timestamp).toISOString().replace(/T.*$/, ''),
+        }))
+        .reduce((accumulator: TBarChartData, data) => {
+          const node = accumulator.find(item => item.title) ?? {
+            title: data.date,
+            value: 0,
+          };
+          node.value += 1;
+          accumulator.push(node);
+          return accumulator;
+        }, []);
+    }),
+  );
 
   /**
    * Exported passwords list.

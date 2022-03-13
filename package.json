@@ -1,6 +1,6 @@
 {
   "name": "upgraded-enigma",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "private": true,
   "description": "Organizer and productivity tools.",
   "license": "MIT",
@@ -223,6 +223,7 @@
     "@nrwl/tao": "13.8.8",
     "@nrwl/web": "13.8.8",
     "@nrwl/workspace": "13.8.8",
+    "@rfprodz/d3-charts": "0.0.7",
     "@sentry/angular": "6.18.2",
     "@sentry/tracing": "6.18.2",
     "@storybook/addon-essentials": "6.5.0-alpha.34",

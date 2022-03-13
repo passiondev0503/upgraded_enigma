@@ -142,10 +142,6 @@ const clientConstraints = [
     ],
   },
   {
-    sourceTag: 'scope:client-d3-charts',
-    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-util'],
-  },
-  {
     sourceTag: 'scope:client-directives',
     onlyDependOnLibsWithTags: ['scope:client-unit-testing'],
   },
