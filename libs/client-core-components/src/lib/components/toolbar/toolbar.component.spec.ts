@@ -22,37 +22,32 @@ describe('AppToolbarComponent', () => {
   };
   let win: Window;
 
-  beforeEach(
-    waitForAsync(() => {
-      void TestBed.configureTestingModule(testBedConfig)
-        .compileComponents()
-        .then(() => {
-          fixture = TestBed.createComponent(AppToolbarComponent);
-          component = fixture.debugElement.componentInstance;
+  beforeEach(waitForAsync(() => {
+    void TestBed.configureTestingModule(testBedConfig)
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(AppToolbarComponent);
+        component = fixture.debugElement.componentInstance;
 
-          store = TestBed.inject(Store);
-          storeSpy = {
-            dispatch: jest.spyOn(store, 'dispatch').mockImplementation((action: unknown) => of(null)),
-          };
+        store = TestBed.inject(Store);
+        storeSpy = {
+          dispatch: jest.spyOn(store, 'dispatch').mockImplementation((action: unknown) => of(null)),
+        };
 
-          win = TestBed.inject(WINDOW);
+        win = TestBed.inject(WINDOW);
 
-          fixture.detectChanges();
-        });
-    }),
-  );
+        fixture.detectChanges();
+      });
+  }));
 
   it('should be defined', () => {
     expect(component).toBeDefined();
   });
 
-  it(
-    'toggleSidebar should call store dispatch',
-    waitForAsync(() => {
-      component.toggleSidebar();
-      expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.toggleSidebar());
-    }),
-  );
+  it('toggleSidebar should call store dispatch', waitForAsync(() => {
+    component.toggleSidebar();
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.toggleSidebar());
+  }));
 
   it('toggleMaterialTheme should emit an output event', () => {
     const outputSpy = jest.spyOn(component.darkThemeEnabled, 'emit');
@@ -61,13 +56,10 @@ describe('AppToolbarComponent', () => {
     expect(outputSpy).toHaveBeenCalledWith(event);
   });
 
-  it(
-    'toggleChatbot should call store dispatch',
-    waitForAsync(() => {
-      component.toggleChatbot();
-      expect(storeSpy.dispatch).toHaveBeenCalledWith(new chatbotActions.toggle());
-    }),
-  );
+  it('toggleChatbot should call store dispatch', waitForAsync(() => {
+    component.toggleChatbot();
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(new chatbotActions.toggle());
+  }));
 
   it('windowScrollHandler should set the fixedPosition value', () => {
     component.windowScrollHandler();

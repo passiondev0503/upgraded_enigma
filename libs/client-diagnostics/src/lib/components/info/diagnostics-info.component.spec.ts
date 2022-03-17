@@ -32,19 +32,17 @@ describe('AppDiagnosticsInfoComponent', () => {
 
   let httpController: HttpTestingController;
 
-  beforeEach(
-    waitForAsync(() => {
-      void TestBed.configureTestingModule(testBedConfig)
-        .compileComponents()
-        .then(() => {
-          httpController = TestBed.inject(HttpTestingController);
-          fixture = TestBed.createComponent(AppDiagnosticsInfoComponent);
-          component = fixture.componentInstance;
-          componentSpy = spyOnFunctions<AppDiagnosticsInfoComponent>(component);
-          flushHttpRequests(httpController);
-        });
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    void TestBed.configureTestingModule(testBedConfig)
+      .compileComponents()
+      .then(() => {
+        httpController = TestBed.inject(HttpTestingController);
+        fixture = TestBed.createComponent(AppDiagnosticsInfoComponent);
+        component = fixture.componentInstance;
+        componentSpy = spyOnFunctions<AppDiagnosticsInfoComponent>(component);
+        flushHttpRequests(httpController);
+      });
+  }));
 
   afterEach(() => {
     flushHttpRequests(httpController, true);

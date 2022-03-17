@@ -8,20 +8,18 @@ describe('AppWorkspaceWidgetComponent', () => {
   let component: AppWorkspaceWidgetComponent;
   let fixture: ComponentFixture<AppWorkspaceWidgetComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      void TestBed.configureTestingModule({
-        imports: [BrowserTestingModule, AppClientMaterialModule.forRoot()],
-        declarations: [AppWorkspaceWidgetComponent],
-      })
-        .compileComponents()
-        .then(() => {
-          fixture = TestBed.createComponent(AppWorkspaceWidgetComponent);
-          component = fixture.componentInstance;
-          fixture.detectChanges();
-        });
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    void TestBed.configureTestingModule({
+      imports: [BrowserTestingModule, AppClientMaterialModule.forRoot()],
+      declarations: [AppWorkspaceWidgetComponent],
+    })
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(AppWorkspaceWidgetComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+      });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

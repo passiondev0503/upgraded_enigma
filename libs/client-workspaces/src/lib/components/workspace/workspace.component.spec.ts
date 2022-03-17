@@ -12,31 +12,29 @@ describe('AppWorkspaceComponent', () => {
   let component: AppWorkspaceComponent;
   let fixture: ComponentFixture<AppWorkspaceComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      void TestBed.configureTestingModule({
-        imports: [
-          BrowserTestingModule,
-          RouterTestingModule.withRoutes([
-            {
-              path: 'workspaces/item',
-              component: AppTestingComponent,
-            },
-          ]),
-          NgxsModule.forRoot([]),
-          NgxsRouterPluginModule.forRoot(),
-          AppClientMaterialModule.forRoot(),
-        ],
-        declarations: [AppWorkspaceComponent],
-      })
-        .compileComponents()
-        .then(() => {
-          fixture = TestBed.createComponent(AppWorkspaceComponent);
-          component = fixture.componentInstance;
-          fixture.detectChanges();
-        });
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    void TestBed.configureTestingModule({
+      imports: [
+        BrowserTestingModule,
+        RouterTestingModule.withRoutes([
+          {
+            path: 'workspaces/item',
+            component: AppTestingComponent,
+          },
+        ]),
+        NgxsModule.forRoot([]),
+        NgxsRouterPluginModule.forRoot(),
+        AppClientMaterialModule.forRoot(),
+      ],
+      declarations: [AppWorkspaceComponent],
+    })
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(AppWorkspaceComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+      });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

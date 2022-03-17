@@ -29,18 +29,16 @@ describe('AppDiagnosticsIndexComponent', () => {
   let component: AppDiagnosticsIndexComponent;
   let componentSpy: TClassMemberFunctionSpiesObject<AppDiagnosticsIndexComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      void TestBed.configureTestingModule(testBedConfig)
-        .compileComponents()
-        .then(() => {
-          fixture = TestBed.createComponent(AppDiagnosticsIndexComponent);
-          component = fixture.componentInstance;
-          componentSpy = spyOnFunctions<AppDiagnosticsIndexComponent>(component);
-          fixture.detectChanges();
-        });
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    void TestBed.configureTestingModule(testBedConfig)
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(AppDiagnosticsIndexComponent);
+        component = fixture.componentInstance;
+        componentSpy = spyOnFunctions<AppDiagnosticsIndexComponent>(component);
+        fixture.detectChanges();
+      });
+  }));
 
   it('should be defined', () => {
     expect(component).toBeDefined();

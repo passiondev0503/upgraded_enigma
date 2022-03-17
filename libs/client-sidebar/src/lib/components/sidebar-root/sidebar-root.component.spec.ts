@@ -28,19 +28,17 @@ describe('AppSidebarRootComponent', () => {
   let store: Store;
   let storeDispatchSpy: jest.SpyInstance;
 
-  beforeEach(
-    waitForAsync(() => {
-      void TestBed.configureTestingModule(testBedConfig)
-        .compileComponents()
-        .then(() => {
-          fixture = TestBed.createComponent(AppSidebarRootComponent);
-          component = fixture.componentInstance;
-          store = TestBed.inject(Store);
-          storeDispatchSpy = jest.spyOn(store, 'dispatch');
-          fixture.detectChanges();
-        });
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    void TestBed.configureTestingModule(testBedConfig)
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(AppSidebarRootComponent);
+        component = fixture.componentInstance;
+        store = TestBed.inject(Store);
+        storeDispatchSpy = jest.spyOn(store, 'dispatch');
+        fixture.detectChanges();
+      });
+  }));
 
   it('should be defined', () => {
     expect(component).toBeDefined();

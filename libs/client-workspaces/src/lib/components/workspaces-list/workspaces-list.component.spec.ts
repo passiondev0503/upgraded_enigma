@@ -13,31 +13,29 @@ describe('AppWorkspacesListComponent', () => {
   let component: AppWorkspacesListComponent;
   let fixture: ComponentFixture<AppWorkspacesListComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      void TestBed.configureTestingModule({
-        imports: [
-          BrowserTestingModule,
-          RouterTestingModule.withRoutes([
-            {
-              path: 'workspaces',
-              component: AppTestingComponent,
-            },
-          ]),
-          NgxsModule.forRoot([]),
-          NgxsRouterPluginModule.forRoot(),
-          AppClientMaterialModule.forRoot(),
-        ],
-        declarations: [AppWorkspacesListComponent, AppWorkspaceWidgetComponent],
-      })
-        .compileComponents()
-        .then(() => {
-          fixture = TestBed.createComponent(AppWorkspacesListComponent);
-          component = fixture.componentInstance;
-          fixture.detectChanges();
-        });
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    void TestBed.configureTestingModule({
+      imports: [
+        BrowserTestingModule,
+        RouterTestingModule.withRoutes([
+          {
+            path: 'workspaces',
+            component: AppTestingComponent,
+          },
+        ]),
+        NgxsModule.forRoot([]),
+        NgxsRouterPluginModule.forRoot(),
+        AppClientMaterialModule.forRoot(),
+      ],
+      declarations: [AppWorkspacesListComponent, AppWorkspaceWidgetComponent],
+    })
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(AppWorkspacesListComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+      });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

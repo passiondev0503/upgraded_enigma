@@ -24,21 +24,19 @@ describe('AppDiagnosticsHomeComponent', () => {
   let service: AppMarkdownService;
   let serviceSpy: TClassMemberFunctionSpiesObject<AppMarkdownService>;
 
-  beforeEach(
-    waitForAsync(() => {
-      void TestBed.configureTestingModule(testBedConfig)
-        .compileComponents()
-        .then(() => {
-          fixture = TestBed.createComponent(AppDiagnosticsHomeComponent);
-          component = fixture.componentInstance;
-          componentSpy = spyOnFunctions<AppDiagnosticsHomeComponent>(component);
-          service = TestBed.inject(AppMarkdownService);
-          serviceSpy = spyOnFunctions<AppMarkdownService>(service);
-          (component as any).timer$ = null;
-          fixture.detectChanges();
-        });
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    void TestBed.configureTestingModule(testBedConfig)
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(AppDiagnosticsHomeComponent);
+        component = fixture.componentInstance;
+        componentSpy = spyOnFunctions<AppDiagnosticsHomeComponent>(component);
+        service = TestBed.inject(AppMarkdownService);
+        serviceSpy = spyOnFunctions<AppMarkdownService>(service);
+        (component as any).timer$ = null;
+        fixture.detectChanges();
+      });
+  }));
 
   it('should be defined', () => {
     expect(component).toBeDefined();
