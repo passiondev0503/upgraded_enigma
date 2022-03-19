@@ -11,7 +11,7 @@ Organizer and productivity tools mono-repository.
 | PR open event (destination: trunk)  | [![pr-validation](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/pr-validation.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/pr-validation.yml)                      |
 | PR merge event (destination: trunk) | [![trunk-on-push](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/trunk-on-push.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/trunk-on-push.yml)                      |
 | Manual                              | [![e2e-test](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/e2e-test.yml)                                     |
-| Scheduled (daily)                   | [![codeowners-validator](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/codeowners-validator.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/codeowners-validator.yml) |
+| Scheduled (weekly)                  | [![codeowners-validator](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/codeowners-validator.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/codeowners-validator.yml) |
 
 ## Requirements
 
