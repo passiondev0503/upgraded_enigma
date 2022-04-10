@@ -40,4 +40,4 @@ export const APP_ROUTES: Route[] = [
   imports: [RouterModule.forRoot(APP_ROUTES, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppClientRoutingModule {}

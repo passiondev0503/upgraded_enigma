@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { writeFile } from 'fs';
-import { stat } from 'fs/promises';
+import { readFile, stat } from 'fs/promises';
 import { argv } from 'yargs';
 
 /**
@@ -35,13 +35,19 @@ interface IEnvConfig {
   appId: string;
   measurementId: string;
   defaultRtcRoomId: string;
+  version: string;
 }
 
 class AppEnvConfig {
   /**
+   * The current working directory.
+   */
+  private readonly cwd = __dirname;
+
+  /**
    * Environment file path.
    */
-  private readonly environmentFilePath = `${__dirname}/../../apps/client/src/environments/firebase.ts`;
+  private readonly environmentFilePath = `${this.cwd}/../../apps/client/src/environments/environment.config.ts`;
 
   /**
    * Client app environment secrets.
@@ -56,25 +62,44 @@ class AppEnvConfig {
     appId: 'FIREBASE_APP_ID',
     measurementId: 'FIREBASE_MEASUREMENT_ID',
     defaultRtcRoomId: 'DEFAULT_RTC_ROOM_ID',
+    version: 'N/A',
   };
 
   constructor() {
+    this.execute().catch(error => {
+      // eslint-disable-next-line no-console -- log error
+      console.error('error', error);
+      process.exit(1);
+    });
+  }
+
+  private async execute() {
     /**
-     * If reset argument is passed (retrieved via yargs argv object) environment
-     * variables in client app are set to default values.
+     * Indicates that the value of the environment configuration file should be reset.
      */
     const reset = (<{ [k: string]: boolean | undefined }>argv).reset;
 
-    const env = typeof reset !== 'undefined' ? { ...this.defaultEnv } : this.getEnvValues();
+    const env = typeof reset !== 'undefined' ? this.defaultEnv : await this.getEnvValues();
 
-    this.writeEnvironmentFile(env);
+    await this.writeEnvironmentFile(env);
   }
 
   /**
    * Returns environment configuration file contents.
    */
   private envConfigFileContents(env: IEnvConfig) {
-    return `export const firebase = {
+    return `/**
+ * Metadata environment configuration factory.
+ * @returns metadata environment configuration
+ */
+export const metaEnvFactory = () => ({
+  version: '${env.version}',
+});
+
+/**
+ * Firebase config factory
+ */
+export const firebaseEnvFactory = () => ({
   apiKey: '${env.apiKey}',
   authDomain: '${env.authDomain}',
   databaseURL: '${env.databaseURL}',
@@ -84,15 +109,15 @@ class AppEnvConfig {
   appId: '${env.appId}',
   measurementId: '${env.measurementId}',
   defaultRtcRoomId: '${env.defaultRtcRoomId}',
-};
+});
 `;
   }
 
   /**
    * Writes environment file.
    */
-  private writeEnvironmentFile(env: IEnvConfig) {
-    stat(this.environmentFilePath)
+  private async writeEnvironmentFile(env: IEnvConfig) {
+    return stat(this.environmentFilePath)
       .then(data => {
         const envFileContents = this.envConfigFileContents(env);
         writeFile(this.environmentFilePath, envFileContents, err => {
@@ -114,6 +139,27 @@ class AppEnvConfig {
   }
 
   /**
+   * Gets the value of the version property from the package.json file.
+   * @param source the package.json file location
+   * @returns the value of the version property from the package.json file
+   */
+  private async getPackageVersion(source = `${this.cwd}/../../package.json`) {
+    return readFile(source, 'utf8')
+      .then<string>(data => {
+        const packageJsonContent: {
+          version: string;
+          [key: string]: unknown;
+        } = JSON.parse(data);
+        return packageJsonContent.version;
+      })
+      .catch(error => {
+        // eslint-disable-next-line no-console -- log error
+        console.error('Unable to read the package.json', error);
+        process.exit(1);
+      });
+  }
+
+  /**
    * Gets environment variable value.
    * @param key environment variable key
    * @returns environment variable value or key if value is null or undefined
@@ -125,7 +171,9 @@ class AppEnvConfig {
   /**
    * Sets environment variable values from process.env.
    */
-  private getEnvValues(): IEnvConfig {
+  private async getEnvValues(): Promise<IEnvConfig> {
+    const version = await this.getPackageVersion();
+
     const env: IEnvConfig = {
       apiKey: this.getEnvValue('FIREBASE_API_KEY'),
       authDomain: this.getEnvValue('FIREBASE_AUTH_DOMAIN'),
@@ -136,6 +184,7 @@ class AppEnvConfig {
       appId: this.getEnvValue('FIREBASE_APP_ID'),
       measurementId: this.getEnvValue('FIREBASE_MEASUREMENT_ID'),
       defaultRtcRoomId: this.getEnvValue('DEFAULT_RTC_ROOM_ID'),
+      version,
     };
     return env;
   }

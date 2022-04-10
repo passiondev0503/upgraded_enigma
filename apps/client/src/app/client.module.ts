@@ -17,7 +17,7 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsModule } from '@ngxs/store';
 
 import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
+import { AppClientRoutingModule } from './client-routing.module';
 import { AppRootComponent } from './components/root.component';
 
 export const grpcProviders: Provider[] = [
@@ -49,11 +49,11 @@ export const grpcProviders: Provider[] = [
     AppClientMaterialModule.forRoot(),
     AppWebsocketModule.forRoot(environment),
     AppClientTranslateModule.forRoot(),
-    AppRoutingModule,
+    AppClientRoutingModule,
   ],
   providers: [...grpcProviders],
   declarations: [AppRootComponent],
   bootstrap: [AppRootComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {}
+export class AppClientModule {}

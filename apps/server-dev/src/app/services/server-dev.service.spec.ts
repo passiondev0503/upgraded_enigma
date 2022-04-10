@@ -1,17 +1,17 @@
 import { Test } from '@nestjs/testing';
 import { ChildProcess } from 'child_process';
 
-import { AppService } from './app.service';
+import { AppServerDevService } from './server-dev.service';
 
-describe('AppService', () => {
-  let service: AppService;
+describe('AppServerDevService', () => {
+  let service: AppServerDevService;
 
   beforeAll(async () => {
     const app = await Test.createTestingModule({
-      providers: [AppService],
+      providers: [AppServerDevService],
     }).compile();
 
-    service = app.get<AppService>(AppService);
+    service = app.get<AppServerDevService>(AppServerDevService);
   });
 
   describe('resetEnvironments', () => {
@@ -21,7 +21,10 @@ describe('AppService', () => {
       spy.mockImplementation(() => child);
       service.resetEnvironments();
       child.emit('close');
-      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith('yarn', ['tools:env:reset'], {
+        stdio: 'inherit',
+        detached: true,
+      });
     });
 
     it('should return call child process spawn', () => {
@@ -31,7 +34,10 @@ describe('AppService', () => {
       service.resetEnvironments();
       const code = 8;
       child.emit('close', code);
-      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith('yarn', ['tools:env:reset'], {
+        stdio: 'inherit',
+        detached: true,
+      });
     });
   });
 });

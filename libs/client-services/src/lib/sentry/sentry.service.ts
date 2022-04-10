@@ -2,7 +2,7 @@ import { APP_INITIALIZER, ErrorHandler, Injectable, Provider } from '@angular/co
 import { Router } from '@angular/router';
 import { IWebClientAppEnvironment, TSentryEnvironment } from '@app/client-util';
 import * as Sentry from '@sentry/angular';
-import { Integrations } from '@sentry/tracing';
+import { BrowserTracing } from '@sentry/tracing';
 
 /**
  * Sentry is disabled for environments defined in this array.
@@ -10,12 +10,15 @@ import { Integrations } from '@sentry/tracing';
 const sentryDisabledEnvironments: TSentryEnvironment[] = ['unit-testing', 'development'];
 
 /**
- * This method must be used only in main.ts on client.
+ * Initializes Sentry.
+ * @param env web client environment
+ * @param release release identifier
  */
-export const initializeSentry = (env: IWebClientAppEnvironment) => {
+export const initializeSentry = (env: IWebClientAppEnvironment, release: string) => {
   if (!sentryDisabledEnvironments.includes(env.sentry.env)) {
     Sentry.init({
       environment: env.sentry.env,
+      release,
       dsn: env.sentry.dsn,
       integrations: [
         /**
@@ -23,7 +26,7 @@ export const initializeSentry = (env: IWebClientAppEnvironment) => {
          * which automatically instruments your application to monitor its
          * performance, including custom Angular routing instrumentation.
          */
-        new Integrations.BrowserTracing({
+        new BrowserTracing({
           tracingOrigins: [...env.sentry.tracingOrigins],
           routingInstrumentation: Sentry.routingInstrumentation,
         }),
@@ -39,6 +42,11 @@ export const initializeSentry = (env: IWebClientAppEnvironment) => {
   }
 };
 
+/**
+ * Sentry providers configuration.
+ * @param env web client environment
+ * @returns Sentry providers
+ */
 export const sentryProviders: (env: IWebClientAppEnvironment) => Provider[] = env => {
   return sentryDisabledEnvironments.includes(env.sentry.env)
     ? []

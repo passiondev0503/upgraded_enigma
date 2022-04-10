@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { spawn } from 'child_process';
 
 @Injectable()
-export class AppService {
+export class AppServerDevService {
   public readonly spawn = spawn;
 
   public resetEnvironments() {

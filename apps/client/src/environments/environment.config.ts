@@ -1,11 +1,22 @@
-import { IWebClientAppEnvironment } from '@app/client-util';
+/**
+ * Metadata environment configuration factory.
+ * @returns metadata environment configuration
+ */
+export const metaEnvFactory = () => ({
+  version: 'N/A',
+});
 
 /**
- * Sentry environment configuration factory.
+ * Firebase config factory
  */
-export const sentryEnvFactory = (config: { production: boolean }): IWebClientAppEnvironment['sentry'] => ({
-  env: config.production ? 'production' : 'development',
-  dsn: 'https://a076fb94912040d1952c9d76dba44f85@o551250.ingest.sentry.io/5679603',
-  tracingOrigins: ['localhost:4200', 'https://organizer-833bc.web.app', 'https://organizer-833bc.firebaseapp.com'],
-  tracesSampleRate: 1.0,
+export const firebaseEnvFactory = () => ({
+  apiKey: 'FIREBASE_API_KEY',
+  authDomain: 'FIREBASE_AUTH_DOMAIN',
+  databaseURL: 'FIREBASE_DATABASE_URL',
+  projectId: 'FIREBASE_PROJECT_ID',
+  storageBucket: 'FIREBASE_STORAGE_BUCKET',
+  messagingSenderId: 'FIREBASE_MESSAGING_SENDER_ID',
+  appId: 'FIREBASE_APP_ID',
+  measurementId: 'FIREBASE_MEASUREMENT_ID',
+  defaultRtcRoomId: 'DEFAULT_RTC_ROOM_ID',
 });

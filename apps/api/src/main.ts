@@ -9,7 +9,7 @@ import e from 'express';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
-import { ApiAppModule } from './app/app.module';
+import { ApiAppModule } from './app/api.module';
 import { environment } from './environments/environment';
 
 /**

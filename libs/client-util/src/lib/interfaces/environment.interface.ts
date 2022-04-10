@@ -5,11 +5,16 @@ import { TSentryEnvironment } from './sentry.interface';
 export type TAppName = 'Upgraded Enigma' | string;
 
 /**
+ * Capacitor platform.
+ */
+export type TCapacitorPlatform = 'android' | 'ios' | 'web' | string;
+
+/**
  * Web Client Application environment.
  */
 export interface IWebClientAppEnvironment {
   production: boolean;
-  platform: string;
+  platform: TCapacitorPlatform;
   appName: TAppName;
   description: string;
   api: string;
@@ -30,5 +35,8 @@ export interface IWebClientAppEnvironment {
     appId: string;
     measurementId: string;
     defaultRtcRoomId: string;
+  };
+  meta: {
+    version: string;
   };
 }

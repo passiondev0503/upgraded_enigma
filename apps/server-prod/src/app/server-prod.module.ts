@@ -35,7 +35,7 @@ const appName = process.argv[appNameArg] ?? 'client';
     }),
   ],
 })
-export class AppModule implements OnModuleDestroy {
+export class AppServerProdModule implements OnModuleDestroy {
   public onModuleDestroy() {
     Logger.verbose(`\n${new Date(Date.now())}: Received exit signal - terminating app...\n`);
   }

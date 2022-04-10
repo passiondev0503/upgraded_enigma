@@ -14,6 +14,8 @@ export class AppToolbarComponent {
   @HostBinding('class.fixed-position-toolbar') public fixedPosition =
     this.win.innerHeight + this.win.scrollY < this.win.document.body.offsetHeight;
 
+  @Input() public version?: string;
+
   @Input() public anchors: IAnchor[] = [
     {
       href: 'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=bug_report.md&title=',

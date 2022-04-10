@@ -1,10 +1,10 @@
-import { IWebClientAppEnvironment } from '@app/client-util';
+import { IWebClientAppEnvironment, TCapacitorPlatform } from '@app/client-util';
 import { Capacitor } from '@capacitor/core';
 
-import { sentryEnvFactory } from './environment.config';
-import { firebase } from './firebase';
+import { firebaseEnvFactory, metaEnvFactory } from './environment.config';
+import { sentryEnvFactory } from './sentry.config';
 
-const platform: string = Capacitor.getPlatform();
+const platform: TCapacitorPlatform = Capacitor.getPlatform();
 
 /**
  * Production environment variables.
@@ -13,7 +13,7 @@ export const environment: IWebClientAppEnvironment = {
   production: true,
   platform,
   appName: 'Upgraded Enigma Client',
-  description: 'Upgraded Enigma client application',
+  description: 'Upgraded Enigma client application.',
   api:
     platform !== 'web'
       ? 'https://upgraded-enigma.web.app/api'
@@ -21,6 +21,7 @@ export const environment: IWebClientAppEnvironment = {
       ? 'http://localhost:8080/api'
       : `${window.location.origin}/api`,
   envoyUrl: 'http://localhost:8082', // TODO
+  firebase: firebaseEnvFactory(),
   sentry: sentryEnvFactory({ production: true }),
-  firebase: { ...firebase },
+  meta: metaEnvFactory(),
 };

@@ -137,9 +137,9 @@ jobs:
         if: steps.changes.outputs.nx == 'true'
         run: |
           yarn generate:env:documentation
-          yarn tools:client:env:set
+          yarn tools:env:set:client
           npx nx run-many --target=build --all --configuration production
-          yarn tools:client:env:reset
+          yarn tools:env:reset:client
 
       - name: Build documentation
         if: steps.changes.outputs.nx == 'true'

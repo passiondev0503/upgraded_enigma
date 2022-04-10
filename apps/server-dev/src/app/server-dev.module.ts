@@ -1,14 +1,14 @@
 import { Logger, Module, OnModuleDestroy } from '@nestjs/common';
 
-import { AppService } from './services/app.service';
+import { AppServerDevService } from './services/server-dev.service';
 
 @Module({
   imports: [],
   controllers: [],
-  providers: [AppService],
+  providers: [AppServerDevService],
 })
-export class AppModule implements OnModuleDestroy {
-  constructor(private readonly service: AppService) {}
+export class AppServerDevModule implements OnModuleDestroy {
+  constructor(private readonly service: AppServerDevService) {}
 
   public onModuleDestroy() {
     Logger.verbose(`\n${new Date(Date.now())}: Dev server > received exit signal - terminating app...\n`);
