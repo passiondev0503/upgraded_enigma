@@ -141,13 +141,15 @@ jobs:
           npx nx run-many --target=build --all --configuration production
           yarn tools:env:reset:client
 
-      - name: Build documentation
+      - name: Build documentation app assets
         if: steps.changes.outputs.nx == 'true'
         run: |
           yarn test:reports
+          yarn generate:unit-test-coverage-index
           npx nx run tools:compodoc-build
           yarn generate:changelog
           yarn e2e:headless:report
+          yarn generate:e2e-test-report-index
           npx nx run documentation:build-storybook || true
           cp -r ./dist/storybook/documentation ./dist/apps/documentation/assets/storybook || true
 
@@ -179,3 +181,6 @@ jobs:
       #     yarn firebase:deploy:ci:api || exit 1
       #   env:
       #     FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
+
+      - name: Cleanup
+        run: rm -rf ./.env ./functions/.env

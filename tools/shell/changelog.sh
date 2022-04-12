@@ -1,31 +1,22 @@
 #!/bin/bash
 
-source tools/shell/colors.sh ''
-source tools/shell/module-aliases.sh ''
-source tools/shell/print-utils.sh ''
+source tools/shell/utils/colors.sh ''
+source tools/shell/utils/module-aliases.sh ''
+source tools/shell/utils/print-utils.sh ''
 
 ##
-# Project root reference.
+# Constants.
 ##
 PROJECT_ROOT=.
-##
-# Changelog root path.
-##
 CHANGELOG_ROOT=${PROJECT_ROOT}/changelog
-##
-# Apps changelog path.
-##
 CHANGELOG_APPS=${PROJECT_ROOT}/changelog/apps
-##
-# Libs changelog path.
-##
 CHANGELOG_LIBS=${PROJECT_ROOT}/changelog/libs
 
 ##
 # Reports usage error and exits.
 ##
 reportUsageErrorAndExit() {
-  printInfoTitle "<< USAGE >>"
+  printInfoTitle "<< ${0} usage >>"
   printUsageTip "bash tools/shell/changelog.sh all" "generate all changelogs"
   printUsageTip "bash tools/shell/changelog.sh <APP_ALIAS_FROM_TSCONFIG>" "generate changelog for a specific application/library"
 

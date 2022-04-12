@@ -70,6 +70,9 @@ export const sentryProviders: (env: IWebClientAppEnvironment) => Provider[] = en
       ];
 };
 
+/**
+ * The Sentry tracing service.
+ */
 @Injectable({
   providedIn: 'root',
 })

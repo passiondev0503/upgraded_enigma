@@ -6,22 +6,31 @@ Organizer and productivity tools mono-repository.
 
 ## Workflows
 
-| Trigger                             | Badge                                                                                                                                                                                                                             |
-| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PR open event (destination: trunk)  | [![pr-validation](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/pr-validation.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/pr-validation.yml)                      |
-| PR merge event (destination: trunk) | [![trunk-on-push](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/trunk-on-push.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/trunk-on-push.yml)                      |
-| Manual                              | [![e2e-test](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/e2e-test.yml)                                     |
-| Scheduled (weekly)                  | [![codeowners-validator](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/codeowners-validator.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/codeowners-validator.yml) |
+| Info                                                                         | Trigger                             | Badge                                                                                                                                                                                                                             |
+| ---------------------------------------------------------------------------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [:information_source:](# 'Quality gates.')                                   | PR open event (destination: trunk)  | [![pr-validation](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/pr-validation.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/pr-validation.yml)                      |
+| [:information_source:](# 'Full testing, deliverables build and deployment.') | PR merge event (destination: trunk) | [![trunk-on-push](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/trunk-on-push.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/trunk-on-push.yml)                      |
+| [:information_source:](# 'User acceptance testing.')                         | Manual                              | [![e2e-test](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/e2e-test.yml)                                     |
+| [:information_source:](# 'Code ownership validation.')                       | Scheduled (weekly)                  | [![codeowners-validator](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/codeowners-validator.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/codeowners-validator.yml) |
+| [:information_source:](# 'Source code security scanning.')                   | Manual, Scheduled (weekly)          | [![codeql-analysis](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/upgraded-enigma/upgraded-enigma/actions/workflows/codeql-analysis.yml)                |
 
 ## Requirements
 
 In order to run own copy of the project one must fulfill the following requirements.
 
-### Operating system
+### Supported operating systems
 
-- [Debian based Linux](https://en.wikipedia.org/wiki/List_of_Linux_distributions#Debian-based) - recommended, check out this [dev setup instructions](https://github.com/rfprod/wdsdu) to facilitate getting started
-- [OSX](https://en.wikipedia.org/wiki/MacOS)
-- [~~Windows~~](https://en.wikipedia.org/wiki/Microsoft_Windows) - `poorly supported`
+- :trophy: [Debian based Linux](https://en.wikipedia.org/wiki/List_of_Linux_distributions#Debian-based) - `recommended`
+  - check out [this dev setup instructions](https://github.com/rfprod/wdsdu) to facilitate setting up the dev environment;
+  - given that the dev environment is set up, the command `yarn install:all:linux` should install everything needed to work with the project;
+- :ok: [OSX](https://en.wikipedia.org/wiki/MacOS) - `should work due to the similarities with Linux`
+  - one will have to figure out oneself how to set up the dev environment;
+  - given that the dev environment is set up, the command `yarn install:all:osx` should install everything needed to work with the project;
+  - the automation scripts support the OS with relatively high probability, but it have not been tested;
+- :no_entry_sign: [Windows](https://en.wikipedia.org/wiki/Microsoft_Windows) - `not recommended`
+  - one will have to figure out oneself how to set up the dev environment;
+  - one will have to figure out oneself how to install required dependencies like `protolint` and `shellcheck` system wide;
+  - the automation scripts support the OS with relatively low probability, but it have not been tested.
 
 ### Core dependencies
 
@@ -55,77 +64,22 @@ git cz
 
 ## GitBook documentation
 
-Is generated based on GitHub repo.
+The GitBook documentation is generated based on this GitHub repo.
 
 - [GitBook documentation](https://rfprod.gitbook.io/upgraded-enigma/)
 
 ## Firebase deployment
 
-Applications as well as generated documentation, testing reports, and a custom changelog are deployed to Firebase.
-
-### Webapp
+Application deployments and autogenerated engineering documentation.
 
 - [Client](https://upgraded-enigma.web.app)
 - [Elements](https://upgraded-enigma-elements.web.app)
-
-### Documentation
-
 - [Documentation](https://upgraded-enigma-documentation.web.app)
-- [Compodoc](https://upgraded-enigma-documentation.web.app/assets/compodoc/index.html)
-- [Storybook](https://upgraded-enigma-documentation.web.app/assets/storybook/index.html)
-
-#### Unit coverage
-
-- [API](https://upgraded-enigma-documentation.web.app/assets/coverage/apps/api/index.html)
-  - [Backend Auth](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-auth/index.html)
-  - [Backend gRPC](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-grpc/index.html)
-  - [Backend Interfaces](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-interfaces/index.html)
-  - [Backend Logger](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-logger/index.html)
-  - [Backend Websocket](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/backend-websocket/index.html)
-- [Server Dev](https://mono-documentation.web.app/assets/coverage/apps/server-dev/index.html)
-- [Client](https://upgraded-enigma-documentation.web.app/assets/coverage/apps/client/index.html)
-  - [Client Chatbot](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-chatbot/index.html)
-  - [Client Core Components](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-core-components/index.html)
-  - [Client Diagnostics](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-diagnostics/index.html)
-  - [Client Core](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-core/index.html)
-  - [Client Material](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-material/index.html)
-  - [Client Services](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-services/index.html)
-  - [Client Store](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-store/index.html)
-  - [Client Translate](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-translate/index.html)
-  - [Client Unit Testing](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-unit-testing/index.html)
-  - [Client Util](https://upgraded-enigma-documentation.web.app/assets/coverage/libs/client-util/index.html)
-- [Documentation](https://upgraded-enigma-documentation.web.app/assets/coverage/apps/documentation/index.html)
-
-#### E2E report
-
-- [Client E2E](https://upgraded-enigma-documentation.web.app/assets/cypress/client-e2e/mochawesome/mochawesome.html)
-- [Client Core Components E2E](https://upgraded-enigma-documentation.web.app/assets/cypress/client-core-components-e2e/mochawesome/mochawesome.html)
-- [Documentation E2E](https://upgraded-enigma-documentation.web.app/assets/cypress/documentation-e2e/mochawesome/mochawesome.html)
-
-#### Changelog
-
-- [API](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/api-CHANGELOG.html)
-- [Backend Auth](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-auth-CHANGELOG.html)
-- [Backend gRPC](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-grpc-CHANGELOG.html)
-- [Backend Interfaces](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-interfaces-CHANGELOG.html)
-- [Backend Logger](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-logger-CHANGELOG.html)
-- [Backend Websocket](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/backend-websocket-CHANGELOG.html)
-- [Client](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/client-CHANGELOG.html)
-- [Client E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/client-e2e-CHANGELOG.html)
-- [Client Core Components](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-core-components-CHANGELOG.html)
-- [Client Core Components E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-core-components-e2e-CHANGELOG.html)
-- [Client Diagnostics](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-diagnostics-CHANGELOG.html)
-- [Client Diagnostics E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-diagnostics-e2e-CHANGELOG.html)
-- [Client Core](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-core-CHANGELOG.html)
-- [Client Material](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-material-CHANGELOG.html)
-- [Client Services](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-services-CHANGELOG.html)
-- [Client Store](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-store-CHANGELOG.html)
-- [Client Translate](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-translate-CHANGELOG.html)
-- [Client Util](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/client-util-CHANGELOG.html)
-- [Documentation](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/documentation-CHANGELOG.html)
-- [Documentation E2E](https://upgraded-enigma-documentation.web.app/assets/changelog/apps/documentation-e2e-CHANGELOG.html)
-- [Mocks Core](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/mocks-core-CHANGELOG.html)
-- [Proto](https://upgraded-enigma-documentation.web.app/assets/changelog/libs/proto-CHANGELOG.html)
+  - [Compodoc](https://upgraded-enigma-documentation.web.app/assets/compodoc/index.html)
+  - [Storybook](https://upgraded-enigma-documentation.web.app/assets/storybook/index.html)
+  - [Unit test reports](https://upgraded-enigma-documentation.web.app/assets/coverage/index.html)
+  - [E2E test reports](https://upgraded-enigma-documentation.web.app/assets/cypress/index.html)
+  - [Changelogs](https://upgraded-enigma-documentation.web.app/assets/changelog/index.html)
 
 ## Workspace generators
 
@@ -149,23 +103,24 @@ This project was generated using [Nx](https://nx.dev).
 - [30-minute video showing all Nx features](https://nx.dev/getting-started/what-is-nx)
 - [Interactive Tutorial](https://nx.dev/tutorial/01-create-application)
 
-### Adding capabilities to your workspace
+### Adding capabilities to the workspace
 
 Nx supports many plugins which add capabilities for developing different types of applications and different tools.
 
 These capabilities include generating applications, libraries, .etc as well as the devtools to test, and build projects as well.
 
-Below are some plugins which you can add to your workspace:
+Below are some plugins which can be added to the workspace:
 
-| Application type                       | Command                  |
-| -------------------------------------- | ------------------------ |
-| [Angular](https://angular.io)          | `ng add @nrwl/angular`   |
-| [React](https://reactjs.org)           | `ng add @nrwl/react`     |
-| Web (no framework frontends)           | `ng add @nrwl/web`       |
-| [Nest](https://nestjs.com)             | `ng add @nrwl/nest`      |
-| [Express](https://expressjs.com)       | `ng add @nrwl/express`   |
-| [Node](https://nodejs.org)             | `ng add @nrwl/node`      |
-| [Storybook](https://storybook.js.org/) | `ng add @nrwl/storybook` |
+| Application type                       | Command                  | Part of the workspace |
+| -------------------------------------- | ------------------------ | --------------------- |
+| [Angular](https://angular.io)          | `ng add @nrwl/angular`   | :heavy_check_mark:    |
+| [React](https://reactjs.org)           | `ng add @nrwl/react`     | :x:                   |
+| Web (no framework frontends)           | `ng add @nrwl/web`       | :heavy_check_mark:    |
+| [Nest](https://nestjs.com)             | `ng add @nrwl/nest`      | :heavy_check_mark:    |
+| [Express](https://expressjs.com)       | `ng add @nrwl/express`   | :x:                   |
+| [Node](https://nodejs.org)             | `ng add @nrwl/node`      | :heavy_check_mark:    |
+| [Storybook](https://storybook.js.org/) | `ng add @nrwl/storybook` | :heavy_check_mark:    |
+| [Cypress](https://www.cypress.io/)     | `ng add @nrwl/cypress`   | :heavy_check_mark:    |
 
 ### Generating an application
 
@@ -253,9 +208,9 @@ To execute the end-to-end tests affected by a change run:
 npm run affected:e2e
 ```
 
-### Understanding your workspace
+### Understanding the workspace
 
-To see a diagram of the dependencies of your projects run:
+To see a diagram of the dependencies of the projects run:
 
 ```bash
 npm run dep-graph
@@ -296,7 +251,7 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 - [NestJS](https://nestjs.com/)
 - [Firebase JS Reference](https://firebase.google.com/docs/reference/js/)
 - [Angular Firebase: Apollo Server](https://angularfirebase.com/lessons/graphql-apollo-2-tutorial-node/#Apollo-Server)
-- [GRPC](https://grpc.io/)
+- [gRPC](https://grpc.io/)
 
 ### Testing
 
