@@ -31,12 +31,7 @@ const typeConstraints = [
 /**
  * Shared module boundary rules based on scopes.
  */
-const sharedConstraints = [
-  {
-    sourceTag: 'scope:proto',
-    onlyDependOnLibsWithTags: [],
-  },
-];
+const sharedConstraints = [];
 
 /**
  * Backend module boundary rules based on scopes.
@@ -44,19 +39,11 @@ const sharedConstraints = [
 const backendConstraints = [
   {
     sourceTag: 'scope:api',
-    onlyDependOnLibsWithTags: [
-      'scope:proto',
-      'scope:backend-grpc',
-      'scope:backend-interfaces',
-      'scope:backend-logger',
-      'scope:backend-websocket',
-      'scope:backend-diagnostics',
-    ],
+    onlyDependOnLibsWithTags: ['scope:backend-interfaces', 'scope:backend-logger', 'scope:backend-websocket', 'scope:backend-diagnostics'],
   },
   {
     sourceTag: 'scope:client-api',
     onlyDependOnLibsWithTags: [
-      'scope:proto',
       'scope:backend-auth',
       'scope:backend-interfaces',
       'scope:backend-logger',
@@ -66,15 +53,11 @@ const backendConstraints = [
   },
   {
     sourceTag: 'scope:backend-auth',
-    onlyDependOnLibsWithTags: ['scope:proto', 'scope:backend-interfaces'],
+    onlyDependOnLibsWithTags: ['scope:backend-interfaces'],
   },
   {
     sourceTag: 'scope:backend-diagnostics',
     onlyDependOnLibsWithTags: ['scope:backend-interfaces'],
-  },
-  {
-    sourceTag: 'scope:backend-grpc',
-    onlyDependOnLibsWithTags: ['scope:proto', 'scope:backend-interfaces'],
   },
   {
     sourceTag: 'scope:backend-interfaces',
@@ -82,11 +65,11 @@ const backendConstraints = [
   },
   {
     sourceTag: 'scope:backend-logger',
-    onlyDependOnLibsWithTags: ['scope:proto'],
+    onlyDependOnLibsWithTags: [],
   },
   {
     sourceTag: 'scope:backend-websocket',
-    onlyDependOnLibsWithTags: ['scope:proto', 'scope:backend-interfaces', 'scope:backend-diagnostics'],
+    onlyDependOnLibsWithTags: ['scope:backend-interfaces', 'scope:backend-diagnostics'],
   },
   {
     sourceTag: 'scope:server-dev',
@@ -124,7 +107,7 @@ const clientConstraints = [
   },
   {
     sourceTag: 'scope:client-store',
-    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:proto', 'scope:client-util', 'scope:client-translate'],
+    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-util', 'scope:client-translate'],
   },
   {
     sourceTag: 'scope:client-services',
@@ -149,7 +132,6 @@ const clientConstraints = [
     sourceTag: 'scope:client-diagnostics',
     onlyDependOnLibsWithTags: [
       'scope:client-unit-testing',
-      'scope:proto',
       'scope:client-core',
       'scope:client-material',
       'scope:client-store',
@@ -160,13 +142,7 @@ const clientConstraints = [
   },
   {
     sourceTag: 'scope:client-chatbot',
-    onlyDependOnLibsWithTags: [
-      'scope:client-unit-testing',
-      'scope:proto',
-      'scope:client-material',
-      'scope:client-store',
-      'scope:client-translate',
-    ],
+    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-material', 'scope:client-store', 'scope:client-translate'],
   },
   {
     sourceTag: 'scope:client-util',
@@ -195,7 +171,6 @@ const clientConstraints = [
     sourceTag: 'scope:client',
     onlyDependOnLibsWithTags: [
       'scope:client-unit-testing',
-      'scope:proto',
       'scope:client-store',
       'scope:client-services',
       'scope:client-chatbot',

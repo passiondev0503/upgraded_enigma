@@ -1,4 +1,4 @@
-import { IUser, IUserLoginCredentials, IUserLogoutCredentials, Message } from '@app/backend-interfaces';
+import { IMessage, IUser, IUserLoginCredentials, IUserLogoutCredentials } from '@app/backend-interfaces';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as crypto from 'crypto';
@@ -41,18 +41,18 @@ export class BackendAuthService {
     return result;
   }
 
-  public ping(): Message {
-    return new Message({
+  public ping(): IMessage {
+    return <IMessage>{
       message: 'Auth service is online. Public methods: login, logout, signup.',
-    });
+    };
   }
 
   public login(credentials: IUserLoginCredentials) {
     return this.authenticateAndReturnProfile(credentials);
   }
 
-  public logout(credentials: IUserLogoutCredentials): Message {
-    return new Message({ message: `success for token ${credentials.token}` });
+  public logout(credentials: IUserLogoutCredentials): IMessage {
+    return <IMessage>{ message: `success for token ${credentials.token}` };
   }
 
   private authenticateAndReturnProfile(credentials: IUserLoginCredentials) {

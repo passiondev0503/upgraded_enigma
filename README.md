@@ -29,7 +29,7 @@ In order to run own copy of the project one must fulfill the following requireme
   - the automation scripts support the OS with relatively high probability, but it has not been tested;
 - :no_entry_sign: [Windows](https://en.wikipedia.org/wiki/Microsoft_Windows) - `not recommended`
   - one will have to figure out oneself how to set up the dev environment;
-  - one will have to figure out oneself how to install required dependencies like `protolint` and `shellcheck` system wide;
+  - one will have to figure out oneself how to install required dependencies like `shellcheck` system wide;
   - the automation scripts support the OS with relatively low probability, but it has not been tested.
 
 ### Core dependencies
@@ -250,8 +250,6 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 
 - [NestJS](https://nestjs.com/)
 - [Firebase JS Reference](https://firebase.google.com/docs/reference/js/)
-- [Angular Firebase: Apollo Server](https://angularfirebase.com/lessons/graphql-apollo-2-tutorial-node/#Apollo-Server)
-- [gRPC](https://grpc.io/)
 
 ### Testing
 

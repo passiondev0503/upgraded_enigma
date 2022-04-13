@@ -1,8 +1,6 @@
-import { backendGrpcClientOptions } from '@app/backend-grpc';
 import { ValidationPipe } from '@nestjs/common';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { NestFactory } from '@nestjs/core';
-import { MicroserviceOptions } from '@nestjs/microservices';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { WsAdapter } from '@nestjs/platform-ws';
 import e from 'express';
@@ -39,20 +37,12 @@ async function bootstrap(expressInstance: e.Express): Promise<unknown> {
   };
   app.enableCors(corsOptions);
 
-  // TODO: debug grpc in firebase, currently it causes all functions deployment failure
-  if (environment.firebase !== true) {
-    const grpcClientOptions = backendGrpcClientOptions(environment);
-    app.connectMicroservice<MicroserviceOptions>(grpcClientOptions);
-    await app.startAllMicroservices();
-  }
-
   const port = typeof process.env.port !== 'undefined' ? process.env.port : defaultPort;
   await app.listen(port, () => {
     console.warn(`Listening at:
     - http://localhost:${port}/${globalPrefix}/diagnostics
     - http://localhost:${port}/${globalPrefix}/graphql
-    - http://localhost:${port}/${globalPrefix}/grpc
-    - http://localhost:${port}/${globalPrefix}/grpc/:id
+
     - ws://localhost:${environment.wsPort}/api/events`);
   });
 

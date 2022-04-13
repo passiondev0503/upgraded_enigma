@@ -19,7 +19,7 @@ export class AppUserProfileComponent {
 
   constructor(private readonly store: Store) {}
 
-  @HostBinding('class.mat-body-1') protected matBody1 = true;
+  @HostBinding('class.mat-body-1') protected matBody = true;
 
   /**
    * Gets user status.

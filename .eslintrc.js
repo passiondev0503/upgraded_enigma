@@ -2,6 +2,11 @@ const { nxModuleBoundaryRules } = require('./.eslintrc.module-boundaries');
 const { join } = require('path');
 
 /**
+ * This RegExp patter validates the allowed camelCase patterns that should be used for the object literal property names.
+ */
+const camelCaseRegExpInput = '([a-z]+([A-Z])?[a-z]*)([A-Z][a-z]+|A11y|URL){0,}([$])?';
+
+/**
  * Roadmap typescript-eslint
  * https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/ROADMAP.md
  *
@@ -148,21 +153,25 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.js'],
+      env: {
+        browser: true,
+        node: true,
+      },
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
         createDefaultProgram: true,
       },
-      extends: ['eslint:recommended', 'plugin:prettier/recommended', 'plugin:eslint-comments/recommended', 'plugin:@nrwl/nx/javascript'],
+      extends: ['eslint:recommended', 'plugin:prettier/recommended', 'plugin:eslint-comments/recommended'],
       plugins: [
         'prettier',
-        '@angular-eslint', // https://github.com/angular-eslint/angular-eslint
         'simple-import-sort', // https://github.com/lydell/eslint-plugin-simple-import-sort
         'eslint-comments', // https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/
         'unicorn', // https://www.npmjs.com/package/eslint-plugin-unicorn
       ],
     },
     {
+      files: '**/*.ts',
       parser: '@typescript-eslint/parser',
       parserOptions: {
         ecmaVersion: 2020,
@@ -186,9 +195,7 @@ module.exports = {
         'compat', // https://www.npmjs.com/package/eslint-plugin-compat
         'eslint-comments', // https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/
         'unicorn', // https://www.npmjs.com/package/eslint-plugin-unicorn
-        '@nrwl/eslint-plugin-nx',
       ],
-      files: '**/*.ts',
       rules: {
         '@nrwl/nx/enforce-module-boundaries': ['error', nxModuleBoundaryRules],
         '@typescript-eslint/await-thenable': 'error',
@@ -240,21 +247,45 @@ module.exports = {
           {
             selector: 'objectLiteralProperty',
             /**
-             * PascalCase can be used only in cases when camelCase is not applicable, like in http headers, e.g. 'Authorization'.
-             * In all other cases camelCase must be used.
+             * By default only camelCase is allowed.
+             * Exceptions:
+             * > FORCE_COLOR - nodejs environment property
+             * > Authorization, Content-Type - http headers
+             * Valid examples:
+             * > property
+             * > propertyName
+             * > longPropertyName
+             * > databaseURL
              */
-            /**
-             * Node env uses uppercase.
-             */
-            format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+            format: null, // ['camelCase', 'UPPER_CASE', 'PascalCase'],
             leadingUnderscore: 'forbid',
             trailingUnderscore: 'forbid',
+            custom: {
+              regex: `^(${camelCaseRegExpInput}|FORCE_COLOR|Authorization|Content-Type)$`,
+              match: true,
+            },
           },
           {
             selector: 'property',
-            format: ['camelCase'],
+            /**
+             * By default only camelCase is allowed.
+             * Exceptions:
+             * > Cypress - cypress e2e testing window property
+             * Valid examples:
+             * > property
+             * > propertyName
+             * > longPropertyName
+             * > databaseURL
+             * > observable$
+             * > observableProperty$
+             */
+            format: null, // ['camelCase', 'PascalCase'],
             leadingUnderscore: 'forbid',
             trailingUnderscore: 'forbid',
+            custom: {
+              regex: `^(${camelCaseRegExpInput}|Cypress)$`,
+              match: true,
+            },
           },
           {
             selector: 'function',
@@ -467,114 +498,10 @@ module.exports = {
       },
     },
     {
-      files: ['**/grpc/**', '*proto*.*'], // generated protobuf definitions
-      rules: {
-        'max-lines': 'off',
-        'no-dupe-class-members': 'off',
-        '@typescript-eslint/explicit-member-accessibility': 'off',
-        '@typescript-eslint/member-ordering': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/no-unused-vars': 'off',
-        '@typescript-eslint/naming-convention': 'off',
-        'simple-import-sort/imports': 'off',
-        'simple-import-sort/exports': 'off',
-      },
-    },
-    {
       files: ['**/src/support/index.ts'],
       rules: {
         'no-console': 'off',
         '@typescript-eslint/triple-slash-reference': 'off',
-      },
-    },
-    {
-      files: 'bootstrap-environment-check.ts',
-      rules: {
-        '@typescript-eslint/naming-convention': [
-          'error', // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/naming-convention.md
-          {
-            selector: 'default',
-            format: ['camelCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'variable',
-            format: ['camelCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'parameter',
-            format: ['camelCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'objectLiteralProperty',
-            format: ['camelCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'property',
-            format: ['camelCase', 'PascalCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'function',
-            format: ['camelCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'enum',
-            format: ['UPPER_CASE'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'enumMember',
-            format: ['UPPER_CASE'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'memberLike',
-            modifiers: ['private'],
-            format: ['camelCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'typeAlias',
-            prefix: ['T'],
-            format: ['StrictPascalCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'typeParameter',
-            format: ['StrictPascalCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'interface',
-            prefix: ['I'],
-            format: ['StrictPascalCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'class',
-            prefix: ['App'],
-            format: ['StrictPascalCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-        ],
       },
     },
   ],

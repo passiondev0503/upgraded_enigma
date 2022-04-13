@@ -26,7 +26,6 @@ export const environment: IWebClientAppEnvironment = {
   appName: 'Upgraded Enigma Client',
   description: 'Upgraded Enigma client application',
   api: window.location.origin.includes('localhost') ? 'http://localhost:8080/api' : `${window.location.origin}/api`,
-  envoyUrl: 'http://localhost:8082',
   firebase: firebaseEnvFactory(),
   sentry: sentryEnvFactory({ production: true }),
   meta: metaEnvFactory(),

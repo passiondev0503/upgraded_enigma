@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Provider } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
@@ -9,7 +9,6 @@ import { AppClientCoreComponentsModule } from '@app/client-core-components';
 import { AppClientMaterialModule } from '@app/client-material';
 import { AppUserState, AppWebsocketModule } from '@app/client-store';
 import { AppClientTranslateModule } from '@app/client-translate';
-import { EntityServiceClient } from '@app/proto';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
@@ -19,13 +18,6 @@ import { NgxsModule } from '@ngxs/store';
 import { environment } from '../environments/environment';
 import { AppClientRoutingModule } from './client-routing.module';
 import { AppRootComponent } from './components/root.component';
-
-export const grpcProviders: Provider[] = [
-  {
-    provide: EntityServiceClient,
-    useFactory: () => new EntityServiceClient(environment.envoyUrl ?? '', null, { withCredentials: 'true' }),
-  },
-];
 
 /**
  * Application root module.
@@ -51,7 +43,6 @@ export const grpcProviders: Provider[] = [
     AppClientTranslateModule.forRoot(),
     AppClientRoutingModule,
   ],
-  providers: [...grpcProviders],
   declarations: [AppRootComponent],
   bootstrap: [AppRootComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

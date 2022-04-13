@@ -14,7 +14,7 @@ import { concatMap, first, tap } from 'rxjs/operators';
 export class AppUserAuthComponent implements OnInit {
   constructor(private readonly fb: FormBuilder, private readonly router: Router, private readonly store: Store) {}
 
-  @HostBinding('class.mat-body-1') protected matBody1 = true;
+  @HostBinding('class.mat-body-1') protected matBody = true;
 
   /**
    * Login form.

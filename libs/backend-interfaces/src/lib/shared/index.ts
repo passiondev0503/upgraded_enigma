@@ -1,1 +1,1 @@
-export * from './http/index';
+export * from './message.interface';

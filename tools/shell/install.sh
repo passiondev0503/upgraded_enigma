@@ -13,10 +13,8 @@ reportUsage() {
   printUsageTip "bash tools/shell/install.sh" "print install.sh usage"
   printUsageTip "bash tools/shell/install.sh project" "install project dependencies only"
   printUsageTip "bash tools/shell/install.sh global" "install global dependencies only"
-  printUsageTip "bash tools/shell/install.sh all" "install projects dependencies, global dependencies, brew (linux), protolint (linux), shellcheck (linux)"
-  printUsageTip "bash tools/shell/install.sh all osx" "install projects dependencies, global dependencies, protolint (osx), shellcheck (osx)"
-  printUsageTip "bash tools/shell/install.sh proto" "install protobuf dependencies on linux"
-  printUsageTip "bash tools/shell/install.sh proto osx" "install protobuf dependencies on osx"
+  printUsageTip "bash tools/shell/install.sh all" "install projects dependencies, global dependencies, shellcheck (linux)"
+  printUsageTip "bash tools/shell/install.sh all osx" "install projects dependencies, global dependencies, shellcheck (osx)"
   printUsageTip "bash tools/shell/install.sh shellcheck" "install shellcheck on linux"
   printUsageTip "bash tools/shell/install.sh shellcheck osx" "install shellcheck on osx"
   printGap
@@ -73,83 +71,6 @@ resolveIfPackageIsInstalledAndInstall() {
 }
 
 ##
-# Installs linuxbrew dependencies on Linux.
-##
-installLinuxBrewDependencies() {
-  printInfoTitle "<< INSTALLING LINUXBREW dependencies >>"
-  printGap
-
-  resolveIfPackageIsInstalledAndInstall build-essential
-}
-
-##
-# Installs brew, protilint, protobuf, and gRPC tools on Linux.
-##
-installBrewAndProtobufLinux() {
-  printInfoTitle "<< INSTALLING BREW, PROTOLINT, PROTOBUF, PROTOC-GEN-GRPC-WEB, GRPC TOOLS on LINUX >>"
-  printGap
-
-  # install linux brew dependencies
-  installLinuxBrewDependencies
-  # install linux brew wrapper
-  sudo apt install linuxbrew-wrapper
-  # pass ENTER to brew --help command so that it automatically proceeds with installation
-  printf '\n' | brew --help
-  # export variables for brew to work
-  # shellcheck disable=SC2016
-  {
-    echo ''
-    echo '# homebrew'
-    echo 'export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"'
-    echo 'export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"'
-    echo 'export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"'
-  } >>~/.bashrc
-  # run doctor
-  brew doctor
-  # tap source code
-  brew tap yoheimuta/protolint
-  # install protolint
-  brew install protolint
-  # export variable for plex.vscode-protolint plugin to work
-  # shellcheck disable=SC2016
-  {
-    echo ''
-    echo '# protolint'
-    echo 'export PATH="/home/linuxbrew/.linuxbrew/Cellar/protolint/0.23.1/bin:$PATH"'
-  } >>~/.bashrc
-  # install protobuf
-  brew install protobuf
-  # install protoc-gen-grpc-web
-  brew install protoc-gen-grpc-web --ignore-dependencies
-  # install gRPC tools
-  brew install bradleyjkemp/formulae/grpc-tools
-}
-
-##
-# Installs protobuf and gRPC tools on OSX.
-##
-installProtobufOsx() {
-  printInfoTitle "<< INSTALLING PROTOLINT, PROTOBUF, PROTOC-GEN-GRPC-WEB on OSX >>"
-  printGap
-
-  brew install protolint
-  brew install protobuf
-  brew install protoc-gen-grpc-web --ignore-dependencies
-  brew install bradleyjkemp/formulae/grpc-tools
-}
-
-##
-# Installs protobuf and gRPC tools.
-##
-installProtobufAndGrpcTools() {
-  if [ "$1" = "osx" ]; then
-    installProtobufOsx
-  else
-    installBrewAndProtobufLinux
-  fi
-}
-
-##
 # Installs Shellcheck on Linux.
 ##
 installShellcheckLinux() {
@@ -188,14 +109,11 @@ if [ $# -lt 1 ]; then
 elif [ "$1" = "all" ]; then
   installProjectDependencies
   installGlobalDependencies
-  installProtobuf "$2"
   installShellcheck "$2"
 elif [ "$1" = "project" ]; then
   installProjectDependencies
 elif [ "$1" = "global" ]; then
   installGlobalDependencies
-elif [ "$1" = "proto" ]; then
-  installProtobuf "$2"
 elif [ "$1" = "shellcheck" ]; then
   installShellcheck "$2"
 else

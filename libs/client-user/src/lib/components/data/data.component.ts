@@ -19,7 +19,7 @@ export class AppUserDataComponent {
     void this.getExportedPasswordsList().subscribe();
   }
 
-  @HostBinding('class.mat-body-1') protected matBody1 = true;
+  @HostBinding('class.mat-body-1') protected matBody = true;
 
   /**
    * Currently logged in user object.

@@ -12,7 +12,6 @@ const testingEnvironment = {
   platform: '',
   appName: 'Client',
   api: 'http://localhost:8080/api',
-  envoyUrl: 'http://localhost:8081',
 };
 
 export default {

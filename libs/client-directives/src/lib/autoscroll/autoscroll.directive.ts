@@ -1,6 +1,6 @@
 import { AfterContentInit, Directive, ElementRef, HostListener, Input, OnDestroy } from '@angular/core';
 
-const defaultLockYOffset = 10;
+const defaultVerticalOffsetLock = 10;
 
 /**
  * Autoscroll directive.
@@ -9,7 +9,7 @@ const defaultLockYOffset = 10;
   selector: '[appAutoscroll]',
 })
 export class AppAutoscrollDirective implements AfterContentInit, OnDestroy {
-  @Input() public lockYOffset = defaultLockYOffset;
+  @Input() public verticalOffsetLock = defaultVerticalOffsetLock;
 
   @Input() public observeAttributes = false;
 
@@ -55,7 +55,7 @@ export class AppAutoscrollDirective implements AfterContentInit, OnDestroy {
   public scrollHandler(): void {
     if (typeof this.nativeElement !== 'undefined') {
       const scrollFromBottom = this.nativeElement.scrollHeight - this.nativeElement.scrollTop - this.nativeElement.clientHeight;
-      this.lockAutoscroll = scrollFromBottom > this.lockYOffset;
+      this.lockAutoscroll = scrollFromBottom > this.verticalOffsetLock;
     }
   }
 

@@ -14,7 +14,6 @@ const testingEnvironment = {
   platform: '',
   appName: 'Upgraded enigma',
   api: 'http://localhost:8080/api',
-  envoyUrl: 'http://localhost:8081',
 };
 
 export default {

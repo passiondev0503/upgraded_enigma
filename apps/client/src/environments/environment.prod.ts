@@ -20,7 +20,6 @@ export const environment: IWebClientAppEnvironment = {
       : window.location.origin.includes('localhost')
       ? 'http://localhost:8080/api'
       : `${window.location.origin}/api`,
-  envoyUrl: 'http://localhost:8082', // TODO
   firebase: firebaseEnvFactory(),
   sentry: sentryEnvFactory({ production: true }),
   meta: metaEnvFactory(),

@@ -19,5 +19,4 @@ functions
 !functions/package-lock.json
 libs
 tools
-!tools/proto
 *.log

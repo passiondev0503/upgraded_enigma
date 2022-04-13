@@ -29,8 +29,6 @@ export class ApiEnvironment {
 
   public appName: TApiAppName = 'Upgraded Enigma API';
 
-  public envoyUrl? = 'http://localhost:8081';
-
   public wsPort = defaultWsPort;
 
   public jwtSecret = '';

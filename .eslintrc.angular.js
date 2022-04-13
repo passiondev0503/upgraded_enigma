@@ -54,6 +54,7 @@ module.exports = {
     {
       files: ['**/*.html'],
       excludedFiles: ['*inline-template-*.component.html'],
+      plugins: ['prettier', '@angular-eslint/template'],
       extends: ['plugin:prettier/recommended', 'plugin:@angular-eslint/template/recommended'],
       rules: {},
     },
