@@ -5,9 +5,6 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[proto3]": {
-    "editor.defaultFormatter": "xaver.clang-format"
-  },
   "[sh]": {
     "editor.defaultFormatter": "timonwong.shellcheck"
   },
@@ -17,18 +14,6 @@
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  "clang-format.fallbackStyle": "Google",
-  "clang-format.language.apex.enable": false,
-  "clang-format.language.c.enable": false,
-  "clang-format.language.cpp.enable": false,
-  "clang-format.language.cuda.enable": false,
-  "clang-format.language.glsl.enable": false,
-  "clang-format.language.java.enable": false,
-  "clang-format.language.javascript.enable": false,
-  "clang-format.language.objective-c.enable": false,
-  "clang-format.language.objective-cpp.enable": false,
-  "clang-format.language.typescript.enable": false,
-  "clang-format.style": "Google",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true,
@@ -38,8 +23,7 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "files.associations": {
-    "*.dockerfile.*": "dockerfile",
-    "*.proto": "proto3"
+    "*.dockerfile.*": "dockerfile"
   },
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 5000,

@@ -42,32 +42,7 @@ installGlobalDependencies() {
   printInfoTitle "<< INSTALLING GLOBAL DEPENDENCIES >>"
   printGap
 
-  sudo npm install -g @angular/cli@latest @ionic/cli@latest @nestjs/cli@latest @ngxs/cli@latest @nrwl/cli@latest typescript@latest firebase-tools@latest @compodoc/compodoc@latest commitizen@latest cz-conventional-changelog@latest clang-format@latest yarn@1.22.18 madge@latest npm-check-updates@latest || exit 1
-}
-
-##
-# Resolves if package is installed, and installs the package if it is not.
-##
-resolveIfPackageIsInstalledAndInstall() {
-  printInfoTitle "<< Resolving if package is installed >>"
-  printNameAndValue "package name" "$1"
-  printGap
-
-  local PACKAGE_EXISTS
-  PACKAGE_EXISTS=$(dpkg -s "$1")
-
-  if [ -z "$PACKAGE_EXISTS" ]; then
-    printErrorTitle "<< PACKAGE DOES NOT EXIST >>"
-    printSuccessMessage "installing package..."
-    printGap
-
-    sudo apt update
-    sudo apt install "$1"
-  else
-    printSuccessTitle "<< PACKAGE EXISTS >>"
-    printSuccessMessage "$PACKAGE_EXISTS"
-    printGap
-  fi
+  sudo npm install -g @angular/cli@latest @ionic/cli@latest @nestjs/cli@latest @ngxs/cli@latest @nrwl/cli@latest typescript@latest firebase-tools@latest @compodoc/compodoc@latest commitizen@latest cz-conventional-changelog@latest yarn@1.22.18 madge@latest npm-check-updates@latest || exit 1
 }
 
 ##
