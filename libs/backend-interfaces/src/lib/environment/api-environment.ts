@@ -7,6 +7,7 @@ export interface IApiEnvironment {
   firebase: boolean;
   appName: string;
   wsPort: number;
+  jwtSecret: string;
 }
 
 /**

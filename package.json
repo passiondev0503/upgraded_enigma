@@ -1,6 +1,6 @@
 {
   "name": "upgraded-enigma",
-  "version": "1.9.5",
+  "version": "1.9.7",
   "private": true,
   "description": "Organizer and productivity tools.",
   "license": "MIT",
@@ -97,8 +97,6 @@
     "start:client-api": "nx serve client-api",
     "prestart:electron": "electron-builder install-app-deps",
     "start:electron": "yarn build:client && electron .",
-    "start:envoy": "sudo docker-compose -f .envoy/docker-compose.envoy.yml up",
-    "start:envoy:api": "yarn start:envoy & nx serve api",
     "test": "bash tools/shell/test.sh single-run all",
     "test:changed": "bash tools/shell/test.sh single-run changed",
     "test:coverage": "bash tools/shell/test.sh single-run:coverage all",
