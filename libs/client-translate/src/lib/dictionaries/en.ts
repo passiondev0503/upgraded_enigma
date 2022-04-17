@@ -47,7 +47,6 @@ export const EN: IUiDictionary = {
   user: {
     title: 'User',
     status: 'User status',
-    sessions: 'User sessions (by expiration date)',
     initialized: 'User initialized',
     encryption: 'Encryption enabled',
   },

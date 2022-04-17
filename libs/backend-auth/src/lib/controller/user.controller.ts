@@ -1,4 +1,4 @@
-import { IUser, IUserPassword } from '@app/backend-interfaces';
+import { IUser, UserPasswordPayload } from '@app/backend-interfaces';
 import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
 import { keypair } from 'keypair';
 import { combineLatest, of, throwError } from 'rxjs';
@@ -29,12 +29,12 @@ export class BackendUserController {
   }
 
   @Post('user/password/add')
-  public addPassword(@Body() payload: IUserPassword) {
+  public addPassword(@Body() payload: UserPasswordPayload) {
     return this.userService.addPassword(payload);
   }
 
   @Delete('user/password/delete')
-  public deletePassword(@Body() payload: IUserPassword) {
+  public deletePassword(@Body() payload: UserPasswordPayload) {
     return this.userService.deletePassword(payload);
   }
 
@@ -43,7 +43,7 @@ export class BackendUserController {
     return this.rsaKeysExist$.pipe(
       concatMap(([privateKeyExists, publicKeyExists]) => {
         if (privateKeyExists && publicKeyExists) {
-          return throwError(new Error('Keys already exist.'));
+          return throwError(() => new Error('Keys already exist.'));
         }
         const keysObject = keypair();
         return this.userService.saveKeys(keysObject).pipe(
@@ -54,7 +54,7 @@ export class BackendUserController {
                 if (Object.keys(savedKeys).length && Object.keys(user).length) {
                   return of(user);
                 }
-                return throwError(new Error('Error updating user, check server logs for details.'));
+                return throwError(() => new Error('Error updating user, check server logs for details.'));
               }),
             );
           }),
@@ -68,7 +68,7 @@ export class BackendUserController {
     return this.rsaKeysExist$.pipe(
       concatMap(([privateKeyExists, publicKeyExists]) => {
         if (!privateKeyExists || !publicKeyExists) {
-          return throwError(new Error("Keys don't exist."));
+          return throwError(() => new Error("Keys don't exist."));
         }
         return combineLatest([this.userService.user(), this.userService.userStatus()]).pipe(
           concatMap(([user, userStatus]) => {
@@ -87,7 +87,9 @@ export class BackendUserController {
                 encrypted: true,
               });
             }
-            return throwError(new Error(`Error encrypting data, check server logs for details. Data is ${userStatus.encrypted} now.`));
+            return throwError(
+              () => new Error(`Error encrypting data, check server logs for details. Data is ${userStatus.encrypted} now.`),
+            );
           }),
         );
       }),
@@ -99,7 +101,7 @@ export class BackendUserController {
     return this.rsaKeysExist$.pipe(
       concatMap(([privateKeyExists, publicKeyExists]) => {
         if (!privateKeyExists || !publicKeyExists) {
-          return throwError(new Error("Keys don't exist."));
+          return throwError(() => new Error("Keys don't exist."));
         }
         return combineLatest([this.userService.user(), this.userService.userStatus()]).pipe(
           concatMap(([user, userStatus]) => {
@@ -118,7 +120,9 @@ export class BackendUserController {
                 encrypted: false,
               });
             }
-            return throwError(new Error(`Error decrypting data, check server logs for details. Data is ${userStatus.encrypted} now.`));
+            return throwError(
+              () => new Error(`Error decrypting data, check server logs for details. Data is ${userStatus.encrypted} now.`),
+            );
           }),
         );
       }),
@@ -130,7 +134,7 @@ export class BackendUserController {
     return this.rsaKeysExist$.pipe(
       concatMap(([privateKeyExists, publicKeyExists]) => {
         if (!privateKeyExists || !publicKeyExists) {
-          return throwError(new Error("Keys don't exist."));
+          return throwError(() => new Error("Keys don't exist."));
         }
         return combineLatest([this.userService.user(), this.userService.userStatus()]).pipe(
           concatMap(([user, userStatus]) => {
@@ -148,7 +152,7 @@ export class BackendUserController {
               };
               return this.userService.exportPasswords(result.passwords);
             }
-            return throwError(new Error('Error updating user, check server logs for details.'));
+            return throwError(() => new Error('Error updating user, check server logs for details.'));
           }),
         );
       }),

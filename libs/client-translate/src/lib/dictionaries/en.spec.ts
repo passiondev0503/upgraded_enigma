@@ -63,7 +63,6 @@ describe('English shared translations', () => {
         user: {
           title: 'User',
           status: 'User status',
-          sessions: 'User sessions (by expiration date)',
           initialized: 'User initialized',
           encryption: 'Encryption enabled',
         },

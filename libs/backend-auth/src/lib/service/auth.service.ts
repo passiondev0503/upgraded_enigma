@@ -1,8 +1,9 @@
-import { IMessage, IUser, IUserLoginCredentials, IUserLogoutCredentials } from '@app/backend-interfaces';
+import { IUser, IUserLoginCredentials, IUserLogoutCredentials, Message } from '@app/backend-interfaces';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as crypto from 'crypto';
-import { map } from 'rxjs/operators';
+import { of, throwError } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import { BackendUserService } from './user.service';
 
@@ -41,29 +42,47 @@ export class BackendAuthService {
     return result;
   }
 
-  public ping(): IMessage {
-    return <IMessage>{
+  public ping() {
+    return new Message({
       message: 'Auth service is online. Public methods: login, logout, signup.',
-    };
+    });
   }
 
-  public login(credentials: IUserLoginCredentials) {
-    return this.authenticateAndReturnProfile(credentials);
+  /**
+   * Logs a user in.
+   * @note TODO: review this method implementation.
+   * @param payload user log in credentials
+   * @returns
+   */
+  public login(payload: IUserLoginCredentials) {
+    return this.authenticateAndReturnProfile(payload);
   }
 
-  public logout(credentials: IUserLogoutCredentials): IMessage {
-    return <IMessage>{ message: `success for token ${credentials.token}` };
+  /**
+   * Logs a user out.
+   * @note TODO: reset the token when this method is called.
+   * @param payload user logout credentials
+   * @returns execution result
+   */
+  public logout(payload: IUserLogoutCredentials) {
+    return this.userService
+      .user()
+      .pipe(
+        switchMap(user =>
+          user.token === payload.token ? of(true) : throwError(() => new Error('Something went wrong, the tokens do not match.')),
+        ),
+      );
   }
 
-  private authenticateAndReturnProfile(credentials: IUserLoginCredentials) {
+  private authenticateAndReturnProfile(payload: IUserLoginCredentials) {
     const name = {
       first: '',
       last: '',
     };
     const defaultProfile: IUser = {
-      email: credentials.email,
+      email: payload.email,
       token: this.generateJwtToken({
-        email: credentials.email,
+        email: payload.email,
         name: `${name.first} ${name.last}`,
       }),
       keys: {
@@ -71,7 +90,7 @@ export class BackendAuthService {
         private: '',
       },
       encrypted: false,
-      password: credentials.password,
+      password: payload.password,
       passwords: [],
     };
     return this.userService.user().pipe(map(user => (user !== null ? user : defaultProfile)));

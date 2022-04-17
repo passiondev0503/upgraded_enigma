@@ -7,8 +7,8 @@ export interface IUserPassword {
 }
 
 export interface IUserState {
-  email: string;
-  token: string;
+  email?: string;
+  token?: string;
   passwords?: IUserPassword[];
   status: {
     initialized: boolean;
@@ -19,8 +19,8 @@ export interface IUserState {
 }
 
 export const userInitialState: IUserState = {
-  email: '',
-  token: '',
+  email: void 0,
+  token: void 0,
   passwords: [],
   status: {
     initialized: false,

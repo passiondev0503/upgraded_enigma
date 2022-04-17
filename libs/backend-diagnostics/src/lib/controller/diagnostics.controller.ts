@@ -1,4 +1,4 @@
-import { IMessage } from '@app/backend-interfaces';
+import { Message } from '@app/backend-interfaces';
 import { Controller, Get } from '@nestjs/common';
 
 import { BackendDiagnosticsService } from '../service/diagnostics.service';
@@ -8,7 +8,7 @@ export class BackendDiagnosticsController {
   constructor(private readonly diagnosticsService: BackendDiagnosticsService) {}
 
   @Get('diagnostics')
-  public ping(): IMessage {
+  public ping(): Message {
     return this.diagnosticsService.ping();
   }
 

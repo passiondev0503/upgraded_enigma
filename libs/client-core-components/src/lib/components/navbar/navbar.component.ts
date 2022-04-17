@@ -1,11 +1,11 @@
 import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppUserState, sidebarActions, userActions } from '@app/client-store';
-import { IButton, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@app/client-util';
+import { sidebarActions, userActions } from '@app/client-store';
+import { IToolbarButton, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@app/client-util';
 import { RouterState } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
-import { first, map, tap } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -14,13 +14,15 @@ import { first, map, tap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppNavbarComponent {
-  @Input() public logoSrc = 'assets/icons/icon-72x72.png';
+  @Input() public logoSrc = 'assets/upgraded-enigma.png';
 
   @Input() public showBackButton = false;
 
-  @Input() public buttons: IButton[] = [
+  @Input() public auth: { authenticated: boolean } = { authenticated: false };
+
+  @Input() public buttons: IToolbarButton[] = [
     {
-      routerLink: [''],
+      routerLink: [{ outlets: { primary: [''], sidebar: [] } }],
       routeActive: () =>
         this.router.isActive('', {
           matrixParams: 'ignored',
@@ -33,7 +35,7 @@ export class AppNavbarComponent {
       requiresAuth: false,
     },
     {
-      routerLink: ['user/auth'],
+      routerLink: [{ outlets: { primary: ['user', 'auth'], sidebar: [] } }],
       routeActive: () =>
         this.router.isActive('user/auth', {
           matrixParams: 'ignored',
@@ -46,7 +48,7 @@ export class AppNavbarComponent {
       requiresAuth: false,
     },
     {
-      routerLink: [''],
+      routerLink: [{ outlets: { primary: [''], sidebar: [] } }],
       routeActive: () => false,
       icon: 'lock',
       title: 'Log out',
@@ -56,7 +58,7 @@ export class AppNavbarComponent {
       },
     },
     {
-      routerLink: ['user'],
+      routerLink: [{ outlets: { primary: ['user'], sidebar: [] } }],
       routeActive: () =>
         this.router.isActive('user', {
           matrixParams: 'ignored',
@@ -65,11 +67,11 @@ export class AppNavbarComponent {
           fragment: 'ignored',
         }),
       icon: 'verified_user',
-      title: 'User profile',
+      title: 'User',
       requiresAuth: true,
     },
     {
-      routerLink: ['user/data'],
+      routerLink: [{ outlets: { primary: ['user', 'data'], sidebar: [] } }],
       routeActive: () =>
         this.router.isActive('user/data', {
           matrixParams: 'ignored',
@@ -82,7 +84,7 @@ export class AppNavbarComponent {
       requiresAuth: true,
     },
     {
-      routerLink: ['user/rtc-chat'],
+      routerLink: [{ outlets: { primary: ['user', 'rtc-chat'], sidebar: [] } }],
       routeActive: () =>
         this.router.isActive('user/rtc-chat', {
           matrixParams: 'ignored',
@@ -95,7 +97,7 @@ export class AppNavbarComponent {
       requiresAuth: true,
     },
     {
-      routerLink: ['workspaces'],
+      routerLink: [{ outlets: { primary: ['workspaces'], sidebar: [] } }],
       routeActive: () =>
         this.router.isActive('workspaces', {
           matrixParams: 'ignored',
@@ -108,7 +110,7 @@ export class AppNavbarComponent {
       requiresAuth: true,
     },
     {
-      routerLink: ['chatbot'],
+      routerLink: [{ outlets: { primary: ['chatbot'], sidebar: [] } }],
       routeActive: () =>
         this.router.isActive('chatbot', {
           matrixParams: 'ignored',
@@ -121,7 +123,7 @@ export class AppNavbarComponent {
       requiresAuth: true,
     },
     {
-      routerLink: ['info'],
+      routerLink: [{ outlets: { primary: ['info'], sidebar: [] } }],
       routeActive: () =>
         this.router.isActive('info', {
           matrixParams: 'ignored',
@@ -137,7 +139,10 @@ export class AppNavbarComponent {
 
   public readonly appName = this.env.appName;
 
-  public readonly user$ = this.store.select(AppUserState.token).pipe(map(token => ({ userAuthenticated: Boolean(token) })));
+  /**
+   * This stream is needed to trigger the change detection when the router state changes.
+   */
+  public readonly routerEvents$ = this.router.events;
 
   constructor(
     public readonly store: Store,

@@ -62,7 +62,7 @@ export class AppUserAuthComponent implements OnInit {
           first(),
           concatMap(user => {
             const formData: { email: string; password: string } = this.form.value;
-            return user.token ? this.logUserIn(formData) : this.initializeUser(formData);
+            return typeof user.token !== 'undefined' ? this.logUserIn(formData) : this.initializeUser(formData);
           }),
         )
         .subscribe();

@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IButton } from '@app/client-util';
+import { IToolbarButton } from '@app/client-util';
 
 @Pipe({
   name: 'buttonsVisibility',
 })
 export class AppButtonsVisibilityPipe implements PipeTransform {
-  public transform(value?: IButton[], userAuthenticated?: boolean) {
+  public transform(value?: IToolbarButton[], userAuthenticated?: boolean) {
     if (typeof value === 'undefined') {
       return null;
     }

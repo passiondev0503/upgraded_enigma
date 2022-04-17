@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { combineLatest } from 'rxjs';
-import { concatMap, map } from 'rxjs/operators';
+import { concatMap, map, tap } from 'rxjs/operators';
 
 import {
   TAddPasswordPayload,
@@ -68,10 +68,12 @@ export class AppUserState {
 
   @Action(userActions.logOut)
   public logOut(ctx: StateContext<IUserState>) {
-    const token = ctx.getState().token;
+    const token = ctx.getState().token ?? '';
     return this.api.logout({ token }).pipe(
-      map(result => {
-        return ctx.patchState(userInitialState);
+      tap(result => {
+        if (result) {
+          ctx.patchState(userInitialState);
+        }
       }),
     );
   }

@@ -85,7 +85,7 @@ export class AppUserApiService {
    * Logs user out.
    */
   public logout(formData: { token: string }) {
-    return this.httpHandlers.pipeHttpResponse<{ message: string }>(this.http.post<{ message: string }>(this.endpoints.logout, formData));
+    return this.httpHandlers.pipeHttpResponse<boolean>(this.http.post<boolean>(this.endpoints.logout, formData));
   }
 
   /**

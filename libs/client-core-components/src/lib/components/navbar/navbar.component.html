@@ -1,6 +1,12 @@
-<mat-toolbar color="primary" fxFlex="0 1 auto" *ngIf="user$ | async as user">
+<mat-toolbar color="primary" fxFlex="0 1 auto" *ngIf="routerEvents$ | async">
   <span fxFlex="0 1 auto" class="logo-container" fxLayout="row" fxLayoutAlign="start center">
-    <img *ngIf="!showBackButton" class="logo-container_image" [src]="logoSrc" alt="{{ appName }}" title="{{ appName }}" />
+    <img
+      *ngIf="!showBackButton"
+      class="logo-container_image"
+      [src]="logoSrc"
+      alt="{{ appName }}"
+      [routerLink]="[!auth.authenticated ? '' : 'user']"
+    />
 
     <button mat-icon-button *ngIf="showBackButton" (click)="goBack()">
       <mat-icon title="{{ 'back' | translate }}"> arrow_back </mat-icon>
@@ -11,7 +17,7 @@
 
   <button
     mat-button
-    *ngFor="let button of buttons | buttonsVisibility: user.userAuthenticated"
+    *ngFor="let button of buttons | buttonsVisibility: auth.authenticated"
     [routerLink]="button.routerLink"
     [disabled]="button.routeActive()"
     (click)="sidebarCloseHandler()"
@@ -23,14 +29,14 @@
   </button>
 
   <button mat-icon-button [matMenuTriggerFor]="mobileMenuTop" [fxHide.md]="true" [fxHide.lg]="true" [fxHide.xl]="true">
-    <mat-icon *ngIf="!user.userAuthenticated">menu</mat-icon>
-    <mat-icon *ngIf="user.userAuthenticated">account_circle</mat-icon>
+    <mat-icon *ngIf="!auth.authenticated">menu</mat-icon>
+    <mat-icon *ngIf="auth.authenticated">account_circle</mat-icon>
   </button>
 
   <mat-menu #mobileMenuTop="matMenu" [fxHide.md]="true" [fxHide.lg]="true" [fxHide.xl]="true">
     <a
       mat-menu-item
-      *ngFor="let button of buttons | buttonsVisibility: user.userAuthenticated"
+      *ngFor="let button of buttons | buttonsVisibility: auth.authenticated"
       [routerLink]="button.routerLink"
       [disabled]="button.routeActive()"
       (click)="button.click ? button.click() : null"

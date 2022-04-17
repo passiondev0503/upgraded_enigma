@@ -47,7 +47,6 @@ export const RU: IUiDictionary = {
   user: {
     title: 'Пользователь',
     status: 'Статус пользователя',
-    sessions: 'Пользовательские сессии (по времени истечения)',
     initialized: 'Пользователь инициализирован',
     encryption: 'Шифрование включено',
   },

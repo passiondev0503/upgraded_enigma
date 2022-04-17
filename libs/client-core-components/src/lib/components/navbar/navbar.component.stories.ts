@@ -64,20 +64,21 @@ primary.args = {
   logoSrc: 'assets/icons/icon-72x72.png',
   buttons: [
     {
-      routerLink: [''],
+      routerLink: [{ outlets: { primary: [''], sidebar: [] } }],
       routeActive: () => false,
       icon: 'home',
       title: 'Home',
       requiresAuth: false,
     },
     {
-      routerLink: ['info'],
+      routerLink: [{ outlets: { primary: ['info'], sidebar: [] } }],
       routeActive: () => false,
       icon: 'av_timer',
       title: 'Diagnostics',
       requiresAuth: true,
     },
   ],
+  auth: { authenticated: true },
 };
 primary.parameters = {
   /**

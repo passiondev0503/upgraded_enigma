@@ -1,7 +1,7 @@
 <span class="container" fxLayout="column" fxLayoutAlign="start stretch">
-  <app-navbar fxFlex="0 0 auto"></app-navbar>
+  <app-navbar fxFlex="0 0 auto" class="navbar" *ngIf="auth$ | async as auth" [auth]="auth"></app-navbar>
 
-  <app-content fxFlex="1 1 auto"></app-content>
+  <app-content fxFlex="1 1 auto" class="content"></app-content>
 
-  <app-toolbar fxFlex="0 0 auto" [version]="version" (darkThemeEnabled)="toggleMaterialTheme($event)"></app-toolbar>
+  <app-toolbar fxFlex="0 0 auto" class="toolbar" [version]="version" (darkThemeEnabled)="toggleMaterialTheme($event)"></app-toolbar>
 </span>

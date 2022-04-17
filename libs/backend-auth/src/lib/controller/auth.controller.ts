@@ -1,4 +1,4 @@
-import { IMessage, IUser, IUserLoginCredentials, IUserLogoutCredentials } from '@app/backend-interfaces';
+import { IUser, Message, UserLoginCredentialsPayload, UserLogoutCredentialsPayload } from '@app/backend-interfaces';
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Observable } from 'rxjs';
 
@@ -9,17 +9,17 @@ export class BackendAuthController {
   constructor(private readonly authService: BackendAuthService) {}
 
   @Get('auth')
-  public ping(): IMessage {
+  public ping(): Message {
     return this.authService.ping();
   }
 
   @Post('auth/login')
-  public login(@Body() payload: IUserLoginCredentials): Observable<IUser> {
+  public login(@Body() payload: UserLoginCredentialsPayload): Observable<IUser> {
     return this.authService.login(payload);
   }
 
   @Post('auth/logout')
-  public logout(@Body() payload: IUserLogoutCredentials): IMessage {
+  public logout(@Body() payload: UserLogoutCredentialsPayload): Observable<boolean> {
     return this.authService.logout(payload);
   }
 }

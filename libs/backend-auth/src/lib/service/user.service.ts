@@ -140,7 +140,7 @@ export class BackendUserService {
   /**
    * Adds a password.
    */
-  public addPassword(passwordObject: IUserPassword) {
+  public addPassword(payload: IUserPassword) {
     return new Observable<IUser>(observer => {
       fs.readFile(this.userConfigPath, (readError, data) => {
         if (readError !== null) {
@@ -148,8 +148,8 @@ export class BackendUserService {
         } else {
           const user: IUser = JSON.parse(data.toString());
 
-          passwordObject.timestamp = new Date().getTime();
-          user.passwords.push(passwordObject);
+          payload.timestamp = new Date().getTime();
+          user.passwords.push(payload);
 
           fs.writeFile(this.userConfigPath, JSON.stringify(user), writeError => {
             if (writeError !== null) {
@@ -167,7 +167,7 @@ export class BackendUserService {
   /**
    * Deletes a password.
    */
-  public deletePassword(passwordObject: IUserPassword) {
+  public deletePassword(payload: IUserPassword) {
     return new Observable<IUser | null>(observer => {
       fs.readFile(this.userConfigPath, (readError, data) => {
         if (readError !== null) {
@@ -175,7 +175,7 @@ export class BackendUserService {
         } else {
           const user: IUser = JSON.parse(data.toString());
 
-          user.passwords = user.passwords.filter(item => item.name !== passwordObject.name && item.password !== passwordObject.password);
+          user.passwords = user.passwords.filter(item => item.name !== payload.name && item.password !== payload.password);
 
           fs.writeFile(this.userConfigPath, JSON.stringify(user), writeError => {
             if (writeError !== null) {

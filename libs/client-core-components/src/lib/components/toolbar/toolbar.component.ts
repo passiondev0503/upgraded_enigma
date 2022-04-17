@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, HostListener, Inject, Input, Output } from '@angular/core';
 import { AppSidebarState, AppUserState, chatbotActions, sidebarActions } from '@app/client-store';
-import { IAnchor, WINDOW } from '@app/client-util';
+import { IToolbarAnchor, WINDOW } from '@app/client-util';
 import { Store } from '@ngxs/store';
 import { map } from 'rxjs/operators';
 
@@ -16,7 +16,7 @@ export class AppToolbarComponent {
 
   @Input() public version?: string;
 
-  @Input() public anchors: IAnchor[] = [
+  @Input() public anchors: IToolbarAnchor[] = [
     {
       href: 'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=bug_report.md&title=',
       icon: 'bug_report',

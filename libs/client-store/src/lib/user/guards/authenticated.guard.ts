@@ -15,7 +15,7 @@ export class AppAuthenticatedGuard implements CanActivate {
   public canActivate(): Observable<boolean | UrlTree> {
     return this.store.selectOnce(AppUserState.model).pipe(
       map(user => {
-        if (!user.token || !user.email) {
+        if (typeof user.token === 'undefined' || typeof user.email === 'undefined') {
           return this.router.createUrlTree(['/user', 'auth']);
         }
         return user.token ? true : false;

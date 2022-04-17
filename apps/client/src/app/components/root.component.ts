@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Inject, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { AppUserState } from '@app/client-store';
 import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@app/client-util';
+import { Store } from '@ngxs/store';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -25,12 +28,22 @@ export class AppRootComponent implements OnInit {
    */
   public readonly version = this.env.meta.version;
 
+  /**
+   * User authentication state.
+   */
+  public readonly auth$ = this.store.select(AppUserState.token).pipe(map(token => ({ authenticated: typeof token !== 'undefined' })));
+
   constructor(
     private readonly title: Title,
     private readonly meta: Meta,
+    public readonly store: Store,
     @Inject(WEB_CLIENT_APP_ENV) private readonly env: IWebClientAppEnvironment,
   ) {}
 
+  /**
+   * Toggles the material theme.
+   * @param darkThemeEnabled dark theme enabled state
+   */
   public toggleMaterialTheme(darkThemeEnabled: boolean): void {
     this.darkTheme = darkThemeEnabled;
   }

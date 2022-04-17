@@ -16,11 +16,11 @@ export class AppAnonimousGuard implements CanActivate {
     return this.store.selectOnce(AppUserState.model).pipe(
       first(),
       map(user => {
-        if (user.token) {
+        if (typeof user.token !== 'undefined') {
           return this.router.createUrlTree(['/user']);
         }
 
-        return !user.token ? true : false;
+        return typeof user.token === 'undefined' ? true : false;
       }),
     );
   }
