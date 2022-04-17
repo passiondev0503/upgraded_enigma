@@ -60,7 +60,7 @@ functions/*
 !.vscode/extensions.json
 
 # misc
-/.angular/cache
+.angular
 /coverage
 /documentation
 /changelog
@@ -80,4 +80,3 @@ Thumbs.db
 # Local Files
 *.keystore
 /tools/shell/vars.sh
-

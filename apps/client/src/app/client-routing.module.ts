@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { AppAuthenticatedGuard } from '@app/client-store';
 
-export const APP_ROUTES: Route[] = [
+/**
+ * The client application routes.
+ */
+const clientRoutes: Route[] = [
   {
     path: '',
     loadChildren: () => import('@app/client-diagnostics').then(mod => mod.AppClientDiagnosticsModule),
@@ -18,6 +21,7 @@ export const APP_ROUTES: Route[] = [
   },
   {
     path: 'chatbot',
+    canActivate: [AppAuthenticatedGuard],
     loadChildren: () => import('@app/client-chatbot').then(mod => mod.AppClientChatbotModule),
   },
   {
@@ -34,10 +38,10 @@ export const APP_ROUTES: Route[] = [
 ];
 
 /**
- * Application routing module.
+ * The client application routing module.
  */
 @NgModule({
-  imports: [RouterModule.forRoot(APP_ROUTES, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(clientRoutes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
 export class AppClientRoutingModule {}

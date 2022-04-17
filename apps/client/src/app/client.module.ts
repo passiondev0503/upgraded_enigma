@@ -9,6 +9,7 @@ import { AppClientCoreComponentsModule } from '@app/client-core-components';
 import { AppClientMaterialModule } from '@app/client-material';
 import { AppUserState, AppWebsocketModule } from '@app/client-store';
 import { AppClientTranslateModule } from '@app/client-translate';
+import { sentryProviders } from '@app/client-util-sentry';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
@@ -20,7 +21,7 @@ import { AppClientRoutingModule } from './client-routing.module';
 import { AppRootComponent } from './components/root.component';
 
 /**
- * Application root module.
+ * The web client root module.
  */
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { AppRootComponent } from './components/root.component';
     AppClientTranslateModule.forRoot(),
     AppClientRoutingModule,
   ],
+  providers: [...sentryProviders(environment)],
   declarations: [AppRootComponent],
   bootstrap: [AppRootComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -403,45 +403,53 @@ export class AppUserRtcChatComponent implements OnInit {
    * Gets media devices.
    */
   private getMediaDevices() {
-    if (typeof this.nav !== 'undefined') {
-      this.nav.mediaDevices
-        .enumerateDevices()
-        .then(devices => {
-          devices.forEach(item => {
-            this.mediaDevicesSubject.next([...this.mediaDevicesSubject.value, item]);
+    return new Promise<void>((resolve, reject) => {
+      if (typeof this.nav !== 'undefined') {
+        this.nav.mediaDevices
+          .enumerateDevices()
+          .then(devices => {
+            const dev = devices.filter(item => item.deviceId !== '');
+            for (const item of dev) {
+              this.mediaDevicesSubject.next([...this.mediaDevicesSubject.value, item]);
+            }
+            resolve();
+          })
+          .catch(error => {
+            reject(error);
           });
-        })
-        .catch(error => {
-          // eslint-disable-next-line no-console -- TODO: remove after debugging
-          console.error('getMediaDevices:', error);
-        });
-    }
+      }
+    });
   }
 
   /**
    * Connects user media.
    */
   private connectUserMedia() {
-    if (typeof this.nav !== 'undefined') {
-      void this.nav.mediaDevices
-        .getUserMedia({
-          video: { width: { min: 320 }, height: { min: 240 } },
-          audio: true,
-        })
-        .then(stream => {
-          this.setupVideoStream(stream);
-          this.registerPeerConnectionListeners();
-        })
-        .catch(error => {
-          // eslint-disable-next-line no-console -- TODO: remove after debugging
-          console.error('connectMediaDevices:', error);
-        });
-    }
+    return new Promise<void>((resolve, reject) => {
+      if (typeof this.nav !== 'undefined' && this.mediaDevicesSubject.value.length) {
+        void this.nav.mediaDevices
+          .getUserMedia({
+            video: { width: { min: 320 }, height: { min: 240 } },
+            audio: true,
+          })
+          .then(stream => {
+            this.setupVideoStream(stream);
+            this.registerPeerConnectionListeners();
+            resolve();
+          })
+          .catch(error => {
+            reject(error);
+          });
+      }
+    });
   }
 
   public ngOnInit() {
-    this.getMediaDevices();
-
-    this.connectUserMedia();
+    this.getMediaDevices()
+      .then(() => this.connectUserMedia())
+      .catch(error => {
+        // eslint-disable-next-line no-console -- TODO: replace with a toaster
+        console.error('connectMediaDevices:', error);
+      });
   }
 }

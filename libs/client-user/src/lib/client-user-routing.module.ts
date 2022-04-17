@@ -7,7 +7,10 @@ import { AppUserDataComponent } from './components/data/data.component';
 import { AppUserProfileComponent } from './components/profile/profile.component';
 import { AppUserRtcChatComponent } from './components/rtc-chat/rtc-chat.component';
 
-const routes: Route[] = [
+/**
+ * The user module routes.
+ */
+const userRoutes: Route[] = [
   {
     path: '',
     canActivate: [AppAuthenticatedGuard],
@@ -30,8 +33,11 @@ const routes: Route[] = [
   },
 ];
 
+/**
+ * The user module routing module.
+ */
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(userRoutes)],
   exports: [RouterModule],
 })
 export class AppClientUserRoutingModule {}

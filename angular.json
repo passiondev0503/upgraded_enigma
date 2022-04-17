@@ -1166,243 +1166,6 @@
       "sourceRoot": "apps/documentation-e2e/src",
       "tags": ["scope:documentation-e2e", "type:e2e"]
     },
-    "elements": {
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "configurations": {
-            "production": {
-              "buildOptimizer": true,
-              "deployUrl": "https://upgraded-enigma-elements.web.app/",
-              "fileReplacements": [
-                {
-                  "replace": "apps/elements/src/environments/environment.ts",
-                  "with": "apps/elements/src/environments/environment.prod.ts"
-                }
-              ],
-              "ngswConfigPath": "apps/elements/ngsw-config.json",
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false
-            }
-          },
-          "options": {
-            "allowedCommonJsDependencies": ["hammerjs"],
-            "aot": true,
-            "assets": [
-              "apps/elements/src/favicon.ico",
-              "apps/elements/src/assets",
-              "apps/elements/src/manifest.webmanifest",
-              {
-                "glob": "**/*",
-                "input": "./libs/client-core/src/lib/assets",
-                "output": "./assets"
-              }
-            ],
-            "baseHref": "/",
-            "budgets": [
-              {
-                "maximumError": "16mb",
-                "maximumWarning": "12mb",
-                "type": "initial"
-              },
-              {
-                "maximumError": "10kb",
-                "maximumWarning": "6kb",
-                "type": "anyComponentStyle"
-              }
-            ],
-            "buildOptimizer": false,
-            "extractLicenses": true,
-            "index": "apps/elements/src/index.html",
-            "main": "apps/elements/src/main.ts",
-            "namedChunks": true,
-            "optimization": false,
-            "outputHashing": "none",
-            "outputPath": "dist/apps/elements",
-            "polyfills": "apps/elements/src/polyfills.ts",
-            "scripts": [],
-            "sourceMap": true,
-            "styles": [
-              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
-              "node_modules/material-design-icon-fonts-self-hosted-web/iconfont/material-icons.css",
-              "apps/elements/src/styles.scss",
-              "libs/client-core/src/lib/styles/styles.scss"
-            ],
-            "tsConfig": "apps/elements/tsconfig.app.json",
-            "vendorChunk": true
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "elements:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "eslintConfig": "apps/elements/.eslintrc.json",
-            "lintFilePatterns": ["apps/elements/**/*.ts"]
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "elements:build:production",
-              "proxyConfig": "apps/elements/proxy.conf.json"
-            }
-          },
-          "options": {
-            "browserTarget": "elements:build"
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/elements/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/apps/elements"]
-        }
-      },
-      "prefix": "app",
-      "projectType": "application",
-      "root": "apps/elements",
-      "sourceRoot": "apps/elements/src",
-      "tags": ["scope:elements", "type:application"]
-    },
-    "elements-e2e": {
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "configurations": {
-            "production": {
-              "devServerTarget": "elements:serve:production"
-            }
-          },
-          "options": {
-            "cypressConfig": "apps/elements-e2e/cypress.json",
-            "devServerTarget": "elements:serve",
-            "tsConfig": "apps/elements-e2e/tsconfig.e2e.json"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "eslintConfig": "apps/elements-e2e/.eslintrc.json",
-            "lintFilePatterns": ["apps/elements-e2e/**/*.ts"]
-          }
-        }
-      },
-      "implicitDependencies": ["elements"],
-      "projectType": "application",
-      "root": "apps/elements-e2e",
-      "sourceRoot": "apps/elements-e2e/src",
-      "tags": ["scope:elements-e2e", "type:e2e"]
-    },
-    "elements-testing": {
-      "architect": {
-        "build": {
-          "builder": "@nrwl/web:webpack",
-          "configurations": {
-            "production": {
-              "extractLicenses": true,
-              "fileReplacements": [
-                {
-                  "replace": "apps/elements-testing/src/environments/environment.ts",
-                  "with": "apps/elements-testing/src/environments/environment.prod.ts"
-                }
-              ],
-              "namedChunks": false,
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "vendorChunk": false
-            }
-          },
-          "options": {
-            "assets": ["apps/elements-testing/src/favicon.ico", "apps/elements-testing/src/assets"],
-            "baseHref": "/",
-            "budgets": [
-              {
-                "maximumError": "5mb",
-                "maximumWarning": "2mb",
-                "type": "initial"
-              }
-            ],
-            "index": "apps/elements-testing/src/index.html",
-            "main": "apps/elements-testing/src/main.ts",
-            "outputPath": "dist/apps/elements-testing",
-            "polyfills": "apps/elements-testing/src/polyfills.ts",
-            "scripts": [],
-            "styles": ["apps/elements-testing/src/styles.scss"],
-            "tsConfig": "apps/elements-testing/tsconfig.app.json"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "eslintConfig": "apps/elements-testing/.eslintrc.json",
-            "lintFilePatterns": ["apps/elements-testing/**/*.ts"]
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/web:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "elements-testing:build:production"
-            }
-          },
-          "options": {
-            "buildTarget": "elements-testing:build",
-            "port": 4021
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/elements-testing/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/apps/elements-testing"]
-        }
-      },
-      "projectType": "application",
-      "root": "apps/elements-testing",
-      "sourceRoot": "apps/elements-testing/src",
-      "tags": ["scope:elements-testing", "type:application"]
-    },
-    "elements-testing-e2e": {
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "configurations": {
-            "production": {
-              "devServerTarget": "elements-testing:serve:production"
-            }
-          },
-          "options": {
-            "cypressConfig": "apps/elements-testing-e2e/cypress.json",
-            "devServerTarget": "elements-testing:serve",
-            "tsConfig": "apps/elements-testing-e2e/tsconfig.e2e.json"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "eslintConfig": "apps/elements-testing-e2e/.eslintrc.json",
-            "lintFilePatterns": ["apps/elements-testing-e2e/**/*.ts"]
-          }
-        }
-      },
-      "implicitDependencies": ["elements-testing"],
-      "projectType": "application",
-      "root": "apps/elements-testing-e2e",
-      "sourceRoot": "apps/elements-testing-e2e/src",
-      "tags": ["scope:elements-testing-e2e", "type:e2e"]
-    },
     "server-dev": {
       "architect": {
         "build": {
@@ -1612,6 +1375,30 @@
       "root": "tools",
       "sourceRoot": "tools/src",
       "tags": ["scope:tools", "type:workspace"]
+    },
+    "client-util-sentry": {
+      "projectType": "library",
+      "root": "libs/client-util-sentry",
+      "sourceRoot": "libs/client-util-sentry/src",
+      "prefix": "app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/client-util-sentry"],
+          "options": {
+            "jestConfig": "libs/client-util-sentry/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["libs/client-util-sentry/**/*.ts"],
+            "eslintConfig": "libs/client-util-sentry/.eslintrc.json"
+          }
+        }
+      },
+      "tags": ["scope:client-util-sentry", "type:util"]
     }
   },
   "version": 1

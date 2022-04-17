@@ -1,25 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppAuthenticatedGuard } from '@app/client-store';
 
 import { AppWorkspaceComponent } from './components/workspace/workspace.component';
 import { AppWorkspacesListComponent } from './components/workspaces-list/workspaces-list.component';
 
-const routes: Routes = [
+/**
+ * The workspaces module routes.
+ */
+const workspacesRoutes: Routes = [
   {
     path: '',
-    canActivate: [AppAuthenticatedGuard],
     component: AppWorkspacesListComponent,
   },
   {
     path: 'item/:id',
-    canActivate: [AppAuthenticatedGuard],
     component: AppWorkspaceComponent,
   },
 ];
 
+/**
+ * The workspaces module routing module.
+ */
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(workspacesRoutes)],
   exports: [RouterModule],
 })
 export class AppClientWorkspacesRoutingModule {}

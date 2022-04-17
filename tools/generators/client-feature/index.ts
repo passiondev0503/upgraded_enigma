@@ -13,7 +13,7 @@ import {
   url,
 } from '@angular-devkit/schematics';
 import { createOrUpdate, deleteFile, formatFiles, getProjectConfig } from '@nrwl/workspace';
-import fs from 'fs';
+import * as fs from 'fs';
 import * as path from 'path';
 
 import { ISchematicContext } from './schema.interface';
@@ -78,7 +78,7 @@ const updateProjectConfig =
 
     createOrUpdate(tree, './angular.json', JSON.stringify(angularJson));
 
-    return chain([formatFiles({ skipFormat: false }, angularJsonPath)])(tree, context);
+    return chain([formatFiles({ skipFormat: false }, './angular.json')])(tree, context);
   };
 
 /**
@@ -100,7 +100,6 @@ export default function (schema: ISchematicContext) {
         externalSchematic('@nrwl/angular', 'lib', {
           name,
           tags,
-          style: 'scss',
         }),
         addFiles(schema),
         externalSchematic('@schematics/angular', 'component', {
@@ -108,19 +107,16 @@ export default function (schema: ISchematicContext) {
           name,
           path: path.join('libs', name, 'src', 'lib', 'components'),
           style: 'scss',
-          skipImport: true,
         }),
         externalSchematic('@schematics/angular', 'service', {
           project: name,
           name,
           path: path.join('libs', name, 'src', 'lib', 'services'),
-          skipImport: true,
         }),
         externalSchematic('@schematics/angular', 'guard', {
           project: name,
           name,
           path: path.join('libs', name, 'src', 'lib', 'guards'),
-          skipImport: true,
         }),
       ]),
       updateProjectConfig(schema),

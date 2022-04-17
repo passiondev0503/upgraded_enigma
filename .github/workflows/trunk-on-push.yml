@@ -159,14 +159,6 @@ jobs:
         env:
           FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
 
-      - name: Deploy elements
-        if: steps.changes.outputs.nx == 'true'
-        run: |
-          bash tools/shell/generate-elements-bootstrap-script.sh ./dist/apps elements
-          yarn firebase:deploy:ci:elements || exit 1
-        env:
-          FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
-
       - name: Deploy documentation
         if: steps.changes.outputs.nx == 'true'
         run: yarn firebase:deploy:ci:documentation || exit 1

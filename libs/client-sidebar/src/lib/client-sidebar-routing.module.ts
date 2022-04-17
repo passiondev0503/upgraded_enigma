@@ -3,15 +3,21 @@ import { Route, RouterModule } from '@angular/router';
 
 import { AppSidebarRootComponent } from './components/sidebar-root/sidebar-root.component';
 
-export const SIDEBAR_ROUTES: Route[] = [
+/**
+ * The sidebar module routes.
+ */
+const sidebarRoutes: Route[] = [
   {
     path: 'root',
     component: AppSidebarRootComponent,
   },
 ];
 
+/**
+ * The sidebar module routing module.
+ */
 @NgModule({
-  imports: [RouterModule.forChild(SIDEBAR_ROUTES)],
+  imports: [RouterModule.forChild(sidebarRoutes)],
   exports: [RouterModule],
 })
 export class AppClientSidebarRoutingModule {}

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { combineLatest } from 'rxjs';
 import { concatMap, map, tap } from 'rxjs/operators';
@@ -22,7 +23,7 @@ import { AppUserApiService } from './user-api.service';
 })
 @Injectable()
 export class AppUserState {
-  constructor(private readonly api: AppUserApiService) {}
+  constructor(private readonly api: AppUserApiService, private readonly router: Router) {}
 
   @Selector()
   public static model(state: IUserState) {
@@ -73,6 +74,7 @@ export class AppUserState {
       tap(result => {
         if (result) {
           ctx.patchState(userInitialState);
+          void this.router.navigate(['']);
         }
       }),
     );

@@ -1,5 +1,6 @@
 {
-  "id": "client-feature",
+  "$id": "client-feature",
+  "$schema": "http://json-schema.org/schema",
   "type": "object",
   "properties": {
     "name": {

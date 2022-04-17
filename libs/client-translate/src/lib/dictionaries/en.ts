@@ -23,7 +23,7 @@ export const EN: IUiDictionary = {
   generateKeypair: 'Generate RSA keypair',
 
   login: 'Log in',
-  loginInstructions: 'Provide an email and a password, please',
+  loginInstructions: 'Please provide an email and a password',
   email: 'Email',
   password: 'Password',
   forgetMyAddress: 'Forget my address',

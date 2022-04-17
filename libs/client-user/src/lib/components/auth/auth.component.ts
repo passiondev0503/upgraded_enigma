@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppUserState, userActions } from '@app/client-store';
 import { Store } from '@ngxs/store';
+import { BehaviorSubject } from 'rxjs';
 import { concatMap, first, tap } from 'rxjs/operators';
+
+type TPasswordInputType = 'password' | 'text';
 
 @Component({
   selector: 'app-auth',
@@ -11,37 +14,30 @@ import { concatMap, first, tap } from 'rxjs/operators';
   styleUrls: ['./auth.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppUserAuthComponent implements OnInit {
-  constructor(private readonly fb: FormBuilder, private readonly router: Router, private readonly store: Store) {}
-
+export class AppUserAuthComponent {
   @HostBinding('class.mat-body-1') protected matBody = true;
 
   /**
-   * Login form.
+   * The auth form.
    */
   public form = this.fb.group({
     email: ['', Validators.compose([Validators.required, Validators.email])],
-    password: [
-      '',
-      Validators.compose([Validators.required, Validators.pattern(/[a-z]+/), Validators.pattern(/[A-Z]+/), Validators.pattern(/\d+/)]),
-    ],
+    password: ['', Validators.compose([Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{3,}$/)])], // TODO: undate the validator ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$
   });
 
-  public ngOnInit() {
-    void this.store
-      .select(AppUserState.model)
-      .pipe(
-        first(),
-        tap(user => {
-          this.form.patchValue({ email: user.email, password: '' });
-          this.form.updateValueAndValidity();
-        }),
-      )
-      .subscribe();
+  private readonly passwordInputTypeSubject = new BehaviorSubject<TPasswordInputType>('password');
+
+  public readonly passwordInputType$ = this.passwordInputTypeSubject.asObservable();
+
+  constructor(private readonly fb: FormBuilder, private readonly router: Router, private readonly store: Store) {}
+
+  public togglePasswordVisibility(): void {
+    const nextValue = this.passwordInputTypeSubject.value === 'password' ? 'text' : 'password';
+    this.passwordInputTypeSubject.next(nextValue);
   }
 
   /**
-   * Resets login form.
+   * Resets the auth form.
    */
   public resetForm(): void {
     this.form.reset({
@@ -52,7 +48,7 @@ export class AppUserAuthComponent implements OnInit {
   }
 
   /**
-   * Submits login form.
+   * Submits the auth form.
    */
   public submitForm(): void {
     if (this.form.valid) {
@@ -69,6 +65,11 @@ export class AppUserAuthComponent implements OnInit {
     }
   }
 
+  /**
+   * Initializes the user.
+   * @param formData the auth form data
+   * @returns execution result
+   */
   private initializeUser(formData: { email: string; password: string }) {
     return this.store.dispatch(new userActions.configureUser(formData)).pipe(
       concatMap(() => {
