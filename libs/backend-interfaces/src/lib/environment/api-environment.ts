@@ -1,14 +1,12 @@
 import { Provider } from '@nestjs/common';
 
-/**
- * Application environment constructor options interface.
- */
-export interface IApiEnvironmentConstructorOptions {
-  production?: boolean;
-  firebase?: boolean;
-  appName?: string;
-  envoyUrl?: string;
-  wsPort?: number;
+import { initializeClassProperties } from '../utils/class.util';
+
+export interface IApiEnvironment {
+  production: boolean;
+  firebase: boolean;
+  appName: string;
+  wsPort: number;
 }
 
 /**
@@ -19,13 +17,12 @@ export type TApiAppName = 'Upgraded Enigma API' | string;
 export const defaultWsPort = 8081;
 
 /**
- * Application environment.
- * By default generates dev environment.
+ * API application environment.
  */
-export class ApiEnvironment {
+export class ApiEnvironment implements IApiEnvironment {
   public production = false;
 
-  public firebase?: boolean;
+  public firebase = false;
 
   public appName: TApiAppName = 'Upgraded Enigma API';
 
@@ -33,16 +30,8 @@ export class ApiEnvironment {
 
   public jwtSecret = '';
 
-  /**
-   * Constructor.
-   * By default generates dev environment.
-   * @param options app env constructor options
-   */
-  constructor(options: IApiEnvironmentConstructorOptions = {}) {
-    const keys = Object.keys(options);
-    for (const key of keys) {
-      this[key] = options[key];
-    }
+  constructor(input?: ApiEnvironment) {
+    initializeClassProperties<ApiEnvironment>(this, input);
   }
 }
 

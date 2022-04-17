@@ -8,6 +8,7 @@ import { ApiEnvironment, defaultWsPort } from '@app/backend-interfaces';
  */
 export const environment: ApiEnvironment = {
   production: false,
+  firebase: false,
   appName: 'Upgraded Enigma Client API',
   wsPort: defaultWsPort,
   jwtSecret: 'jwtsecret', // TODO: should be set from .env

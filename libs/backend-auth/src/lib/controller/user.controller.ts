@@ -1,4 +1,4 @@
-import { IUser, UserPasswordPayload } from '@app/backend-interfaces';
+import { IUser, UserPassword } from '@app/backend-interfaces';
 import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
 import { keypair } from 'keypair';
 import { combineLatest, of, throwError } from 'rxjs';
@@ -29,12 +29,12 @@ export class BackendUserController {
   }
 
   @Post('user/password/add')
-  public addPassword(@Body() payload: UserPasswordPayload) {
+  public addPassword(@Body() payload: UserPassword) {
     return this.userService.addPassword(payload);
   }
 
   @Delete('user/password/delete')
-  public deletePassword(@Body() payload: UserPasswordPayload) {
+  public deletePassword(@Body() payload: UserPassword) {
     return this.userService.deletePassword(payload);
   }
 
