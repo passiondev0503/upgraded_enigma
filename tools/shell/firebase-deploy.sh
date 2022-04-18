@@ -114,7 +114,6 @@ deployApiApp() {
 deployAll() {
   deployApiApp "$1"
   deployClientApp "$1"
-  deployElementsApp "$1"
   deployDocumentationApp "$1"
 }
 
