@@ -45,8 +45,6 @@ jobs:
               - 'package.json'
               - 'yarn.lock'
               - 'babel.config.json'
-              - 'functions/package.json'
-              - 'functions/package-lock.json'
               - 'tools/generators/**'
               - 'tools/proto/**'
               - 'tools/ts/**'
@@ -56,31 +54,28 @@ jobs:
               - '.prettier*'
               - '.protolint.yaml'
               - '.stylelint*'
+            dependencies:
+              - 'yarn.lock'
             shelltools:
               - 'tools/shell/**'
 
       - name: Use Node.js ${{ matrix.node-version }}
-        if: steps.changes.outputs.nx == 'true'
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           check-latest: true
 
       - name: Configure kernel (increase watchers)
-        if: steps.changes.outputs.nx == 'true'
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
       - name: Use yarn 1.22.18 (required for integrity check)
-        if: steps.changes.outputs.nx == 'true'
         run: npm i -g yarn@1.22.18 # this is mandatory, yarn v2 does not have integrity check which is needed for the pipeline
 
       - name: Get variables (yarn cache directory path, commit hash)
-        if: steps.changes.outputs.nx == 'true'
         id: get-variables
         run: echo "::set-output name=yarncachedir::$(yarn cache dir)"; echo "::set-output name=commitsha::$(echo ${GITHUB_SHA})"
 
       - name: Workspace cache (npm, yarn, nx, jest)
-        if: steps.changes.outputs.nx == 'true'
         uses: actions/cache@v2
         id: workspace-cache # use this to check for `cache-hit` (`steps.workspace-cache.outputs.cache-hit != 'true'`)
         env:
@@ -100,12 +95,17 @@ jobs:
             ${{ runner.os }}-
 
       - name: Workspace integrity check
-        if: steps.changes.outputs.nx == 'true'
+        if: steps.changes.outputs.dependencies == 'false'
         run: yarn workspace:integrity-check
 
       - name: Install project dependencies
-        if: steps.changes.outputs.nx == 'true'
         run: yarn install:ci
+
+      - name: Validate the commit messages
+        run: |
+          git checkout -b premerge
+          git fetch origin main:main
+          npx commitlint --from main
 
       - name: Process dependencies with ngcc
         if: steps.changes.outputs.nx == 'true'
