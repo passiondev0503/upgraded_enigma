@@ -1,11 +1,11 @@
-import { Message } from '@app/backend-interfaces';
+import { AppMessage } from '@app/backend-interfaces';
 import { Injectable } from '@nestjs/common';
 import { execSync } from 'child_process';
 import * as dotenv from 'dotenv';
 import * as os from 'os';
 
 @Injectable()
-export class BackendDiagnosticsService {
+export class AppDiagnosticsService {
   constructor() {
     dotenv.config();
   }
@@ -23,8 +23,8 @@ export class BackendDiagnosticsService {
     return version;
   }
 
-  public ping(): Message {
-    return new Message({
+  public ping(): AppMessage {
+    return new AppMessage({
       message: 'Diagnostics service is online. Routes: diagnostics, diagnostics/static.',
     });
   }

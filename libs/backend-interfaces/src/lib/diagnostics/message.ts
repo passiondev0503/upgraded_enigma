@@ -3,10 +3,10 @@ import { initializeClassProperties } from '../utils/class.util';
 /**
  * Mostly used for diagnostics, e.g. for the ping endpoints.
  */
-export class Message {
+export class AppMessage {
   public message = '';
 
-  constructor(input?: Message) {
-    initializeClassProperties<Message>(this, input);
+  constructor(input?: AppMessage) {
+    initializeClassProperties<AppMessage>(this, input);
   }
 }

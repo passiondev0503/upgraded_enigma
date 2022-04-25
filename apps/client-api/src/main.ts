@@ -5,7 +5,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { WsAdapter } from '@nestjs/platform-ws';
 import e from 'express';
 
-import { ClientApiAppModule } from './app/app.module';
+import { AppClientApiAppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 /**
@@ -21,7 +21,7 @@ const defaultPort = 8080;
  * Bootstraps server.
  */
 async function bootstrap(expressInstance: e.Express): Promise<unknown> {
-  const app = await NestFactory.create(ClientApiAppModule, new ExpressAdapter(expressInstance));
+  const app = await NestFactory.create(AppClientApiAppModule, new ExpressAdapter(expressInstance));
   app.useWebSocketAdapter(new WsAdapter(app));
 
   const globalPrefix = 'api';

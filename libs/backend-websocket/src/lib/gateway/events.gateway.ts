@@ -1,4 +1,4 @@
-import { BackendDiagnosticsService } from '@app/backend-diagnostics';
+import { AppDiagnosticsService } from '@app/backend-diagnostics';
 import { defaultWsPort } from '@app/backend-interfaces';
 import {
   OnGatewayConnection,
@@ -16,7 +16,7 @@ import { Server } from 'ws';
   path: '/api/events',
   transports: ['websocket'],
 })
-export class BackendEventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
+export class AppEventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   /**
    * Platform-specific server instance.
    */
@@ -25,7 +25,7 @@ export class BackendEventsGateway implements OnGatewayConnection, OnGatewayDisco
 
   private dynamicDataSub?: Subscription;
 
-  constructor(private readonly diagnosticsService: BackendDiagnosticsService) {}
+  constructor(private readonly diagnosticsService: AppDiagnosticsService) {}
 
   private sendClientChangeEvent(): void {
     if (typeof this.server !== 'undefined') {

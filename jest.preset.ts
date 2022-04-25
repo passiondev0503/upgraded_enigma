@@ -43,6 +43,7 @@ module.exports = {
     '!**/*.js',
     '!**/*.stories.ts',
     '!**/*.module.ts',
+    '!**/jest.*.ts',
   ],
   collectCoverage: true,
   cacheDirectory: '/tmp/jest_rs/upgraded-enigma',

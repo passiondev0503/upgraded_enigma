@@ -1,16 +1,16 @@
 import { Test } from '@nestjs/testing';
 
-import { BackendDiagnosticsService } from './diagnostics.service';
+import { AppDiagnosticsService } from './diagnostics.service';
 
-describe('BackendDiagnosticsService', () => {
-  let service: BackendDiagnosticsService;
+describe('AppDiagnosticsService', () => {
+  let service: AppDiagnosticsService;
 
   beforeAll(async () => {
     const app = await Test.createTestingModule({
-      providers: [BackendDiagnosticsService],
+      providers: [AppDiagnosticsService],
     }).compile();
 
-    service = app.get<BackendDiagnosticsService>(BackendDiagnosticsService);
+    service = app.get<AppDiagnosticsService>(AppDiagnosticsService);
   });
 
   describe('ping', () => {

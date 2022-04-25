@@ -1,10 +1,6 @@
 const { nxModuleBoundaryRules } = require('./.eslintrc.module-boundaries');
+const { namingConventionConfig } = require('./.eslintrc.naming-convention');
 const { join } = require('path');
-
-/**
- * This RegExp patter validates the allowed camelCase patterns that should be used for the object literal property names.
- */
-const camelCaseRegExpInput = '([a-z]+([A-Z])?[a-z]*)([A-Z][a-z]+|A11y|URL){0,}([$])?';
 
 /**
  * Roadmap typescript-eslint
@@ -171,6 +167,12 @@ module.exports = {
       ],
     },
     {
+      files: ['**/.eslintrc.naming-convention.js'],
+      rules: {
+        'max-lines-per-function': ['error', { max: 101, skipBlankLines: true, skipComments: true }],
+      },
+    },
+    {
       files: '**/*.ts',
       parser: '@typescript-eslint/parser',
       parserOptions: {
@@ -224,122 +226,7 @@ module.exports = {
           'error',
           { default: ['static-field', 'instance-field', 'static-method', 'instance-method'] },
         ],
-        '@typescript-eslint/naming-convention': [
-          'error', // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/naming-convention.md
-          {
-            selector: 'default',
-            format: ['camelCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'variable',
-            format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'parameter',
-            format: ['camelCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'objectLiteralProperty',
-            /**
-             * By default only camelCase is allowed.
-             * Exceptions:
-             * > FORCE_COLOR - nodejs environment property
-             * > Authorization, Content-Type - http headers
-             * Valid examples:
-             * > property
-             * > propertyName
-             * > longPropertyName
-             * > databaseURL
-             */
-            format: null, // ['camelCase', 'UPPER_CASE', 'PascalCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-            custom: {
-              regex: `^(${camelCaseRegExpInput}|FORCE_COLOR|Authorization|Content-Type)$`,
-              match: true,
-            },
-          },
-          {
-            selector: 'property',
-            /**
-             * By default only camelCase is allowed.
-             * Exceptions:
-             * > Cypress - cypress e2e testing window property
-             * Valid examples:
-             * > property
-             * > propertyName
-             * > longPropertyName
-             * > databaseURL
-             * > observable$
-             * > observableProperty$
-             */
-            format: null, // ['camelCase', 'PascalCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-            custom: {
-              regex: `^(${camelCaseRegExpInput}|Cypress)$`,
-              match: true,
-            },
-          },
-          {
-            selector: 'function',
-            format: ['camelCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'enum',
-            format: ['UPPER_CASE'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'enumMember',
-            format: ['UPPER_CASE'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'memberLike',
-            modifiers: ['private'],
-            format: ['camelCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'typeAlias',
-            prefix: ['T'],
-            format: ['StrictPascalCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'typeParameter',
-            format: ['StrictPascalCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'interface',
-            prefix: ['I'],
-            format: ['StrictPascalCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-          {
-            selector: 'class',
-            prefix: ['App'],
-            format: ['StrictPascalCase'],
-            leadingUnderscore: 'forbid',
-            trailingUnderscore: 'forbid',
-          },
-        ],
+        ...namingConventionConfig(),
         '@typescript-eslint/no-dynamic-delete': 'error',
         '@typescript-eslint/no-empty-function': [
           'error',
@@ -502,6 +389,15 @@ module.exports = {
       rules: {
         'no-console': 'off',
         '@typescript-eslint/triple-slash-reference': 'off',
+      },
+    },
+    {
+      files: ['**/jest.config.ts', '**/jest.preset.ts'], // jest configs were converted from js to ts files, but still use the js syntax
+      rules: {
+        '@typescript-eslint/no-require-imports': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        ...namingConventionConfig({ jestConfigs: true }),
       },
     },
   ],

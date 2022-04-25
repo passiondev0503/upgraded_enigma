@@ -1,17 +1,17 @@
-import { IUser, UserPassword } from '@app/backend-interfaces';
+import { AppUserPassword, IUser } from '@app/backend-interfaces';
 import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
 import { keypair } from 'keypair';
 import { combineLatest, of, throwError } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 
-import { BackendAuthService } from '../service/auth.service';
-import { BackendUserService } from '../service/user.service';
+import { AppAuthService } from '../service/auth.service';
+import { AppUserService } from '../service/user.service';
 
 @Controller()
-export class BackendUserController {
+export class AppUserController {
   private readonly rsaKeysExist$ = combineLatest([this.userService.userKeyExists(), this.userService.userKeyExists(true)]);
 
-  constructor(private readonly userService: BackendUserService, private readonly authService: BackendAuthService) {}
+  constructor(private readonly userService: AppUserService, private readonly authService: AppAuthService) {}
 
   @Get('user')
   public user() {
@@ -29,12 +29,12 @@ export class BackendUserController {
   }
 
   @Post('user/password/add')
-  public addPassword(@Body() payload: UserPassword) {
+  public addPassword(@Body() payload: AppUserPassword) {
     return this.userService.addPassword(payload);
   }
 
   @Delete('user/password/delete')
-  public deletePassword(@Body() payload: UserPassword) {
+  public deletePassword(@Body() payload: AppUserPassword) {
     return this.userService.deletePassword(payload);
   }
 

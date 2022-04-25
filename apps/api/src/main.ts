@@ -7,7 +7,7 @@ import e from 'express';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
-import { ApiAppModule } from './app/api.module';
+import { AppApiModule } from './app/api.module';
 import { environment } from './environments/environment';
 
 /**
@@ -23,7 +23,7 @@ const defaultPort = 8080;
  * Bootstraps server.
  */
 async function bootstrap(expressInstance: e.Express): Promise<unknown> {
-  const app = await NestFactory.create(ApiAppModule, new ExpressAdapter(expressInstance));
+  const app = await NestFactory.create(AppApiModule, new ExpressAdapter(expressInstance));
   app.useWebSocketAdapter(new WsAdapter(app));
 
   const globalPrefix = 'api';

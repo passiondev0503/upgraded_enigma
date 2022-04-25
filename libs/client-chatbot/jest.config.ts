@@ -1,11 +1,10 @@
 const jestPresetAngularSerializers = require('jest-preset-angular/build/serializers');
 
-module.exports = {
-  preset: '../../jest.preset.js',
-  coverageDirectory: '../../coverage/libs/client-directives',
+const config = {
+  coverageDirectory: '../../coverage/libs/client-chatbot',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   snapshotSerializers: jestPresetAngularSerializers,
-  displayName: 'client-directives',
+  displayName: 'client-chatbot',
   coverageThreshold: {
     // TODO: bump unit test coverage and remove this override
     global: {
@@ -15,4 +14,7 @@ module.exports = {
       statements: 0,
     },
   },
+  preset: '../../jest.preset.ts',
 };
+
+export default config;

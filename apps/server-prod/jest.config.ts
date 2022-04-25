@@ -1,6 +1,6 @@
-module.exports = {
+const config = {
   displayName: 'server-prod',
-  preset: '../../jest.preset.js',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -20,4 +20,7 @@ module.exports = {
       statements: 100,
     },
   },
+  preset: '../../jest.preset.ts',
 };
+
+export default config;

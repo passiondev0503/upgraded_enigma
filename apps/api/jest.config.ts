@@ -1,5 +1,4 @@
-module.exports = {
-  preset: '../../jest.preset.js',
+const config = {
   coverageDirectory: '../../coverage/apps/api',
   globals: {
     'ts-jest': {
@@ -16,4 +15,7 @@ module.exports = {
       statements: 100,
     },
   },
+  preset: '../../jest.preset.ts',
 };
+
+export default config;

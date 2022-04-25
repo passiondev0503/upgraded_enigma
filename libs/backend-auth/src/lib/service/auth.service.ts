@@ -1,11 +1,11 @@
-import { IUser, IUserLoginCredentials, IUserLogoutCredentials, Message } from '@app/backend-interfaces';
+import { AppMessage, IUser, IUserLoginCredentials, IUserLogoutCredentials } from '@app/backend-interfaces';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as crypto from 'crypto';
 import { of, throwError } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { BackendUserService } from './user.service';
+import { AppUserService } from './user.service';
 
 export interface IAuthPayload {
   email: string;
@@ -14,8 +14,8 @@ export interface IAuthPayload {
 }
 
 @Injectable()
-export class BackendAuthService {
-  constructor(private readonly jwt: JwtService, private readonly userService: BackendUserService) {}
+export class AppAuthService {
+  constructor(private readonly jwt: JwtService, private readonly userService: AppUserService) {}
 
   public encryptStringWithRsaPublicKey(input: string, publicKey: crypto.RsaPublicKey | crypto.KeyLike) {
     const buffer = Buffer.from(input);
@@ -43,7 +43,7 @@ export class BackendAuthService {
   }
 
   public ping() {
-    return new Message({
+    return new AppMessage({
       message: 'Auth service is online. Public methods: login, logout, signup.',
     });
   }

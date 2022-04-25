@@ -5,7 +5,7 @@ import { Glob } from 'glob';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class BackendUserService {
+export class AppUserService {
   private readonly cwd = process.cwd();
 
   public readonly userConfigPath = `${this.cwd}/.config/user.json`;

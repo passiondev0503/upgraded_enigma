@@ -1,11 +1,11 @@
 import { JwtModule } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { BackendAuthService } from '../service/auth.service';
-import { BackendUserService } from '../service/user.service';
-import { BackendAuthController } from './auth.controller';
+import { AppAuthService } from '../service/auth.service';
+import { AppUserService } from '../service/user.service';
+import { AppAuthController } from './auth.controller';
 
-describe('BackendAuthController', () => {
+describe('AppAuthController', () => {
   let app: TestingModule;
 
   beforeAll(async () => {
@@ -15,14 +15,14 @@ describe('BackendAuthController', () => {
           secret: 'jwtsecret',
         }),
       ],
-      controllers: [BackendAuthController],
-      providers: [BackendAuthService, BackendUserService],
+      controllers: [AppAuthController],
+      providers: [AppAuthService, AppUserService],
     }).compile();
   });
 
   describe('ping', () => {
     it('should return "Auth service is online. Public methods: login, logout, signup."', () => {
-      const appController = app.get<BackendAuthController>(BackendAuthController);
+      const appController = app.get<AppAuthController>(AppAuthController);
       expect(appController.ping()).toEqual({
         message: 'Auth service is online. Public methods: login, logout, signup.',
       });

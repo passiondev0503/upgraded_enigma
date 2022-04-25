@@ -1,21 +1,21 @@
-import { ApiEnvironment } from '@app/backend-interfaces';
+import { AppApiEnvironment } from '@app/backend-interfaces';
 import { DynamicModule, Module, Provider } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 
-import { BackendAuthController } from './controller/auth.controller';
-import { BackendUserController } from './controller/user.controller';
-import { BackendAuthService } from './service/auth.service';
-import { BackendUserService } from './service/user.service';
+import { AppAuthController } from './controller/auth.controller';
+import { AppUserController } from './controller/user.controller';
+import { AppAuthService } from './service/auth.service';
+import { AppUserService } from './service/user.service';
 
-export const authModuleProviders: Provider[] = [BackendAuthService, BackendUserService];
+export const authModuleProviders: Provider[] = [AppAuthService, AppUserService];
 
 @Module({
-  controllers: [BackendAuthController, BackendUserController],
+  controllers: [AppAuthController, AppUserController],
 })
-export class BackendAuthModule {
-  public static forRoot(environment: ApiEnvironment): DynamicModule {
+export class AppAuthModule {
+  public static forRoot(environment: AppApiEnvironment): DynamicModule {
     return {
-      module: BackendAuthModule,
+      module: AppAuthModule,
       providers: [...authModuleProviders],
       imports: [
         JwtModule.register({

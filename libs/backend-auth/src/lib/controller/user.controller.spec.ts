@@ -1,11 +1,11 @@
 import { JwtModule } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { BackendAuthService } from '../service/auth.service';
-import { BackendUserService } from '../service/user.service';
-import { BackendUserController } from './user.controller';
+import { AppAuthService } from '../service/auth.service';
+import { AppUserService } from '../service/user.service';
+import { AppUserController } from './user.controller';
 
-describe('BackendUserController', () => {
+describe('AppUserController', () => {
   let app: TestingModule;
 
   beforeAll(async () => {
@@ -15,15 +15,15 @@ describe('BackendUserController', () => {
           secret: 'jwtsecret',
         }),
       ],
-      controllers: [BackendUserController],
-      providers: [BackendUserService, BackendAuthService],
+      controllers: [AppUserController],
+      providers: [AppUserService, AppAuthService],
     }).compile();
   });
 
   it('TODO', () => {
-    const appController = app.get<BackendUserController>(BackendUserController);
+    const appController = app.get<AppUserController>(AppUserController);
     expect(appController).toBeDefined();
   });
 
-  test.todo('BackendUserController');
+  test.todo('AppUserController');
 });

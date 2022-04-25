@@ -1,11 +1,11 @@
 import { JwtModule } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 
-import { BackendAuthService } from './auth.service';
-import { BackendUserService } from './user.service';
+import { AppAuthService } from './auth.service';
+import { AppUserService } from './user.service';
 
-describe('BackendAuthService', () => {
-  let service: BackendAuthService;
+describe('AppAuthService', () => {
+  let service: AppAuthService;
 
   beforeAll(async () => {
     const app = await Test.createTestingModule({
@@ -14,10 +14,10 @@ describe('BackendAuthService', () => {
           secret: 'jwtsecret',
         }),
       ],
-      providers: [BackendAuthService, BackendUserService],
+      providers: [AppAuthService, AppUserService],
     }).compile();
 
-    service = app.get<BackendAuthService>(BackendAuthService);
+    service = app.get<AppAuthService>(AppAuthService);
   });
 
   describe('ping', () => {

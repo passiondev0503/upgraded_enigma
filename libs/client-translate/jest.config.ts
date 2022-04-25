@@ -1,11 +1,10 @@
 const jestPresetAngularSerializers = require('jest-preset-angular/build/serializers');
 
-module.exports = {
-  preset: '../../jest.preset.js',
-  coverageDirectory: '../../coverage/libs/client-sidebar',
+const config = {
+  coverageDirectory: '../../coverage/libs/client-translate',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   snapshotSerializers: jestPresetAngularSerializers,
-  displayName: 'client-sidebar',
+  displayName: 'client-translate',
   coverageThreshold: {
     global: {
       branches: 100,
@@ -14,4 +13,7 @@ module.exports = {
       statements: 100,
     },
   },
+  preset: '../../jest.preset.ts',
 };
+
+export default config;

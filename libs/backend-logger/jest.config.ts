@@ -1,13 +1,17 @@
-module.exports = {
-  preset: '../../jest.preset.js',
-  coverageDirectory: '../../coverage/apps/client-api',
+const config = {
+  displayName: 'backend-logger',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
     },
   },
-  displayName: 'client-api',
   testEnvironment: 'node',
+  transform: {
+    '^.+\\.[tj]sx?$': 'ts-jest',
+  },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  coverageDirectory: '../../coverage/libs/backend-logger',
   coverageThreshold: {
     // TODO: bump unit test coverage and remove this override
     global: {
@@ -17,4 +21,7 @@ module.exports = {
       statements: 0,
     },
   },
+  preset: '../../jest.preset.ts',
 };
+
+export default config;

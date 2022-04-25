@@ -1,14 +1,14 @@
-import { Message } from '@app/backend-interfaces';
+import { AppMessage } from '@app/backend-interfaces';
 import { Controller, Get } from '@nestjs/common';
 
-import { BackendDiagnosticsService } from '../service/diagnostics.service';
+import { AppDiagnosticsService } from '../service/diagnostics.service';
 
 @Controller()
-export class BackendDiagnosticsController {
-  constructor(private readonly diagnosticsService: BackendDiagnosticsService) {}
+export class AppDiagnosticsController {
+  constructor(private readonly diagnosticsService: AppDiagnosticsService) {}
 
   @Get('diagnostics')
-  public ping(): Message {
+  public ping(): AppMessage {
     return this.diagnosticsService.ping();
   }
 

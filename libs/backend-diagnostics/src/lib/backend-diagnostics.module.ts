@@ -1,17 +1,17 @@
 import { DynamicModule, Module, Provider } from '@nestjs/common';
 
-import { BackendDiagnosticsController } from './controller/diagnostics.controller';
-import { BackendDiagnosticsService } from './service/diagnostics.service';
+import { AppDiagnosticsController } from './controller/diagnostics.controller';
+import { AppDiagnosticsService } from './service/diagnostics.service';
 
-export const diagnosticsModuleProviders: Provider[] = [BackendDiagnosticsService];
+export const diagnosticsModuleProviders: Provider[] = [AppDiagnosticsService];
 
 @Module({
-  controllers: [BackendDiagnosticsController],
+  controllers: [AppDiagnosticsController],
 })
-export class BackendDiagnosticsModule {
+export class AppDiagnosticsModule {
   public static forRoot(): DynamicModule {
     return {
-      module: BackendDiagnosticsModule,
+      module: AppDiagnosticsModule,
       providers: [...diagnosticsModuleProviders],
     };
   }

@@ -1,21 +1,21 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { BackendDiagnosticsService } from '../service/diagnostics.service';
-import { BackendDiagnosticsController } from './diagnostics.controller';
+import { AppDiagnosticsService } from '../service/diagnostics.service';
+import { AppDiagnosticsController } from './diagnostics.controller';
 
-describe('BackendDiagnosticsController', () => {
+describe('AppDiagnosticsController', () => {
   let app: TestingModule;
 
   beforeAll(async () => {
     app = await Test.createTestingModule({
-      controllers: [BackendDiagnosticsController],
-      providers: [BackendDiagnosticsService],
+      controllers: [AppDiagnosticsController],
+      providers: [AppDiagnosticsService],
     }).compile();
   });
 
   describe('ping', () => {
     it('should return "Diagnostics service is online. Routes: diagnostics, diagnostics/static."', () => {
-      const appController = app.get<BackendDiagnosticsController>(BackendDiagnosticsController);
+      const appController = app.get<AppDiagnosticsController>(AppDiagnosticsController);
       expect(appController.ping()).toEqual({
         message: 'Diagnostics service is online. Routes: diagnostics, diagnostics/static.',
       });
