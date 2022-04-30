@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" fxFlex="0 1 auto" *ngIf="user$ | async as user">
+<mat-toolbar color="primary" class="toolbar" *ngIf="user$ | async as user">
   <button mat-icon-button (click)="toggleSidebar()">
     <mat-icon title="open sidenav" *ngIf="(sidebarOpened$ | async) === false"> flip_to_front </mat-icon>
 
