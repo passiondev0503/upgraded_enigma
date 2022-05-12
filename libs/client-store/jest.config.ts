@@ -8,10 +8,10 @@ const config = {
   coverageThreshold: {
     // TODO: bump unit test coverage and remove this override
     global: {
-      branches: 22,
-      functions: 32,
-      lines: 64,
-      statements: 64,
+      branches: 27,
+      functions: 37,
+      lines: 66,
+      statements: 66,
     },
   },
   preset: '../../jest.preset.ts',

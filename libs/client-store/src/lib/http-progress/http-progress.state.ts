@@ -9,7 +9,7 @@ import {
   THttpProgressPayload,
   TShowToastPayload,
 } from './http-progress.interface';
-import { AppHttpProgressService } from './http-progress.service';
+import { AppHttpProgressService } from './services/http-progress/http-progress.service';
 import { AppToasterService } from './services/toaster/toaster.service';
 
 @State<IAppHttpProgressState>({
@@ -23,17 +23,17 @@ export class AppHttpProgressState {
   constructor(private readonly toaster: AppToasterService, private readonly service: AppHttpProgressService) {}
 
   @Selector()
-  public static allProgress(state: IAppHttpProgressState) {
+  public static state(state: IAppHttpProgressState) {
     return state;
   }
 
   @Selector()
-  public static mainViewProgress(state: IAppHttpProgressState) {
+  public static mainView(state: IAppHttpProgressState) {
     return state.mainView;
   }
 
   @Selector()
-  public static sidebarProgress(state: IAppHttpProgressState) {
+  public static sidebar(state: IAppHttpProgressState) {
     return state.sidebar;
   }
 
@@ -49,7 +49,7 @@ export class AppHttpProgressState {
       }
     }
     if (newState.mainView.loading) {
-      this.service.handlers.mainView.start();
+      this.service.globalProgressHandler.start();
     }
     return ctx.patchState(newState);
   }
@@ -66,7 +66,7 @@ export class AppHttpProgressState {
       }
     }
     if (!newState.mainView.loading) {
-      this.service.handlers.mainView.stop();
+      this.service.globalProgressHandler.stop();
     }
     return ctx.patchState(newState);
   }

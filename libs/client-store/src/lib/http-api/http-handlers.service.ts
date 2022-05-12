@@ -9,7 +9,7 @@ import { MonoTypeOperatorFunction, Observable, of } from 'rxjs';
 import { catchError, finalize, tap, timeout } from 'rxjs/operators';
 
 import { httpProgressActions } from '../http-progress/http-progress.actions';
-import { AppHttpProgressService } from '../http-progress/http-progress.service';
+import { AppHttpProgressService } from '../http-progress/services/http-progress/http-progress.service';
 import { AppToasterService } from '../http-progress/services/toaster/toaster.service';
 import { userActions } from '../user/user.actions';
 

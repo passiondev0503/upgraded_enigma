@@ -11,7 +11,7 @@ import { map } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppSidebarRootComponent {
-  public readonly loading$ = this.store.select(AppHttpProgressState.sidebarProgress).pipe(map(state => state.loading));
+  public readonly loading$ = this.store.select(AppHttpProgressState.sidebar).pipe(map(state => state.loading));
 
   constructor(private readonly store: Store) {}
 

@@ -3,41 +3,25 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable, Provider } from '@angular/core';
 import { tap } from 'rxjs/operators';
 
-import { AppGlobalProgressBarComponent } from './components/global-progress-bar/global-progress-bar.component';
-import { IHttpProgressHandlers } from './http-progress.interface';
+import { AppGlobalProgressBarComponent } from '../../components/global-progress-bar/global-progress-bar.component';
+import { IHttpProgressHandler } from '../../http-progress.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppHttpProgressService {
-  public readonly handlers: IHttpProgressHandlers = {
-    mainView: {
-      start: () => this.startProgress(),
-      stop: () => this.stopProgress(),
-      tapStopperObservable: <T>() => {
-        return tap<T>({
-          next: () => {
-            this.handlers.mainView.stop();
-          },
-          error: () => {
-            this.handlers.mainView.stop();
-          },
-        });
-      },
-    },
-    sidebar: {
-      start: () => void 0,
-      stop: () => void 0,
-      tapStopperObservable: <T>() => {
-        return tap<T>({
-          next: () => {
-            this.handlers.sidebar.stop();
-          },
-          error: () => {
-            this.handlers.sidebar.stop();
-          },
-        });
-      },
+  public readonly globalProgressHandler: IHttpProgressHandler = {
+    start: () => this.startProgress(),
+    stop: () => this.stopProgress(),
+    tapStopperObservable: <T>() => {
+      return tap<T>({
+        next: () => {
+          this.globalProgressHandler.stop();
+        },
+        error: () => {
+          this.globalProgressHandler.stop();
+        },
+      });
     },
   };
 
