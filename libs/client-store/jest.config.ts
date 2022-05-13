@@ -14,7 +14,7 @@ const config = {
       statements: 66,
     },
   },
-  preset: '../../jest.preset.ts',
+  preset: '../../jest.preset.js',
 };
 
 export default config;
