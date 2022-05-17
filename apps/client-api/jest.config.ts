@@ -1,12 +1,5 @@
 const config = {
   coverageDirectory: '../../coverage/apps/client-api',
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-    },
-  },
-  displayName: 'client-api',
-  testEnvironment: 'node',
   coverageThreshold: {
     // TODO: bump unit test coverage and remove this override
     global: {
@@ -16,7 +9,18 @@ const config = {
       statements: 0,
     },
   },
+  displayName: 'client-api',
+  globals: {
+    'ts-jest': {
+      tsconfig: '<rootDir>/tsconfig.spec.json',
+    },
+  },
   preset: '../../jest.preset.js',
+  resolver: '../../tools/js/jest-node-resolver.js',
+  testEnvironment: 'node',
+  transform: {
+    '^.+\\.[tj]s$': 'ts-jest',
+  },
 };
 
 export default config;

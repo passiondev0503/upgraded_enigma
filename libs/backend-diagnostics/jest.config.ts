@@ -1,16 +1,5 @@
 const config = {
   coverageDirectory: '../../coverage/libs/backend-diagnostics',
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-    },
-  },
-  displayName: 'backend-diagnostics',
-  testEnvironment: 'node',
-  transform: {
-    '^.+\\.[tj]sx?$': 'ts-jest',
-  },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageThreshold: {
     // TODO: bump unit test coverage and remove this override
     global: {
@@ -20,7 +9,18 @@ const config = {
       statements: 0,
     },
   },
+  displayName: 'backend-diagnostics',
+  globals: {
+    'ts-jest': {
+      tsconfig: '<rootDir>/tsconfig.spec.json',
+    },
+  },
   preset: '../../jest.preset.js',
+  resolver: '../../tools/js/jest-node-resolver.js',
+  testEnvironment: 'node',
+  transform: {
+    '^.+\\.[tj]s$': 'ts-jest',
+  },
 };
 
 export default config;
