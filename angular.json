@@ -445,19 +445,17 @@
     "client-core-components": {
       "architect": {
         "build-storybook": {
-          "builder": "@nrwl/storybook:build",
+          "builder": "@storybook/angular:build-storybook",
           "configurations": {
             "ci": {
               "quiet": true
             }
           },
           "options": {
-            "config": {
-              "configFolder": "libs/client-core-components/.storybook"
-            },
-            "outputPath": "dist/storybook/client-core-components",
-            "projectBuildConfig": "client-core-components:build-storybook",
-            "uiFramework": "@storybook/angular"
+            "browserTarget": "client-core-components:build-storybook",
+            "compodoc": false,
+            "configDir": "libs/client-core-components/.storybook",
+            "outputDir": "dist/storybook/client-core-components"
           }
         },
         "lint": {
@@ -468,19 +466,17 @@
           }
         },
         "storybook": {
-          "builder": "@nrwl/storybook:storybook",
+          "builder": "@storybook/angular:start-storybook",
           "configurations": {
             "ci": {
               "quiet": true
             }
           },
           "options": {
-            "config": {
-              "configFolder": "libs/client-core-components/.storybook"
-            },
-            "port": 4400,
-            "projectBuildConfig": "client-core-components:build-storybook",
-            "uiFramework": "@storybook/angular"
+            "browserTarget": "client-core-components:build-storybook",
+            "compodoc": false,
+            "configDir": "libs/client-core-components/.storybook",
+            "port": 4400
           }
         },
         "test": {
@@ -535,19 +531,17 @@
     "client-diagnostics": {
       "architect": {
         "build-storybook": {
-          "builder": "@nrwl/storybook:build",
+          "builder": "@storybook/angular:build-storybook",
           "configurations": {
             "ci": {
               "quiet": true
             }
           },
           "options": {
-            "config": {
-              "configFolder": "libs/client-diagnostics/.storybook"
-            },
-            "outputPath": "dist/storybook/client-diagnostics",
-            "projectBuildConfig": "client-diagnostics:build-storybook",
-            "uiFramework": "@storybook/angular"
+            "browserTarget": "client-diagnostics:build-storybook",
+            "compodoc": false,
+            "configDir": "libs/client-diagnostics/.storybook",
+            "outputDir": "dist/storybook/client-diagnostics"
           }
         },
         "lint": {
@@ -558,19 +552,17 @@
           }
         },
         "storybook": {
-          "builder": "@nrwl/storybook:storybook",
+          "builder": "@storybook/angular:start-storybook",
           "configurations": {
             "ci": {
               "quiet": true
             }
           },
           "options": {
-            "config": {
-              "configFolder": "libs/client-diagnostics/.storybook"
-            },
-            "port": 4400,
-            "projectBuildConfig": "client-diagnostics:build-storybook",
-            "uiFramework": "@storybook/angular"
+            "browserTarget": "client-diagnostics:build-storybook",
+            "compodoc": false,
+            "configDir": "libs/client-diagnostics/.storybook",
+            "port": 4400
           }
         },
         "test": {
@@ -922,27 +914,27 @@
       "tags": ["scope:client-util", "type:util"]
     },
     "client-util-sentry": {
-      "projectType": "library",
-      "root": "libs/client-util-sentry",
-      "sourceRoot": "libs/client-util-sentry/src",
-      "prefix": "app",
       "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/client-util-sentry"],
-          "options": {
-            "jestConfig": "libs/client-util-sentry/jest.config.ts",
-            "passWithNoTests": true
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["libs/client-util-sentry/**/*.ts"],
-            "eslintConfig": "libs/client-util-sentry/.eslintrc.json"
+            "eslintConfig": "libs/client-util-sentry/.eslintrc.json",
+            "lintFilePatterns": ["libs/client-util-sentry/**/*.ts"]
           }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/client-util-sentry/jest.config.ts",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/client-util-sentry"]
         }
       },
+      "prefix": "app",
+      "projectType": "library",
+      "root": "libs/client-util-sentry",
+      "sourceRoot": "libs/client-util-sentry/src",
       "tags": ["scope:client-util-sentry", "type:util"]
     },
     "client-workspaces": {
@@ -1086,19 +1078,17 @@
           }
         },
         "build-storybook": {
-          "builder": "@nrwl/storybook:build",
+          "builder": "@storybook/angular:build-storybook",
           "configurations": {
             "ci": {
               "quiet": true
             }
           },
           "options": {
-            "config": {
-              "configFolder": "apps/documentation/.storybook"
-            },
-            "outputPath": "dist/storybook/documentation",
-            "projectBuildConfig": "documentation",
-            "uiFramework": "@storybook/angular"
+            "browserTarget": "documentation:build",
+            "compodoc": false,
+            "configDir": "apps/documentation/.storybook",
+            "outputDir": "dist/storybook/documentation"
           }
         },
         "extract-i18n": {
@@ -1126,19 +1116,17 @@
           }
         },
         "storybook": {
-          "builder": "@nrwl/storybook:storybook",
+          "builder": "@storybook/angular:start-storybook",
           "configurations": {
             "ci": {
               "quiet": true
             }
           },
           "options": {
-            "config": {
-              "configFolder": "apps/documentation/.storybook"
-            },
-            "port": 4400,
-            "projectBuildConfig": "documentation",
-            "uiFramework": "@storybook/angular"
+            "browserTarget": "documentation:build",
+            "compodoc": false,
+            "configDir": "apps/documentation/.storybook",
+            "port": 4400
           }
         },
         "test": {
