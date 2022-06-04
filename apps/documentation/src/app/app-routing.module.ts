@@ -20,7 +20,7 @@ const docRoutes: Array<Route> = [
 @NgModule({
   imports: [
     RouterModule.forRoot(docRoutes, {
-      initialNavigation: 'enabled',
+      initialNavigation: 'enabledBlocking',
       onSameUrlNavigation: 'reload',
       relativeLinkResolution: 'legacy',
     }),

@@ -1,6 +1,6 @@
 import { actionPayloadConstructor, IActionPayload } from '@app/client-util';
 
-import { IUserPassword, IUserStatePayload, USER_STATE_TOKEN } from './user.interface';
+import { ILoginPayload, IUserPassword, IUserStatePayload, USER_STATE_TOKEN } from './user.interface';
 
 const createAction = actionPayloadConstructor(USER_STATE_TOKEN.getName());
 
@@ -8,7 +8,7 @@ export type TUserPayload = IActionPayload<IUserStatePayload>;
 
 const setState = createAction<TUserPayload>('set state');
 
-export type TLogInPayload = IActionPayload<{ email: string; password: string }>;
+export type TLogInPayload = IActionPayload<ILoginPayload>;
 
 const logIn = createAction<TLogInPayload>('log in');
 

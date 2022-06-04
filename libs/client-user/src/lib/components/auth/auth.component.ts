@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AppUserState, userActions } from '@app/client-store';
+import { AppUserState, ILoginPayload, userActions } from '@app/client-store';
 import { Store } from '@ngxs/store';
 import { BehaviorSubject } from 'rxjs';
 import { concatMap, first, tap } from 'rxjs/operators';
@@ -57,7 +57,7 @@ export class AppUserAuthComponent {
         .pipe(
           first(),
           concatMap(user => {
-            const formData: { email: string; password: string } = this.form.value;
+            const formData = <ILoginPayload>this.form.value;
             return typeof user.token !== 'undefined' ? this.logUserIn(formData) : this.initializeUser(formData);
           }),
         )
@@ -70,11 +70,11 @@ export class AppUserAuthComponent {
    * @param formData the auth form data
    * @returns execution result
    */
-  private initializeUser(formData: { email: string; password: string }) {
+  private initializeUser(formData: ILoginPayload) {
     return this.store.dispatch(new userActions.configureUser(formData)).pipe(
       concatMap(() => {
         // make subsequent login request for user after successful initialization request
-        const loginFormData = this.form.value;
+        const loginFormData = <ILoginPayload>this.form.value;
         return this.store.dispatch(new userActions.logIn(loginFormData)).pipe(
           tap({
             next: () => {
@@ -89,7 +89,7 @@ export class AppUserAuthComponent {
     );
   }
 
-  private logUserIn(formData: { email: string; password: string }) {
+  private logUserIn(formData: ILoginPayload) {
     return this.store.dispatch(new userActions.logIn(formData)).pipe(
       tap({
         next: () => {

@@ -46,3 +46,8 @@ export interface IUserStatePayload {
 export interface IUserHandlers {
   setState(payload: IUserStatePayload): void;
 }
+
+export interface ILoginPayload {
+  email: string;
+  password: string;
+}

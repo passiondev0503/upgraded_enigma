@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
-import { AppUserState, userActions } from '@app/client-store';
+import { AppUserState, IUserPassword, userActions } from '@app/client-store';
 import { Store } from '@ngxs/store';
 import { TBarChartData } from '@rfprodz/d3-charts';
 import { of } from 'rxjs';
@@ -59,6 +59,7 @@ export class AppUserDataComponent {
   public form = this.fb.group({
     name: ['', Validators.compose([Validators.required])],
     password: ['', Validators.compose([Validators.required])],
+    timestamp: [0],
   });
 
   /**
@@ -138,6 +139,7 @@ export class AppUserDataComponent {
     this.form = this.fb.group({
       name: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.required])],
+      timestamp: [0],
     });
   }
 
@@ -145,7 +147,7 @@ export class AppUserDataComponent {
    * Adds user password.
    */
   public addPassword(): void {
-    const formData = this.form.value;
+    const formData = <IUserPassword>this.form.value;
     void this.store
       .dispatch(new userActions.addPassword(formData))
       .pipe(
