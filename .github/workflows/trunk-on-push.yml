@@ -73,20 +73,20 @@ jobs:
           node-version: ${{ matrix.node-version }}
           check-latest: true
 
-      - name: Configure kernel (increase watchers)
+      - name: Configure kernel
         if: steps.changes.outputs.nx == 'true'
-        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+        uses: rfprod/nx-ng-starter/.github/actions/configure-kernel@main
 
-      - name: Use yarn 1.22.19 (required for integrity check)
+      - name: Use yarn v1 required for integrity check
         if: steps.changes.outputs.nx == 'true'
-        run: npm i -g yarn@1.22.19 # this is mandatory, yarn v2 does not have integrity check which is needed for the pipeline
+        uses: rfprod/nx-ng-starter/.github/actions/use-yarn-v1@main
 
-      - name: Get yarn cache directory path and commit hash
-        if: steps.changes.outputs.nx == 'true'
+      - name: Get variables
+        if: ${{ steps.changes.outputs.nx == 'true' }}
         id: get-variables
-        run: echo "::set-output name=yarncachedir::$(yarn cache dir)"; echo "::set-output name=commitsha::$(echo ${GITHUB_SHA})"
+        uses: rfprod/nx-ng-starter/.github/actions/get-variables@main
 
-      - name: Workspace cache (npm, yarn, nx, jest)
+      - name: Workspace cache (node_modules, nx, jest, angular)
         if: steps.changes.outputs.nx == 'true'
         uses: actions/cache@v3
         id: workspace-cache # use this to check for `cache-hit` (`steps.workspace-cache.outputs.cache-hit != 'true'`)

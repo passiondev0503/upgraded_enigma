@@ -41,8 +41,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           check-latest: true
 
-      - name: Configure kernel (increase watchers)
-        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+      - name: Configure kernel
+        uses: rfprod/nx-ng-starter/.github/actions/configure-kernel@main
 
       - name: Install project dependencies
         run: yarn install:ci
