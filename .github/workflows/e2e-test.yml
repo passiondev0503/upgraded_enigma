@@ -32,8 +32,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Don't save Bash session history
-        run: unset HISTFILE
+      - name: Disable session history
+        uses: rfprod/nx-ng-starter/.github/actions/disable-session-history@main
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3

@@ -22,8 +22,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Don't save Bash session history
-        run: unset HISTFILE
+      - name: Disable session history
+        uses: rfprod/nx-ng-starter/.github/actions/disable-session-history@main
 
       - name: GitHub CODEOWNERS Validator
         uses: mszostok/codeowners-validator@v0.5.1
