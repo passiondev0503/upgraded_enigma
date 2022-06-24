@@ -271,7 +271,7 @@
             "outputHashing": "none",
             "outputPath": "dist/apps/client",
             "polyfills": "apps/client/src/polyfills.ts",
-            "scripts": [],
+            "scripts": ["node_modules/dompurify/dist/purify.min.js", "tools/js/trusted-types.policy.js"],
             "sourceMap": true,
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
@@ -311,24 +311,8 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "assets": [
-              "apps/client/src/favicon.ico",
-              "apps/client/src/assets",
-              {
-                "glob": "**/*",
-                "input": "./libs/client-core/src/lib/assets",
-                "output": "./assets"
-              }
-            ],
             "jestConfig": "apps/client/jest.config.ts",
-            "passWithNoTests": true,
-            "scripts": [],
-            "styles": [
-              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
-              "node_modules/material-design-icon-fonts-self-hosted-web/iconfont/material-icons.css",
-              "apps/client/src/styles.scss",
-              "libs/client-core/src/lib/styles/styles.scss"
-            ]
+            "passWithNoTests": true
           },
           "outputs": ["coverage/apps/client"]
         }
@@ -1081,6 +1065,8 @@
             "outputPath": "dist/apps/documentation",
             "polyfills": "apps/documentation/src/polyfills.ts",
             "scripts": [
+              "node_modules/dompurify/dist/purify.min.js",
+              "tools/js/trusted-types.policy.js",
               "node_modules/marked/lib/marked.umd.js",
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-csharp.min.js",

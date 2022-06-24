@@ -187,6 +187,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'prettier',
         'plugin:eslint-comments/recommended',
+        'plugin:no-unsanitized/DOM',
       ],
       plugins: [
         'prettier',

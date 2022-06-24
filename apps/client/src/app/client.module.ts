@@ -26,7 +26,12 @@ import { AppRootComponent } from './components/root.component';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
-    NgxsModule.forRoot([], { developmentMode: !environment.production }),
+    NgxsModule.forRoot([], {
+      developmentMode: !environment.production,
+      compatibility: {
+        strictContentSecurityPolicy: true,
+      },
+    }),
     NgxsStoragePluginModule.forRoot({
       key: [AppUserState],
     }),
