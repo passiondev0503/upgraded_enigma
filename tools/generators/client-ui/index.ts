@@ -14,6 +14,7 @@ import {
 } from '@angular-devkit/schematics';
 import { createOrUpdate, deleteFile, formatFiles, getProjectConfig } from '@nrwl/workspace';
 import * as fs from 'fs';
+import { fileExists } from 'nx/src/utils/fileutils';
 import * as path from 'path';
 
 import { ISchematicContext } from './schema.interface';
@@ -68,7 +69,7 @@ const updateProjectConfig =
     const projectConfig: IProjectConfig = getProjectConfig(tree, schema.name);
     projectConfig.architect.lint.builder = '@angular-eslint/builder:lint';
     projectConfig.architect.lint.options.eslintConfig = `libs/${schema.name}/.eslintrc.json`;
-    projectConfig.architect.lint.options.lintFilePatterns = [`libs/${schema.name}/**/*.ts`];
+    projectConfig.architect.lint.options.lintFilePatterns = [`libs/${schema.name}/**/*.ts`, `libs/${schema.name}/**/*.html`];
 
     const projectRoot = `${process.cwd()}`;
     const angularJsonPath = `${projectRoot}/angular.json`;
@@ -87,7 +88,10 @@ const updateProjectConfig =
 const cleanup =
   (schema: ISchematicContext): Rule =>
   (tree: Tree, context: SchematicContext) => {
-    return chain([deleteFile('./.eslintrc.json')])(tree, context);
+    const root = `${process.cwd()}`;
+    const rootEslintJson = `${root}/.eslintrc.json`;
+    const eslintJsonExists = fileExists(rootEslintJson);
+    return chain(eslintJsonExists ? [deleteFile(rootEslintJson)] : [])(tree, context);
   };
 
 export default function (schema: ISchematicContext) {
