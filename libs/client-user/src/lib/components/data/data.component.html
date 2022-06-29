@@ -150,7 +150,11 @@
   <mat-divider fxFlex="100"></mat-divider>
 
   <span fxFlex="100" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="chartData$ | async as chartData">
-    <app-bar-chart [chartId]="'bar-chart-0'" [data]="chartData"></app-bar-chart>
+    <app-bar-chart
+      [chartId]="'bar-chart-0'"
+      [data]="chartData"
+      [options]="{ xAxisTitle: 'Date created', yAxisTitle: 'Passwords count' }"
+    ></app-bar-chart>
   </span>
 
   <mat-divider fxFlex="100"></mat-divider>
