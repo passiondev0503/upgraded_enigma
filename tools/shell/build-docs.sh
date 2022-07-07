@@ -15,9 +15,12 @@ buildDocumentation() {
 
   yarn test:reports || exit 1
   yarn generate:unit-test-coverage-index || exit 1
+
   npx nx run tools:compodoc-build || exit 1
+  cp -r ./dist/compodoc ./dist/apps/documentation/assets || exit 1
+
   yarn generate:changelog || exit 1
-  yarn e2e:headless:report || exit 1
+  yarn e2e:report || exit 1
   yarn generate:e2e-test-report-index || exit 1
 
   ##

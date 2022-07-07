@@ -1,0 +1,52 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "configurations": {
+        "production": {
+          "extractLicenses": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/client-api/src/environments/environment.ts",
+              "with": "apps/client-api/src/environments/environment.prod.ts"
+            }
+          ],
+          "inspect": false,
+          "optimization": true
+        }
+      },
+      "options": {
+        "assets": ["apps/client-api/src/assets"],
+        "main": "apps/client-api/src/main.ts",
+        "outputPath": "dist/apps/client-api",
+        "tsConfig": "apps/client-api/tsconfig.app.json"
+      }
+    },
+    "lint": {
+      "executor": "@angular-eslint/builder:lint",
+      "options": {
+        "eslintConfig": "apps/client-api/.eslintrc.json",
+        "lintFilePatterns": ["apps/client-api/**/*.ts"]
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "client-api:build"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "apps/client-api/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/apps/client-api"]
+    }
+  },
+  "prefix": "app",
+  "projectType": "application",
+  "sourceRoot": "apps/client-api/src",
+  "tags": ["scope:client-api", "type:application"]
+}
