@@ -19,6 +19,7 @@
     "client-e2e": "apps/client-e2e",
     "client-material": "libs/client-material",
     "client-pipes": "libs/client-pipes",
+    "client-pwa-offline": "libs/client-pwa-offline",
     "client-services": "libs/client-services",
     "client-sidebar": "libs/client-sidebar",
     "client-store": "libs/client-store",

@@ -1,10 +1,10 @@
-import { DOCUMENT } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppClientMaterialModule } from '@app/client-material';
-import { documentFactory, WINDOW, windowFactory } from '@app/client-util';
+import { AppClientPwaOfflineModule } from '@app/client-pwa-offline';
+import { appBaseHrefProvider, documentProvider, pathLocationStrategyProvider, windowProvider } from '@app/client-util';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
@@ -39,7 +39,6 @@ const markdownModuleConfig: MarkdownModuleConfig = {
     BrowserAnimationsModule,
     HttpClientModule,
     MarkdownModule.forRoot(markdownModuleConfig),
-    AppDocRoutingModule,
     AppClientMaterialModule.forRoot(),
     FlexLayoutModule,
     NgxsModule.forRoot([], {
@@ -52,11 +51,15 @@ const markdownModuleConfig: MarkdownModuleConfig = {
     NgxsRouterPluginModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
     AppDocStoreModule,
+    AppClientPwaOfflineModule,
+    AppDocRoutingModule,
   ],
   providers: [
-    { provide: WINDOW, useFactory: windowFactory },
-    { provide: DOCUMENT, useFactory: documentFactory },
-    { provide: DOC_APP_ENV, useValue: environment },
+    appBaseHrefProvider,
+    pathLocationStrategyProvider,
+    windowProvider,
+    documentProvider,
+    { provide: DOC_APP_ENV, useValue: { ...environment } },
   ],
   bootstrap: [AppDocRootComponent],
 })

@@ -7,6 +7,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppClientCoreModule } from '@app/client-core';
 import { AppClientCoreComponentsModule } from '@app/client-core-components';
 import { AppClientMaterialModule } from '@app/client-material';
+import { AppClientPwaOfflineModule } from '@app/client-pwa-offline';
 import { AppUserState, AppWebsocketModule } from '@app/client-store';
 import { AppClientTranslateModule } from '@app/client-translate';
 import { sentryProviders } from '@app/client-util-sentry';
@@ -47,6 +48,7 @@ import { AppRootComponent } from './components/root.component';
     AppClientMaterialModule.forRoot(),
     AppWebsocketModule.forRoot(environment),
     AppClientTranslateModule.forRoot(),
+    AppClientPwaOfflineModule,
     AppClientRoutingModule,
   ],
   providers: [...sentryProviders(environment)],

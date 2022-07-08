@@ -32,7 +32,7 @@
         }
       },
       "options": {
-        "allowedCommonJsDependencies": ["hammerjs"],
+        "allowedCommonJsDependencies": ["hammerjs", "memo-decorator", "moment"],
         "aot": true,
         "assets": [
           "apps/client/src/favicon.ico",

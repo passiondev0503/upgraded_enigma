@@ -30,7 +30,7 @@
         }
       },
       "options": {
-        "allowedCommonJsDependencies": ["hammerjs"],
+        "allowedCommonJsDependencies": ["hammerjs", "moment"],
         "aot": true,
         "assets": [
           "apps/documentation/src/favicon.ico",

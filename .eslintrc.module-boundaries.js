@@ -39,16 +39,16 @@ const sharedConstraints = [];
 const backendConstraints = [
   {
     sourceTag: 'scope:api',
-    onlyDependOnLibsWithTags: ['scope:backend-interfaces', 'scope:backend-logger', 'scope:backend-websocket', 'scope:backend-diagnostics'],
+    onlyDependOnLibsWithTags: ['scope:backend-diagnostics', 'scope:backend-interfaces', 'scope:backend-logger', 'scope:backend-websocket'],
   },
   {
     sourceTag: 'scope:client-api',
     onlyDependOnLibsWithTags: [
       'scope:backend-auth',
+      'scope:backend-diagnostics',
       'scope:backend-interfaces',
       'scope:backend-logger',
       'scope:backend-websocket',
-      'scope:backend-diagnostics',
     ],
   },
   {
@@ -69,7 +69,7 @@ const backendConstraints = [
   },
   {
     sourceTag: 'scope:backend-websocket',
-    onlyDependOnLibsWithTags: ['scope:backend-interfaces', 'scope:backend-diagnostics'],
+    onlyDependOnLibsWithTags: ['scope:backend-diagnostics', 'scope:backend-interfaces'],
   },
   {
     sourceTag: 'scope:server-dev',
@@ -87,7 +87,7 @@ const backendConstraints = [
 const clientConstraints = [
   {
     sourceTag: 'scope:documentation',
-    onlyDependOnLibsWithTags: ['scope:client-material', 'scope:client-unit-testing', 'scope:client-util'],
+    onlyDependOnLibsWithTags: ['scope:client-material', 'scope:client-pwa-offline', 'scope:client-unit-testing', 'scope:client-util'],
   },
   {
     sourceTag: 'scope:documentation-e2e',
@@ -102,12 +102,16 @@ const clientConstraints = [
     onlyDependOnLibsWithTags: [],
   },
   {
+    sourceTag: 'scope:client-pwa-offline',
+    onlyDependOnLibsWithTags: ['scope:client-util'],
+  },
+  {
     sourceTag: 'scope:client-core',
-    onlyDependOnLibsWithTags: ['scope:client-util', 'scope:client-store'],
+    onlyDependOnLibsWithTags: ['scope:client-store', 'scope:client-util'],
   },
   {
     sourceTag: 'scope:client-store',
-    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-util', 'scope:client-translate'],
+    onlyDependOnLibsWithTags: ['scope:client-translate', 'scope:client-unit-testing', 'scope:client-util'],
   },
   {
     sourceTag: 'scope:client-services',
@@ -116,12 +120,12 @@ const clientConstraints = [
   {
     sourceTag: 'scope:client-componnents',
     onlyDependOnLibsWithTags: [
-      'scope:client-unit-testing',
       'scope:client-core',
       'scope:client-material',
-      'scope:client-store',
-      'scope:client-util',
       'scope:client-pipes',
+      'scope:client-store',
+      'scope:client-unit-testing',
+      'scope:client-util',
     ],
   },
   {
@@ -131,18 +135,18 @@ const clientConstraints = [
   {
     sourceTag: 'scope:client-diagnostics',
     onlyDependOnLibsWithTags: [
-      'scope:client-unit-testing',
       'scope:client-core',
       'scope:client-material',
       'scope:client-store',
       'scope:client-services',
-      'scope:client-util',
       'scope:client-translate',
+      'scope:client-unit-testing',
+      'scope:client-util',
     ],
   },
   {
     sourceTag: 'scope:client-chatbot',
-    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-material', 'scope:client-store', 'scope:client-translate'],
+    onlyDependOnLibsWithTags: ['scope:client-material', 'scope:client-store', 'scope:client-translate', 'scope:client-unit-testing'],
   },
   {
     sourceTag: 'scope:client-util',
@@ -155,17 +159,17 @@ const clientConstraints = [
   {
     sourceTag: 'scope:client-user',
     onlyDependOnLibsWithTags: [
-      'scope:client-unit-testing',
       'scope:client-material',
       'scope:client-services',
       'scope:client-store',
       'scope:client-translate',
+      'scope:client-unit-testing',
       'scope:client-util',
     ],
   },
   {
     sourceTag: 'scope:client-workspaces',
-    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-material', 'scope:client-store'],
+    onlyDependOnLibsWithTags: ['scope:client-material', 'scope:client-store', 'scope:client-unit-testing'],
   },
   {
     sourceTag: 'scope:client-translate',
@@ -174,20 +178,21 @@ const clientConstraints = [
   {
     sourceTag: 'scope:client',
     onlyDependOnLibsWithTags: [
-      'scope:client-unit-testing',
-      'scope:client-store',
-      'scope:client-services',
       'scope:client-chatbot',
-      'scope:client-core-components',
       'scope:client-core',
+      'scope:client-core-components',
       'scope:client-diagnostics',
+      'scope:client-services',
+      'scope:client-sidebar',
+      'scope:client-store',
       'scope:client-material',
+      'scope:client-pwa-offline',
       'scope:client-translate',
+      'scope:client-unit-testing',
+      'scope:client-user',
       'scope:client-util',
       'scope:client-util-sentry',
-      'scope:client-user',
       'scope:client-workspaces',
-      'scope:client-sidebar',
     ],
   },
   {
