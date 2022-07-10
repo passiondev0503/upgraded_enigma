@@ -16,6 +16,7 @@ export class AppWorkspaceWidgetComponent {
     description: '',
     image: '',
     url: '',
+    timers: [],
   };
 
   @Output() public readonly deleteWorkspace = new EventEmitter<IWorkspace>();

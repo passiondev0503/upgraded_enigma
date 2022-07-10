@@ -24,6 +24,7 @@ export class AppWorkspacesListComponent {
       description: 'description',
       image: 'assets/img/avatar_placeholder.png',
       url: 'https://duckduckgo.com',
+      timers: [],
     },
     {
       id: 'xx1',
@@ -32,6 +33,7 @@ export class AppWorkspacesListComponent {
       description: 'description 1',
       image: 'assets/img/avatar_placeholder.png',
       url: 'https://duckduckgo.com',
+      timers: [],
     },
     {
       id: 'xx2',
@@ -40,6 +42,7 @@ export class AppWorkspacesListComponent {
       description: 'description 2',
       image: 'assets/img/avatar_placeholder.png',
       url: 'https://duckduckgo.com',
+      timers: [],
     },
   ]);
 

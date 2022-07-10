@@ -17,4 +17,10 @@
 
     <button mat-button (click)="deleteHandler()">delete</button>
   </div>
+
+  <div fxLayout="row wrap">
+    <app-workspace-timer fxFlex="0 1 auto" *ngFor="let timer of data.timers"></app-workspace-timer>
+
+    <span fxFlex="1 1 auto"></span>
+  </div>
 </ng-container>

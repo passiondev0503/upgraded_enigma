@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-progress-spinner mode="determinate" [value]="progress$ | async"></mat-progress-spinner>
+    </div>
+
+    <mat-card-title>
+      {{ data.title }}
+    </mat-card-title>
+
+    <mat-card-subtitle> Session: {{ data.session }} | Break: {{ data.break }} | Iterations: {{ data.iterations }} </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-progress-spinner mode="determinate" [value]="progress$ | async"></mat-progress-spinner>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button (click)="emitShortenSession()">shorten session</button>
+
+    <button mat-button (click)="emitProlongSession()">prolong session</button>
+
+    <button mat-button (click)="emitShortenBreak()">shorten break</button>
+
+    <button mat-button (click)="emitProlongBreak()">prolong break</button>
+
+    <button mat-button (click)="emitPauseTimer()">pause timer</button>
+
+    <button mat-button (click)="emitResetTimer()">reset timer</button>
+
+    <button mat-button (click)="emitEndSession()">break</button>
+  </mat-card-actions>
+</mat-card>

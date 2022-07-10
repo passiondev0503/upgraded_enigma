@@ -23,6 +23,16 @@ export class AppWorkspaceComponent {
     description: 'description',
     image: 'assets/img/avatar_placeholder.png',
     url: 'https://duckduckgo.com',
+    timers: [
+      {
+        id: 'wst',
+        title: 'Timer',
+        description: 'Workspace timer',
+        session: 10,
+        break: 5,
+        iterations: 3,
+      },
+    ],
   });
 
   public readonly data$ = this.dataSubject.asObservable();
@@ -42,6 +52,6 @@ export class AppWorkspaceComponent {
   }
 
   public backHandler() {
-    void this.store.dispatch(new Navigate(['/workspaces', 'item']));
+    void this.store.dispatch(new Navigate(['/workspaces']));
   }
 }
