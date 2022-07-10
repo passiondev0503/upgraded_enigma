@@ -1,22 +1,22 @@
-/**
- * Metadata environment configuration factory.
- * @returns metadata environment configuration
- */
-export const metaEnvFactory = () => ({
-  version: 'N/A',
-});
+import { IClientEnvironmentConfig } from '@app/client-util';
 
 /**
- * Firebase config factory
+ * The application environment configuration factory.
+ * @returns application environment configuration
  */
-export const firebaseEnvFactory = () => ({
-  apiKey: 'FIREBASE_API_KEY',
-  authDomain: 'FIREBASE_AUTH_DOMAIN',
-  databaseURL: 'FIREBASE_DATABASE_URL',
-  projectId: 'FIREBASE_PROJECT_ID',
-  storageBucket: 'FIREBASE_STORAGE_BUCKET',
-  messagingSenderId: 'FIREBASE_MESSAGING_SENDER_ID',
-  appId: 'FIREBASE_APP_ID',
-  measurementId: 'FIREBASE_MEASUREMENT_ID',
-  defaultRtcRoomId: 'DEFAULT_RTC_ROOM_ID',
+export const appEnvFactory = (): IClientEnvironmentConfig => ({
+  firebase: {
+    apiKey: 'FIREBASE_API_KEY',
+    authDomain: 'FIREBASE_AUTH_DOMAIN',
+    databaseURL: 'FIREBASE_DATABASE_URL',
+    projectId: 'FIREBASE_PROJECT_ID',
+    storageBucket: 'FIREBASE_STORAGE_BUCKET',
+    messagingSenderId: 'FIREBASE_MESSAGING_SENDER_ID',
+    appId: 'FIREBASE_APP_ID',
+    measurementId: 'FIREBASE_MEASUREMENT_ID',
+    defaultRtcRoomId: 'DEFAULT_RTC_ROOM_ID',
+  },
+  meta: {
+    version: 'N/A',
+  },
 });

@@ -1,8 +1,11 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "prefix": "app",
+  "projectType": "application",
+  "sourceRoot": "apps/client-api/src",
+  "tags": ["scope:client-api", "type:application"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
       "configurations": {
         "production": {
           "extractLicenses": true,
@@ -16,6 +19,7 @@
           "optimization": true
         }
       },
+      "executor": "@nrwl/node:webpack",
       "options": {
         "assets": ["apps/client-api/src/assets"],
         "main": "apps/client-api/src/main.ts",
@@ -44,9 +48,5 @@
       },
       "outputs": ["coverage/apps/client-api"]
     }
-  },
-  "prefix": "app",
-  "projectType": "application",
-  "sourceRoot": "apps/client-api/src",
-  "tags": ["scope:client-api", "type:application"]
+  }
 }

@@ -7,8 +7,11 @@ import { DOC_APP_ENV, IDocAppEnvironment } from '../app/interfaces/environment.i
 export const testingEnvironment: IDocAppEnvironment = {
   appName: 'test',
   description: 'unit test',
-  mdFilePaths: [],
   production: false,
+  meta: {
+    version: 'N/A',
+  },
+  mdFilePaths: [],
 };
 
 export const testingProviders: Provider[] = [

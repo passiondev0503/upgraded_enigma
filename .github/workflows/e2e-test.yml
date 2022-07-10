@@ -52,6 +52,6 @@ jobs:
 
       - name: E2E all
         run: |
-          yarn tools:client:env:set
+          npx nx run-many --target configure-env --all
           npx nx run-many --target=e2e --all
-          yarn tools:client:env:reset
+          npx nx run-many --target configure-env --all --reset

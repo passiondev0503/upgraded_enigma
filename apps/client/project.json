@@ -1,8 +1,16 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "generators": {
+    "@nrwl/workspace:component": {
+      "style": "scss"
+    }
+  },
+  "prefix": "app",
+  "projectType": "application",
+  "sourceRoot": "apps/client/src",
+  "tags": ["scope:client", "type:application"],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
       "configurations": {
         "analyze-bundle": {
           "buildOptimizer": true,
@@ -31,6 +39,7 @@
           "sourceMap": false
         }
       },
+      "executor": "@angular-devkit/build-angular:browser",
       "options": {
         "allowedCommonJsDependencies": ["hammerjs", "memo-decorator", "moment"],
         "aot": true,
@@ -78,6 +87,12 @@
         "vendorChunk": true
       }
     },
+    "configure-env": {
+      "executor": "./tools/executors/client-env:configure",
+      "options": {
+        "app": "client"
+      }
+    },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
@@ -92,12 +107,12 @@
       }
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
           "browserTarget": "client:build:production"
         }
       },
+      "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
         "browserTarget": "client:build",
         "proxyConfig": "apps/client/proxy.conf.json"
@@ -111,14 +126,5 @@
       },
       "outputs": ["coverage/apps/client"]
     }
-  },
-  "prefix": "app",
-  "projectType": "application",
-  "generators": {
-    "@nrwl/workspace:component": {
-      "style": "scss"
-    }
-  },
-  "sourceRoot": "apps/client/src",
-  "tags": ["scope:client", "type:application"]
+  }
 }

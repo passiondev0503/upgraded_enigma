@@ -117,9 +117,9 @@ jobs:
         if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}
         run: |
           yarn generate:env:documentation
-          yarn tools:env:set:client
+          npx nx run-many --target configure-env --all
           npx nx run-many --target=build --all --configuration production
-          yarn tools:env:reset:client
+          npx nx run-many --target configure-env --all --reset
 
       - name: Build documentation app assets
         if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}

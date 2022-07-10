@@ -21,20 +21,20 @@ describe('AppServerDevService', () => {
       spy.mockImplementation(() => child);
       service.resetEnvironments();
       child.emit('close');
-      expect(spy).toHaveBeenCalledWith('yarn', ['tools:env:reset'], {
+      expect(spy).toHaveBeenCalledWith('npx', ['nx', 'run-many', '--target', 'configure-env', '--all', '--reset'], {
         stdio: 'inherit',
         detached: true,
       });
     });
 
-    it('should return call child process spawn', () => {
+    it('should return call child process spawn, erro code 8', () => {
       const spy = jest.spyOn(service, 'spawn');
       const child = new ChildProcess();
       spy.mockImplementation(() => child);
       service.resetEnvironments();
       const code = 8;
       child.emit('close', code);
-      expect(spy).toHaveBeenCalledWith('yarn', ['tools:env:reset'], {
+      expect(spy).toHaveBeenCalledWith('npx', ['nx', 'run-many', '--target', 'configure-env', '--all', '--reset'], {
         stdio: 'inherit',
         detached: true,
       });
