@@ -7,7 +7,7 @@ import { AppClientMaterialModule } from '@app/client-material';
 import { AppClientPipesModule } from '@app/client-pipes';
 import { AppHttpProgressStoreModule, AppUserState, AppUserStoreModule } from '@app/client-store';
 import { AppClientTranslateModule } from '@app/client-translate';
-import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
+import { documentFactory, routerButton, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
 import { NgxsModule } from '@ngxs/store';
 import { Args, Story } from '@storybook/angular/types-6-0';
 
@@ -63,20 +63,8 @@ export const primary = story.bind({});
 primary.args = {
   logoSrc: 'assets/icons/icon-72x72.png',
   buttons: [
-    {
-      routerLink: [{ outlets: { primary: [''], sidebar: [] } }],
-      routeActive: () => false,
-      icon: 'home',
-      title: 'Home',
-      requiresAuth: false,
-    },
-    {
-      routerLink: [{ outlets: { primary: ['info'], sidebar: [] } }],
-      routeActive: () => false,
-      icon: 'av_timer',
-      title: 'Diagnostics',
-      requiresAuth: true,
-    },
+    routerButton('Home', 'home', () => false, [{ outlets: { primary: [''], sidebar: [] } }], false),
+    routerButton('Diagnostics', 'av_timer', () => false, [{ outlets: { primary: ['info'], sidebar: [] } }], false),
   ],
   auth: { authenticated: true },
 };

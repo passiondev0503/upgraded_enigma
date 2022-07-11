@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, HostListener, Inject, Input, Output } from '@angular/core';
 import { AppSidebarState, AppUserState, chatbotActions, sidebarActions } from '@app/client-store';
-import { IToolbarAnchor, WINDOW } from '@app/client-util';
+import { anchorButton, IAnchorButton, WINDOW } from '@app/client-util';
 import { Store } from '@ngxs/store';
 import { map } from 'rxjs/operators';
 
@@ -16,22 +16,22 @@ export class AppToolbarComponent {
 
   @Input() public version?: string;
 
-  @Input() public anchors: IToolbarAnchor[] = [
-    {
-      href: 'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=bug_report.md&title=',
-      icon: 'bug_report',
-      title: 'Report a bug',
-    },
-    {
-      href: 'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=feature_request.md&title=',
-      icon: 'lightbulb',
-      title: 'Request a feature',
-    },
-    {
-      href: 'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=maintenance.md&title=',
-      icon: 'engineering',
-      title: 'Request maintenance',
-    },
+  @Input() public anchors: IAnchorButton[] = [
+    anchorButton(
+      'Report a bug',
+      'bug_report',
+      'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=bug_report.md&title=',
+    ),
+    anchorButton(
+      'Request a feature',
+      'lightbulb',
+      'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=feature_request.md&title=',
+    ),
+    anchorButton(
+      'Request maintenance',
+      'engineering',
+      'https://github.com/upgraded-enigma/upgraded-enigma/issues/new?assignees=&labels=&template=maintenance.md&title=',
+    ),
   ];
 
   @Output() public readonly darkThemeEnabled = new EventEmitter<boolean>();

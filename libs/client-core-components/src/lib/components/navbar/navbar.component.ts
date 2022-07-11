@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { sidebarActions, userActions } from '@app/client-store';
-import { IToolbarButton, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@app/client-util';
+import { IRouterButton, IWebClientAppEnvironment, routerButton, WEB_CLIENT_APP_ENV } from '@app/client-util';
 import { RouterState } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
 import { first, tap } from 'rxjs/operators';
@@ -20,121 +20,121 @@ export class AppNavbarComponent {
 
   @Input() public auth: { authenticated: boolean } = { authenticated: false };
 
-  @Input() public buttons: IToolbarButton[] = [
-    {
-      routerLink: [{ outlets: { primary: [''], sidebar: [] } }],
-      routeActive: () =>
+  @Input() public buttons: IRouterButton[] = [
+    routerButton(
+      'Home',
+      'home',
+      () =>
         this.router.isActive('', {
           matrixParams: 'ignored',
           queryParams: 'ignored',
           paths: 'exact',
           fragment: 'ignored',
         }),
-      icon: 'home',
-      title: 'Home',
-      requiresAuth: false,
-    },
-    {
-      routerLink: [{ outlets: { primary: ['user', 'auth'], sidebar: [] } }],
-      routeActive: () =>
+      [{ outlets: { primary: [''], sidebar: [] } }],
+      false,
+    ),
+    routerButton(
+      'Log in',
+      'input',
+      () =>
         this.router.isActive('user/auth', {
           matrixParams: 'ignored',
           queryParams: 'ignored',
           paths: 'exact',
           fragment: 'ignored',
         }),
-      icon: 'input',
-      title: 'Log in',
-      requiresAuth: false,
-    },
-    {
-      routerLink: [{ outlets: { primary: [''], sidebar: [] } }],
-      routeActive: () => false,
-      icon: 'lock',
-      title: 'Log out',
-      requiresAuth: true,
-      click: () => {
+      [{ outlets: { primary: ['user', 'auth'], sidebar: [] } }],
+      false,
+    ),
+    routerButton(
+      'Log out',
+      'lock',
+      () => false,
+      [{ outlets: { primary: [''], sidebar: [] } }],
+      true,
+      () => {
         void this.store.dispatch(new userActions.logOut()).subscribe();
       },
-    },
-    {
-      routerLink: [{ outlets: { primary: ['user'], sidebar: [] } }],
-      routeActive: () =>
+    ),
+    routerButton(
+      'User',
+      'verified_user',
+      () =>
         this.router.isActive('user', {
           matrixParams: 'ignored',
           queryParams: 'ignored',
           paths: 'exact',
           fragment: 'ignored',
         }),
-      icon: 'verified_user',
-      title: 'User',
-      requiresAuth: true,
-    },
-    {
-      routerLink: [{ outlets: { primary: ['user', 'data'], sidebar: [] } }],
-      routeActive: () =>
+      [{ outlets: { primary: ['user'], sidebar: [] } }],
+      true,
+    ),
+    routerButton(
+      'User data',
+      'dashboard',
+      () =>
         this.router.isActive('user/data', {
           matrixParams: 'ignored',
           queryParams: 'ignored',
           paths: 'exact',
           fragment: 'ignored',
         }),
-      icon: 'dashboard',
-      title: 'User data',
-      requiresAuth: true,
-    },
-    {
-      routerLink: [{ outlets: { primary: ['user', 'rtc-chat'], sidebar: [] } }],
-      routeActive: () =>
+      [{ outlets: { primary: ['user', 'data'], sidebar: [] } }],
+      true,
+    ),
+    routerButton(
+      'RTC Chat',
+      'voice_chat',
+      () =>
         this.router.isActive('user/rtc-chat', {
           matrixParams: 'ignored',
           queryParams: 'ignored',
           paths: 'exact',
           fragment: 'ignored',
         }),
-      icon: 'voice_chat',
-      title: 'RTC Chat',
-      requiresAuth: true,
-    },
-    {
-      routerLink: [{ outlets: { primary: ['workspaces'], sidebar: [] } }],
-      routeActive: () =>
+      [{ outlets: { primary: ['user', 'rtc-chat'], sidebar: [] } }],
+      true,
+    ),
+    routerButton(
+      'Workspaces',
+      'view_comfy',
+      () =>
         this.router.isActive('workspaces', {
           matrixParams: 'ignored',
           queryParams: 'ignored',
           paths: 'exact',
           fragment: 'ignored',
         }),
-      icon: 'view_comfy',
-      title: 'Workspaces',
-      requiresAuth: true,
-    },
-    {
-      routerLink: [{ outlets: { primary: ['chatbot'], sidebar: [] } }],
-      routeActive: () =>
+      [{ outlets: { primary: ['workspaces'], sidebar: [] } }],
+      true,
+    ),
+    routerButton(
+      'Chat',
+      'chat',
+      () =>
         this.router.isActive('chatbot', {
           matrixParams: 'ignored',
           queryParams: 'ignored',
           paths: 'exact',
           fragment: 'ignored',
         }),
-      icon: 'chat',
-      title: 'Chat',
-      requiresAuth: true,
-    },
-    {
-      routerLink: [{ outlets: { primary: ['info'], sidebar: [] } }],
-      routeActive: () =>
+      [{ outlets: { primary: ['chatbot'], sidebar: [] } }],
+      true,
+    ),
+    routerButton(
+      'Diagnostics',
+      'av_timer',
+      () =>
         this.router.isActive('info', {
           matrixParams: 'ignored',
           queryParams: 'ignored',
           paths: 'exact',
           fragment: 'ignored',
         }),
-      icon: 'av_timer',
-      title: 'Diagnostics',
-      requiresAuth: true,
-    },
+      [{ outlets: { primary: ['info'], sidebar: [] } }],
+      true,
+    ),
   ];
 
   public readonly appName = this.env.appName;
