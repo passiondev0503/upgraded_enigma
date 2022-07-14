@@ -6,9 +6,9 @@ const config = {
     // TODO: bump unit test coverage and remove this override
     global: {
       branches: 0,
-      functions: 0,
-      lines: 0,
-      statements: 0,
+      functions: 25,
+      lines: 36,
+      statements: 41,
     },
   },
   displayName: 'client-directives',

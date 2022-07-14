@@ -129,10 +129,6 @@ const clientConstraints = [
     ],
   },
   {
-    sourceTag: 'scope:client-directives',
-    onlyDependOnLibsWithTags: ['scope:client-unit-testing'],
-  },
-  {
     sourceTag: 'scope:client-diagnostics',
     onlyDependOnLibsWithTags: [
       'scope:client-core',
@@ -143,6 +139,10 @@ const clientConstraints = [
       'scope:client-unit-testing',
       'scope:client-util',
     ],
+  },
+  {
+    sourceTag: 'scope:client-directives',
+    onlyDependOnLibsWithTags: ['scope:client-unit-testing'],
   },
   {
     sourceTag: 'scope:client-chatbot',

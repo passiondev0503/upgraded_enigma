@@ -19,7 +19,7 @@
         "jestConfig": "libs/client-directives/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/client-diagnostics"]
+      "outputs": ["coverage/libs/client-directives"]
     }
   }
 }
