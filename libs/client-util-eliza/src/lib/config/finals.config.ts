@@ -17,3 +17,8 @@ export const elizaFinals: TElisaFinals = [
   "This was a good session, wasn't it -- but time is over now.   Goodbye.",
   'Maybe we could discuss this moreover in our next session ?   Goodbye.',
 ];
+
+/**
+ * The default final message is used if no finals are configured.
+ */
+export const elizaFinalDefault = 'Bye.';

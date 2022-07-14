@@ -14,10 +14,12 @@
  */
 
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, shareReplay } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 import { ELIZA_DATA } from '../../config/data.config';
 import { elizaInitialConfig } from '../../config/eliza.config';
+import { elizaFinalDefault } from '../../config/finals.config';
+import { elizaInitialDefault } from '../../config/initials.config';
 import { IChatMessage } from '../../interfaces/chat.interface';
 import { IElizaConfig, IElizaData, IElizaKeyword, IElizaResponse } from '../../interfaces/eliza.interface';
 
@@ -57,7 +59,7 @@ export class AppElizaService {
   /**
    * Publicly readable conversation messages.
    */
-  public readonly messages$ = this.messagesSubject.asObservable().pipe(shareReplay());
+  public readonly messages$ = this.messagesSubject.asObservable();
 
   constructor(@Inject(ELIZA_DATA) public readonly elizaData: IElizaData) {
     this.setup(elizaData);
@@ -95,19 +97,20 @@ export class AppElizaService {
    * Resets Eliza.
    */
   public reset(): void {
-    if (typeof this.data === 'undefined') {
+    const data = this.data;
+    if (typeof data === 'undefined') {
       throw new Error('Initialize Eliza first.');
     }
     this.mem = [];
     this.lastChoice = [];
-    for (let k = 0; k < this.data.keywords.length; k += 1) {
+    for (let k = 0; k < data.keywords.length; k += 1) {
       this.lastChoice[k] = [];
-      const rules = this.data.keywords[k].rules;
+      const rules = data.keywords[k].rules;
       for (let i = 0; i < rules.length; i += 1) {
         this.lastChoice[k][i] = -1;
       }
     }
-    this.messagesSubject.next([{ bot: true, text: this.getInitial() }]);
+    this.messagesSubject.next([{ bot: true, text: this.getInitial(data) }]);
   }
 
   // eslint-disable-next-line max-lines-per-function, complexity -- TODO refactor
@@ -121,22 +124,9 @@ export class AppElizaService {
         synPatterns[item] = `(${item}|${this.data.synonyms[item].join('|')})`;
       }
     }
-    // Check keywords, install empty structure to prevent any errors.
-    if (this.data.keywords.length === 0) {
-      this.data.keywords = [
-        {
-          index: 0,
-          key: '###',
-          rank: 0,
-          rules: [
-            {
-              pattern: '###',
-              options: [],
-              memory: false,
-            },
-          ],
-        },
-      ];
+    // Check keywords.
+    if (data.keywords.length === 0) {
+      throw Error('Eliza does not have any configured keywords.');
     }
     // First, convert rules to regexps.
     // Expand synonyms and insert asterisk expressions for backtracking.
@@ -225,39 +215,32 @@ export class AppElizaService {
   private composeRegExpsAndPresAndPosts(data: IElizaData): void {
     this.pres = {};
     this.posts = {};
-    if (data.pres.length > 0) {
+    if (data.pres.length === 0) {
+      throw Error('Eliza does not have any configured pre expressions.');
+    } else {
       const a = [];
       for (let i = 0; i < data.pres.length; i += 2) {
         a.push(data.pres[i]);
         this.pres[data.pres[i]] = data.pres[i + 1];
       }
       this.preExp = new RegExp('\\b(' + a.join('|') + ')\\b');
-    } else {
-      // default (should not match)
-      this.preExp = /####/;
-      this.pres['####'] = '####';
     }
-    if (data.posts.length > 0) {
+    if (data.posts.length === 0) {
+      throw Error('Eliza does not have any configured post expressions.');
+    } else {
       const a = [];
       for (let i = 0; i < data.posts.length; i += 2) {
         a.push(data.posts[i]);
         this.posts[data.posts[i]] = data.posts[i + 1];
       }
       this.postExp = new RegExp('\\b(' + a.join('|') + ')\\b');
-    } else {
-      // default (should not match)
-      this.postExp = /####/;
-      this.posts['####'] = '####';
     }
   }
 
   // eslint-disable-next-line max-lines-per-function, complexity -- TODO refactor
-  private execRule(k: number, sentence: string): string {
-    if (typeof this.data === 'undefined') {
-      throw new Error('Initialize Eliza first.');
-    }
+  private execRule(data: IElizaData, k: number, sentence: string): string {
     const config = this.configSubject.value;
-    const rules = this.data.keywords[k].rules;
+    const rules = data.keywords[k].rules;
     const paramRegExp = /\(([0-9]+)\)/;
     for (let i = 0; i < rules.length; i += 1) {
       const match = sentence.match(rules[i].pattern);
@@ -277,15 +260,15 @@ export class AppElizaService {
         }
         let reply = options[optionIndex];
         if (config.debug) {
-          const debugLog = `match:\nkey: ${this.data.keywords[k].key}\nrank: ${this.data.keywords[k].rank}\ndecomp: ${rules[i].pattern}\nreasmb: ${reply}\nmemory: ${memory}`;
+          const debugLog = `match:\nkey: ${data.keywords[k].key}\nrank: ${data.keywords[k].rank}\ndecomp: ${rules[i].pattern}\nreasmb: ${reply}\nmemory: ${memory}`;
           // eslint-disable-next-line no-console -- debug output
           console.warn('debugLog', debugLog);
         }
         if (reply.search('^goto ') === 0) {
           const key = reply.substring(5);
-          const ki = this.getRuleIndexByKey(key);
+          const ki = this.getRuleIndexByKey(data, key);
           if (ki >= 0) {
-            return this.execRule(ki, sentence);
+            return this.execRule(data, ki, sentence);
           }
         }
         // Substitute positional params.
@@ -313,7 +296,7 @@ export class AppElizaService {
           }
           reply = leftPart + rightPart;
         }
-        const transformedReply = this.postTransform(reply);
+        const transformedReply = this.postTransform(data, reply);
         if (memory) {
           this.memSave(transformedReply);
         } else {
@@ -325,10 +308,7 @@ export class AppElizaService {
   }
 
   // eslint-disable-next-line complexity -- TODO refactor
-  private transformUserQuery(input: string): IElizaResponse {
-    if (typeof this.data === 'undefined') {
-      throw new Error('Initialize Eliza first.');
-    }
+  private transformUserQuery(data: IElizaData, input: string): IElizaResponse {
     let reply = '';
     // Unify text string and split text in part sentences and loop through them.
     const parts = this.splitUserQueryIntoParts(input);
@@ -336,9 +316,9 @@ export class AppElizaService {
       let part = parts[i];
       if (part !== '') {
         // Check for quit expressions.
-        for (let q = 0; q < this.data.quits.length; q += 1) {
-          if (this.data.quits[q] === part) {
-            return { reply: this.getFinal(), final: true };
+        for (let q = 0; q < data.quits.length; q += 1) {
+          if (data.quits[q] === part) {
+            return { reply: this.getFinal(data), final: true };
           }
         }
         let match = part.match(this.preExp);
@@ -353,9 +333,9 @@ export class AppElizaService {
           part = leftPart + rightPart;
         }
         // Loop trough keywords.
-        for (let k = 0; k < this.data.keywords.length; k += 1) {
-          if (part.search(new RegExp('\\b' + this.data.keywords[k].key + '\\b', 'i')) >= 0) {
-            reply = this.execRule(k, part);
+        for (let k = 0; k < data.keywords.length; k += 1) {
+          if (part.search(new RegExp('\\b' + data.keywords[k].key + '\\b', 'i')) >= 0) {
+            reply = this.execRule(data, k, part);
           }
           if (reply !== '') {
             return { reply, final: false };
@@ -367,8 +347,8 @@ export class AppElizaService {
     reply = this.memGet();
     // If nothing in mem, try xnone.
     if (reply === '') {
-      const k = this.getRuleIndexByKey('xnone');
-      reply = k >= 0 ? this.execRule(k, ' ') : reply;
+      const k = this.getRuleIndexByKey(data, 'xnone');
+      reply = k >= 0 ? this.execRule(data, k, ' ') : reply;
     }
     return { reply: reply !== '' ? reply : 'I am at a loss for words.', final: false };
   }
@@ -403,17 +383,14 @@ export class AppElizaService {
     return 0;
   }
 
-  private postTransform(input: string): string {
-    if (typeof this.data === 'undefined') {
-      throw new Error('Initialize Eliza first.');
-    }
+  private postTransform(data: IElizaData, input: string): string {
     // final cleanings
     let result = input.replace(/\s{2,}/g, ' ').replace(/\s+\./g, '.');
-    if (this.data.postTransforms.length > 0) {
-      for (let i = 0; i < this.data.postTransforms.length; i += 1) {
-        const postTransform = this.data.postTransforms[i];
+    if (data.postTransforms.length > 0) {
+      for (let i = 0; i < data.postTransforms.length; i += 1) {
+        const postTransform = data.postTransforms[i];
         result = result.replace(postTransform.searchValue, postTransform.replaceValue);
-        this.data.postTransforms[i].searchValue.lastIndex = 0;
+        data.postTransforms[i].searchValue.lastIndex = 0;
       }
     }
     if (this.configSubject.value.capitalizeFirstLetter) {
@@ -425,12 +402,9 @@ export class AppElizaService {
     return result;
   }
 
-  private getRuleIndexByKey(key: string): number {
-    if (typeof this.data === 'undefined') {
-      throw new Error('Initialize Eliza first.');
-    }
-    for (let k = 0; k < this.data.keywords.length; k += 1) {
-      if (this.data.keywords[k].key === key) {
+  private getRuleIndexByKey(data: IElizaData, key: string): number {
+    for (let k = 0; k < data.keywords.length; k += 1) {
+      if (data.keywords[k].key === key) {
         return k;
       }
     }
@@ -460,23 +434,21 @@ export class AppElizaService {
     return '';
   }
 
-  private getFinal(): string {
-    if (typeof this.data === 'undefined') {
-      throw new Error('Initialize Eliza first.');
-    }
-    return this.data.finals.length === 0 ? '' : this.data.finals[Math.floor(Math.random() * this.data.finals.length)];
+  private getFinal(data: IElizaData): string {
+    return data.finals.length === 0 ? elizaFinalDefault : data.finals[Math.floor(Math.random() * data.finals.length)];
   }
 
-  private getInitial(): string {
-    if (typeof this.data === 'undefined') {
-      throw new Error('Initialize Eliza first.');
-    }
-    return this.data.initials.length === 0 ? '' : this.data.initials[Math.floor(Math.random() * this.data.initials.length)];
+  private getInitial(data: IElizaData): string {
+    return data.initials.length === 0 ? elizaInitialDefault : data.initials[Math.floor(Math.random() * data.initials.length)];
   }
 
   public getResponse(statement: string): Promise<IElizaResponse> {
+    const data = this.data;
+    if (typeof data === 'undefined') {
+      throw new Error('Initialize Eliza first.');
+    }
     return new Promise<IElizaResponse>(resolve => {
-      const elizaReply = this.transformUserQuery(statement);
+      const elizaReply = this.transformUserQuery(data, statement);
       resolve(elizaReply);
     });
   }

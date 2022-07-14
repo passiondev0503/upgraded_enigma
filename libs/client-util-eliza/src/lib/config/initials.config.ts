@@ -15,3 +15,8 @@ export const elizaInitials: TElisaInitials = [
   "Please tell me what's been bothering you.",
   'Is something troubling you ?',
 ];
+
+/**
+ * The default initial message is used if no initials are configured.
+ */
+export const elizaInitialDefault = 'Hello.';
