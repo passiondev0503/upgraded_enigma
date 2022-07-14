@@ -6,5 +6,6 @@ import { AppAutoscrollDirective } from './autoscroll/autoscroll.directive';
 @NgModule({
   imports: [CommonModule],
   declarations: [AppAutoscrollDirective],
+  exports: [AppAutoscrollDirective],
 })
 export class AppClientDirectivesModule {}

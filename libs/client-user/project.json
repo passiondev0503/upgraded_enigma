@@ -10,7 +10,8 @@
       "options": {
         "eslintConfig": "libs/client-user/.eslintrc.json",
         "lintFilePatterns": ["libs/client-user/**/*.ts"]
-      }
+      },
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nrwl/jest:jest",

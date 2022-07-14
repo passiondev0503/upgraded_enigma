@@ -3,7 +3,7 @@
   right: 0;
   bottom: 0;
   display: block;
-  width: 200px;
+  width: 250px;
   max-height: 60vh;
   padding: 16px;
 }
@@ -28,4 +28,8 @@
       content: '🤖';
     }
   }
+}
+
+.form {
+  width: 100%;
 }

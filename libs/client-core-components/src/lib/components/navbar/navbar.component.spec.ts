@@ -126,9 +126,9 @@ describe('AppNavbarComponent', () => {
     });
     routerIsActiveSpy.mockClear();
 
-    const sixthButtonIndex = 5;
-    component.buttons[sixthButtonIndex].routeActive();
-    expect(routerIsActiveSpy).toHaveBeenCalledWith('user/rtc-chat', {
+    const seventhButtonIndex = 5;
+    component.buttons[seventhButtonIndex].routeActive();
+    expect(routerIsActiveSpy).toHaveBeenCalledWith('workspaces', {
       matrixParams: 'ignored',
       queryParams: 'ignored',
       paths: 'exact',
@@ -136,9 +136,9 @@ describe('AppNavbarComponent', () => {
     });
     routerIsActiveSpy.mockClear();
 
-    const seventhButtonIndex = 6;
-    component.buttons[seventhButtonIndex].routeActive();
-    expect(routerIsActiveSpy).toHaveBeenCalledWith('workspaces', {
+    const sixthButtonIndex = 6;
+    component.buttons[sixthButtonIndex].routeActive();
+    expect(routerIsActiveSpy).toHaveBeenCalledWith('user/rtc-chat', {
       matrixParams: 'ignored',
       queryParams: 'ignored',
       paths: 'exact',

@@ -1,6 +1,8 @@
-<h3>Chatbot</h3>
+<h3>
+  Chatbot <button mat-icon-button (click)="resetBot()"><mat-icon>refresh</mat-icon></button>
+</h3>
 
-<cdk-virtual-scroll-viewport itemSize="20" class="messages-list">
+<cdk-virtual-scroll-viewport itemSize="20" class="messages-list" appAutoscroll>
   <div
     class="message"
     *cdkVirtualFor="let message of messages$ | async"
@@ -10,8 +12,8 @@
   </div>
 </cdk-virtual-scroll-viewport>
 
-<form [formGroup]="form" (ngSubmit)="sendMessage()">
-  <mat-form-field>
+<form [formGroup]="form" (ngSubmit)="userMessage()">
+  <mat-form-field class="form">
     <mat-label>Your message</mat-label>
 
     <textarea type="text" matInput formControlName="message"></textarea>
@@ -21,3 +23,5 @@
     </button>
   </mat-form-field>
 </form>
+
+<ng-container *ngIf="respond$ | async"></ng-container>

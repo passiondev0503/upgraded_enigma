@@ -84,19 +84,6 @@ export class AppNavbarComponent {
       true,
     ),
     routerButton(
-      'RTC Chat',
-      'voice_chat',
-      () =>
-        this.router.isActive('user/rtc-chat', {
-          matrixParams: 'ignored',
-          queryParams: 'ignored',
-          paths: 'exact',
-          fragment: 'ignored',
-        }),
-      [{ outlets: { primary: ['user', 'rtc-chat'], sidebar: [] } }],
-      true,
-    ),
-    routerButton(
       'Workspaces',
       'view_comfy',
       () =>
@@ -107,6 +94,19 @@ export class AppNavbarComponent {
           fragment: 'ignored',
         }),
       [{ outlets: { primary: ['workspaces'], sidebar: [] } }],
+      true,
+    ),
+    routerButton(
+      'RTC Chat',
+      'voice_chat',
+      () =>
+        this.router.isActive('user/rtc-chat', {
+          matrixParams: 'ignored',
+          queryParams: 'ignored',
+          paths: 'exact',
+          fragment: 'ignored',
+        }),
+      [{ outlets: { primary: ['user', 'rtc-chat'], sidebar: [] } }],
       true,
     ),
     routerButton(

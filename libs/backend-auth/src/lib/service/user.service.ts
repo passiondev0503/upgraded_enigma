@@ -212,7 +212,7 @@ export class AppUserService {
    */
   public listExportedPasswordFiles() {
     return new Observable<string[]>(observer => {
-      new Glob('config/export.*.json', {}, (error, files) => {
+      new Glob(`${process.cwd()}/.config/export.*.json`, {}, (error, files) => {
         if (error !== null) {
           observer.error(error);
         }

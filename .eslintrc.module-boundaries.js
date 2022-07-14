@@ -146,7 +146,13 @@ const clientConstraints = [
   },
   {
     sourceTag: 'scope:client-chatbot',
-    onlyDependOnLibsWithTags: ['scope:client-material', 'scope:client-store', 'scope:client-translate', 'scope:client-unit-testing'],
+    onlyDependOnLibsWithTags: [
+      'scope:client-directives',
+      'scope:client-material',
+      'scope:client-store',
+      'scope:client-translate',
+      'scope:client-unit-testing',
+    ],
   },
   {
     sourceTag: 'scope:client-util',

@@ -48,7 +48,8 @@
       "options": {
         "eslintConfig": "tools/.eslintrc.json",
         "lintFilePatterns": ["tools/generators/**/*.ts", "tools/ts/**/*.ts"]
-      }
+      },
+      "outputs": ["{options.outputFile}"]
     },
     "update-check": {
       "executor": "@nrwl/workspace:run-commands",

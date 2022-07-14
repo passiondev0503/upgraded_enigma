@@ -135,7 +135,7 @@ export class AppUserApiService {
    */
   public exportPasswords() {
     return this.httpHandlers.pipeHttpResponse<{ path: string; passwords: IUserPasswordDto }>(
-      this.http.get<{ path: string; passwords: IUserPasswordDto }>(this.endpoints.exportPasswords),
+      this.http.post<{ path: string; passwords: IUserPasswordDto }>(this.endpoints.exportPasswords, {}),
     );
   }
 
