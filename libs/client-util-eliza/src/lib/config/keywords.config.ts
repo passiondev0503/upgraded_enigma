@@ -1,4 +1,4 @@
-import { IElizaKeyword } from '../../../interfaces/eliza.interface';
+import { IElizaKeyword } from '../interfaces/eliza.interface';
 
 /**
  * Keywords, basic set of rules.

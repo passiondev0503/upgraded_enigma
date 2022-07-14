@@ -14,7 +14,15 @@
     </legend>
 
     <mat-form-field fxFlex="100">
-      <input matInput type="text" name="email" formControlName="email" placeholder="{{ 'email' | translate }}" required />
+      <input
+        matInput
+        type="text"
+        name="email"
+        formControlName="email"
+        placeholder="{{ 'email' | translate }}"
+        autocomplete="email"
+        required
+      />
       <mat-icon matSuffix class="material-icons">email</mat-icon>
 
       <mat-error *ngIf="form.controls.email.hasError('required')"> The value is required. </mat-error>
@@ -28,6 +36,7 @@
         name="password"
         formControlName="password"
         placeholder="{{ 'password' | translate }}"
+        autocomplete="current-password"
         required
       />
       <mat-icon matSuffix class="material-icons password-switch" (click)="togglePasswordVisibility()" *ngIf="passwordInputType === 'text'">

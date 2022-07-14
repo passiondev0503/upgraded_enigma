@@ -1,4 +1,4 @@
-import { IElisaPostTransform } from '../../../interfaces/eliza.interface';
+import { IElisaPostTransform } from '../interfaces/eliza.interface';
 
 /**
  * Post transform rules.

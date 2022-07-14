@@ -1,4 +1,4 @@
-import { IElizaConfig } from '../../../interfaces/eliza.interface';
+import { IElizaConfig } from '../interfaces/eliza.interface';
 
 export const elizaInitialConfig: IElizaConfig = {
   noRandom: false,

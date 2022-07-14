@@ -1,4 +1,4 @@
-import { TElisaFinals } from '../../../interfaces/eliza.interface';
+import { TElisaFinals } from '../interfaces/eliza.interface';
 
 /**
  * Final expressions.

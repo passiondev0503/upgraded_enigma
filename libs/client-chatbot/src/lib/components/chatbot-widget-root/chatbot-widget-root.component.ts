@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { AppElizaService, IChatMessage } from '@app/client-util-eliza';
 import { BehaviorSubject, from, of, switchMap, tap } from 'rxjs';
-
-import { IChatMessage } from '../../interfaces/chat.interface';
-import { AppElizaService } from '../../services/eliza/eliza.service';
 
 @Component({
   selector: 'app-chatbot-widget-root',

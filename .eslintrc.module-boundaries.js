@@ -151,11 +151,16 @@ const clientConstraints = [
       'scope:client-material',
       'scope:client-store',
       'scope:client-translate',
+      'scope:client-util-eliza',
       'scope:client-unit-testing',
     ],
   },
   {
     sourceTag: 'scope:client-util',
+    onlyDependOnLibsWithTags: [],
+  },
+  {
+    sourceTag: 'scope:client-util-eliza',
     onlyDependOnLibsWithTags: [],
   },
   {
@@ -197,6 +202,7 @@ const clientConstraints = [
       'scope:client-unit-testing',
       'scope:client-user',
       'scope:client-util',
+      'scope:client-util-eliza',
       'scope:client-util-sentry',
       'scope:client-workspaces',
     ],

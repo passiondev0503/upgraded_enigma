@@ -1,4 +1,4 @@
-import { TElisaPosts } from '../../../interfaces/eliza.interface';
+import { TElisaPosts } from '../interfaces/eliza.interface';
 
 /**
  * Post expressions.

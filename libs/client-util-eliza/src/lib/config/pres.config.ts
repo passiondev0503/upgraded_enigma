@@ -1,4 +1,4 @@
-import { TElisaPres } from '../../../interfaces/eliza.interface';
+import { TElisaPres } from '../interfaces/eliza.interface';
 
 /**
  * Pre expressions.

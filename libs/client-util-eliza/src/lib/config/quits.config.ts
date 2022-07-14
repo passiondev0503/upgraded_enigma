@@ -1,4 +1,4 @@
-import { TElisaQuits } from '../../../interfaces/eliza.interface';
+import { TElisaQuits } from '../interfaces/eliza.interface';
 
 /**
  * Quit expressions.

@@ -13,13 +13,13 @@
  * JavaScript source: https://github.com/natelewis/eliza-as-promised
  */
 
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, shareReplay } from 'rxjs';
 
+import { ELIZA_DATA } from '../../config/data.config';
+import { elizaInitialConfig } from '../../config/eliza.config';
 import { IChatMessage } from '../../interfaces/chat.interface';
 import { IElizaConfig, IElizaData, IElizaKeyword, IElizaResponse } from '../../interfaces/eliza.interface';
-import { elizaData } from './config/data.config';
-import { elizaInitialConfig } from './config/eliza.config';
 
 @Injectable({
   providedIn: 'root',
@@ -59,8 +59,8 @@ export class AppElizaService {
    */
   public readonly messages$ = this.messagesSubject.asObservable().pipe(shareReplay());
 
-  constructor() {
-    this.setup();
+  constructor(@Inject(ELIZA_DATA) public readonly elizaData: IElizaData) {
+    this.setup(elizaData);
   }
 
   /**
@@ -81,10 +81,12 @@ export class AppElizaService {
 
   /**
    * Sets up Eliza.
+   * @param data Eliza data
+   * @param reinitialize indicates that Eliza should be initialized again, even if it's data has already been initialized
    */
-  public setup(): void {
-    if (typeof this.data === 'undefined') {
-      this.init();
+  public setup(data: IElizaData, reinitialize = false): void {
+    if (typeof this.data === 'undefined' && !reinitialize) {
+      this.init(data);
     }
     this.reset();
   }
@@ -109,8 +111,8 @@ export class AppElizaService {
   }
 
   // eslint-disable-next-line max-lines-per-function, complexity -- TODO refactor
-  private init(): void {
-    this.data = { ...elizaData };
+  private init(data: IElizaData): void {
+    this.data = { ...data };
     // Parse data and convert it from canonical form to internal use.
     // Produce a list of synonyms.
     const synPatterns: Record<string, string> = {};

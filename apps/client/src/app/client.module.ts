@@ -10,6 +10,7 @@ import { AppClientMaterialModule } from '@app/client-material';
 import { AppClientPwaOfflineModule } from '@app/client-pwa-offline';
 import { AppUserState, AppWebsocketModule } from '@app/client-store';
 import { AppClientTranslateModule } from '@app/client-translate';
+import { AppClientUtilElizaModule } from '@app/client-util-eliza';
 import { sentryProviders } from '@app/client-util-sentry';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
@@ -48,6 +49,7 @@ import { AppRootComponent } from './components/root.component';
     AppClientMaterialModule.forRoot(),
     AppWebsocketModule.forRoot(environment),
     AppClientTranslateModule.forRoot(),
+    AppClientUtilElizaModule.forRoot(),
     AppClientPwaOfflineModule,
     AppClientRoutingModule,
   ],
