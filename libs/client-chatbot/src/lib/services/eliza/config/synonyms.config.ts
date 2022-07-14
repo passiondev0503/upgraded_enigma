@@ -1,6 +1,8 @@
-export type TElisaSynonyms = Record<string, string[]>;
+import { TElisaSynonyms } from '../../../interfaces/eliza.interface';
 
 /**
+ * Synonyms mapping.
+ *
  * Entries prestructured as layed out in Weizenbaum's description
  * [cf: Communications of the ACM, Vol. 9, #1 (January 1966): p 36-45.]
  * Links:

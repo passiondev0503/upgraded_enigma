@@ -1,6 +1,8 @@
-export type TElisaPres = string[];
+import { TElisaPres } from '../../../interfaces/eliza.interface';
 
 /**
+ * Pre expressions.
+ *
  * Entries prestructured as layed out in Weizenbaum's description
  * [cf: Communications of the ACM, Vol. 9, #1 (January 1966): p 36-45.]
  * Links:

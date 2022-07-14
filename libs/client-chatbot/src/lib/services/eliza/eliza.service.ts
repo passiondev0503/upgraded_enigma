@@ -13,76 +13,89 @@
  * JavaScript source: https://github.com/natelewis/eliza-as-promised
  */
 
-interface IResponse {
-  final?: string;
-  reply?: string;
-}
-
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, shareReplay } from 'rxjs';
 
 import { IChatMessage } from '../../interfaces/chat.interface';
-import { elizaData, IElizaData } from './config/data.config';
-import { IKeyword } from './config/keywords.config';
+import { IElizaConfig, IElizaData, IElizaKeyword, IElizaResponse } from '../../interfaces/eliza.interface';
+import { elizaData } from './config/data.config';
+import { elizaInitialConfig } from './config/eliza.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppElizaService {
-  private readonly noRandomSubject = new BehaviorSubject<boolean>(false);
+  /**
+   * Eliza configuration.
+   */
+  private readonly configSubject = new BehaviorSubject<IElizaConfig>({ ...elizaInitialConfig });
 
-  public capitalizeFirstLetter = true;
-
-  public debug = false;
-
-  public memSize = 20;
+  /**
+   * Publicly readable Eliza configuration.
+   */
+  public readonly config$ = this.configSubject.asObservable();
 
   private data?: IElizaData;
 
-  public quit = false;
+  private mem: string[] = [];
 
-  public mem: string[] = [];
+  private lastChoice: number[][] = [];
 
-  public lastChoice: number[][] = [];
+  private postExp = new RegExp('');
 
-  public postExp = new RegExp('');
+  private preExp = new RegExp('');
 
-  public preExp = new RegExp('');
+  private pres: Record<string, string> = {};
 
-  public pres: Record<string, string> = {};
+  private posts: Record<string, string> = {};
 
-  public posts: Record<string, string> = {};
-
-  public sentence = '';
-
+  /**
+   * Conversation messages.
+   */
   private readonly messagesSubject = new BehaviorSubject<IChatMessage[]>([]);
 
+  /**
+   * Publicly readable conversation messages.
+   */
   public readonly messages$ = this.messagesSubject.asObservable().pipe(shareReplay());
 
   constructor() {
     this.setup();
   }
 
-  public nextMessage(message: IChatMessage) {
+  /**
+   * Adds next chat message.
+   * @param message chat message
+   */
+  public nextMessage(message: IChatMessage): void {
     this.messagesSubject.next([...this.messagesSubject.value, message]);
   }
 
-  public setup(noRandomFlag = false) {
-    this.noRandomSubject.next(noRandomFlag);
-    this.capitalizeFirstLetter = true;
-    this.debug = false;
-    this.memSize = 20;
+  /**
+   * Modifies Eliza configuration.
+   * @param config Eliza config
+   */
+  public nextConfig(config: Partial<IElizaConfig>): void {
+    this.configSubject.next({ ...this.configSubject.value, ...config });
+  }
+
+  /**
+   * Sets up Eliza.
+   */
+  public setup(): void {
     if (typeof this.data === 'undefined') {
       this.init();
     }
     this.reset();
   }
 
-  public reset() {
+  /**
+   * Resets Eliza.
+   */
+  public reset(): void {
     if (typeof this.data === 'undefined') {
       throw new Error('Initialize Eliza first.');
     }
-    this.quit = false;
     this.mem = [];
     this.lastChoice = [];
     for (let k = 0; k < this.data.keywords.length; k += 1) {
@@ -96,17 +109,17 @@ export class AppElizaService {
   }
 
   // eslint-disable-next-line max-lines-per-function, complexity -- TODO refactor
-  private init() {
+  private init(): void {
     this.data = { ...elizaData };
-    // parse data and convert it from canonical form to internal use
-    // produce synonym list
+    // Parse data and convert it from canonical form to internal use.
+    // Produce a list of synonyms.
     const synPatterns: Record<string, string> = {};
     for (const item in this.data.synonyms) {
       if (item) {
         synPatterns[item] = `(${item}|${this.data.synonyms[item].join('|')})`;
       }
     }
-    // check for keywords or install empty structure to prevent any errors
+    // Check keywords, install empty structure to prevent any errors.
     if (this.data.keywords.length === 0) {
       this.data.keywords = [
         {
@@ -123,8 +136,8 @@ export class AppElizaService {
         },
       ];
     }
-    // 1st convert rules to regexps
-    // expand synonyms and insert asterisk expressions for backtracking
+    // First, convert rules to regexps.
+    // Expand synonyms and insert asterisk expressions for backtracking.
     const sre = /@(\S+)/;
     const are = /(\S)\s*\*\s*(\S)/;
     const are1 = /^\s*\*\s*(\S)/;
@@ -135,7 +148,7 @@ export class AppElizaService {
       const rules = this.data.keywords[i].rules;
       for (let j = 0; j < rules.length; j += 1) {
         const rule = rules[j];
-        // check mem flag and store it as decomp's element 2
+        // Check mem flag and store it as decomp's element 2.
         if (rule.pattern.charAt(0) === '$') {
           let ofs = 1;
           while (rule.pattern.charAt[ofs] === ' ') {
@@ -152,7 +165,7 @@ export class AppElizaService {
           rule.pattern = rule.pattern.substring(0, match.index ?? 0) + sp + rule.pattern.substring((match.index ?? 0) + match[0].length);
           match = rule.pattern.match(sre);
         }
-        // expand asterisk expressions
+        // Expand asterisk expressions.
         if (are3.test(rule.pattern)) {
           rule.pattern = '\\s*(.*)\\s*';
         } else {
@@ -192,21 +205,29 @@ export class AppElizaService {
             rule.pattern = leftPart + '\\s*(.*)\\s*';
           }
         }
-        // expand white space
+        // Expand whitespaces.
         rule.pattern = rule.pattern.replace(wsre, '\\s+');
         wsre.lastIndex = 0;
       }
     }
-    // now sort keywords by rank (highest first)
+    // Sort keywords by rank (highest first).
     this.data.keywords.sort(this.sortKeywords);
-    // and compose regexps and refs for pres and posts
+    // Compose regexps and refs for pres and posts.
+    this.composeRegExpsAndPresAndPosts(this.data);
+  }
+
+  /**
+   * Composes regexps and refs for pres and posts.
+   * @param data Eliza data
+   */
+  private composeRegExpsAndPresAndPosts(data: IElizaData): void {
     this.pres = {};
     this.posts = {};
-    if (this.data.pres.length > 0) {
+    if (data.pres.length > 0) {
       const a = [];
-      for (let i = 0; i < this.data.pres.length; i += 2) {
-        a.push(this.data.pres[i]);
-        this.pres[this.data.pres[i]] = this.data.pres[i + 1];
+      for (let i = 0; i < data.pres.length; i += 2) {
+        a.push(data.pres[i]);
+        this.pres[data.pres[i]] = data.pres[i + 1];
       }
       this.preExp = new RegExp('\\b(' + a.join('|') + ')\\b');
     } else {
@@ -214,11 +235,11 @@ export class AppElizaService {
       this.preExp = /####/;
       this.pres['####'] = '####';
     }
-    if (this.data.posts.length > 0) {
+    if (data.posts.length > 0) {
       const a = [];
-      for (let i = 0; i < this.data.posts.length; i += 2) {
-        a.push(this.data.posts[i]);
-        this.posts[this.data.posts[i]] = this.data.posts[i + 1];
+      for (let i = 0; i < data.posts.length; i += 2) {
+        a.push(data.posts[i]);
+        this.posts[data.posts[i]] = data.posts[i + 1];
       }
       this.postExp = new RegExp('\\b(' + a.join('|') + ')\\b');
     } else {
@@ -229,19 +250,20 @@ export class AppElizaService {
   }
 
   // eslint-disable-next-line max-lines-per-function, complexity -- TODO refactor
-  private execRule(k: number): string {
+  private execRule(k: number, sentence: string): string {
     if (typeof this.data === 'undefined') {
       throw new Error('Initialize Eliza first.');
     }
+    const config = this.configSubject.value;
     const rules = this.data.keywords[k].rules;
     const paramRegExp = /\(([0-9]+)\)/;
     for (let i = 0; i < rules.length; i += 1) {
-      const match = this.sentence.match(rules[i].pattern);
+      const match = sentence.match(rules[i].pattern);
       if (match !== null) {
         const options = rules[i].options;
         const memory = rules[i].memory;
-        let optionIndex = this.noRandomSubject.value ? 0 : Math.floor(Math.random() * options.length);
-        if ((this.noRandomSubject.value && this.lastChoice[k][i] > optionIndex) || this.lastChoice[k][i] === optionIndex) {
+        let optionIndex = config.noRandom ? 0 : Math.floor(Math.random() * options.length);
+        if ((config.noRandom && this.lastChoice[k][i] > optionIndex) || this.lastChoice[k][i] === optionIndex) {
           this.lastChoice[k][i] += 1;
           optionIndex = this.lastChoice[k][i];
           if (optionIndex >= options.length) {
@@ -252,7 +274,7 @@ export class AppElizaService {
           this.lastChoice[k][i] = optionIndex;
         }
         let reply = options[optionIndex];
-        if (this.debug) {
+        if (config.debug) {
           const debugLog = `match:\nkey: ${this.data.keywords[k].key}\nrank: ${this.data.keywords[k].rank}\ndecomp: ${rules[i].pattern}\nreasmb: ${reply}\nmemory: ${memory}`;
           // eslint-disable-next-line no-console -- debug output
           console.warn('debugLog', debugLog);
@@ -261,17 +283,17 @@ export class AppElizaService {
           const key = reply.substring(5);
           const ki = this.getRuleIndexByKey(key);
           if (ki >= 0) {
-            return this.execRule(ki);
+            return this.execRule(ki, sentence);
           }
         }
-        // substitute positional params
+        // Substitute positional params.
         let paramRegExpMatch = reply.match(paramRegExp);
         if (paramRegExpMatch) {
           let leftPart = '';
           let rightPart = reply;
           while (paramRegExpMatch !== null) {
             let param = match[parseInt(paramRegExpMatch[1], 10)];
-            // postprocess param
+            // Postprocess param.
             let postExpMatch = param.match(this.postExp);
             if (postExpMatch !== null) {
               let leftPart2 = '';
@@ -300,30 +322,21 @@ export class AppElizaService {
     return '';
   }
 
-  // eslint-disable-next-line max-lines-per-function, complexity -- TODO refactor
-  private transform(input: string) {
+  // eslint-disable-next-line complexity -- TODO refactor
+  private transformUserQuery(input: string): IElizaResponse {
     if (typeof this.data === 'undefined') {
       throw new Error('Initialize Eliza first.');
     }
     let reply = '';
-    this.quit = false;
-    // unify text string and split text in part sentences and loop through them
-    const parts = input
-      .toLowerCase()
-      .replace(/@#\$%\^&\*\(\)_\+=~`\{\[\}\]\|:;<>\/\\\t/g, ' ')
-      .replace(/\s+-+\s+/g, '.')
-      .replace(/\s*[,.?!;]+\s*/g, '.')
-      .replace(/\s*\bbut\b\s*/g, '.')
-      .replace(/\s{2,}/g, ' ')
-      .split('.');
+    // Unify text string and split text in part sentences and loop through them.
+    const parts = this.splitUserQueryIntoParts(input);
     for (let i = 0; i < parts.length; i += 1) {
       let part = parts[i];
       if (part !== '') {
-        // check for quit expression
+        // Check for quit expressions.
         for (let q = 0; q < this.data.quits.length; q += 1) {
           if (this.data.quits[q] === part) {
-            this.quit = true;
-            return this.getFinal();
+            return { reply: this.getFinal(), final: true };
           }
         }
         let match = part.match(this.preExp);
@@ -337,38 +350,50 @@ export class AppElizaService {
           }
           part = leftPart + rightPart;
         }
-        this.sentence = part;
-        // loop trough keywords
+        // Loop trough keywords.
         for (let k = 0; k < this.data.keywords.length; k += 1) {
           if (part.search(new RegExp('\\b' + this.data.keywords[k].key + '\\b', 'i')) >= 0) {
-            reply = this.execRule(k);
+            reply = this.execRule(k, part);
           }
           if (reply !== '') {
-            return reply;
+            return { reply, final: false };
           }
         }
       }
     }
-    // nothing matched try mem
+    // Nothing matched, try mem.
     reply = this.memGet();
-    // if nothing in mem, try xnone
+    // If nothing in mem, try xnone.
     if (reply === '') {
-      this.sentence = ' ';
       const k = this.getRuleIndexByKey('xnone');
-      reply = k >= 0 ? this.execRule(k) : reply;
+      reply = k >= 0 ? this.execRule(k, ' ') : reply;
     }
-    // return reply or default string
-    return reply !== '' ? reply : 'I am at a loss for words.';
+    return { reply: reply !== '' ? reply : 'I am at a loss for words.', final: false };
   }
 
-  private sortKeywords(a: IKeyword, b: IKeyword) {
+  /**
+   * Unify text string, split text into partial sentences to be able to loop through them.
+   * @param input user query
+   * @returns split user query
+   */
+  private splitUserQueryIntoParts(input: string): string[] {
+    const parts = input
+      .toLowerCase()
+      .replace(/@#\$%\^&\*\(\)_\+=~`\{\[\}\]\|:;<>\/\\\t/g, ' ')
+      .replace(/\s+-+\s+/g, '.')
+      .replace(/\s*[,.?!;]+\s*/g, '.')
+      .replace(/\s*\bbut\b\s*/g, '.')
+      .replace(/\s{2,}/g, ' ')
+      .split('.');
+    return parts;
+  }
+
+  private sortKeywords(a: IElizaKeyword, b: IElizaKeyword) {
     if (a.rank > b.rank) {
-      // sort by rank
       return -1;
     } else if (a.rank < b.rank) {
       return 1;
     } else if (a.index > b.index) {
-      // or original index
       return 1;
     } else if (a.index < b.index) {
       return -1;
@@ -376,7 +401,7 @@ export class AppElizaService {
     return 0;
   }
 
-  private postTransform(input: string) {
+  private postTransform(input: string): string {
     if (typeof this.data === 'undefined') {
       throw new Error('Initialize Eliza first.');
     }
@@ -389,7 +414,7 @@ export class AppElizaService {
         this.data.postTransforms[i].searchValue.lastIndex = 0;
       }
     }
-    if (this.capitalizeFirstLetter) {
+    if (this.configSubject.value.capitalizeFirstLetter) {
       const match = result.match(/^([a-z])/);
       if (match) {
         result = match[0].toUpperCase() + result.substring(1);
@@ -398,7 +423,7 @@ export class AppElizaService {
     return result;
   }
 
-  private getRuleIndexByKey(key: string) {
+  private getRuleIndexByKey(key: string): number {
     if (typeof this.data === 'undefined') {
       throw new Error('Initialize Eliza first.');
     }
@@ -410,16 +435,16 @@ export class AppElizaService {
     return -1;
   }
 
-  private memSave(input: string) {
+  private memSave(input: string): void {
     this.mem.push(input);
-    if (this.mem.length > this.memSize) {
+    if (this.mem.length > this.configSubject.value.memSize) {
       this.mem.shift();
     }
   }
 
-  private memGet() {
+  private memGet(): string {
     if (this.mem.length > 0) {
-      if (this.noRandomSubject.value) {
+      if (this.configSubject.value.noRandom) {
         return this.mem.shift() ?? '';
       }
       const n = Math.floor(Math.random() * this.mem.length);
@@ -433,28 +458,24 @@ export class AppElizaService {
     return '';
   }
 
-  private getFinal() {
+  private getFinal(): string {
     if (typeof this.data === 'undefined') {
       throw new Error('Initialize Eliza first.');
     }
     return this.data.finals.length === 0 ? '' : this.data.finals[Math.floor(Math.random() * this.data.finals.length)];
   }
 
-  private getInitial() {
+  private getInitial(): string {
     if (typeof this.data === 'undefined') {
       throw new Error('Initialize Eliza first.');
     }
     return this.data.initials.length === 0 ? '' : this.data.initials[Math.floor(Math.random() * this.data.initials.length)];
   }
 
-  public getResponse(statement: string) {
-    return new Promise<IResponse>(resolve => {
-      const elizaReply = this.transform(statement);
-      if (this.quit) {
-        resolve({ final: this.getFinal() });
-      } else {
-        resolve({ reply: elizaReply });
-      }
+  public getResponse(statement: string): Promise<IElizaResponse> {
+    return new Promise<IElizaResponse>(resolve => {
+      const elizaReply = this.transformUserQuery(statement);
+      resolve(elizaReply);
     });
   }
 }

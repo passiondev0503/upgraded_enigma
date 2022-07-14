@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BehaviorSubject, from, of, switchMap, tap } from 'rxjs';
 
@@ -26,10 +26,8 @@ export class AppChatbotWidgetRootComponent {
     }),
     tap(response => {
       if (response !== null) {
-        if (typeof response.reply !== 'undefined') {
-          this.botResponse(response.reply);
-        } else if (typeof response.final !== 'undefined') {
-          this.botResponse(response.final);
+        this.botResponse(response.reply);
+        if (response.final) {
           this.form.disable();
         }
       }
@@ -57,5 +55,12 @@ export class AppChatbotWidgetRootComponent {
   public botResponse(text: string) {
     const message: IChatMessage = { bot: true, text };
     this.eliza.nextMessage(message);
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  public keyUp(event: KeyboardEvent) {
+    if (event.ctrlKey && event.key === 'Enter') {
+      this.userMessage();
+    }
   }
 }

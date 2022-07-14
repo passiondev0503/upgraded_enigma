@@ -1,24 +1,15 @@
-export interface IKeyworkRule {
-  pattern: string;
-  options: string[];
-  memory: boolean;
-}
-
-export interface IKeyword {
-  index: number;
-  key: string;
-  rank: number;
-  rules: IKeyworkRule[];
-}
+import { IElizaKeyword } from '../../../interfaces/eliza.interface';
 
 /**
+ * Keywords, basic set of rules.
+ *
  * Entries prestructured as layed out in Weizenbaum's description
  * [cf: Communications of the ACM, Vol. 9, #1 (January 1966): p 36-45.]
  * Links:
  * - https://cacm.acm.org/
  * - https://dl.acm.org/doi/10.1145/365153.365168
  */
-export const elizaKeywords: IKeyword[] = [
+export const elizaKeywords: IElizaKeyword[] = [
   {
     index: 0,
     key: 'xnone',

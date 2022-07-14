@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BehaviorSubject, from, of, switchMap, tap } from 'rxjs';
 
@@ -26,10 +26,8 @@ export class AppChatbotRootComponent {
     }),
     tap(response => {
       if (response !== null) {
-        if (typeof response.reply !== 'undefined') {
-          this.botResponse(response.reply);
-        } else if (typeof response.final !== 'undefined') {
-          this.botResponse(response.final);
+        this.botResponse(response.reply);
+        if (response.final) {
           this.form.disable();
         }
       }
@@ -48,14 +46,23 @@ export class AppChatbotRootComponent {
   }
 
   public userMessage() {
-    const message: IChatMessage = { bot: false, text: this.form.controls.message.value ?? '' };
-    this.nextUserMessageSubject.next(message);
-    this.eliza.nextMessage(message);
-    this.form.reset();
+    if (this.form.controls.message.value !== null && this.form.controls.message.value.length > 0) {
+      const message: IChatMessage = { bot: false, text: this.form.controls.message.value };
+      this.nextUserMessageSubject.next(message);
+      this.eliza.nextMessage(message);
+      this.form.reset();
+    }
   }
 
   public botResponse(text: string) {
     const message: IChatMessage = { bot: true, text };
     this.eliza.nextMessage(message);
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  public keyUp(event: KeyboardEvent) {
+    if (event.ctrlKey && event.key === 'Enter') {
+      this.userMessage();
+    }
   }
 }
