@@ -5,10 +5,10 @@ const config = {
   coverageThreshold: {
     // TODO: bump unit test coverage and remove this override
     global: {
-      branches: 27,
+      branches: 28,
       functions: 37,
       lines: 66,
-      statements: 66,
+      statements: 67,
     },
   },
   displayName: 'client-store',
