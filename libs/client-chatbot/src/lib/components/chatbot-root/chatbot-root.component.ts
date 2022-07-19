@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { AppElizaService, IChatMessage } from '@app/client-util-eliza';
+import { AppElizaService, IChatMessage } from '@rfprodz/client-util-eliza';
 import { BehaviorSubject, from, of, switchMap, tap } from 'rxjs';
 
 @Component({

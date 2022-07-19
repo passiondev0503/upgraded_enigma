@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { AppUserState, IUserPassword, userActions } from '@app/client-store';
 import { Store } from '@ngxs/store';
-import { TBarChartData } from '@rfprodz/d3-charts';
+import { TBarChartData } from '@rfprodz/client-d3-charts';
 import { of } from 'rxjs';
 import { concatMap, map, tap } from 'rxjs/operators';
 

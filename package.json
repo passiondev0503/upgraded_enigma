@@ -1,6 +1,6 @@
 {
   "name": "upgraded-enigma",
-  "version": "1.22.1",
+  "version": "1.23.0",
   "private": true,
   "description": "Organizer and productivity tools.",
   "license": "MIT",
@@ -148,7 +148,8 @@
     "@nestjs/platform-ws": "9.0.3",
     "@nestjs/serve-static": "3.0.0",
     "@nestjs/websockets": "9.0.3",
-    "@rfprodz/d3-charts": "0.0.48",
+    "@rfprodz/client-d3-charts": "1.0.0",
+    "@rfprodz/client-util-eliza": "1.0.0",
     "body-parser": "1.20.0",
     "class-transformer": "0.5.1",
     "class-validator": "0.13.2",

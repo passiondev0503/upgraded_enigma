@@ -27,7 +27,6 @@
     "client-unit-testing": "libs/client-unit-testing",
     "client-user": "libs/client-user",
     "client-util": "libs/client-util",
-    "client-util-eliza": "libs/client-util-eliza",
     "client-util-sentry": "libs/client-util-sentry",
     "client-workspaces": "libs/client-workspaces",
     "documentation": "apps/documentation",

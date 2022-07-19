@@ -10,13 +10,13 @@ import { AppClientMaterialModule } from '@app/client-material';
 import { AppClientPwaOfflineModule } from '@app/client-pwa-offline';
 import { AppUserState, AppWebsocketModule } from '@app/client-store';
 import { AppClientTranslateModule } from '@app/client-translate';
-import { AppClientUtilElizaModule } from '@app/client-util-eliza';
 import { sentryProviders } from '@app/client-util-sentry';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsModule } from '@ngxs/store';
+import { AppClientUtilElizaModule } from '@rfprodz/client-util-eliza';
 
 import { environment } from '../environments/environment';
 import { AppClientRoutingModule } from './client-routing.module';

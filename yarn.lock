@@ -3821,10 +3821,17 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
-"@rfprodz/d3-charts@0.0.48":
-  version "0.0.48"
-  resolved "https://registry.yarnpkg.com/@rfprodz/d3-charts/-/d3-charts-0.0.48.tgz#90833f4bac5b9717820b3ddba94ac88285b9b69b"
-  integrity sha512-PvlIZwO4n7PEFmNYx1Id3FrKd7c59sASmugjP4G9N6es+PJgLxpcb47abY7NyrRwnUK/+AriPIMmNDWDD6KQXg==
+"@rfprodz/client-d3-charts@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@rfprodz/client-d3-charts/-/client-d3-charts-1.0.0.tgz#bb99033b10ad5e9a946a1a528dcd6a7dd1102d70"
+  integrity sha512-MHDow0rBqumxA3o8Ks33YzdxMFHTcEnHpsWOyDfgfztS/QxSX+bgWUc/X6ZuMN+HoOQ7V/HJK35j+L5M6JuJ3Q==
+  dependencies:
+    tslib "2.4.0"
+
+"@rfprodz/client-util-eliza@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@rfprodz/client-util-eliza/-/client-util-eliza-1.0.0.tgz#064409c8d66260e30e19aab1d438bd0074bb81ca"
+  integrity sha512-0dFbVoixM3/R7SEtGaoobM5eZ4E3TIvpvZjMnSvDr9wCYU0jJeoDcP+N3NSrStkhppbq3tpYd0w/Il7EZ9C6nw==
   dependencies:
     tslib "2.4.0"
 
