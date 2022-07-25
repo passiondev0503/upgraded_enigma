@@ -100,7 +100,9 @@ jobs:
 
       - name: Install global dependencies
         if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}
-        run: npm i -g firebase-tools @compodoc/compodoc
+        run: |
+          npm i -g firebase-tools @compodoc/compodoc
+          npx cypress install
 
       - name: Lint all
         if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}
