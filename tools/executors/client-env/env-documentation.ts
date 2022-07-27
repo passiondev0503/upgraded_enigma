@@ -8,7 +8,7 @@ interface IEnvConfig {
 }
 
 export class AppDocumentationEnvConfig extends AppBaseEnvConfig<IEnvConfig> {
-  protected supportedApps: TSupportedApp[] = ['documentation'];
+  public readonly supportedApps: TSupportedApp[] = ['documentation'];
 
   constructor(options: IExecutorOptions, context: ExecutorContext) {
     super(options, context);

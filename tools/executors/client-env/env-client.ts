@@ -28,7 +28,7 @@ interface IEnvConfig {
 }
 
 export class AppClientEnvConfig extends AppBaseEnvConfig<IEnvConfig> {
-  protected supportedApps: TSupportedApp[] = ['client'];
+  public readonly supportedApps: TSupportedApp[] = ['client'];
 
   protected defaultEnv: IEnvConfig = {
     apiKey: 'FIREBASE_API_KEY',

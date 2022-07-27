@@ -1,4 +1,4 @@
-export type TSupportedApp = 'client' | 'documentation';
+export type TSupportedApp = 'client' | 'documentation' | '';
 
 export interface IExecutorOptions {
   app: TSupportedApp;

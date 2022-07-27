@@ -51,6 +51,14 @@
       },
       "outputs": ["{options.outputFile}"]
     },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "tools/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/tools"]
+    },
     "update-check": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
