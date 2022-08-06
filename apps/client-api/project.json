@@ -47,6 +47,13 @@
         "passWithNoTests": true
       },
       "outputs": ["coverage/apps/client-api"]
+    },
+    "tsc-check": {
+      "executor": "./tools/executors/tsc:check",
+      "options": {
+        "tsConfig": "apps/client-api/tsconfig.app.json"
+      },
+      "outputs": ["dist/out-tsc/apps/client-api"]
     }
   }
 }

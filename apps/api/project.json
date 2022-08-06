@@ -1,6 +1,5 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "generators": {},
   "prefix": "app",
   "projectType": "application",
   "sourceRoot": "apps/api/src",
@@ -75,6 +74,13 @@
         "passWithNoTests": true
       },
       "outputs": ["coverage/apps/api"]
+    },
+    "tsc-check": {
+      "executor": "./tools/executors/tsc:check",
+      "options": {
+        "tsConfig": "apps/api/tsconfig.app.json"
+      },
+      "outputs": ["dist/out-tsc/apps/api"]
     }
   }
 }

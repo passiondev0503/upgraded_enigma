@@ -20,6 +20,13 @@
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/client-pipes"]
+    },
+    "tsc-check": {
+      "executor": "./tools/executors/tsc:check",
+      "options": {
+        "tsConfig": "libs/client-pipes/tsconfig.lib.json"
+      },
+      "outputs": ["dist/out-tsc/libs/client-pipes"]
     }
   }
 }
