@@ -7,8 +7,8 @@ const config = {
     global: {
       branches: 35,
       functions: 47,
-      lines: 74,
-      statements: 74,
+      lines: 66,
+      statements: 64,
     },
   },
   displayName: 'client-store-user',
