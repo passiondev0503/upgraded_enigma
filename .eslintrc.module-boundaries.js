@@ -87,7 +87,13 @@ const backendConstraints = [
 const clientConstraints = [
   {
     sourceTag: 'scope:documentation',
-    onlyDependOnLibsWithTags: ['scope:client-material', 'scope:client-pwa-offline', 'scope:client-unit-testing', 'scope:client-util'],
+    onlyDependOnLibsWithTags: [
+      'scope:client-material',
+      'scope:client-pwa-offline',
+      'scope:client-unit-testing',
+      'scope:client-util',
+      'scope:client-util-ngrx',
+    ],
   },
   {
     sourceTag: 'scope:documentation-e2e',
@@ -95,7 +101,7 @@ const clientConstraints = [
   },
   {
     sourceTag: 'scope:client-unit-testing',
-    onlyDependOnLibsWithTags: ['scope:client-material', 'scope:client-util'],
+    onlyDependOnLibsWithTags: ['scope:client-material', 'scope:client-util', 'scope:client-util-ngrx'],
   },
   {
     sourceTag: 'scope:client-material',
@@ -111,7 +117,55 @@ const clientConstraints = [
   },
   {
     sourceTag: 'scope:client-store',
+    onlyDependOnLibsWithTags: [
+      'scope:client-store-chatbot',
+      'scope:client-store-diagnostics',
+      'scope:client-store-http-progress',
+      'scope:client-store-http-api',
+      'scope:client-store-sidebar',
+      'scope:client-store-theme',
+      'scope:client-store-user',
+      'scope:client-translate',
+      'scope:client-unit-testing',
+      'scope:client-util',
+    ],
+  },
+  {
+    sourceTag: 'scope:client-store-chatbot',
+    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-util'],
+  },
+  {
+    sourceTag: 'scope:client-store-diagnostics',
+    onlyDependOnLibsWithTags: ['scope:client-store-http-progress', 'scope:client-unit-testing', 'scope:client-util'],
+  },
+  {
+    sourceTag: 'scope:client-store-http-api',
+    onlyDependOnLibsWithTags: [
+      'scope:client-store-http-progress',
+      'scope:client-translate',
+      'scope:client-unit-testing',
+      'scope:client-util',
+    ],
+  },
+  {
+    sourceTag: 'scope:client-store-http-progress',
     onlyDependOnLibsWithTags: ['scope:client-translate', 'scope:client-unit-testing', 'scope:client-util'],
+  },
+  {
+    sourceTag: 'scope:client-store-sidebar',
+    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-util'],
+  },
+  {
+    sourceTag: 'scope:client-store-theme',
+    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-util'],
+  },
+  {
+    sourceTag: 'scope:client-store-user',
+    onlyDependOnLibsWithTags: ['scope:client-store-http-progress', 'scope:client-unit-testing', 'scope:client-util'],
+  },
+  {
+    sourceTag: 'scope:client-store-websocket',
+    onlyDependOnLibsWithTags: ['scope:client-store-diagnostics', 'scope:client-unit-testing', 'scope:client-util'],
   },
   {
     sourceTag: 'scope:client-services',
@@ -133,7 +187,11 @@ const clientConstraints = [
     onlyDependOnLibsWithTags: [
       'scope:client-core',
       'scope:client-material',
-      'scope:client-store',
+      'scope:client-store-diagnostics',
+      'scope:client-store-http-api',
+      'scope:client-store-http-progress',
+      'scope:client-store-user',
+      'scope:client-store-websocket',
       'scope:client-services',
       'scope:client-translate',
       'scope:client-unit-testing',
@@ -159,6 +217,10 @@ const clientConstraints = [
     onlyDependOnLibsWithTags: [],
   },
   {
+    sourceTag: 'scope:client-util-ngrx',
+    onlyDependOnLibsWithTags: [],
+  },
+  {
     sourceTag: 'scope:client-util-sentry',
     onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-util'],
   },
@@ -167,7 +229,7 @@ const clientConstraints = [
     onlyDependOnLibsWithTags: [
       'scope:client-material',
       'scope:client-services',
-      'scope:client-store',
+      'scope:client-store-user',
       'scope:client-translate',
       'scope:client-unit-testing',
       'scope:client-util',
@@ -191,19 +253,22 @@ const clientConstraints = [
       'scope:client-services',
       'scope:client-sidebar',
       'scope:client-store',
+      'scope:client-store-user',
+      'scope:client-store-websocket',
       'scope:client-material',
       'scope:client-pwa-offline',
       'scope:client-translate',
       'scope:client-unit-testing',
       'scope:client-user',
       'scope:client-util',
+      'scope:client-util-ngrx',
       'scope:client-util-sentry',
       'scope:client-workspaces',
     ],
   },
   {
     sourceTag: 'scope:client-sidebar',
-    onlyDependOnLibsWithTags: ['scope:client-store', 'scope:client-unit-testing'],
+    onlyDependOnLibsWithTags: ['scope:client-store-http-progress', 'scope:client-store-sidebar', 'scope:client-unit-testing'],
   },
   {
     sourceTag: 'scope:client-pipes',

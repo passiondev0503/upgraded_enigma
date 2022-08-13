@@ -2,14 +2,17 @@ import { APP_BASE_HREF, DOCUMENT, LocationStrategy, PathLocationStrategy } from 
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@app/client-material';
 import { AppClientPipesModule } from '@app/client-pipes';
-import { AppHttpProgressStoreModule, AppUserState, AppUserStoreModule } from '@app/client-store';
+import { AppSidebarStoreModule } from '@app/client-store-sidebar';
 import { AppClientTranslateModule } from '@app/client-translate';
 import { documentFactory, routerButton, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
-import { NgxsModule } from '@ngxs/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { Args, Story } from '@storybook/angular/types-6-0';
+import { of } from 'rxjs';
 
 import { AppNavbarComponent } from './navbar.component';
 
@@ -33,13 +36,20 @@ const story: Story<AppNavbarComponent> = (args: Args) => ({
       HttpClientModule,
       RouterTestingModule,
       AppClientMaterialModule.forRoot(),
-      NgxsModule.forRoot([AppUserState]),
-      AppUserStoreModule,
-      AppHttpProgressStoreModule.forRoot(),
+      StoreModule.forRoot({}),
+      EffectsModule.forRoot(),
+      AppSidebarStoreModule.forRoot(),
       AppClientTranslateModule,
       AppClientPipesModule,
     ],
     providers: [
+      {
+        provide: Router,
+        useValue: {
+          events: of(true),
+          navigate: () => new Promise<boolean>(resolve => resolve(true)),
+        },
+      },
       {
         provide: LocationStrategy,
         useClass: PathLocationStrategy,

@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
-import { AppUserState, IUserPassword, userActions } from '@app/client-store';
-import { Store } from '@ngxs/store';
+import { IUserPassword, IUserState, userActions, userSelectors } from '@app/client-store-user';
+import { Store } from '@ngrx/store';
 import { TBarChartData } from '@rfprodz/client-d3-charts';
-import { of } from 'rxjs';
-import { concatMap, map, tap } from 'rxjs/operators';
+import { first, map, shareReplay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-data',
@@ -14,9 +13,9 @@ import { concatMap, map, tap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppUserDataComponent {
-  constructor(private readonly fb: FormBuilder, private readonly store: Store) {
-    void this.getUser().subscribe();
-    void this.getExportedPasswordsList().subscribe();
+  constructor(private readonly fb: FormBuilder, private readonly store: Store<IUserState>) {
+    this.getUser();
+    this.getExportedPasswordsList();
   }
 
   @HostBinding('class.mat-body-1') protected matBody = true;
@@ -24,12 +23,12 @@ export class AppUserDataComponent {
   /**
    * Currently logged in user object.
    */
-  public readonly user$ = this.store.select(AppUserState.model);
+  public readonly user$ = this.store.select(userSelectors.userState).pipe(shareReplay());
 
   /**
    * Currently logged in user object.
    */
-  public readonly chartData$ = this.store.select(AppUserState.model).pipe(
+  public readonly chartData$ = this.user$.pipe(
     map(model => {
       return (model.passwords ?? [])
         .map(item => ({
@@ -51,7 +50,7 @@ export class AppUserDataComponent {
   /**
    * Exported passwords list.
    */
-  public readonly exportedPasswordFiles$ = this.store.select(AppUserState.model).pipe(map(model => model.exportedPasswordFiles));
+  public readonly exportedPasswordFiles$ = this.user$.pipe(map(model => model.exportedPasswordFiles));
 
   /**
    * New password form.
@@ -107,7 +106,6 @@ export class AppUserDataComponent {
    */
   public set sortByCriterion(val: string) {
     if (this.sortValue !== val) {
-      // sort if value has changed
       this.sortValue = val;
       this.performSorting(val);
     }
@@ -122,14 +120,14 @@ export class AppUserDataComponent {
    * Gets currently logged in user.
    */
   private getUser() {
-    return this.store.dispatch(new userActions.getUser());
+    this.store.dispatch(userActions.getUser({ payload: { save: false } }));
   }
 
   /**
    * Get exported passwords list.
    */
   public getExportedPasswordsList() {
-    return this.store.dispatch(new userActions.listExportedPasswordFiles());
+    this.store.dispatch(userActions.listExportedPasswordFiles());
   }
 
   /**
@@ -147,37 +145,28 @@ export class AppUserDataComponent {
    * Adds user password.
    */
   public addPassword(): void {
-    const formData = <IUserPassword>this.form.value;
-    void this.store
-      .dispatch(new userActions.addPassword(formData))
-      .pipe(
-        concatMap(() => this.getUser()),
-        tap(() => {
-          this.resetPasswordForm();
-        }),
-      )
-      .subscribe();
+    const payload = <IUserPassword>this.form.value;
+    this.store.dispatch(userActions.addPassword({ payload }));
+    this.getUser();
+    this.resetPasswordForm();
   }
 
   /**
    * Deletes user password.
-   *
    * @param id local model array index
    */
   public deletePassword(id: number): void {
     void this.store
-      .selectOnce(AppUserState.model)
+      .select(userSelectors.userState)
       .pipe(
-        concatMap(user => {
-          const formData = (user.passwords ?? [])[id];
-          return typeof formData !== 'undefined'
-            ? this.store.dispatch(new userActions.deletePassword(formData)).pipe(
-                concatMap(() => this.getUser()),
-                tap(() => {
-                  this.resetPasswordForm();
-                }),
-              )
-            : of(null);
+        first(),
+        tap(user => {
+          const payload = (user.passwords ?? [])[id];
+          if (typeof payload !== 'undefined') {
+            this.store.dispatch(userActions.deletePassword({ payload }));
+            this.getUser();
+            this.resetPasswordForm();
+          }
         }),
       )
       .subscribe();
@@ -187,31 +176,25 @@ export class AppUserDataComponent {
    * Encrypts user passwords with user public RSA key.
    */
   public encryptPasswords(): void {
-    void this.store
-      .dispatch(new userActions.encryptPasswords())
-      .pipe(concatMap(() => this.getUser()))
-      .subscribe();
+    this.store.dispatch(userActions.encryptPasswords());
+    this.getUser();
   }
 
   /**
    * Decrypts user passwords with user private RSA key.
    */
   public decryptPasswords(): void {
-    void this.store
-      .dispatch(new userActions.decryptPasswords())
-      .pipe(concatMap(() => this.getUser()))
-      .subscribe();
+    this.store.dispatch(userActions.decryptPasswords());
+    this.getUser();
   }
 
   /**
    * Export user passwords encrypted with keypair.
-   * TODO: let user save file to an arbitrary path.
+   * @note TODO: let user save file to an arbitrary path.
    */
   public exportPasswords(): void {
-    void this.store
-      .dispatch(new userActions.exportPasswords())
-      .pipe(concatMap(() => this.getExportedPasswordsList()))
-      .subscribe();
+    this.store.dispatch(userActions.exportPasswords());
+    this.getExportedPasswordsList();
   }
 
   /**
@@ -220,7 +203,8 @@ export class AppUserDataComponent {
    * @param index element array index
    */
   public hideElement$ = (index: number) =>
-    this.store.selectOnce(AppUserState.model).pipe(
+    this.store.select(userSelectors.userState).pipe(
+      first(),
       map(user => {
         const passwords = user.passwords ?? [];
         if (typeof user.status !== 'undefined' && passwords.length > 0) {
@@ -238,8 +222,9 @@ export class AppUserDataComponent {
    */
   private performSorting(val: string): void {
     void this.store
-      .selectOnce(AppUserState.model)
+      .select(userSelectors.userState)
       .pipe(
+        first(),
         tap(user => {
           const sorted = { ...user, passwords: [...(user.passwords ?? [])] };
           if (val === 'timestamp') {
@@ -250,7 +235,7 @@ export class AppUserDataComponent {
              */
             sorted.passwords.sort((a, b) => a.name.localeCompare(b.name));
           }
-          void this.store.dispatch(new userActions.setState(sorted));
+          this.store.dispatch(userActions.setState({ payload: sorted }));
         }),
       )
       .subscribe();

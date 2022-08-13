@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { IDiagnosticsStateModel } from '@app/client-store-diagnostics';
 
 @Component({
   selector: 'app-diagnostics-info-page',
@@ -11,11 +12,5 @@ export class AppDiagnosticsInfoPage {
 
   @Input() public markedInstructions = '';
 
-  @Input() public serverData: {
-    static: Record<string, unknown>[];
-    dynamic: Record<string, unknown>[];
-  } | null = {
-    static: [],
-    dynamic: [],
-  };
+  @Input() public diagnosticsData: IDiagnosticsStateModel | null = null;
 }

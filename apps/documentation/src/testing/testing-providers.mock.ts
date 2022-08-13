@@ -8,6 +8,7 @@ export const testingEnvironment: IDocAppEnvironment = {
   appName: 'test',
   description: 'unit test',
   production: false,
+  testing: true,
   meta: {
     version: 'N/A',
   },

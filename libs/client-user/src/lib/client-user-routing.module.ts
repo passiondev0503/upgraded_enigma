@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { AppAnonimousGuard, AppAuthenticatedGuard } from '@app/client-store';
+import { AppAnonimousGuard, AppAuthenticatedGuard } from '@app/client-store-user';
 
 import { AppUserAuthComponent } from './components/auth/auth.component';
 import { AppUserDataComponent } from './components/data/data.component';

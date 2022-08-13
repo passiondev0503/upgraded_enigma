@@ -8,8 +8,10 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@app/client-material';
 import { documentFactory, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
-import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { NgxsModule } from '@ngxs/store';
+import { AppRouteSerializer } from '@app/client-util-ngrx';
+import { EffectsModule } from '@ngrx/effects';
+import { NavigationActionTiming, routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
 
 import { AppTestingComponent } from './components/testing/testing.component.mock';
 import { dialogRefMockProvider } from './refs/dialog-ref.mock';
@@ -64,8 +66,12 @@ export const mocksCoreModuleProviders: Provider[] = [
     AppClientMaterialModule.forRoot(),
     HttpClientTestingModule,
     RouterTestingModule,
-    NgxsModule.forRoot([], { developmentMode: true }),
-    NgxsFormPluginModule.forRoot(),
+    StoreModule.forRoot({ router: routerReducer }),
+    EffectsModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({
+      serializer: AppRouteSerializer,
+      navigationActionTiming: NavigationActionTiming.PostActivation,
+    }),
   ],
   declarations: [AppTestingComponent],
   exports: [

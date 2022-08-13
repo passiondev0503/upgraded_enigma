@@ -45,6 +45,10 @@ export const primary = story.bind({});
 primary.args = {
   ping: 'ping result',
   markedInstructions: 'Marked instructions',
+  diagnosticsData: {
+    dynamicData: [],
+    staticData: [],
+  },
 };
 primary.parameters = {
   /**

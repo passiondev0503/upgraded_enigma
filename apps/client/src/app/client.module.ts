@@ -8,14 +8,13 @@ import { AppClientCoreModule } from '@app/client-core';
 import { AppClientCoreComponentsModule } from '@app/client-core-components';
 import { AppClientMaterialModule } from '@app/client-material';
 import { AppClientPwaOfflineModule } from '@app/client-pwa-offline';
-import { AppUserState, AppWebsocketModule } from '@app/client-store';
+import { AppWebsocketStoreModule } from '@app/client-store-websocket';
 import { AppClientTranslateModule } from '@app/client-translate';
+import { AppRouteSerializer, metaReducers } from '@app/client-util-ngrx';
 import { sentryProviders } from '@app/client-util-sentry';
-import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
-import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
-import { NgxsModule } from '@ngxs/store';
+import { EffectsModule } from '@ngrx/effects';
+import { NavigationActionTiming, routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
 import { AppClientUtilElizaModule } from '@rfprodz/client-util-eliza';
 
 import { environment } from '../environments/environment';
@@ -28,18 +27,6 @@ import { AppRootComponent } from './components/root.component';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
-    NgxsModule.forRoot([], {
-      developmentMode: !environment.production,
-      compatibility: {
-        strictContentSecurityPolicy: true,
-      },
-    }),
-    NgxsStoragePluginModule.forRoot({
-      key: [AppUserState],
-    }),
-    NgxsLoggerPluginModule.forRoot({ disabled: environment.production, collapsed: true }),
-    NgxsRouterPluginModule.forRoot(),
-    NgxsFormPluginModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AngularFireModule.initializeApp(environment.firebase ?? {}, 'organizer-833bc'),
     AngularFireDatabaseModule,
@@ -47,11 +34,17 @@ import { AppRootComponent } from './components/root.component';
     AppClientCoreComponentsModule,
     AppClientCoreModule.forRoot(environment),
     AppClientMaterialModule.forRoot(),
-    AppWebsocketModule.forRoot(environment),
+    StoreModule.forRoot({ router: routerReducer }, { metaReducers: metaReducers(environment.production) }),
+    EffectsModule.forRoot(),
+    AppWebsocketStoreModule.forRoot(environment),
     AppClientTranslateModule.forRoot(),
     AppClientUtilElizaModule.forRoot(),
     AppClientPwaOfflineModule,
     AppClientRoutingModule,
+    StoreRouterConnectingModule.forRoot({
+      serializer: AppRouteSerializer,
+      navigationActionTiming: NavigationActionTiming.PostActivation,
+    }),
   ],
   providers: [...sentryProviders(environment)],
   declarations: [AppRootComponent],

@@ -10,7 +10,7 @@ import {
   windowFactory,
 } from '@app/client-util';
 
-import { appClientCoreModuleProvidersFactory } from './client-core-module.providers';
+import { appClientCoreModuleProviders } from './client-core-module.providers';
 
 describe('client-core-module-proviers', () => {
   const testingEnvironment: IWebClientAppEnvironment = {
@@ -31,7 +31,7 @@ describe('client-core-module-proviers', () => {
   };
 
   const testBedConfig: TestModuleMetadata = {
-    providers: [...appClientCoreModuleProvidersFactory(testingEnvironment)],
+    providers: [...appClientCoreModuleProviders(testingEnvironment)],
   };
 
   let locationStrategy: LocationStrategy;

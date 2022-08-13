@@ -2,9 +2,9 @@ import { APP_BASE_HREF, DOCUMENT, LocationStrategy, PathLocationStrategy } from 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppClientMaterialModule } from '@app/client-material';
-import { AppHttpProgressStoreModule } from '@app/client-store';
+import { AppHttpProgressStoreModule } from '@app/client-store-http-progress';
 import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
-import { NgxsModule } from '@ngxs/store';
+import { StoreModule } from '@ngrx/store';
 import { Args, Story } from '@storybook/angular/types-6-0';
 
 import { AppDiagnosticsHomePage } from './diagnostics-home-page.component';
@@ -28,7 +28,7 @@ const story: Story<AppDiagnosticsHomePage> = (args: Args) => ({
       FlexLayoutModule,
       AppClientMaterialModule.forRoot(),
       AppHttpProgressStoreModule.forRoot(),
-      NgxsModule.forRoot([]),
+      StoreModule.forRoot({}),
     ],
     providers: [
       {

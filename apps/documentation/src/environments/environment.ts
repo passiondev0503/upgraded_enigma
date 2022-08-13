@@ -14,6 +14,7 @@ import { appEnvFactory } from './environment.config';
  */
 export const environment: IDocAppEnvironment = {
   production: false,
+  testing: false,
   appName: 'Upgraded Enigma Documentation',
   description: 'Upgraded Enigma documentation',
   ...appEnvFactory(),

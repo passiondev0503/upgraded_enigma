@@ -1,15 +1,24 @@
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { AppSidebarState, sidebarActions } from '@app/client-store';
-import { getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
-import { NgxsModule, Store } from '@ngxs/store';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppSidebarStoreModule, sidebarActions } from '@app/client-store-sidebar';
+import { AppTestingComponent, getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 
 import { AppContentComponent } from './content.component';
 
 describe('AppContentComponent', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    imports: [NgxsModule.forFeature([AppSidebarState])],
+    imports: [
+      AppSidebarStoreModule.forRoot(),
+      RouterTestingModule.withRoutes([
+        {
+          path: '',
+          component: AppTestingComponent,
+        },
+      ]),
+    ],
     declarations: [AppContentComponent],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
@@ -44,14 +53,14 @@ describe('AppContentComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('sidebarCloseHandler should call store dispatch', waitForAsync(() => {
+  it('sidebarCloseHandler should call store dispatch', () => {
     component.sidebarCloseHandler();
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.closeSidebar());
-  }));
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(sidebarActions.close({ payload: { navigate: true } }));
+  });
 
   it('sidebarOpenHandler should call store dispatch', waitForAsync(() => {
     component.sidebarOpenHandler();
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.openSidebar());
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(sidebarActions.open({ payload: { navigate: true } }));
   }));
 
   it('should scroll content on router events', async () => {

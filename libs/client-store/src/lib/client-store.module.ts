@@ -1,39 +1,21 @@
 import { NgModule } from '@angular/core';
-import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
-
-import { AppChatbotStoreModule } from './chatbot/chatbot.module';
-import { AppDiagnosticsModule } from './diagnostics/diagnostics.module';
-import { AppHttpApiModule } from './http-api/http-api.module';
-import { AppHttpProgressStoreModule } from './http-progress/http-progress.module';
-import { AppSidebarStoreModule } from './sidebar/sidebar.module';
-import { AppThemeStoreModule } from './theme/theme.module';
-import { USER_STATE_TOKEN } from './user/user.interface';
-import { AppUserStoreModule } from './user/user.module';
-import { AppWebsocketModule } from './websocket/websocket.module';
+import { AppChatbotStoreModule } from '@app/client-store-chatbot';
+import { AppDiagnosticsStoreModule } from '@app/client-store-diagnostics';
+import { AppHttpApiStoreModule } from '@app/client-store-http-api';
+import { AppHttpProgressStoreModule } from '@app/client-store-http-progress';
+import { AppSidebarStoreModule } from '@app/client-store-sidebar';
+import { AppThemeStoreModule } from '@app/client-store-theme';
+import { AppUserStoreModule } from '@app/client-store-user';
 
 @NgModule({
   imports: [
-    AppHttpApiModule,
+    AppChatbotStoreModule.forRoot(),
+    AppDiagnosticsStoreModule.forRoot(),
+    AppHttpApiStoreModule.forRoot(),
     AppHttpProgressStoreModule.forRoot(),
-    AppUserStoreModule,
-    AppSidebarStoreModule,
-    AppWebsocketModule,
-    AppChatbotStoreModule,
-    AppThemeStoreModule,
-    AppDiagnosticsModule,
-    NgxsStoragePluginModule.forRoot({
-      key: USER_STATE_TOKEN,
-    }),
-  ],
-  exports: [
-    AppHttpApiModule,
-    AppHttpProgressStoreModule,
-    AppUserStoreModule,
-    AppSidebarStoreModule,
-    AppWebsocketModule,
-    AppChatbotStoreModule,
-    AppThemeStoreModule,
-    AppDiagnosticsModule,
+    AppSidebarStoreModule.forRoot(),
+    AppThemeStoreModule.forRoot(),
+    AppUserStoreModule.forRoot(),
   ],
 })
 export class AppClientStoreModule {}

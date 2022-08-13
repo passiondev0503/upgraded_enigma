@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Navigate } from '@ngxs/router-plugin';
-import { Store } from '@ngxs/store';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 import { IWorkspace } from '../../interfaces/workspace.interfaces';
@@ -48,7 +47,7 @@ export class AppWorkspacesListComponent {
 
   public readonly widgets$ = this.widgetsSubject.asObservable();
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly router: Router) {}
 
   public deleteHandler(event: IWorkspace) {
     /**
@@ -63,6 +62,6 @@ export class AppWorkspacesListComponent {
   }
 
   public openHandler(event: IWorkspace) {
-    void this.store.dispatch(new Navigate(['/workspaces', 'item', event.id]));
+    void this.router.navigate(['/workspaces', 'item', event.id]);
   }
 }

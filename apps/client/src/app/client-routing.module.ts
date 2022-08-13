@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { AppAuthenticatedGuard } from '@app/client-store';
+import { AppAuthenticatedGuard } from '@app/client-store-user';
 
 /**
  * The client application routes.

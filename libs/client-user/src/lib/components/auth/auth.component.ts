@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AppUserState, ILoginPayload, userActions } from '@app/client-store';
-import { Store } from '@ngxs/store';
+import { ILoginPayload, IUserState, userActions, userSelectors } from '@app/client-store-user';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
-import { concatMap, first, tap } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 
 type TPasswordInputType = 'password' | 'text';
 
@@ -29,7 +28,7 @@ export class AppUserAuthComponent {
 
   public readonly passwordInputType$ = this.passwordInputTypeSubject.asObservable();
 
-  constructor(private readonly fb: FormBuilder, private readonly router: Router, private readonly store: Store) {}
+  constructor(private readonly fb: FormBuilder, private readonly store: Store<IUserState>) {}
 
   public togglePasswordVisibility(): void {
     const nextValue = this.passwordInputTypeSubject.value === 'password' ? 'text' : 'password';
@@ -44,7 +43,7 @@ export class AppUserAuthComponent {
       email: null,
       password: null,
     });
-    void this.store.dispatch(new userActions.setState({}));
+    this.store.dispatch(userActions.setState({ payload: {} }));
   }
 
   /**
@@ -53,12 +52,16 @@ export class AppUserAuthComponent {
   public submitForm(): void {
     if (this.form.valid) {
       void this.store
-        .select(AppUserState.model)
+        .select(userSelectors.userState)
         .pipe(
           first(),
-          concatMap(user => {
+          tap(user => {
             const formData = <ILoginPayload>this.form.value;
-            return typeof user.token !== 'undefined' ? this.logUserIn(formData) : this.initializeUser(formData);
+            if (typeof user.token !== 'undefined') {
+              this.logUserIn(formData);
+            } else {
+              this.initializeUser(formData);
+            }
           }),
         )
         .subscribe();
@@ -67,38 +70,15 @@ export class AppUserAuthComponent {
 
   /**
    * Initializes the user.
-   * @param formData the auth form data
+   * @param payload the login form data
    * @returns execution result
    */
-  private initializeUser(formData: ILoginPayload) {
-    return this.store.dispatch(new userActions.configureUser(formData)).pipe(
-      concatMap(() => {
-        // make subsequent login request for user after successful initialization request
-        const loginFormData = <ILoginPayload>this.form.value;
-        return this.store.dispatch(new userActions.logIn(loginFormData)).pipe(
-          tap({
-            next: () => {
-              void this.router.navigate(['user']);
-            },
-            error: () => {
-              void this.router.navigate(['auth']);
-            },
-          }),
-        );
-      }),
-    );
+  private initializeUser(payload: ILoginPayload) {
+    this.store.dispatch(userActions.configureUser({ payload }));
+    this.store.dispatch(userActions.login({ payload }));
   }
 
-  private logUserIn(formData: ILoginPayload) {
-    return this.store.dispatch(new userActions.logIn(formData)).pipe(
-      tap({
-        next: () => {
-          void this.router.navigate(['user']);
-        },
-        error: () => {
-          void this.router.navigate(['auth']);
-        },
-      }),
-    );
+  private logUserIn(payload: ILoginPayload) {
+    this.store.dispatch(userActions.login({ payload }));
   }
 }

@@ -1,11 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormBuilder, Validators } from '@angular/forms';
-import { AppWebsocketState, IWebsocketResponseEvent, IWsMessageEvent } from '@app/client-store';
 import { NAVIGATOR } from '@app/client-util';
-import { Store } from '@ngxs/store';
 import { BehaviorSubject, combineLatest, from, Observable, of } from 'rxjs';
-import { filter, first, map, mapTo, switchMap } from 'rxjs/operators';
+import { filter, first, map, switchMap } from 'rxjs/operators';
 
 const getSenderId = () => {
   const multiplier = 1000000000;
@@ -43,10 +40,6 @@ export class AppUserRtcChatComponent implements OnInit {
 
   public readonly mediaDevices$ = this.mediaDevicesSubject.asObservable();
 
-  public readonly messages$ = this.store
-    .select(AppWebsocketState.getState)
-    .pipe(map(state => state.events as IWebsocketResponseEvent<IWsMessageEvent>[]));
-
   public readonly webRtcConfig: {
     servers: {
       iceServers: [{ urls: string[] }];
@@ -66,11 +59,6 @@ export class AppUserRtcChatComponent implements OnInit {
     roomId: 'T1vgzF95VyHhCewCbWG6',
     senderId: getSenderId(), // TODO: this should be firebase user id (app should require firebase auth after local)
   };
-
-  public readonly form = this.fb.group({
-    sender: [`user-${this.webRtcConfig.senderId}`, Validators.compose([Validators.required])],
-    text: ['', Validators.compose([Validators.required])],
-  });
 
   private readonly roomRef$ = from(this.firestore.collection<TFirestoreRooms>('rooms').doc<IFirestoreRoom>(this.webRtcConfig.roomId).get());
 
@@ -129,21 +117,7 @@ export class AppUserRtcChatComponent implements OnInit {
       }),
     );
 
-  constructor(
-    private readonly store: Store,
-    private readonly fb: FormBuilder,
-    private readonly firestore: AngularFirestore,
-    @Inject(NAVIGATOR) private readonly nav: Navigator,
-  ) {}
-
-  /**
-   * Sends chat message.
-   */
-  public sendChatMessage() {
-    if (this.form.valid) {
-      // this.store.dispatch(new /* TODO */ ).next(this.form.value);
-    }
-  }
+  constructor(private readonly firestore: AngularFirestore, @Inject(NAVIGATOR) private readonly nav: Navigator) {}
 
   /**
    * Creates video call offer.
@@ -186,7 +160,7 @@ export class AppUserRtcChatComponent implements OnInit {
         switchMap(answer => {
           // eslint-disable-next-line no-console -- TODO: remove after debugging
           console.warn('answer', answer);
-          return from(this.peerConnection.setLocalDescription(answer)).pipe(mapTo(answer));
+          return from(this.peerConnection.setLocalDescription(answer)).pipe(map(() => answer));
         }),
         switchMap(answer => this.sendVideoRoomAnswer(answer)),
       )
@@ -235,7 +209,7 @@ export class AppUserRtcChatComponent implements OnInit {
               console.error('Peer connection: Error creating offer', error);
             },
           ),
-        ).pipe(mapTo({ peers, existingPeers, offerExists })),
+        ).pipe(map(() => ({ peers, existingPeers, offerExists }))),
       ),
       switchMap(({ peers, existingPeers, offerExists }) => {
         // eslint-disable-next-line no-console -- TODO: remove after debugging

@@ -1,20 +1,18 @@
 import { Location } from '@angular/common';
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientPipesModule } from '@app/client-pipes';
-import { AppSidebarState, sidebarActions } from '@app/client-store';
+import { AppSidebarStoreModule, sidebarActions } from '@app/client-store-sidebar';
 import { getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
 import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@app/client-util';
-import { RouterState } from '@ngxs/router-plugin';
-import { NgxsModule, Store } from '@ngxs/store';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 
 import { AppNavbarComponent } from './navbar.component';
 
 describe('AppNavbarComponent', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    imports: [RouterTestingModule, NgxsModule.forFeature([AppSidebarState]), AppClientPipesModule],
+    imports: [AppSidebarStoreModule.forRoot(), AppClientPipesModule],
     declarations: [AppNavbarComponent],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
@@ -65,15 +63,14 @@ describe('AppNavbarComponent', () => {
 
   it('sidebarCloseHandler should call store dispatch', waitForAsync(() => {
     component.sidebarCloseHandler();
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(new sidebarActions.setState({ sidebarOpened: false }));
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(sidebarActions.close({ payload: { navigate: false } }));
   }));
 
-  it('goBack should call store dispatch and location.back', waitForAsync(() => {
+  it('goBack should call store dispatch and location.back', () => {
     const locationBackSpy = jest.spyOn(loc, 'back');
     component.goBack();
-    expect(storeSpy.select).toHaveBeenCalledWith(RouterState.state);
     expect(locationBackSpy).toHaveBeenCalled();
-  }));
+  });
 
   it('buttons should have default values', () => {
     const expectedLength = 9;

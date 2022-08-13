@@ -1,11 +1,10 @@
 import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { sidebarActions, userActions } from '@app/client-store';
+import { sidebarActions } from '@app/client-store-sidebar';
+import { userActions } from '@app/client-store-user';
 import { IRouterButton, IWebClientAppEnvironment, routerButton, WEB_CLIENT_APP_ENV } from '@app/client-util';
-import { RouterState } from '@ngxs/router-plugin';
-import { Store } from '@ngxs/store';
-import { first, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-navbar',
@@ -54,7 +53,7 @@ export class AppNavbarComponent {
       [{ outlets: { primary: [''], sidebar: [] } }],
       true,
       () => {
-        void this.store.dispatch(new userActions.logOut()).subscribe();
+        this.store.dispatch(userActions.logout());
       },
     ),
     routerButton(
@@ -152,24 +151,16 @@ export class AppNavbarComponent {
   ) {}
 
   public sidebarCloseHandler(): void {
-    void this.store.dispatch(new sidebarActions.setState({ sidebarOpened: false }));
+    this.store.dispatch(sidebarActions.close({ payload: { navigate: false } }));
   }
 
   public goBack(): void {
-    void this.store
-      .select(RouterState.state)
-      .pipe(
-        first(),
-        tap(state => {
-          const hasQueryParams = state?.url?.match(/.*[?].*/);
-          if (typeof hasQueryParams !== 'undefined' && hasQueryParams !== null && hasQueryParams.length > 0) {
-            this.location.back(); // first call resets query params only
-            this.location.back();
-          } else {
-            this.location.back();
-          }
-        }),
-      )
-      .subscribe();
+    const hasQueryParams = this.router.routerState.snapshot.url.match(/.*[?].*/);
+    if (typeof hasQueryParams !== 'undefined' && hasQueryParams !== null && hasQueryParams.length > 0) {
+      this.location.back(); // first call resets query params only
+      this.location.back();
+    } else {
+      this.location.back();
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { Meta, Title } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
+import { AppUserStoreModule } from '@app/client-store-user';
+import { AppClientTranslateModule } from '@app/client-translate';
 import { getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
 
 import { AppRootComponent } from './root.component';
@@ -8,7 +9,7 @@ import { AppRootComponent } from './root.component';
 describe('AppRootComponent', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
     declarations: [AppRootComponent],
-    imports: [RouterTestingModule],
+    imports: [AppUserStoreModule.forRoot(), AppClientTranslateModule.forRoot()],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 

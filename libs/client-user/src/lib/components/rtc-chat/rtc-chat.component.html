@@ -42,40 +42,6 @@
 
   <mat-divider [ngStyle]="{ margin: '16px 0' }" fxFlex="100"></mat-divider>
 
-  <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="stretch start" [ngStyle]="{ 'margin-left': '16px' }">
-    <h4 fxFlex="100">
-      {{ 'chat.title' | translate }}
-    </h4>
-
-    <div fxFlex="100" appAutoscroll [ngStyle]="{ height: '200px', 'max-height': '200px', overflow: 'auto' }">
-      <div [ngStyle]="{ height: '100%' }">
-        <ng-container *ngFor="let message of messages$ | async">
-          <div [ngStyle]="{ padding: '8px' }">
-            <span class="mat-body-2">{{ message.data.sender }}:</span>
-
-            <span class="mat-body-1" [ngStyle]="{ 'overflow-wrap': 'break-word' }"> &nbsp;{{ message.data.text }} </span>
-          </div>
-
-          <mat-divider></mat-divider>
-        </ng-container>
-      </div>
-    </div>
-
-    <div fxFlex="100" fxLayout="row">
-      <form fxFlex [formGroup]="form" (submit)="sendChatMessage()">
-        <mat-form-field appearance="standard">
-          <mat-label>New message</mat-label>
-          <input formControlName="text" [autofocus]="true" appAutofocus matInput placeholder="Message text" />
-          <mat-icon matSuffix [ngStyle]="{ cursor: 'pointer' }" type="submit" color="warn" (click)="sendChatMessage()"> send </mat-icon>
-
-          <mat-hint>Input message text, and hit Enter or the highlighted send button.</mat-hint>
-        </mat-form-field>
-      </form>
-    </div>
-  </div>
-
-  <mat-divider [ngStyle]="{ margin: '16px 0' }" fxFlex="100"></mat-divider>
-
   <h4 fxFlex="100">{{ 'chat.devices' | translate }}</h4>
 
   <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center space-around" *ngIf="mediaDevices$ | async as devices">

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { AppAnonimousGuard } from '@app/client-store';
+import { AppAnonimousGuard } from '@app/client-store-user';
 
 import { AppDiagnosticsHomeComponent } from './components/home/diagnostics-home.component';
 import { AppDiagnosticsIndexComponent } from './components/index/diagnostics-index.component';

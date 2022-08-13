@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { AppMarkdownService } from '@app/client-services';
-import { AppDiagnosticsState, AppHttpApiState, diagnosticsActions, httpApiActions } from '@app/client-store';
+import { diagnosticsActions, diagnosticsSelectors, IDiagnosticsState } from '@app/client-store-diagnostics';
+import { httpApiActions, httpApiSelectors, IHttpApiState } from '@app/client-store-http-api';
 import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@app/client-util';
-import { Store } from '@ngxs/store';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -16,9 +17,9 @@ export class AppDiagnosticsInfoComponent {
   /**
    * Ping result.
    */
-  public readonly ping$ = this.store.select(AppHttpApiState.allData).pipe(map(ping => ping.ping));
+  public readonly ping$ = this.store.select(httpApiSelectors.ping);
 
-  public readonly serverData$ = this.store.select(AppDiagnosticsState.state);
+  public readonly diagnosticsData$ = this.store.select(diagnosticsSelectors.allData);
 
   /**
    * Sample processed markdown.
@@ -35,10 +36,10 @@ export class AppDiagnosticsInfoComponent {
 
   constructor(
     private readonly markdown: AppMarkdownService,
-    private readonly store: Store,
+    private readonly store: Store<IDiagnosticsState & IHttpApiState>,
     @Inject(WEB_CLIENT_APP_ENV) private readonly env: IWebClientAppEnvironment,
   ) {
-    void this.store.dispatch(new httpApiActions.ping()).subscribe();
-    void this.store.dispatch(new diagnosticsActions.getStaticData()).subscribe();
+    this.store.dispatch(httpApiActions.ping());
+    this.store.dispatch(diagnosticsActions.staticData());
   }
 }

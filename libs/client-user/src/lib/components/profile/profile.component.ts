@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
-import { AppUserState, userActions } from '@app/client-store';
-import { Store } from '@ngxs/store';
+import { IUserState, userActions, userSelectors } from '@app/client-store-user';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -11,36 +10,23 @@ import { map, tap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppUserProfileComponent {
-  public user$ = this.store.select(AppUserState.model).pipe(map(user => user));
+  public user$ = this.store.select(userSelectors.userState);
 
   private readonly showModalSubject = new BehaviorSubject<boolean>(false);
 
   public readonly showModal$ = this.showModalSubject.asObservable();
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store: Store<IUserState>) {}
 
   @HostBinding('class.mat-body-1') protected matBody = true;
-
-  /**
-   * Gets user status.
-   */
-  private getUserStatus() {
-    void this.store.dispatch(new userActions.getUser()).subscribe();
-  }
 
   /**
    * Generates private/public RSA keys for a user.
    */
   public generateKeypair(encryptionEnabled = true): void {
     if (!encryptionEnabled) {
-      void this.store
-        .dispatch(new userActions.generateKeypair())
-        .pipe(
-          tap(() => {
-            this.getUserStatus();
-          }),
-        )
-        .subscribe();
+      this.store.dispatch(userActions.generateKeypair());
+      this.store.dispatch(userActions.getUser({ payload: { save: false } }));
     }
   }
 }

@@ -3,9 +3,8 @@ import { BrowserTestingModule } from '@angular/platform-browser/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@app/client-material';
 import { AppTestingComponent } from '@app/client-unit-testing';
-import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
-import { NgxsModule } from '@ngxs/store';
 
+import { AppWorkspaceTimerComponent } from '../workspace-timer/workspace-timer.component';
 import { AppWorkspaceComponent } from './workspace.component';
 
 describe('AppWorkspaceComponent', () => {
@@ -22,11 +21,9 @@ describe('AppWorkspaceComponent', () => {
             component: AppTestingComponent,
           },
         ]),
-        NgxsModule.forRoot([]),
-        NgxsRouterPluginModule.forRoot(),
         AppClientMaterialModule.forRoot(),
       ],
-      declarations: [AppWorkspaceComponent],
+      declarations: [AppWorkspaceComponent, AppWorkspaceTimerComponent],
     })
       .compileComponents()
       .then(() => {

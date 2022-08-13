@@ -1,22 +1,15 @@
 import { APP_BASE_HREF, DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@app/client-material';
-import { AppClientPipesModule } from '@app/client-pipes';
-import {
-  AppChatbotState,
-  AppChatbotStoreModule,
-  AppHttpProgressStoreModule,
-  AppSidebarState,
-  AppSidebarStoreModule,
-  AppUserState,
-  AppUserStoreModule,
-} from '@app/client-store';
-import { AppClientTranslateModule } from '@app/client-translate';
+import { AppChatbotStoreModule } from '@app/client-store-chatbot';
+import { AppSidebarStoreModule } from '@app/client-store-sidebar';
+import { AppUserStoreModule } from '@app/client-store-user';
 import { anchorButton, documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
-import { NgxsModule } from '@ngxs/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { Args, Story } from '@storybook/angular/types-6-0';
 
 import { AppToolbarComponent } from './toolbar.component';
@@ -38,16 +31,13 @@ const story: Story<AppToolbarComponent> = (args: Args) => ({
     imports: [
       BrowserAnimationsModule,
       FlexLayoutModule,
-      HttpClientModule,
       RouterTestingModule,
-      NgxsModule.forRoot([AppSidebarState, AppChatbotState, AppUserState]),
+      StoreModule.forRoot({}),
+      EffectsModule.forRoot(),
+      AppSidebarStoreModule.forRoot(),
+      AppChatbotStoreModule.forRoot(),
+      AppUserStoreModule.forRoot(),
       AppClientMaterialModule.forRoot(),
-      AppHttpProgressStoreModule.forRoot(),
-      AppClientTranslateModule,
-      AppClientPipesModule,
-      AppUserStoreModule,
-      AppChatbotStoreModule,
-      AppSidebarStoreModule,
     ],
     providers: [
       {
@@ -63,6 +53,7 @@ const story: Story<AppToolbarComponent> = (args: Args) => ({
       },
     ],
     declarations: [AppToolbarComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
   },
   props: {
     ...args,

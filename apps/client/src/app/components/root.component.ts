@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Inject, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { AppUserState } from '@app/client-store';
+import { IUserState, userSelectors } from '@app/client-store-user';
 import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@app/client-util';
-import { Store } from '@ngxs/store';
+import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 
 @Component({
@@ -31,12 +31,12 @@ export class AppRootComponent implements OnInit {
   /**
    * User authentication state.
    */
-  public readonly auth$ = this.store.select(AppUserState.token).pipe(map(token => ({ authenticated: typeof token !== 'undefined' })));
+  public readonly auth$ = this.store.select(userSelectors.token).pipe(map(token => ({ authenticated: typeof token !== 'undefined' })));
 
   constructor(
     private readonly title: Title,
     private readonly meta: Meta,
-    public readonly store: Store,
+    public readonly store: Store<IUserState>,
     @Inject(WEB_CLIENT_APP_ENV) private readonly env: IWebClientAppEnvironment,
   ) {}
 

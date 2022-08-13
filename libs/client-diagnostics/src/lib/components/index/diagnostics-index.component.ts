@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { AppWebsocketService } from '@app/client-store';
+import { IWebsocketState, websocketActions } from '@app/client-store-websocket';
+import { Store } from '@ngrx/store';
 
 /**
  * Application index component.
@@ -11,11 +12,11 @@ import { AppWebsocketService } from '@app/client-store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppDiagnosticsIndexComponent implements OnDestroy {
-  constructor(private readonly ws: AppWebsocketService) {
-    this.ws.getDynamicDiagnosticData();
+  constructor(private readonly store: Store<IWebsocketState>) {
+    this.store.dispatch(websocketActions.sendEvent({ payload: { eventType: 'get-diag-dynamic' } }));
   }
 
   public ngOnDestroy() {
-    this.ws.stopDynamicDiagnosticData();
+    this.store.dispatch(websocketActions.sendEvent({ payload: { eventType: 'stop-diag-dynamic' } }));
   }
 }
