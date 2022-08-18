@@ -14,7 +14,7 @@ import { AppThemeToggleComponent } from './theme-toggle.component';
 const testingEnvironment = {
   production: false,
   platform: '',
-  appName: 'Nx Ng Starter Client',
+  appName: 'Upgraded enigma',
   api: 'http://localhost:8080/api',
   envoyUrl: 'http://localhost:8081',
 };

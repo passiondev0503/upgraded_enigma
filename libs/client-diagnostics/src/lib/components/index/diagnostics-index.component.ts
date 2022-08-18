@@ -13,6 +13,7 @@ import { Store } from '@ngrx/store';
 })
 export class AppDiagnosticsIndexComponent implements OnDestroy {
   constructor(private readonly store: Store<IWebsocketState>) {
+    this.store.dispatch(websocketActions.connect());
     this.store.dispatch(websocketActions.sendEvent({ payload: { eventType: 'get-diag-dynamic' } }));
   }
 
