@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "allowJs": true,
     "baseUrl": "../../",
     "module": "commonjs",
     "outDir": "../../dist/out-tsc",
