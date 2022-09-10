@@ -8,7 +8,7 @@ const config = {
       branches: 68,
       functions: 92,
       lines: 93,
-      statements: 94,
+      statements: 93,
     },
   },
   displayName: 'client-core-components',

@@ -5,7 +5,7 @@ const config = {
       branches: 76,
       functions: 87,
       lines: 87,
-      statements: 86,
+      statements: 85,
     },
   },
   displayName: 'tools',
