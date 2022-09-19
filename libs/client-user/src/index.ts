@@ -1,1 +1,1 @@
-export * from './lib/client-user.module';
+export * from './lib/user.module';

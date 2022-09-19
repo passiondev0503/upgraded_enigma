@@ -4,13 +4,13 @@ import { documentProvider, WINDOW, windowProvider } from '@app/client-util';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 
-import { AppClientTranslateModule } from '../client-translate.module';
+import { AppTranslateModule } from '../client-translate.module';
 import { ISupportedLanguage, TLangCode, uiLanguages } from '../interfaces/ui-languages.interface';
 import { AppTranslationUtilsService } from './app-translation-utils.service';
 
 describe('AppTranslationUtilsService', () => {
   const testBedConfig: TestModuleMetadata = {
-    imports: [AppClientTranslateModule.forRoot()],
+    imports: [AppTranslateModule.forRoot()],
     providers: [windowProvider, documentProvider, DateAdapter],
   };
 

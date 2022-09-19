@@ -5,7 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { Meta, Title } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppClientMaterialModule } from '@app/client-material';
+import { AppMaterialModule } from '@app/client-material';
 import { AppRouteSerializer } from '@app/client-util-ngrx';
 import { NavigationActionTiming, routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -37,7 +37,7 @@ describe('AppDocRootComponent', () => {
       NoopAnimationsModule,
       HttpClientTestingModule,
       RouterTestingModule,
-      AppClientMaterialModule.forRoot(),
+      AppMaterialModule.forRoot(),
       FlexLayoutModule,
       StoreModule.forRoot({ router: routerReducer }),
       MarkdownModule.forRoot(markdownModuleConfig),

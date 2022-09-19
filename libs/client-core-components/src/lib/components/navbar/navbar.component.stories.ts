@@ -4,10 +4,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppClientMaterialModule } from '@app/client-material';
-import { AppClientPipesModule } from '@app/client-pipes';
+import { AppMaterialModule } from '@app/client-material';
+import { AppPipesModule } from '@app/client-pipes';
 import { AppSidebarStoreModule } from '@app/client-store-sidebar';
-import { AppClientTranslateModule } from '@app/client-translate';
+import { AppTranslateModule } from '@app/client-translate';
 import { documentFactory, routerButton, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -35,12 +35,12 @@ const story: Story<AppNavbarComponent> = (args: Args) => ({
       FlexLayoutModule,
       HttpClientModule,
       RouterTestingModule,
-      AppClientMaterialModule.forRoot(),
+      AppMaterialModule.forRoot(),
       StoreModule.forRoot({}),
       EffectsModule.forRoot(),
       AppSidebarStoreModule.forRoot(),
-      AppClientTranslateModule,
-      AppClientPipesModule,
+      AppTranslateModule,
+      AppPipesModule,
     ],
     providers: [
       {

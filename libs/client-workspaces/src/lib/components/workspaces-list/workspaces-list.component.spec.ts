@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserTestingModule } from '@angular/platform-browser/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppClientMaterialModule } from '@app/client-material';
+import { AppMaterialModule } from '@app/client-material';
 import { AppTestingComponent } from '@app/client-unit-testing';
 
 import { AppWorkspaceWidgetComponent } from '../workspace-widget/workspace-widget.component';
@@ -21,7 +21,7 @@ describe('AppWorkspacesListComponent', () => {
             component: AppTestingComponent,
           },
         ]),
-        AppClientMaterialModule.forRoot(),
+        AppMaterialModule.forRoot(),
       ],
       declarations: [AppWorkspacesListComponent, AppWorkspaceWidgetComponent],
     })

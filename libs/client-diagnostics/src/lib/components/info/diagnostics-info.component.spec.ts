@@ -1,7 +1,7 @@
 import { HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppClientTranslateModule } from '@app/client-translate';
+import { AppTranslateModule } from '@app/client-translate';
 import {
   flushHttpRequests,
   getTestBedConfig,
@@ -16,7 +16,7 @@ describe('AppDiagnosticsInfoComponent', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
     declarations: [AppDiagnosticsInfoComponent],
     imports: [
-      AppClientTranslateModule.forRoot(),
+      AppTranslateModule.forRoot(),
       RouterTestingModule.withRoutes([
         { path: '', component: AppDiagnosticsInfoComponent },
         { path: '', redirectTo: '', pathMatch: 'full' },

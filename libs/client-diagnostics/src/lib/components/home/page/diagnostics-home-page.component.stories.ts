@@ -1,7 +1,7 @@
 import { APP_BASE_HREF, DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppClientMaterialModule } from '@app/client-material';
+import { AppMaterialModule } from '@app/client-material';
 import { AppHttpProgressStoreModule } from '@app/client-store-http-progress';
 import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
 import { StoreModule } from '@ngrx/store';
@@ -26,7 +26,7 @@ const story: Story<AppDiagnosticsHomePage> = (args: Args) => ({
     imports: [
       BrowserAnimationsModule,
       FlexLayoutModule,
-      AppClientMaterialModule.forRoot(),
+      AppMaterialModule.forRoot(),
       AppHttpProgressStoreModule.forRoot(),
       StoreModule.forRoot({}),
     ],

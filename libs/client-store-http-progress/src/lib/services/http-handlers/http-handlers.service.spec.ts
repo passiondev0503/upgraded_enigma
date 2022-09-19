@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { HttpTestingController } from '@angular/common/http/testing';
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { AppClientTranslateModule } from '@app/client-translate';
+import { AppTranslateModule } from '@app/client-translate';
 import {
   flushHttpRequests,
   getTestBedConfig,
@@ -22,7 +22,7 @@ import { AppHttpHandlersService } from './http-handlers.service';
 
 describe('AppHttpHandlersService', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    imports: [AppClientTranslateModule.forRoot(), AppHttpProgressStoreModule.forRoot()],
+    imports: [AppTranslateModule.forRoot(), AppHttpProgressStoreModule.forRoot()],
     providers: [toasterServiceProvider],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);

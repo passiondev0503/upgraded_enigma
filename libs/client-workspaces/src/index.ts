@@ -1,1 +1,1 @@
-export * from './lib/client-workspaces.module';
+export * from './lib/workspaces.module';

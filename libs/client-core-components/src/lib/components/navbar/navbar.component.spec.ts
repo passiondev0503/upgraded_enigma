@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { AppClientPipesModule } from '@app/client-pipes';
+import { AppPipesModule } from '@app/client-pipes';
 import { AppSidebarStoreModule, sidebarActions } from '@app/client-store-sidebar';
 import { getTestBedConfig, newTestBedMetadata } from '@app/client-unit-testing';
 import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@app/client-util';
@@ -12,7 +12,7 @@ import { AppNavbarComponent } from './navbar.component';
 
 describe('AppNavbarComponent', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    imports: [AppSidebarStoreModule.forRoot(), AppClientPipesModule],
+    imports: [AppSidebarStoreModule.forRoot(), AppPipesModule],
     declarations: [AppNavbarComponent],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);

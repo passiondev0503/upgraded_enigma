@@ -1,1 +1,1 @@
-export * from './lib/client-pipes.module';
+export * from './lib/pipes.module';

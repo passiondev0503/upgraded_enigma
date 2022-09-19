@@ -8,31 +8,31 @@ import { AppAuthenticatedGuard } from '@app/client-store-user';
 const clientRoutes: Route[] = [
   {
     path: '',
-    loadChildren: () => import('@app/client-diagnostics').then(mod => mod.AppClientDiagnosticsModule),
+    loadChildren: () => import('@app/client-diagnostics').then(mod => mod.AppDiagnosticsModule),
   },
   {
     path: 'user',
-    loadChildren: () => import('@app/client-user').then(mod => mod.AppClientUserModule),
+    loadChildren: () => import('@app/client-user').then(mod => mod.AppUserModule),
   },
   {
     path: 'workspaces',
     canActivate: [AppAuthenticatedGuard],
-    loadChildren: () => import('@app/client-workspaces').then(mod => mod.AppClientWorkspacesModule),
+    loadChildren: () => import('@app/client-workspaces').then(mod => mod.AppWorkspacesModule),
   },
   {
     path: 'chatbot',
     canActivate: [AppAuthenticatedGuard],
-    loadChildren: () => import('@app/client-chatbot').then(mod => mod.AppClientChatbotModule),
+    loadChildren: () => import('@app/client-chatbot').then(mod => mod.AppChatbotModule),
   },
   {
     path: '',
     outlet: 'sidebar',
-    loadChildren: () => import('@app/client-sidebar').then(mod => mod.AppClientSidebarModule),
+    loadChildren: () => import('@app/client-sidebar').then(mod => mod.AppSidebarModule),
   },
   {
     path: '',
     outlet: 'chatbot',
-    loadChildren: () => import('@app/client-chatbot').then(mod => mod.AppClientChatbotWidgetModule),
+    loadChildren: () => import('@app/client-chatbot').then(mod => mod.AppChatbotWidgetModule),
   },
   { path: '**', redirectTo: '' },
 ];

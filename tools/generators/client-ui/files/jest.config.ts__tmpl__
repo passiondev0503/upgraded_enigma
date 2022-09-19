@@ -3,7 +3,7 @@ const jestPresetAngularSerializers = require('jest-preset-angular/build/serializ
 const config = {
   coverageDirectory: '../../coverage/libs/<%= name %>',
   coverageThreshold: {
-    // TODO: bump unit test and remove this override
+    // TODO: bump unit test coverage and remove this override
     global: {
       branches: 0,
       functions: 0,

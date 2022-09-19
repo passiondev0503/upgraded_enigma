@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserTestingModule } from '@angular/platform-browser/testing';
-import { AppClientMaterialModule } from '@app/client-material';
+import { AppMaterialModule } from '@app/client-material';
 
 import { AppWorkspaceTimerComponent } from './workspace-timer.component';
 
@@ -10,7 +10,7 @@ describe('AppWorkspaceTimerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     void TestBed.configureTestingModule({
-      imports: [BrowserTestingModule, AppClientMaterialModule.forRoot()],
+      imports: [BrowserTestingModule, AppMaterialModule.forRoot()],
       declarations: [AppWorkspaceTimerComponent],
     })
       .compileComponents()
