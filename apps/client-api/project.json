@@ -19,12 +19,14 @@
           "optimization": true
         }
       },
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "options": {
         "assets": ["apps/client-api/src/assets"],
         "main": "apps/client-api/src/main.ts",
         "outputPath": "dist/apps/client-api",
-        "tsConfig": "apps/client-api/tsconfig.app.json"
+        "tsConfig": "apps/client-api/tsconfig.app.json",
+        "target": "node",
+        "compiler": "tsc"
       }
     },
     "lint": {

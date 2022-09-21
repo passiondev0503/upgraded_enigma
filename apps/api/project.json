@@ -30,7 +30,7 @@
           "optimization": true
         }
       },
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "options": {
         "assets": ["apps/api/src/assets"],
         "budgets": [
@@ -43,7 +43,9 @@
         "buildLibsFromSource": true,
         "main": "apps/api/src/main.ts",
         "outputPath": "dist/apps/api",
-        "tsConfig": "apps/api/tsconfig.app.json"
+        "tsConfig": "apps/api/tsconfig.app.json",
+        "target": "node",
+        "compiler": "tsc"
       }
     },
     "lint": {
