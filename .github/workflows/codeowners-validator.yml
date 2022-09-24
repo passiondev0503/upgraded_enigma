@@ -30,7 +30,7 @@ jobs:
 
       - name: Get codeowners
         id: get-codeowners
-        run: npx nx run tools:get-codeowners
+        run: npx nx run tools:action-codeowners
 
   validate:
     needs: codeowners
