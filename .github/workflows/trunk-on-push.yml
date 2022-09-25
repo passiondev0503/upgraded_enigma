@@ -18,10 +18,6 @@ jobs:
   test-build-deploy:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
@@ -64,45 +60,13 @@ jobs:
               - 'android/**'
               - 'capacitor.config.json'
 
-      - name: Disable session history
+      - name: Setup environment
         if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}
-        uses: rfprod/nx-ng-starter/.github/actions/disable-session-history@main
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}
-        uses: actions/setup-node@v3
+        uses: ./.github/actions/setup-environment
         with:
-          node-version: ${{ matrix.node-version }}
-          check-latest: true
-
-      - name: Configure kernel
-        if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}
-        uses: rfprod/nx-ng-starter/.github/actions/configure-kernel@main
-
-      - name: Use yarn v1 required for integrity check
-        if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}
-        uses: rfprod/nx-ng-starter/.github/actions/use-yarn-v1@main
-
-      - name: Workspace cache
-        if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}
-        id: workspace-cache
-        uses: rfprod/nx-ng-starter/.github/actions/workspace-cache@main
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Workspace integrity check
-        if: ${{ (steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true') && steps.workspace-cache.outputs.cache-hit == 'true' }}
-        run: yarn workspace:integrity-check
-
-      - name: Install project dependencies
-        if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}
-        run: yarn install:ci
-
-      - name: Install global dependencies
-        if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}
-        run: |
-          npm i -g firebase-tools @compodoc/compodoc
-          npx cypress install
+          compodoc: true
+          cypress: true
+          firebase-tools: true
 
       - name: Lint all
         if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}
@@ -136,28 +100,28 @@ jobs:
           npx nx run documentation:build-storybook || true
           cp -r ./dist/storybook/documentation ./dist/apps/documentation/assets/storybook || true
 
-      - name: Check repository owner
+      - name: Check origin
         if: ${{ steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true' }}
-        id: check-repo-owner
-        uses: rfprod/nx-ng-starter/.github/actions/check-repo-owner@main
+        id: check-origin
+        uses: ./.github/actions/check-origin
         with:
           original-owner: 'upgraded-enigma'
 
       - name: Deploy client
-        if: ${{ (steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true') && steps.check-repo-owner.outputs.origin == 'true' }}
+        if: ${{ (steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true') && steps.check-origin.outputs.origin == 'true' }}
         run: yarn firebase:deploy:ci:client || exit 1
         env:
           FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
 
       - name: Deploy documentation
-        if: ${{ (steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true') && steps.check-repo-owner.outputs.origin == 'true' }}
+        if: ${{ (steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true') && steps.check-origin.outputs.origin == 'true' }}
         run: yarn firebase:deploy:ci:documentation || exit 1
         env:
           FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
 
       # This job works only with a paid plan like Blaze
       # - name: Deploy api
-      #   if: ${{ (steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true') && steps.check-repo-owner.outputs.origin == 'true' }}
+      #   if: ${{ (steps.changes.outputs.nx == 'true' || steps.changes.outputs.dependencies == 'true') && steps.check-origin.outputs.origin == 'true' }}
       #   run: |
       #     npx nx build api --configuration firebase
       #     yarn firebase:deploy:ci:api || exit 1

@@ -17,10 +17,6 @@ jobs:
   e2e-test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
       - name: Print inputs
         run: |
@@ -32,23 +28,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Disable session history
-        uses: rfprod/nx-ng-starter/.github/actions/disable-session-history@main
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Setup environment
+        uses: ./.github/actions/setup-environment
         with:
-          node-version: ${{ matrix.node-version }}
-          check-latest: true
-
-      - name: Configure kernel
-        uses: rfprod/nx-ng-starter/.github/actions/configure-kernel@main
-
-      - name: Install project dependencies
-        run: yarn install:ci
-
-      - name: Install Cypress
-        run: npx cypress install
+          cypress: true
 
       - name: E2E all
         run: |

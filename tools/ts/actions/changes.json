@@ -1,0 +1,6 @@
+{
+  "dependencies": ["yarn.lock"],
+  "shelltools": ["tools/shell/**"],
+  "storybook": [".storybook/**", "*.stories.ts", "apps/**", "libs/**", "tsconfig.base.json"],
+  "tools": ["tools/executors/**", "tools/generators/**", "tools/ts/**", "tools/*.json"]
+}
