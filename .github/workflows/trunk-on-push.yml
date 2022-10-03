@@ -38,6 +38,7 @@ jobs:
         uses: ./.github/actions/check-origin
 
   test-build-deploy:
+    needs: checks
     runs-on: ubuntu-latest
 
     steps:
