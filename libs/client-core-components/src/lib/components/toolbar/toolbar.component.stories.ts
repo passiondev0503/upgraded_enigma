@@ -1,4 +1,5 @@
 import { APP_BASE_HREF, DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,6 +32,7 @@ const story: Story<AppToolbarComponent> = (args: Args) => ({
     imports: [
       BrowserAnimationsModule,
       FlexLayoutModule,
+      HttpClientModule,
       RouterTestingModule,
       StoreModule.forRoot({}),
       EffectsModule.forRoot(),
@@ -86,5 +88,5 @@ primary.parameters = {
    * Use legacy Angular renderer.
    * See docs https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#new-angular-renderer
    */
-  angularLegacyRendering: true,
+  // angularLegacyRendering: true,
 };

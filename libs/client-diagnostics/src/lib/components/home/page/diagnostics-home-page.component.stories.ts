@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from '@app/client-material';
 import { AppHttpProgressStoreModule } from '@app/client-store-http-progress';
 import { documentFactory, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { Args, Story } from '@storybook/angular/types-6-0';
 
@@ -29,6 +30,7 @@ const story: Story<AppDiagnosticsHomePage> = (args: Args) => ({
       AppMaterialModule.forRoot(),
       AppHttpProgressStoreModule.forRoot(),
       StoreModule.forRoot({}),
+      EffectsModule.forRoot(),
     ],
     providers: [
       {
@@ -60,5 +62,5 @@ primary.parameters = {
    * Use legacy Angular renderer.
    * See docs https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#new-angular-renderer
    */
-  angularLegacyRendering: true,
+  // angularLegacyRendering: true,
 };

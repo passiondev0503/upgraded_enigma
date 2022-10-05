@@ -2,14 +2,14 @@ import { APP_BASE_HREF, DOCUMENT, LocationStrategy, PathLocationStrategy } from 
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AppMaterialModule } from '@app/client-material';
 import { AppPipesModule } from '@app/client-pipes';
 import { AppSidebarStoreModule } from '@app/client-store-sidebar';
 import { AppTranslateModule } from '@app/client-translate';
 import { documentFactory, routerButton, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
 import { EffectsModule } from '@ngrx/effects';
+import { NavigationActionTiming, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { Args, Story } from '@storybook/angular/types-6-0';
 import { of } from 'rxjs';
@@ -34,13 +34,16 @@ const story: Story<AppNavbarComponent> = (args: Args) => ({
       BrowserAnimationsModule,
       FlexLayoutModule,
       HttpClientModule,
-      RouterTestingModule,
       AppMaterialModule.forRoot(),
       StoreModule.forRoot({}),
       EffectsModule.forRoot(),
       AppSidebarStoreModule.forRoot(),
       AppTranslateModule,
       AppPipesModule,
+      RouterModule,
+      StoreRouterConnectingModule.forRoot({
+        navigationActionTiming: NavigationActionTiming.PostActivation,
+      }),
     ],
     providers: [
       {
@@ -50,6 +53,7 @@ const story: Story<AppNavbarComponent> = (args: Args) => ({
           navigate: () => new Promise<boolean>(resolve => resolve(true)),
         },
       },
+      { provide: ActivatedRoute, useValue: {} },
       {
         provide: LocationStrategy,
         useClass: PathLocationStrategy,
@@ -83,5 +87,5 @@ primary.parameters = {
    * Use legacy Angular renderer.
    * See docs https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#new-angular-renderer
    */
-  angularLegacyRendering: true,
+  // angularLegacyRendering: true,
 };
