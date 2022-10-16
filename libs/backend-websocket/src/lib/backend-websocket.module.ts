@@ -1,4 +1,4 @@
-import { AppDiagnosticsService } from '@app/backend-diagnostics';
+import { diagnosticsModuleProviders } from '@app/backend-diagnostics';
 import { DynamicModule, Module } from '@nestjs/common';
 
 import { AppEventsGateway } from './gateway/events.gateway';
@@ -8,7 +8,7 @@ export class AppWebsocketModule {
   public static forRoot(): DynamicModule {
     return {
       module: AppWebsocketModule,
-      providers: [AppEventsGateway, AppDiagnosticsService],
+      providers: [AppEventsGateway, ...diagnosticsModuleProviders],
     };
   }
 }

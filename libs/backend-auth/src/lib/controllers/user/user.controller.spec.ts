@@ -1,8 +1,7 @@
 import { JwtModule } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { AppAuthService } from '../service/auth.service';
-import { AppUserService } from '../service/user.service';
+import { authModuleProviders } from '../../backend-auth.module';
 import { AppUserController } from './user.controller';
 
 describe('AppUserController', () => {
@@ -16,7 +15,7 @@ describe('AppUserController', () => {
         }),
       ],
       controllers: [AppUserController],
-      providers: [AppUserService, AppAuthService],
+      providers: [...authModuleProviders],
     }).compile();
   });
 

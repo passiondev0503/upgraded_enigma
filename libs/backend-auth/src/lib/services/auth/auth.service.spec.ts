@@ -1,8 +1,8 @@
 import { JwtModule } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 
+import { authModuleProviders } from '../../backend-auth.module';
 import { AppAuthService } from './auth.service';
-import { AppUserService } from './user.service';
 
 describe('AppAuthService', () => {
   let service: AppAuthService;
@@ -14,7 +14,7 @@ describe('AppAuthService', () => {
           secret: 'jwtsecret',
         }),
       ],
-      providers: [AppAuthService, AppUserService],
+      providers: [...authModuleProviders],
     }).compile();
 
     service = app.get<AppAuthService>(AppAuthService);

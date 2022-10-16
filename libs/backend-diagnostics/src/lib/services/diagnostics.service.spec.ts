@@ -1,13 +1,20 @@
 import { Test } from '@nestjs/testing';
+import { exec } from 'child_process';
 
-import { AppDiagnosticsService } from './diagnostics.service';
+import { AppDiagnosticsService, CHILD_PROCESS_EXEC } from './diagnostics.service';
 
 describe('AppDiagnosticsService', () => {
   let service: AppDiagnosticsService;
 
   beforeAll(async () => {
     const app = await Test.createTestingModule({
-      providers: [AppDiagnosticsService],
+      providers: [
+        AppDiagnosticsService,
+        {
+          provide: CHILD_PROCESS_EXEC,
+          useValue: exec,
+        },
+      ],
     }).compile();
 
     service = app.get<AppDiagnosticsService>(AppDiagnosticsService);

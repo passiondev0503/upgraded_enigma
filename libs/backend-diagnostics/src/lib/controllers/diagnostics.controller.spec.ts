@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { AppDiagnosticsService } from '../service/diagnostics.service';
+import { diagnosticsModuleProviders } from '../backend-diagnostics.module';
 import { AppDiagnosticsController } from './diagnostics.controller';
 
 describe('AppDiagnosticsController', () => {
@@ -9,7 +9,7 @@ describe('AppDiagnosticsController', () => {
   beforeAll(async () => {
     app = await Test.createTestingModule({
       controllers: [AppDiagnosticsController],
-      providers: [AppDiagnosticsService],
+      providers: [...diagnosticsModuleProviders],
     }).compile();
   });
 

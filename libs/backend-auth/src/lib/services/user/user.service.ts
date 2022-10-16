@@ -4,8 +4,12 @@ import * as fs from 'fs';
 import { Glob } from 'glob';
 import { Observable } from 'rxjs';
 
+import { IExportedPasswords, IRsaKeys, IUserService, TUserConfigPayload } from '../../interfaces/user.interface';
+
+export const USER_SERVICE_TOKEN = Symbol('USER_SERVICE_TOKEN');
+
 @Injectable()
-export class AppUserService {
+export class AppUserService implements IUserService {
   private readonly cwd = process.cwd();
 
   public readonly userConfigPath = `${this.cwd}/.config/user.json`;
@@ -83,7 +87,7 @@ export class AppUserService {
   /**
    * Configures user.
    */
-  public config(newValues: Partial<IUser>) {
+  public config(payload: TUserConfigPayload) {
     return new Observable<IUser>(observer => {
       fs.readFile(this.userConfigPath, (readError, data) => {
         if (readError !== null) {
@@ -91,7 +95,7 @@ export class AppUserService {
         } else {
           const user: IUser = JSON.parse(data.toString());
 
-          for (const [key, value] of Object.entries(newValues)) {
+          for (const [key, value] of Object.entries(payload)) {
             if (key in user) {
               user[key] = value;
             }
@@ -113,7 +117,7 @@ export class AppUserService {
   /**
    * Saves user RSA keys to files.
    */
-  public saveKeys(keyPair: { public: string; private: string }) {
+  public saveKeys(keyPair: IRsaKeys) {
     return new Observable<IUser>(observer => {
       fs.readFile(this.userConfigPath, (readError, data) => {
         if (readError !== null) {
@@ -195,7 +199,7 @@ export class AppUserService {
    */
   public exportPasswords(passwords: IUserPassword[]) {
     const exportPath = this.userPasswordsExportPath();
-    return new Observable<{ path: string; passwords: IUserPassword[] }>(observer => {
+    return new Observable<IExportedPasswords>(observer => {
       const data = JSON.stringify(passwords);
       fs.writeFile(exportPath, data, writeError => {
         if (writeError !== null) {

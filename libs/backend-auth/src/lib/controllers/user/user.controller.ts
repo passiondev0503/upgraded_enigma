@@ -1,17 +1,22 @@
 import { AppUserPassword, IUser } from '@app/backend-interfaces';
-import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Post } from '@nestjs/common';
 import { keypair } from 'keypair';
 import { combineLatest, of, throwError } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 
-import { AppAuthService } from '../service/auth.service';
-import { AppUserService } from '../service/user.service';
+import type { IAuthService } from '../../interfaces/auth.interface';
+import type { IUserService } from '../../interfaces/user.interface';
+import { AUTH_SERVICE_TOKEN } from '../../services/auth/auth.service';
+import { USER_SERVICE_TOKEN } from '../../services/user/user.service';
 
 @Controller()
 export class AppUserController {
   private readonly rsaKeysExist$ = combineLatest([this.userService.userKeyExists(), this.userService.userKeyExists(true)]);
 
-  constructor(private readonly userService: AppUserService, private readonly authService: AppAuthService) {}
+  constructor(
+    @Inject(USER_SERVICE_TOKEN) private readonly userService: IUserService,
+    @Inject(AUTH_SERVICE_TOKEN) private readonly authService: IAuthService,
+  ) {}
 
   @Get('user')
   public user() {

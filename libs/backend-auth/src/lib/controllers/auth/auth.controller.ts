@@ -1,12 +1,13 @@
 import { AppMessage, AppUserLoginCredentials, AppUserLogoutCredentials, IUser } from '@app/backend-interfaces';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { Observable } from 'rxjs';
 
-import { AppAuthService } from '../service/auth.service';
+import type { IAuthService } from '../../interfaces/auth.interface';
+import { AUTH_SERVICE_TOKEN } from '../../services/auth/auth.service';
 
 @Controller()
 export class AppAuthController {
-  constructor(private readonly authService: AppAuthService) {}
+  constructor(@Inject(AUTH_SERVICE_TOKEN) private readonly authService: IAuthService) {}
 
   @Get('auth')
   public ping(): AppMessage {

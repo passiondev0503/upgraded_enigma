@@ -1,21 +1,19 @@
 import { AppMessage, IUser, IUserLoginCredentials, IUserLogoutCredentials } from '@app/backend-interfaces';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as crypto from 'crypto';
 import { of, throwError } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { AppUserService } from './user.service';
+import { IAuthPayload, IAuthService, IAuthTokenObject } from '../../interfaces/auth.interface';
+import type { IUserService } from '../../interfaces/user.interface';
+import { USER_SERVICE_TOKEN } from '../user/user.service';
 
-export interface IAuthPayload {
-  email: string;
-  name: string;
-  expires: Date;
-}
+export const AUTH_SERVICE_TOKEN = Symbol('AUTH_SERVICE_TOKEN');
 
 @Injectable()
-export class AppAuthService {
-  constructor(private readonly jwt: JwtService, private readonly userService: AppUserService) {}
+export class AppAuthService implements IAuthService {
+  constructor(private readonly jwt: JwtService, @Inject(USER_SERVICE_TOKEN) private readonly userService: IUserService) {}
 
   public encryptStringWithRsaPublicKey(input: string, publicKey: crypto.RsaPublicKey | crypto.KeyLike) {
     const buffer = Buffer.from(input);
@@ -29,7 +27,7 @@ export class AppAuthService {
     return decrypted.toString('utf8');
   }
 
-  public generateJwtToken(payload: Omit<IAuthPayload, 'expires'>) {
+  public generateJwtToken(payload: IAuthPayload) {
     const expires = new Date();
     const daysInWeek = 7;
     expires.setDate(expires.getDate() + daysInWeek);
@@ -38,7 +36,7 @@ export class AppAuthService {
   }
 
   public decryptJWToken(token: string) {
-    const result = this.jwt.decode(token) as IAuthPayload;
+    const result = <IAuthTokenObject>this.jwt.decode(token);
     return result;
   }
 

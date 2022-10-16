@@ -33,7 +33,7 @@ import { environment } from '../environments/environment';
     },
   ],
 })
-export class AppClientApiAppModule implements NestModule {
+export class AppClientApiModule implements NestModule {
   public configure(consumer: MiddlewareConsumer) {
     consumer.apply(AppLoggerMiddleware).forRoutes('*');
   }
