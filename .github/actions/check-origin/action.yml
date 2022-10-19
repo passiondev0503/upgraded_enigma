@@ -22,7 +22,7 @@ inputs:
   original-owner:
     description: Original repository owner
     required: true
-    default: 'rfprod'
+    default: 'upgraded-enigma'
 outputs:
   origin:
     description: Indicates that the repository owner is the original owner which means that it is not a fork. Has two values - 'true' if the repo owner is the original owner, 'false' if the repo owner is not the original owner, i.e. it is a fork.
