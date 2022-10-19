@@ -30,3 +30,20 @@ runs:
       env:
         PREMERGE: ${{ inputs.premerge }}
         TRUNK: ${{ inputs.trunk }}
+
+    - name: Print changes
+      shell: bash
+      run: |
+        echo "### :rocket: Changes" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- DEPENDENCIES: $DEPENDENCIES" >> $GITHUB_STEP_SUMMARY
+        echo "- MOBILE: $MOBILE" >> $GITHUB_STEP_SUMMARY
+        echo "- SHELLTOOLS: $SHELLTOOLS" >> $GITHUB_STEP_SUMMARY
+        echo "- SRC: $SRC" >> $GITHUB_STEP_SUMMARY
+        echo "- STORYBOOK: $STORYBOOK" >> $GITHUB_STEP_SUMMARY
+      env:
+        DEPENDENCIES: ${{ fromJSON(steps.check-changes.outputs.changes).dependencies }}
+        MOBILE: ${{ fromJSON(steps.check-changes.outputs.changes).mobile }}
+        SHELLTOOLS: ${{ fromJSON(steps.check-changes.outputs.changes).shelltools }}
+        SRC: ${{ fromJSON(steps.check-changes.outputs.changes).src }}
+        STORYBOOK: ${{ fromJSON(steps.check-changes.outputs.changes).storybook }}

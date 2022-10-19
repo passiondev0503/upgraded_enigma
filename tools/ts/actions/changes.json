@@ -2,7 +2,6 @@
   "dependencies": ["yarn.lock"],
   "mobile": ["android/**", "capacitor.config.json"],
   "shelltools": ["tools/shell/**"],
-  "storybook": [".storybook/**", "*.stories.ts", "apps/**", "libs/**", "tsconfig.base.json"],
   "src": [
     "apps/**",
     "libs/**",
@@ -21,5 +20,5 @@
     ".protolint.yaml",
     ".stylelint*"
   ],
-  "tools": ["tools/executors/**", "tools/generators/**", "tools/ts/**", "tools/*.json"]
+  "storybook": [".storybook/**", "*.stories.ts", "apps/**", "libs/**", "tsconfig.base.json"]
 }
