@@ -24,7 +24,7 @@ runs:
       id: get-variables
       shell: bash
       run: |
-        echo "::set-output name=commitsha::$(echo ${GITHUB_SHA})";
+        echo "commitsha=$(echo ${GITHUB_SHA})" >> $GITHUB_OUTPUT
 
     - name: Workspace cache (npm, yarn, nx, jest)
       uses: actions/cache@v3
