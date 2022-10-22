@@ -1,6 +1,8 @@
+import { Config } from '@jest/types';
+
 const jestPresetAngularSerializers = require('jest-preset-angular/build/serializers');
 
-const config = {
+const config: Config.InitialOptions = {
   preset: '../../jest.preset.js',
   coverageDirectory: '../../coverage/libs/client-pwa-offline',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
