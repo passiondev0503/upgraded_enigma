@@ -82,6 +82,13 @@
       "options": {
         "tsConfig": "apps/api/tsconfig.app.json"
       },
+      "outputs": ["dist/out-tsc/apps/api"]
+    },
+    "prettier-check": {
+      "executor": "./tools/executors/prettier:check",
+      "options": {
+        "config": ""
+      },
       "outputs": ["{workspaceRoot}/dist/out-tsc/apps/api"]
     }
   }

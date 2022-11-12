@@ -210,6 +210,13 @@
       "options": {
         "tsConfig": "apps/documentation/tsconfig.app.json"
       },
+      "outputs": ["dist/out-tsc/apps/documentation"]
+    },
+    "prettier-check": {
+      "executor": "./tools/executors/prettier:check",
+      "options": {
+        "config": ""
+      },
       "outputs": ["{workspaceRoot}/dist/out-tsc/apps/documentation"]
     }
   }

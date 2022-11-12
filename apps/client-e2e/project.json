@@ -31,6 +31,13 @@
       "options": {
         "tsConfig": "apps/client-e2e/tsconfig.e2e.json"
       },
+      "outputs": ["dist/out-tsc/apps/client-e2e"]
+    },
+    "prettier-check": {
+      "executor": "./tools/executors/prettier:check",
+      "options": {
+        "config": ""
+      },
       "outputs": ["{workspaceRoot}/dist/out-tsc/apps/client-e2e"]
     }
   }

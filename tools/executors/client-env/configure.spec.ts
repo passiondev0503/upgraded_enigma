@@ -11,8 +11,8 @@ import { IExecutorOptions, TSupportedApp } from './schema';
 
 describe('clientEnvExecutor', () => {
   const setup = (app: TSupportedApp = 'client', mockEnvClient?: boolean) => {
-    const envClientMock = envClient.AppClientEnvConfig as jest.Mock;
-    const envDocumentationMock = envDocumentation.AppDocumentationEnvConfig as jest.Mock;
+    const envClientMock = <jest.Mock>envClient.AppClientEnvConfig;
+    const envDocumentationMock = <jest.Mock>envDocumentation.AppDocumentationEnvConfig;
     if (mockEnvClient === true) {
       envClientMock.mockImplementation((opts: IExecutorOptions, ctx: ExecutorContext) => ({
         execute: () => new Promise<void>(resolve => resolve()),

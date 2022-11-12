@@ -26,6 +26,13 @@
       "options": {
         "tsConfig": "libs/client-store-diagnostics/tsconfig.lib.json"
       },
+      "outputs": ["dist/out-tsc/libs/client-store-diagnostics"]
+    },
+    "prettier-check": {
+      "executor": "./tools/executors/prettier:check",
+      "options": {
+        "config": ""
+      },
       "outputs": ["{workspaceRoot}/dist/out-tsc/libs/client-store-diagnostics"]
     }
   }

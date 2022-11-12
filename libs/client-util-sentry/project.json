@@ -26,6 +26,13 @@
       "options": {
         "tsConfig": "libs/client-util-sentry/tsconfig.lib.json"
       },
+      "outputs": ["dist/out-tsc/libs/client-util-sentry"]
+    },
+    "prettier-check": {
+      "executor": "./tools/executors/prettier:check",
+      "options": {
+        "config": ""
+      },
       "outputs": ["{workspaceRoot}/dist/out-tsc/libs/client-util-sentry"]
     }
   }
