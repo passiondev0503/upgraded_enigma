@@ -101,7 +101,7 @@
     "default": {
       "options": {
         "cacheDirectory": "/tmp/nx/upgraded-enigma",
-        "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook", "tsc-check", "prettier-check"],
+        "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook", "tsc-check", "prettier-check", "stylelint-check"],
         "parallel": 1,
         "runtimeCacheInputs": ["node -v", "echo $IMPORTANT_ENV_VAR"]
       },
