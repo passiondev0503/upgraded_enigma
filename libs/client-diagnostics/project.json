@@ -32,6 +32,13 @@
       },
       "outputs": ["{options.outputFile}"]
     },
+    "prettier-check": {
+      "executor": "./tools/executors/prettier:check",
+      "options": {
+        "config": ""
+      },
+      "outputs": ["{workspaceRoot}/dist/prettier/libs/client-diagnostics"]
+    },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
       "options": {
@@ -40,6 +47,13 @@
         "configDir": "libs/client-diagnostics/.storybook",
         "port": 4400
       }
+    },
+    "stylelint-check": {
+      "executor": "./tools/executors/stylelint:check",
+      "options": {
+        "config": ""
+      },
+      "outputs": ["{workspaceRoot}/dist/stylelint/libs/client-diagnostics"]
     },
     "test": {
       "executor": "@nrwl/jest:jest",
@@ -55,13 +69,6 @@
         "tsConfig": "libs/client-diagnostics/tsconfig.lib.json"
       },
       "outputs": ["dist/out-tsc/libs/client-diagnostics"]
-    },
-    "prettier-check": {
-      "executor": "./tools/executors/prettier:check",
-      "options": {
-        "config": ""
-      },
-      "outputs": ["{workspaceRoot}/dist/out-tsc/libs/client-diagnostics"]
     }
   }
 }

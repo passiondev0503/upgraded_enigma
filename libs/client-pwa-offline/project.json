@@ -12,6 +12,20 @@
       },
       "outputs": ["{options.outputFile}"]
     },
+    "prettier-check": {
+      "executor": "./tools/executors/prettier:check",
+      "options": {
+        "config": ""
+      },
+      "outputs": ["{workspaceRoot}/dist/prettier/libs/client-pwa-offline"]
+    },
+    "stylelint-check": {
+      "executor": "./tools/executors/stylelint:check",
+      "options": {
+        "config": ""
+      },
+      "outputs": ["{workspaceRoot}/dist/stylelint/libs/client-pwa-offline"]
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
@@ -26,13 +40,6 @@
         "tsConfig": "libs/client-pwa-offline/tsconfig.lib.json"
       },
       "outputs": ["dist/out-tsc/libs/client-pwa-offline"]
-    },
-    "prettier-check": {
-      "executor": "./tools/executors/prettier:check",
-      "options": {
-        "config": ""
-      },
-      "outputs": ["{workspaceRoot}/dist/out-tsc/libs/client-pwa-offline"]
     }
   }
 }

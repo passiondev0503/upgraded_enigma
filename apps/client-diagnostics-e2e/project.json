@@ -32,13 +32,6 @@
         "tsConfig": "apps/client-diagnostics-e2e/tsconfig.e2e.json"
       },
       "outputs": ["dist/out-tsc/apps/client-diagnostics-e2e"]
-    },
-    "prettier-check": {
-      "executor": "./tools/executors/prettier:check",
-      "options": {
-        "config": ""
-      },
-      "outputs": ["{workspaceRoot}/dist/out-tsc/apps/client-diagnostics-e2e"]
     }
   }
 }

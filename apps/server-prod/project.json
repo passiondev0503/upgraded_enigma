@@ -21,11 +21,11 @@
       "executor": "@nrwl/webpack:webpack",
       "options": {
         "assets": ["apps/server-prod/src/assets"],
+        "compiler": "tsc",
         "main": "apps/server-prod/src/main.ts",
         "outputPath": "dist/apps/server-prod",
-        "tsConfig": "apps/server-prod/tsconfig.app.json",
         "target": "node",
-        "compiler": "tsc"
+        "tsConfig": "apps/server-prod/tsconfig.app.json"
       },
       "outputs": ["{options.outputPath}"]
     },
@@ -57,13 +57,6 @@
         "tsConfig": "apps/server-prod/tsconfig.app.json"
       },
       "outputs": ["dist/out-tsc/apps/server-prod"]
-    },
-    "prettier-check": {
-      "executor": "./tools/executors/prettier:check",
-      "options": {
-        "config": ""
-      },
-      "outputs": ["{workspaceRoot}/dist/out-tsc/apps/server-prod"]
     }
   }
 }

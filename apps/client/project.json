@@ -106,6 +106,13 @@
         "lintFilePatterns": ["apps/client/**/*.ts"]
       }
     },
+    "prettier-check": {
+      "executor": "./tools/executors/prettier:check",
+      "options": {
+        "config": ""
+      },
+      "outputs": ["{workspaceRoot}/dist/prettier/apps/client"]
+    },
     "serve": {
       "configurations": {
         "production": {
@@ -117,6 +124,13 @@
         "browserTarget": "client:build",
         "proxyConfig": "apps/client/proxy.conf.json"
       }
+    },
+    "stylelint-check": {
+      "executor": "./tools/executors/stylelint:check",
+      "options": {
+        "config": ""
+      },
+      "outputs": ["{workspaceRoot}/dist/stylelint/apps/client"]
     },
     "test": {
       "executor": "@nrwl/jest:jest",
@@ -132,13 +146,6 @@
         "tsConfig": "apps/client/tsconfig.app.json"
       },
       "outputs": ["dist/out-tsc/apps/client"]
-    },
-    "prettier-check": {
-      "executor": "./tools/executors/prettier:check",
-      "options": {
-        "config": ""
-      },
-      "outputs": ["{workspaceRoot}/dist/out-tsc/apps/client"]
     }
   }
 }

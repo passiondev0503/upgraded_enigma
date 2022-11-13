@@ -1,7 +1,7 @@
 import { Config } from '@jest/types';
 
 const config: Config.InitialOptions = {
-  coverageDirectory: '../../coverage/apps/client-api',
+  coverageDirectory: '../../coverage/apps/api-client',
   coverageThreshold: {
     global: {
       branches: 100,
@@ -10,7 +10,7 @@ const config: Config.InitialOptions = {
       statements: 100,
     },
   },
-  displayName: 'client-api',
+  displayName: 'api-client',
   preset: '../../jest.preset.js',
   globals: {},
   resolver: '../../tools/js/jest-nestjs-resolver.js',
