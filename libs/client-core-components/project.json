@@ -5,6 +5,7 @@
       "style": "scss"
     }
   },
+  "name": "client-core-components",
   "prefix": "app",
   "projectType": "library",
   "sourceRoot": "libs/client-core-components/src",

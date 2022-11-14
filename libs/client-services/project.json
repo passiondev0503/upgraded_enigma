@@ -5,6 +5,7 @@
       "style": "scss"
     }
   },
+  "name": "client-services",
   "prefix": "app",
   "projectType": "library",
   "sourceRoot": "libs/client-services/src",

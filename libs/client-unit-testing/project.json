@@ -5,6 +5,7 @@
       "style": "scss"
     }
   },
+  "name": "client-unit-testing",
   "prefix": "app",
   "projectType": "library",
   "sourceRoot": "libs/client-unit-testing/src",

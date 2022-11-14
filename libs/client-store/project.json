@@ -5,6 +5,7 @@
       "style": "scss"
     }
   },
+  "name": "client-store",
   "prefix": "app",
   "projectType": "library",
   "sourceRoot": "libs/client-store/src",

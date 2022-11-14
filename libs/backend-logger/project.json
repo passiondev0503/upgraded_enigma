@@ -1,5 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "backend-logger",
   "projectType": "library",
   "sourceRoot": "libs/backend-logger/src",
   "tags": ["scope:backend-logger", "type:feature"],

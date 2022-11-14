@@ -5,6 +5,7 @@
       "style": "scss"
     }
   },
+  "name": "client",
   "prefix": "app",
   "projectType": "application",
   "sourceRoot": "apps/client/src",

@@ -5,6 +5,7 @@
       "style": "scss"
     }
   },
+  "name": "documentation",
   "prefix": "app",
   "projectType": "application",
   "sourceRoot": "apps/documentation/src",

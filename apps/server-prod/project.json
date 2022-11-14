@@ -1,5 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "server-prod",
   "projectType": "application",
   "sourceRoot": "apps/server-prod/src",
   "tags": ["scope:server-prod", "type:application"],

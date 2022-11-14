@@ -5,6 +5,7 @@
       "style": "scss"
     }
   },
+  "name": "client-translate",
   "prefix": "app",
   "projectType": "library",
   "sourceRoot": "libs/client-translate/src",
