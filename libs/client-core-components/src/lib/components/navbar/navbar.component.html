@@ -15,25 +15,12 @@
 
   <span fxFlex="1 1 auto"></span>
 
-  <button
-    mat-button
-    *ngFor="let button of buttons | buttonsVisibility: auth.authenticated"
-    [routerLink]="button.routerLink"
-    [disabled]="button.routeActive()"
-    (click)="sidebarCloseHandler()"
-    (click)="button.click ? button.click() : null"
-    [fxHide.xs]="true"
-    [fxHide.sm]="true"
-  >
-    <mat-icon>{{ button.icon }}</mat-icon> {{ button.title }}
-  </button>
-
-  <button mat-icon-button [matMenuTriggerFor]="mobileMenuTop" [fxHide.md]="true" [fxHide.lg]="true" [fxHide.xl]="true">
+  <button mat-icon-button [matMenuTriggerFor]="mobileMenuTop">
     <mat-icon *ngIf="!auth.authenticated">menu</mat-icon>
     <mat-icon *ngIf="auth.authenticated">account_circle</mat-icon>
   </button>
 
-  <mat-menu #mobileMenuTop="matMenu" [fxHide.md]="true" [fxHide.lg]="true" [fxHide.xl]="true">
+  <mat-menu #mobileMenuTop="matMenu">
     <a
       mat-menu-item
       *ngFor="let button of buttons | buttonsVisibility: auth.authenticated"

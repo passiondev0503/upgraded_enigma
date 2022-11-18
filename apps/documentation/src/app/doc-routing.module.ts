@@ -22,7 +22,6 @@ const docRoutes: Array<Route> = [
     RouterModule.forRoot(docRoutes, {
       initialNavigation: 'enabledBlocking',
       onSameUrlNavigation: 'reload',
-      relativeLinkResolution: 'legacy',
     }),
   ],
   exports: [RouterModule],

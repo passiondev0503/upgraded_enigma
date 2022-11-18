@@ -74,10 +74,11 @@
     <span fxFlex fxLayout="row" fxLayoutAlign="center center">
       <mat-form-field>
         <mat-select type="select" name="sortByCriterion" [(ngModel)]="sortByCriterion" floatPlaceholder="auto">
-          <mat-option value="">{{ 'name' | translate }}</mat-option>
+          <mat-option value="">{{ 'sortBy' | translate }}</mat-option>
+          <mat-option value="name">{{ 'name' | translate }}</mat-option>
           <mat-option value="timestamp">{{ 'timestamp' | translate }}</mat-option>
         </mat-select>
-        <mat-placeholder> <mat-icon matSuffix class="material-icons">sort</mat-icon> {{ 'sortBy' | translate }} </mat-placeholder>
+        <mat-icon matSuffix class="material-icons">sort</mat-icon>
       </mat-form-field>
     </span>
 

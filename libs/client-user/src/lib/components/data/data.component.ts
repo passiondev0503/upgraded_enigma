@@ -229,7 +229,7 @@ export class AppUserDataComponent {
           const sorted = { ...user, passwords: [...(user.passwords ?? [])] };
           if (val === 'timestamp') {
             sorted.passwords.sort((a, b) => b[val] - a[val]);
-          } else if (val === '') {
+          } else if (val === 'name' || val === '') {
             /*
              *	sort by name if sorting is set to none
              */

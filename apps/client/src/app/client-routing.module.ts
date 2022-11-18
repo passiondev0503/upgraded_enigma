@@ -45,7 +45,6 @@ const clientRoutes: Route[] = [
     RouterModule.forRoot(clientRoutes, {
       initialNavigation: 'enabledBlocking',
       onSameUrlNavigation: 'reload',
-      relativeLinkResolution: 'legacy',
     }),
   ],
   exports: [RouterModule],

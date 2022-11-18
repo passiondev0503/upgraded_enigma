@@ -1,8 +1,8 @@
 <div fxLayout="row wrap">
   <h3 fxFlex="100">Hello user. Welcome to this place.</h3>
 
-  <mat-chip-list [attr.aria-label]="'user.status' | translate" *ngIf="user$ | async as user">
-    <mat-chip [color]="user.status.initialized ? 'primary' : 'warn'" [disabled]="true" [selected]="true">
+  <mat-chip-set [attr.aria-label]="'user.status' | translate" *ngIf="user$ | async as user">
+    <mat-chip [color]="user.status.initialized ? 'primary' : 'warn'" [disabled]="true">
       <mat-icon>verified_user</mat-icon>
       &nbsp;
       {{ 'user.initialized' | translate }}
@@ -12,7 +12,6 @@
       [color]="user.status.encryption ? 'primary' : 'warn'"
       selectable="false"
       [disabled]="user.status.encryption"
-      [selected]="true"
       (click)="generateKeypair(user.status.encryption)"
     >
       <mat-icon>enhanced_encryption</mat-icon>
@@ -20,10 +19,10 @@
       {{ 'user.encryption' | translate }}
     </mat-chip>
 
-    <mat-chip *ngIf="user.passwords" [color]="user.passwords.length > 0 ? 'primary' : 'warn'" [disabled]="true" [selected]="true">
+    <mat-chip *ngIf="user.passwords" [color]="user.passwords.length > 0 ? 'primary' : 'warn'" [disabled]="true">
       <mat-icon>bookmarks</mat-icon>
       &nbsp;
       {{ 'passwords.count' | translate }}: {{ user?.passwords?.length }}
     </mat-chip>
-  </mat-chip-list>
+  </mat-chip-set>
 </div>
