@@ -1,6 +1,5 @@
 import { APP_BASE_HREF, DOCUMENT, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AppMaterialModule } from '@app/client-material';
@@ -32,7 +31,6 @@ const story: Story<AppNavbarComponent> = (args: Args) => ({
   moduleMetadata: {
     imports: [
       BrowserAnimationsModule,
-      FlexLayoutModule,
       HttpClientModule,
       AppMaterialModule.forRoot(),
       StoreModule.forRoot({}),

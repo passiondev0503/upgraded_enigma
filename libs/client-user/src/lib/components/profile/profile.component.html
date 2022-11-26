@@ -1,5 +1,5 @@
-<div fxLayout="row wrap">
-  <h3 fxFlex="100">Hello user. Welcome to this place.</h3>
+<div class="flex-wor-wrap">
+  <h3 class="flex--full">Hello user. Welcome to this place.</h3>
 
   <mat-chip-set [attr.aria-label]="'user.status' | translate" *ngIf="user$ | async as user">
     <mat-chip [color]="user.status.initialized ? 'primary' : 'warn'" [disabled]="true">

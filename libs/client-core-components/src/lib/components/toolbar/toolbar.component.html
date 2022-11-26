@@ -5,11 +5,11 @@
     <mat-icon title="close sidenav" *ngIf="sidebarOpened$ | async"> flip_to_back </mat-icon>
   </button>
 
-  <span fxFlex="1 1 auto"></span>
+  <span class="flex--full"></span>
 
   <app-theme-toggle (themeToggled)="toggleMaterialTheme($event)"></app-theme-toggle>
 
-  <span fxFlex="1 1 auto"></span>
+  <span class="flex--full"></span>
 
   <button mat-icon-button [matMenuTriggerFor]="mobileMenuBottom">
     <mat-icon>more_vert</mat-icon>

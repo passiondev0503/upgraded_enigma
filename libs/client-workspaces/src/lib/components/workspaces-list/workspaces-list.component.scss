@@ -4,7 +4,8 @@
   flex-wrap: wrap;
   padding: 5px;
 
-  & app-workspace-widget {
+  .widget {
+    flex: 0 1 auto;
     margin: 5px;
   }
 }

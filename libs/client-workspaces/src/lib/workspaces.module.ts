@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppMaterialModule } from '@app/client-material';
 
@@ -11,7 +10,7 @@ import { AppWorkspacesListComponent } from './components/workspaces-list/workspa
 import { AppWorkspacesRoutingModule } from './workspaces-routing.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, FlexLayoutModule, AppMaterialModule, AppWorkspacesRoutingModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, AppMaterialModule, AppWorkspacesRoutingModule],
   declarations: [AppWorkspacesListComponent, AppWorkspaceWidgetComponent, AppWorkspaceComponent, AppWorkspaceTimerComponent],
 })
 export class AppWorkspacesModule {}

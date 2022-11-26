@@ -1,26 +1,24 @@
 <div class="container" [innerHtml]="markedInstructions"></div>
 
-<div class="container" fxLayout="row wrap">
-  <h2 fxFlex="100">Diagnostics</h2>
+<div class="container">
+  <h2>Diagnostics</h2>
 
-  <ul fxFlex="100">
+  <ul>
     <li [innerHTML]="ping"></li>
   </ul>
 
-  <div fxFlex="100" fxLayout="row wrap" *ngIf="diagnosticsData">
-    <mat-list fxFlex fxFlex.lt-sm="100" fxShow [fxHide]="diagnosticsData.dynamicData.length === 0">
+  <div *ngIf="diagnosticsData">
+    <mat-list *ngIf="diagnosticsData.dynamicData.length > 0">
       <mat-list-item *ngFor="let unit of diagnosticsData.dynamicData">
-        <span fxFlex="5px" [ngStyle]="{ height: '80%', 'background-color': '#cecece', margin: '0 5px 0 0 ' }"></span>
-        <span fxFlex="50">{{ unit.name }}</span>
-        <span fxFlex="50">{{ unit.value }}</span>
+        <span matListItemTitle>{{ unit.name }}</span>
+        <span>{{ unit.value }}</span>
       </mat-list-item>
     </mat-list>
 
-    <mat-list fxFlex fxFlex.lt-sm="100" fxShow [fxHide]="diagnosticsData.staticData.length === 0">
+    <mat-list *ngIf="diagnosticsData.staticData.length > 0">
       <mat-list-item *ngFor="let unit of diagnosticsData.staticData">
-        <span fxFlex="5px" [ngStyle]="{ height: '80%', 'background-color': '#cecece', margin: '0 5px 0 0 ' }"></span>
-        <span fxFlex="50">{{ unit.name }}</span>
-        <span fxFlex="50">{{ unit.value }}</span>
+        <span matListItemTitle>{{ unit.name }}</span>
+        <span>{{ unit.value }}</span>
       </mat-list-item>
     </mat-list>
   </div>

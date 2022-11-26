@@ -1,4 +1,29 @@
+@use 'libs/client-core/src/lib/styles/partials/_flex.scss';
+
 :host {
   display: block;
   padding: 16px;
+}
+
+.container {
+  @extend .flex-row--wrap;
+}
+
+.divider {
+  @extend .flex--full;
+  width: 100%;
+}
+
+.section {
+  @extend .flex-row--wrap;
+  flex: 1 1 auto;
+  margin: 18px 0;
+}
+
+.control {
+  margin: 0 8px;
+}
+
+.hidden {
+  display: none;
 }

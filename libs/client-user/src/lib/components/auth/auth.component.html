@@ -1,70 +1,59 @@
-<div [ngStyle]="{ 'min-height': '100%' }" fxLayout="row" fxLayoutAlign="center center">
-  <form
-    fxFlex="50"
-    fxFlex.lt-sm="90"
-    fxLayout="row wrap"
-    fxLayoutAlign="center center"
-    fxFlayoutGap="10px"
-    [formGroup]="form"
-    (ngSubmit)="submitForm()"
-    novalidate
-  >
-    <legend fxFlex="100">
-      <h2 class="title">{{ 'loginInstructions' | translate }}</h2>
-    </legend>
+<form class="form" [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+  <legend>
+    <h2 class="title">{{ 'loginInstructions' | translate }}</h2>
+  </legend>
 
-    <mat-form-field fxFlex="100">
-      <input
-        matInput
-        type="text"
-        name="email"
-        formControlName="email"
-        placeholder="{{ 'email' | translate }}"
-        autocomplete="email"
-        required
-      />
-      <mat-icon matSuffix class="material-icons">email</mat-icon>
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      name="email"
+      formControlName="email"
+      placeholder="{{ 'email' | translate }}"
+      autocomplete="email"
+      required
+    />
+    <mat-icon matSuffix class="material-icons">email</mat-icon>
 
-      <mat-error *ngIf="form.controls.email.hasError('required')"> The value is required. </mat-error>
-      <mat-error *ngIf="form.controls.email.hasError('email')"> The value must be a valid email. </mat-error>
-    </mat-form-field>
+    <mat-error *ngIf="form.controls.email.hasError('required')"> The value is required. </mat-error>
+    <mat-error *ngIf="form.controls.email.hasError('email')"> The value must be a valid email. </mat-error>
+  </mat-form-field>
 
-    <mat-form-field fxFlex="100" *ngIf="passwordInputType$ | async as passwordInputType">
-      <input
-        matInput
-        [type]="passwordInputType"
-        name="password"
-        formControlName="password"
-        placeholder="{{ 'password' | translate }}"
-        autocomplete="current-password"
-        required
-      />
-      <mat-icon matSuffix class="material-icons password-switch" (click)="togglePasswordVisibility()" *ngIf="passwordInputType === 'text'">
-        visibility_off
-      </mat-icon>
-      <mat-icon
-        matSuffix
-        class="material-icons password-switch"
-        (click)="togglePasswordVisibility()"
-        *ngIf="passwordInputType === 'password'"
-      >
-        visibility
-      </mat-icon>
+  <mat-form-field *ngIf="passwordInputType$ | async as passwordInputType">
+    <input
+      matInput
+      [type]="passwordInputType"
+      name="password"
+      formControlName="password"
+      placeholder="{{ 'password' | translate }}"
+      autocomplete="current-password"
+      required
+    />
+    <mat-icon matSuffix class="material-icons password-switch" (click)="togglePasswordVisibility()" *ngIf="passwordInputType === 'text'">
+      visibility_off
+    </mat-icon>
+    <mat-icon
+      matSuffix
+      class="material-icons password-switch"
+      (click)="togglePasswordVisibility()"
+      *ngIf="passwordInputType === 'password'"
+    >
+      visibility
+    </mat-icon>
 
-      <mat-error *ngIf="form.controls.password.hasError('required')"> The value is required. </mat-error>
-      <mat-error *ngIf="form.controls.password.hasError('pattern')">
-        The value must contain at least one digit, a lower case letter, and an upper case letter.
-      </mat-error>
-    </mat-form-field>
+    <mat-error *ngIf="form.controls.password.hasError('required')"> The value is required. </mat-error>
+    <mat-error *ngIf="form.controls.password.hasError('pattern')">
+      The value must contain at least one digit, a lower case letter, and an upper case letter.
+    </mat-error>
+  </mat-form-field>
 
-    <span fxFlex="100">
-      <button mat-button type="button" (click)="resetForm()" [disabled]="form.pristine" attr.aria-label="{{ 'form.clear' | translate }}">
-        {{ 'form.clear' | translate }}
-      </button>
-    </span>
-
-    <button fxFlex mat-button type="submit" [disabled]="form.pristine || form.invalid" attr.aria-label="{{ 'form.submit' | translate }}">
-      {{ 'form.submit' | translate }}
+  <span>
+    <button mat-button type="button" (click)="resetForm()" [disabled]="form.pristine" attr.aria-label="{{ 'form.clear' | translate }}">
+      {{ 'form.clear' | translate }}
     </button>
-  </form>
-</div>
+  </span>
+
+  <button mat-button type="submit" [disabled]="form.pristine || form.invalid" attr.aria-label="{{ 'form.submit' | translate }}">
+    {{ 'form.submit' | translate }}
+  </button>
+</form>

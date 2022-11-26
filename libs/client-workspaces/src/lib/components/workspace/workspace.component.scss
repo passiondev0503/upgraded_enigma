@@ -1,4 +1,11 @@
+@use 'libs/client-core/src/lib/styles/partials/_flex.scss';
+
 :host {
   display: block;
   padding: 5px;
+}
+
+.container {
+  @extend .flex-row;
+  flex-wrap: wrap;
 }

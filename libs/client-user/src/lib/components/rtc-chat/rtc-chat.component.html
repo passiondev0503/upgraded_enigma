@@ -1,53 +1,39 @@
-<div fxLayout="row wrap" fxLayoutAlign="start stretch">
-  <h3 fxFlex="100">
+<div class="root">
+  <h3 class="root--row">
     Room {{ webRtcConfig.roomId }}&nbsp;
     <button mat-stroked-button color="primary" (click)="createOffer()">Create offer</button>
   </h3>
 
-  <h4 fxFlex="100">
+  <h4 class="root--row">
     Offers &nbsp;
     <button mat-stroked-button color="primary" *ngFor="let offer of offers$ | async" (click)="acceptOffer(offer)">
       Accept offer ({{ offer.sender }})
     </button>
   </h4>
 
-  <h4 fxFlex="100" [ngStyle]="{ 'max-width': '100%' }">
+  <h4 class="root--row">
     ICE Candidates
     <div class="clamp-flex" *ngFor="let candidate of iceCandidates$ | async">&bull; {{ candidate.candidate }}</div>
   </h4>
 
-  <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center start">
-    <div
-      fxFlex.gt-sm="48"
-      fxFlex="100"
-      fxLayout="row"
-      fxLayoutAlign="center center"
-      [ngStyle]="{ margin: '5px' }"
-      *ngIf="localVideoStream$ | async"
-    >
+  <div class="root__streams">
+    <div *ngIf="localVideoStream$ | async">
       <video [srcObject]="localVideoStream$ | async" autoplay muted></video>
     </div>
 
-    <div
-      fxFlex.gt-sm="48"
-      fxFlex="100"
-      fxLayout="row"
-      fxLayoutAlign="center center"
-      [ngStyle]="{ margin: '5px' }"
-      *ngIf="(remoteVideoStream$ | async) && videoRoomPeersValueChanges | async"
-    >
+    <div *ngIf="(remoteVideoStream$ | async) && videoRoomPeersValueChanges | async">
       <video [srcObject]="remoteVideoStream$ | async" autoplay></video>
     </div>
   </div>
 
-  <mat-divider [ngStyle]="{ margin: '16px 0' }" fxFlex="100"></mat-divider>
+  <mat-divider class="flex--full" [ngStyle]="{ margin: '16px 0' }"></mat-divider>
 
-  <h4 fxFlex="100">{{ 'chat.devices' | translate }}</h4>
+  <h4 class="root--row">{{ 'chat.devices' | translate }}</h4>
 
-  <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center space-around" *ngIf="mediaDevices$ | async as devices">
-    <mat-card [ngStyle]="{ margin: '16px' }" *ngFor="let device of devices">
+  <div class="root__devices" *ngIf="mediaDevices$ | async as devices">
+    <mat-card class="flex--shrink" [ngStyle]="{ margin: '16px' }" *ngFor="let device of devices">
       <mat-card-header>
-        <div mat-card-avatar fxLayout="row" fxLayoutAlign="center center">
+        <div mat-card-avatar>
           <mat-icon>devices</mat-icon>
         </div>
         <mat-card-title>{{ device.kind }}</mat-card-title>

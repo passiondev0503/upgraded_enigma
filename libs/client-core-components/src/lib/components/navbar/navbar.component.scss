@@ -1,18 +1,20 @@
+@use 'libs/client-core/src/lib/styles/partials/_flex.scss';
+
 :host {
   display: block;
 }
 
-.logo-container {
-  width: auto !important;
-  height: 100%;
-
-  &_image {
-    width: auto !important;
-    height: 75%;
-    cursor: pointer;
-  }
-}
-
 .toolbar {
   height: 100%;
+
+  &__logo-container {
+    @extend .flex-row;
+    width: auto !important;
+    height: 100%;
+
+    &--logo {
+      width: auto !important;
+      height: 48px;
+    }
+  }
 }

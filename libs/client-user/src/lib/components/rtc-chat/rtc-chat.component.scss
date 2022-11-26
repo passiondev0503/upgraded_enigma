@@ -1,4 +1,42 @@
+@use 'libs/client-core/src/lib/styles/partials/_flex.scss';
+
 :host {
   display: block;
   padding: 16px;
+}
+
+.root {
+  @extend .flex-row--wrap;
+
+  &--row {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  &__streams {
+    @extend .flex-row--wrap;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+
+    * {
+      @extend .flex-row;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 5px;
+
+      @media screen and (min-width: 600px) {
+        width: calc(50% - 20px);
+      }
+    }
+  }
+
+  &__devices {
+    @extend .flex-row--wrap;
+    flex: 1 1 auto;
+    justify-content: space-between;
+    width: 100%;
+  }
 }

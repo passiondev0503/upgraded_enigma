@@ -1,7 +1,6 @@
 import { APP_BASE_HREF, DOCUMENT } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ModuleWithProviders, NgModule, NgZone, Provider } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
@@ -62,7 +61,6 @@ export const mocksCoreModuleProviders: Provider[] = [
     HttpClientTestingModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
     AppMaterialModule.forRoot(),
     HttpClientTestingModule,
     RouterTestingModule,
@@ -80,7 +78,6 @@ export const mocksCoreModuleProviders: Provider[] = [
     HttpClientTestingModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
     AppMaterialModule,
     HttpClientTestingModule,
     RouterTestingModule,

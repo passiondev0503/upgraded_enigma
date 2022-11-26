@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { MatSelectionList } from '@angular/material/list';
 import { IUserPassword, IUserState, userActions, userSelectors } from '@app/client-store-user';
 import { Store } from '@ngrx/store';
 import { TBarChartData } from '@rfprodz/client-d3-charts';
@@ -117,6 +118,11 @@ export class AppUserDataComponent {
   @ViewChild('datePicker') private readonly datePicker!: MatDatepicker<string>;
 
   /**
+   * Passwords list view child reference.
+   */
+  @ViewChild('passwordsList') private readonly passwordsList!: MatSelectionList;
+
+  /**
    * Gets currently logged in user.
    */
   private getUser() {
@@ -152,21 +158,22 @@ export class AppUserDataComponent {
   }
 
   /**
-   * Deletes user password.
-   * @param id local model array index
+   * Delete selected password.
    */
-  public deletePassword(id: number): void {
+  public deletePasswords(): void {
+    const names = this.passwordsList.selectedOptions.selected.map(item => <string>item.value);
     void this.store
       .select(userSelectors.userState)
       .pipe(
         first(),
         tap(user => {
-          const payload = (user.passwords ?? [])[id];
-          if (typeof payload !== 'undefined') {
+          const passwords = (user.passwords ?? []).filter(item => names.includes(item.name));
+          for (let i = 0, max = passwords.length; i < max; i += 1) {
+            const payload = passwords[i];
             this.store.dispatch(userActions.deletePassword({ payload }));
-            this.getUser();
-            this.resetPasswordForm();
           }
+          this.getUser();
+          this.resetPasswordForm();
         }),
       )
       .subscribe();

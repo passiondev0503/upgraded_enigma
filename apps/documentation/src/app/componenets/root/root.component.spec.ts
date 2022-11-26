@@ -1,7 +1,6 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, TestModuleMetadata } from '@angular/core/testing';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { Meta, Title } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -38,7 +37,6 @@ describe('AppDocRootComponent', () => {
       HttpClientTestingModule,
       RouterTestingModule,
       AppMaterialModule.forRoot(),
-      FlexLayoutModule,
       StoreModule.forRoot({ router: routerReducer }),
       MarkdownModule.forRoot(markdownModuleConfig),
       StoreRouterConnectingModule.forRoot({

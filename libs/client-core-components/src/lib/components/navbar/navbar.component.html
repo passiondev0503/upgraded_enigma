@@ -1,8 +1,8 @@
 <mat-toolbar color="primary" class="toolbar" *ngIf="routerEvents$ | async">
-  <span fxFlex="0 1 auto" class="logo-container" fxLayout="row" fxLayoutAlign="start center">
+  <span class="toolbar__logo-container">
     <img
       *ngIf="!showBackButton"
-      class="logo-container_image"
+      class="toolbar__logo-container--logo"
       [src]="logoSrc"
       alt="{{ appName }}"
       [routerLink]="[!auth.authenticated ? '' : 'user']"
@@ -13,7 +13,7 @@
     </button>
   </span>
 
-  <span fxFlex="1 1 auto"></span>
+  <span class="flex--full"></span>
 
   <button mat-icon-button [matMenuTriggerFor]="mobileMenuTop">
     <mat-icon *ngIf="!auth.authenticated">menu</mat-icon>
