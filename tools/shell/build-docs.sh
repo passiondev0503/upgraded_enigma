@@ -1,29 +1,30 @@
 #!/bin/bash
 
-source tools/shell/utils/colors.sh ''
 source tools/shell/utils/print-utils.sh ''
+
+source tools/shell/utils/config.sh
 
 buildDocumentation() {
   printInfoTitle "<< Building documentation app >>"
   printGap
 
-  npx nx run-many --target=test --all --code-coverage --run-in-band || exit 1
-  npx nx run tools:coverage-stats || exit 1
-  yarn generate:env:documentation || exit 1
+  npx nx run-many --target=test --all --code-coverage --run-in-band
+  npx nx run tools:coverage-stats
+  yarn generate:env:documentation
 
-  npx nx run documentation:configure-env || exit 1
-  npx nx build --project documentation --configuration production || exit 1
-  npx nx run documentation:configure-env --reset || exit 1
+  npx nx run documentation:configure-env
+  npx nx build --project documentation --configuration production
+  npx nx run documentation:configure-env --reset
 
-  yarn test:reports || exit 1
-  yarn generate:unit-test-coverage-index || exit 1
+  yarn test:reports
+  yarn generate:unit-test-coverage-index
 
-  npx nx run tools:compodoc-build || exit 1
-  cp -r ./dist/compodoc ./dist/apps/documentation/assets || exit 1
+  npx nx run tools:compodoc-build
+  cp -r ./dist/compodoc ./dist/apps/documentation/assets
 
-  yarn generate:changelog || exit 1
-  yarn e2e:report || exit 1
-  yarn generate:e2e-test-report-index || exit 1
+  yarn generate:changelog
+  yarn e2e:report
+  yarn generate:e2e-test-report-index
 
   ##
   # Note.

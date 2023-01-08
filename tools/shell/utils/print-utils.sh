@@ -24,6 +24,13 @@ printNameAndValue() {
     ${DEFAULT} - ${DEFAULT}%s${DEFAULT}: ${YELLOW}%s${DEFAULT}" "$NAME" "$VALUE"
 }
 
+printValue() {
+  local VALUE
+  VALUE=$1
+  printf "
+    ${DEFAULT} - ${DEFAULT}%s${DEFAULT}" "$VALUE"
+}
+
 printInfoTitle() {
   local TITLE
   TITLE=$1
