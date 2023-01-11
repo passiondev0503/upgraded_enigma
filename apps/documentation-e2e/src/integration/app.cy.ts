@@ -3,8 +3,8 @@ import { getTitle } from '../support/app.po';
 describe('documentation', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
+  it('should display expected page title', () => {
     // Function helper example, see `../support/app.po.ts` file
-    getTitle().contains('Documentation: Nx Ng Starter');
+    getTitle().contains('Upgraded Enigma Documentation');
   });
 });
