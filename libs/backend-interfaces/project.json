@@ -1,7 +1,7 @@
 {
+  "name": "backend-interfaces",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "generators": {},
-  "name": "backend-interfaces",
   "projectType": "library",
   "sourceRoot": "libs/backend-interfaces/src",
   "tags": ["scope:backend-interfaces", "type:util"],

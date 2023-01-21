@@ -1,14 +1,14 @@
 import { HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppTranslateModule } from '@app/client-translate';
 import {
   flushHttpRequests,
   getTestBedConfig,
   newTestBedMetadata,
   spyOnFunctions,
   TClassMemberFunctionSpiesObject,
-} from '@app/client-unit-testing';
+} from '@app/client-testing-unit';
+import { AppTranslateModule } from '@app/client-translate';
 
 import { AppDiagnosticsInfoComponent } from './diagnostics-info.component';
 

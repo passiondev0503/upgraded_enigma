@@ -5,21 +5,21 @@ import { Observable } from 'rxjs';
 import type { IAuthService } from '../../interfaces/auth.interface';
 import { AUTH_SERVICE_TOKEN } from '../../services/auth/auth.service';
 
-@Controller()
+@Controller('auth')
 export class AppAuthController {
   constructor(@Inject(AUTH_SERVICE_TOKEN) private readonly authService: IAuthService) {}
 
-  @Get('auth')
+  @Get('')
   public ping(): AppMessage {
     return this.authService.ping();
   }
 
-  @Post('auth/login')
+  @Post('login')
   public login(@Body() payload: AppUserLoginCredentials): Observable<IUser> {
     return this.authService.login(payload);
   }
 
-  @Post('auth/logout')
+  @Post('logout')
   public logout(@Body() payload: AppUserLogoutCredentials): Observable<boolean> {
     return this.authService.logout(payload);
   }

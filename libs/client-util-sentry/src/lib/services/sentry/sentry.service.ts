@@ -7,7 +7,7 @@ import { BrowserTracing } from '@sentry/tracing';
 /**
  * Sentry is disabled for environments defined in this array.
  */
-const sentryDisabledEnvironments: TSentryEnvironment[] = ['unit-testing', 'development'];
+const sentryDisabledEnvironments: TSentryEnvironment[] = ['testing-unit', 'development'];
 
 /**
  * Initializes Sentry.

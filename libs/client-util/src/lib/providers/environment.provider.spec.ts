@@ -12,7 +12,7 @@ describe('environmentProvider', () => {
     production: false,
     sentry: {
       dsn: '',
-      env: 'unit-testing',
+      env: 'testing-unit',
       tracesSampleRate: 1.0,
       tracingOrigins: [],
     },

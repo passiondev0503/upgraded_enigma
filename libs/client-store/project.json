@@ -1,11 +1,11 @@
 {
+  "name": "client-store",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "generators": {
     "@nrwl/angular:component": {
       "style": "scss"
     }
   },
-  "name": "client-store",
   "prefix": "app",
   "projectType": "library",
   "sourceRoot": "libs/client-store/src",

@@ -1,10 +1,10 @@
-# client-unit-testing
+# client-testing-unit
 
 This library was generated with [Nx](https://nx.dev).
 
 ## Running unit tests
 
-Run `ng test client-unit-testing` to execute the unit tests.
+Run `ng test client-testing-unit` to execute the unit tests.
 
 ## Application
 

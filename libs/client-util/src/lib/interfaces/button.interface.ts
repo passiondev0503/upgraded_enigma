@@ -1,7 +1,9 @@
 import { Router } from '@angular/router';
 
+export type TRouterCommands = { outlets: { [key: string]: string[] } }[];
+
 export interface IRouterButton {
-  routerLink: { outlets: { [key: string]: string[] } }[];
+  routerLink: TRouterCommands;
   routeActive: () => boolean;
   click?: () => void;
   icon: string;
@@ -23,7 +25,7 @@ export const routerButton = (
   title: string,
   icon: string,
   routeActive: Router['isActive'],
-  routerLink: { outlets: { [key: string]: string[] } }[],
+  routerLink: TRouterCommands,
   requiresAuth: boolean,
   click?: () => void,
 ) => <IRouterButton>{ title, icon, routeActive, routerLink, requiresAuth, click };

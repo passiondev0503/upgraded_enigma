@@ -2,14 +2,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { HttpTestingController } from '@angular/common/http/testing';
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { AppTranslateModule } from '@app/client-translate';
 import {
   flushHttpRequests,
   getTestBedConfig,
   newTestBedMetadata,
   spyOnFunctions,
   TClassMemberFunctionSpiesObject,
-} from '@app/client-unit-testing';
+} from '@app/client-testing-unit';
+import { AppTranslateModule } from '@app/client-translate';
 import { HTTP_STATUS, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@app/client-util';
 import { Store } from '@ngrx/store';
 import { of, throwError } from 'rxjs';

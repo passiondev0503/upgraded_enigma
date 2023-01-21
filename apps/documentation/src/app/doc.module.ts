@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from '@app/client-material';
 import { AppPwaOfflineModule } from '@app/client-pwa-offline';
+import { AppRouterStoreModule } from '@app/client-store-router';
 import { appBaseHrefProvider, documentProvider, pathLocationStrategyProvider, windowProvider } from '@app/client-util';
-import { AppRouteSerializer, metaReducers } from '@app/client-util-ngrx';
-import { NavigationActionTiming, routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { metaReducers } from '@app/client-util-ngrx';
 import { StoreModule } from '@ngrx/store';
 import { MarkdownModule, MarkdownModuleConfig, MarkedOptions } from 'ngx-markdown';
 
@@ -38,14 +38,11 @@ const markdownModuleConfig: MarkdownModuleConfig = {
     HttpClientModule,
     MarkdownModule.forRoot(markdownModuleConfig),
     AppMaterialModule.forRoot(),
-    StoreModule.forRoot({ router: routerReducer }, { metaReducers: metaReducers(environment.production) }),
+    StoreModule.forRoot({}, { metaReducers: metaReducers(environment.production) }),
     AppMdFilesStoreModule.forRoot(),
     AppPwaOfflineModule,
     AppDocRoutingModule,
-    StoreRouterConnectingModule.forRoot({
-      serializer: AppRouteSerializer,
-      navigationActionTiming: NavigationActionTiming.PostActivation,
-    }),
+    AppRouterStoreModule.forRoot(),
   ],
   providers: [
     appBaseHrefProvider,

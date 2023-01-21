@@ -5,16 +5,11 @@ import { Meta, Title } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppMaterialModule } from '@app/client-material';
-import { AppRouteSerializer } from '@app/client-util-ngrx';
-import { NavigationActionTiming, routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
 import { MarkdownModule, MarkdownModuleConfig, MarkedOptions } from 'ngx-markdown';
 import { of, tap } from 'rxjs';
 
 import { testingProviders } from '../../../testing/testing-providers.mock';
 import { DOC_APP_ENV, IDocAppEnvironment } from '../../interfaces/environment.interface';
-import { AppDocMarkdownReferenceComponent } from '../md-reference/md-reference.component';
-import { AppDocMarkdownReferenceTreeComponent } from '../md-reference-tree/md-reference-tree.component';
 import { AppDocRootComponent } from './root.component';
 
 describe('AppDocRootComponent', () => {
@@ -37,14 +32,9 @@ describe('AppDocRootComponent', () => {
       HttpClientTestingModule,
       RouterTestingModule,
       AppMaterialModule.forRoot(),
-      StoreModule.forRoot({ router: routerReducer }),
       MarkdownModule.forRoot(markdownModuleConfig),
-      StoreRouterConnectingModule.forRoot({
-        serializer: AppRouteSerializer,
-        navigationActionTiming: NavigationActionTiming.PostActivation,
-      }),
     ],
-    declarations: [AppDocRootComponent, AppDocMarkdownReferenceTreeComponent, AppDocMarkdownReferenceComponent],
+    declarations: [AppDocRootComponent],
     providers: [...testingProviders],
   };
 

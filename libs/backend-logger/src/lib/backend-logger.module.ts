@@ -1,7 +1,10 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
-/**
- * @note TODO
- */
+import { AppLoggerMiddleware } from './middleware/logger.middleware';
+
 @Module({})
-export class AppLoggerModule {}
+export class AppLoggerModule implements NestModule {
+  public configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AppLoggerMiddleware).forRoutes('*');
+  }
+}

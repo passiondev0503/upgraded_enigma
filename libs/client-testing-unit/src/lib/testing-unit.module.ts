@@ -7,7 +7,6 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppMaterialModule } from '@app/client-material';
 import { documentFactory, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@app/client-util';
-import { AppRouteSerializer } from '@app/client-util-ngrx';
 import { EffectsModule } from '@ngrx/effects';
 import { NavigationActionTiming, routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -24,7 +23,7 @@ export const testingEnvironment: IWebClientAppEnvironment = {
   description: 'Testing description',
   api: window.location.origin.includes('localhost') ? 'http://localhost:8080/api' : `${window.location.origin}/api`,
   sentry: {
-    env: 'unit-testing',
+    env: 'testing-unit',
     dsn: '',
     tracesSampleRate: 0.0,
     tracingOrigins: [],
@@ -67,7 +66,6 @@ export const mocksCoreModuleProviders: Provider[] = [
     StoreModule.forRoot({ router: routerReducer }),
     EffectsModule.forRoot(),
     StoreRouterConnectingModule.forRoot({
-      serializer: AppRouteSerializer,
       navigationActionTiming: NavigationActionTiming.PostActivation,
     }),
   ],

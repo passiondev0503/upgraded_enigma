@@ -20,7 +20,7 @@ describe('client-core-module-proviers', () => {
     description: 'Testing description',
     api: window.location.origin.includes('localhost') ? 'http://localhost:8080/api' : `${window.location.origin}/api`,
     sentry: {
-      env: 'unit-testing',
+      env: 'testing-unit',
       dsn: '',
       tracingOrigins: [],
       tracesSampleRate: 0.0,

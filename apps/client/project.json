@@ -1,11 +1,11 @@
 {
+  "name": "client",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "generators": {
     "@nrwl/workspace:component": {
       "style": "scss"
     }
   },
-  "name": "client",
   "prefix": "app",
   "projectType": "application",
   "sourceRoot": "apps/client/src",

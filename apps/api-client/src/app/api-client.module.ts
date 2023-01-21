@@ -1,10 +1,10 @@
 import { AppAuthModule } from '@app/backend-auth';
 import { AppDiagnosticsModule } from '@app/backend-diagnostics';
 import { API_ENV } from '@app/backend-interfaces';
-import { AppLoggerMiddleware } from '@app/backend-logger';
+import { AppLoggerModule } from '@app/backend-logger';
 import { AppWebsocketModule } from '@app/backend-websocket';
 import { HttpModule } from '@nestjs/axios';
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
 import { environment } from '../environments/environment';
 
@@ -25,6 +25,7 @@ import { environment } from '../environments/environment';
     AppAuthModule.forRoot(environment),
     AppDiagnosticsModule.forRoot(),
     AppWebsocketModule.forRoot(),
+    AppLoggerModule,
   ],
   providers: [
     {
@@ -33,8 +34,4 @@ import { environment } from '../environments/environment';
     },
   ],
 })
-export class AppApiClientModule implements NestModule {
-  public configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AppLoggerMiddleware).forRoutes('*');
-  }
-}
+export class AppApiClientModule {}

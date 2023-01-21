@@ -1,6 +1,6 @@
 import { FactoryProvider } from '@angular/core';
 import { TestBed, waitForAsync } from '@angular/core/testing';
-import { testingEnvironment } from '@app/client-unit-testing';
+import { testingEnvironment } from '@app/client-testing-unit';
 import * as Sentry from '@sentry/angular';
 
 import { AppSentryService, initializeSentry, sentryProviders } from './sentry.service';
@@ -42,7 +42,7 @@ describe('AppSentryService', () => {
     it('should not initialize Sentry for unit testing and development environments', () => {
       const sentry = Sentry;
       const initSpy = jest.spyOn(sentry, 'init');
-      expect(env.sentry.env).toEqual('unit-testing');
+      expect(env.sentry.env).toEqual('testing-unit');
       initializeSentry(env, env.meta.version);
       expect(initSpy).not.toHaveBeenCalled();
 
@@ -68,7 +68,7 @@ describe('AppSentryService', () => {
     });
 
     it('should return an empty array for disabled environments', () => {
-      expect(env.sentry.env).toEqual('unit-testing');
+      expect(env.sentry.env).toEqual('testing-unit');
       let providers = sentryProviders(env);
       expect(providers.length).toEqual(0);
 

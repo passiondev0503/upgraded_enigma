@@ -1,11 +1,11 @@
 {
+  "name": "client-translate",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "generators": {
     "@nrwl/angular:component": {
       "style": "scss"
     }
   },
-  "name": "client-translate",
   "prefix": "app",
   "projectType": "library",
   "sourceRoot": "libs/client-translate/src",

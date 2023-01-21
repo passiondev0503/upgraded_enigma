@@ -9,7 +9,7 @@ import type { IUserService } from '../../interfaces/user.interface';
 import { AUTH_SERVICE_TOKEN } from '../../services/auth/auth.service';
 import { USER_SERVICE_TOKEN } from '../../services/user/user.service';
 
-@Controller()
+@Controller('user')
 export class AppUserController {
   private readonly rsaKeysExist$ = combineLatest([this.userService.userKeyExists(), this.userService.userKeyExists(true)]);
 
@@ -18,32 +18,32 @@ export class AppUserController {
     @Inject(AUTH_SERVICE_TOKEN) private readonly authService: IAuthService,
   ) {}
 
-  @Get('user')
+  @Get('')
   public user() {
     return this.userService.user();
   }
 
-  @Get('user/status')
+  @Get('status')
   public userStatus() {
     return this.userService.userStatus();
   }
 
-  @Post('user/config')
+  @Post('config')
   public configureUser(@Body() payload: Partial<IUser>) {
     return this.userService.config(payload);
   }
 
-  @Post('user/password/add')
+  @Post('password/add')
   public addPassword(@Body() payload: AppUserPassword) {
     return this.userService.addPassword(payload);
   }
 
-  @Delete('user/password/delete')
+  @Delete('password/delete')
   public deletePassword(@Body() payload: AppUserPassword) {
     return this.userService.deletePassword(payload);
   }
 
-  @Post('user/rsa/generate')
+  @Post('rsa/generate')
   public generateRsaKeys() {
     return this.rsaKeysExist$.pipe(
       concatMap(([privateKeyExists, publicKeyExists]) => {
@@ -68,7 +68,7 @@ export class AppUserController {
     );
   }
 
-  @Post('user/rsa/encrypt')
+  @Post('rsa/encrypt')
   public encryptDataWithRsaKeys() {
     return this.rsaKeysExist$.pipe(
       concatMap(([privateKeyExists, publicKeyExists]) => {
@@ -101,7 +101,7 @@ export class AppUserController {
     );
   }
 
-  @Post('user/rsa/decrypt')
+  @Post('rsa/decrypt')
   public decryptDataWithRsaKeys() {
     return this.rsaKeysExist$.pipe(
       concatMap(([privateKeyExists, publicKeyExists]) => {
@@ -134,7 +134,7 @@ export class AppUserController {
     );
   }
 
-  @Post('user/passwords/export')
+  @Post('passwords/export')
   public exportUserPasswords() {
     return this.rsaKeysExist$.pipe(
       concatMap(([privateKeyExists, publicKeyExists]) => {
@@ -164,7 +164,7 @@ export class AppUserController {
     );
   }
 
-  @Get('user/passwords/list/exported')
+  @Get('passwords/list/exported')
   public listExportedUserPasswords() {
     return this.userService.listExportedPasswordFiles();
   }

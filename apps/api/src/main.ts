@@ -1,4 +1,3 @@
-import { ValidationPipe } from '@nestjs/common';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
@@ -28,7 +27,6 @@ async function bootstrap(expressInstance: e.Express): Promise<unknown> {
 
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-  app.useGlobalPipes(new ValidationPipe());
 
   const corsOptions: CorsOptions = {
     origin: [/localhost/, /firebase\.app/, /web\.app/],

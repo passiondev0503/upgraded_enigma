@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserTestingModule } from '@angular/platform-browser/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppMaterialModule } from '@app/client-material';
-import { AppTestingComponent } from '@app/client-unit-testing';
+import { AppTestingComponent } from '@app/client-testing-unit';
 
 import { AppWorkspaceTimerComponent } from '../workspace-timer/workspace-timer.component';
 import { AppWorkspaceComponent } from './workspace.component';

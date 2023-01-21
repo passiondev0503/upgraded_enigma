@@ -3,7 +3,7 @@ import { Config } from '@jest/types';
 const jestPresetAngularSerializers = require('jest-preset-angular/build/serializers');
 
 const config: Config.InitialOptions = {
-  coverageDirectory: '../../coverage/libs/client-unit-testing',
+  coverageDirectory: '../../coverage/libs/client-testing-unit',
   coverageThreshold: {
     global: {
       branches: 100,
@@ -12,7 +12,7 @@ const config: Config.InitialOptions = {
       statements: 100,
     },
   },
-  displayName: 'client-unit-testing',
+  displayName: 'client-testing-unit',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   snapshotSerializers: jestPresetAngularSerializers,

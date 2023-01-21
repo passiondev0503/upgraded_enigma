@@ -4,16 +4,16 @@ import { Controller, Get, Inject } from '@nestjs/common';
 import type { IDiagnosticsService } from '../interfaces/diagnostics.interface';
 import { DIAGNOSTICS_SERVICE_TOKEN } from '../services/diagnostics.service';
 
-@Controller()
+@Controller('diagnostics')
 export class AppDiagnosticsController {
   constructor(@Inject(DIAGNOSTICS_SERVICE_TOKEN) private readonly diagnosticsService: IDiagnosticsService) {}
 
-  @Get('diagnostics')
+  @Get('')
   public ping(): AppMessage {
     return this.diagnosticsService.ping();
   }
 
-  @Get('diagnostics/static')
+  @Get('static')
   public static() {
     return this.diagnosticsService.static();
   }

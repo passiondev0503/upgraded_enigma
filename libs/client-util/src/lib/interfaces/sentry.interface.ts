@@ -1,1 +1,1 @@
-export type TSentryEnvironment = 'unit-testing' | 'development' | 'production';
+export type TSentryEnvironment = 'testing-unit' | 'development' | 'production';

@@ -8,12 +8,12 @@ import { AppCoreModule } from '@app/client-core';
 import { AppCoreComponentsModule } from '@app/client-core-components';
 import { AppMaterialModule } from '@app/client-material';
 import { AppPwaOfflineModule } from '@app/client-pwa-offline';
+import { AppRouterStoreModule } from '@app/client-store-router';
 import { AppWebsocketStoreModule } from '@app/client-store-websocket';
 import { AppTranslateModule } from '@app/client-translate';
-import { AppRouteSerializer, metaReducers } from '@app/client-util-ngrx';
+import { metaReducers } from '@app/client-util-ngrx';
 import { sentryProviders } from '@app/client-util-sentry';
 import { EffectsModule } from '@ngrx/effects';
-import { NavigationActionTiming, routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { AppElizaModule } from '@rfprodz/client-util-eliza';
 
@@ -34,17 +34,14 @@ import { AppRootComponent } from './components/root.component';
     AppCoreComponentsModule,
     AppCoreModule.forRoot(environment),
     AppMaterialModule.forRoot(),
-    StoreModule.forRoot({ router: routerReducer }, { metaReducers: metaReducers(environment.production) }),
+    StoreModule.forRoot({}, { metaReducers: metaReducers(environment.production) }),
     EffectsModule.forRoot(),
     AppWebsocketStoreModule.forRoot(environment),
     AppTranslateModule.forRoot(),
     AppElizaModule.forRoot(),
     AppPwaOfflineModule,
     AppClientRoutingModule,
-    StoreRouterConnectingModule.forRoot({
-      serializer: AppRouteSerializer,
-      navigationActionTiming: NavigationActionTiming.PostActivation,
-    }),
+    AppRouterStoreModule.forRoot(),
   ],
   providers: [...sentryProviders(environment)],
   declarations: [AppRootComponent],

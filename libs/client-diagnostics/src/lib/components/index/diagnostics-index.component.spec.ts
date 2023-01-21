@@ -7,7 +7,7 @@ import {
   spyOnFunctions,
   TClassMemberFunctionSpiesObject,
   testingEnvironment,
-} from '@app/client-unit-testing';
+} from '@app/client-testing-unit';
 
 import { AppDiagnosticsIndexComponent } from './diagnostics-index.component';
 
